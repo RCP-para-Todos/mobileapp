@@ -20,6 +20,7 @@ public protocol BLEDelegate
 class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate
 {
     
+    
     public var delegate: BLEDelegate?
     
     public var centralManager : CBCentralManager!
@@ -35,6 +36,13 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
     @IBOutlet weak var estadoConexionLabel: UILabel!
     @IBOutlet weak var insuflacionLabel: UILabel!
     @IBOutlet weak var pesoLabel: UILabel!
+    @IBOutlet weak var clockLabel: UILabel!
+    @IBOutlet weak var posicionLabel: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
+    var contadorY : Double = 0
+    var timer = Timer()
+    var pesoGlobal : Double = 0
+    
     
     
     //Esta funcion es invocada cuando el dispositivo es conectado, es decir pasa a estado 2.
@@ -110,12 +118,18 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
         {
             self.delegate?.bleDidReceiveData(data: characteristic.value)
             let recibido = [UInt8](characteristic.value!)
+            //print(recibido)
             let cadenaBytetoString = String(bytes: recibido, encoding: .utf8)
-            //print(cadenaBytetoString!)
             let datosCorrectos = cadenaBytetoString!.components(separatedBy: ";")
+            
             var insuflacion : Double = 0
             insuflacion = Double(datosCorrectos[0]) ?? 0
-            print(insuflacion)
+            var peso : Double = 0
+            peso = Double(datosCorrectos[1]) ?? 0
+            self.pesoGlobal = peso
+            var posicion : Double = 0
+            posicion = Double(datosCorrectos[3]) ?? 0
+            
             let insuflacionString : String
             if insuflacion < 10 {
                 insuflacionString = "Nula"
@@ -129,9 +143,50 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
             else{
                 insuflacionString = "Alta"
             }
+            
+            let posicionString : String
+            if posicion == 1 {
+                posicionString = "Acostado"
+            }
+            else {
+                posicionString = "Reclinado"
+            }
+            
             self.insuflacionLabel.text = insuflacionString
             self.pesoLabel.text = datosCorrectos[1] + " kg"
+            self.clockLabel.text = datosCorrectos[2]
+            self.posicionLabel.text = posicionString
+            
+            if(peso > 2)
+            {
+                let alert = UIAlertController(title: "Alerta", message: "Se ha detectado una compresión excedida", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
+    }
+    
+    func scheduledTimerWithTimeInterval(){
+        // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.manejarGrafico), userInfo: nil, repeats: true)
+    }
+    
+    @objc func manejarGrafico(){
+        contadorY += 10
+        var image = UIImage(systemName: "arrow.down")!
+        if(pesoGlobal < 1){
+            image = UIImage(systemName: "arrow.down")!
+        }
+        if(pesoGlobal > 1 && pesoGlobal < 3){
+            image = UIImage(systemName: "bookmark")!
+        }
+        if(pesoGlobal > 3){
+            image = UIImage(systemName: "arrow.up")!
+        }
+        let imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: 0, y: contadorY, width: 10, height: 10)
+        view.addSubview(imageView)
+        self.stackView.addSubview(imageView)
     }
     
     //Esta funcion activa las "notificaciones" es decir la recepcion de los datos provenientes del ESP32.
@@ -187,6 +242,7 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
         super.viewDidLoad()
         //Se inicia el manager que controla el bluetooth.
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
+        scheduledTimerWithTimeInterval()
     }
 }
 

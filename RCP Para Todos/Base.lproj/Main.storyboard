@@ -163,15 +163,57 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Posición:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xl-fb-lgS">
+                                <rect key="frame" x="33" y="261" width="69" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSY-TM-7Gu">
+                                <rect key="frame" x="139" y="261" width="113" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Clock:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zeY-PZ-933">
+                                <rect key="frame" x="33" y="319.5" width="48" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWb-Kz-kwe" userLabel="Clock">
+                                <rect key="frame" x="139" y="298" width="113" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IYW-Zs-bBs">
+                                <rect key="frame" x="33" y="348" width="329" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="329" id="WS5-GU-1g9"/>
+                                    <constraint firstAttribute="height" constant="128" id="pje-u8-gn6"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="IYW-Zs-bBs" firstAttribute="leading" secondItem="KgN-gI-jEA" secondAttribute="leading" constant="33" id="U5B-hm-hz9"/>
+                            <constraint firstItem="KgN-gI-jEA" firstAttribute="bottom" secondItem="IYW-Zs-bBs" secondAttribute="bottom" constant="386" id="psf-Rh-pPk"/>
+                            <constraint firstItem="IYW-Zs-bBs" firstAttribute="top" secondItem="zeY-PZ-933" secondAttribute="bottom" constant="8" symbolic="YES" id="tEn-dq-3tm"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="KgN-gI-jEA"/>
                     </view>
                     <navigationItem key="navigationItem" id="cWy-oZ-L3J"/>
                     <connections>
+                        <outlet property="clockLabel" destination="bWb-Kz-kwe" id="oAI-5e-wQE"/>
                         <outlet property="estadoConexionLabel" destination="YvK-rK-lGf" id="ZCd-QL-EMH"/>
                         <outlet property="insuflacionLabel" destination="E7M-hi-3KY" id="Cbr-MA-vqG"/>
                         <outlet property="pesoLabel" destination="xJR-3g-eO6" id="0Oe-OD-hcg"/>
+                        <outlet property="posicionLabel" destination="iSY-TM-7Gu" id="G5l-LV-37Y"/>
+                        <outlet property="stackView" destination="IYW-Zs-bBs" id="D7p-Pc-eoF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKM-Pc-OUS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
