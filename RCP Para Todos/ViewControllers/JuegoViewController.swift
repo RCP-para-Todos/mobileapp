@@ -19,8 +19,6 @@ public protocol BLEDelegate
 
 class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate
 {
-    
-    
     public var delegate: BLEDelegate?
     
     public var centralManager : CBCentralManager!
@@ -35,13 +33,17 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
     
     @IBOutlet weak var estadoConexionLabel: UILabel!
     @IBOutlet weak var insuflacionLabel: UILabel!
-    @IBOutlet weak var pesoLabel: UILabel!
+    @IBOutlet weak var compresionLabel: UILabel!
     @IBOutlet weak var clockLabel: UILabel!
     @IBOutlet weak var posicionLabel: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
-    var contadorY : Double = 0
-    var timer = Timer()
-    var pesoGlobal : Double = 0
+    @IBOutlet weak var tiempoLabel: UILabel!
+    @IBOutlet weak var accionStackView: UIStackView!
+    @IBOutlet weak var tiempoStackView: UIStackView!
+    
+    var contadorY : Int = 0
+    var instantes : [Instante] = []
+    //Los datos se reciben cada 0.5 segundos, pero se necesita actuar sobre ellos cada 1 segundo.
+    var mediosSegundos : Int = 0
     
     
     
@@ -122,71 +124,168 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
             let cadenaBytetoString = String(bytes: recibido, encoding: .utf8)
             let datosCorrectos = cadenaBytetoString!.components(separatedBy: ";")
             
-            var insuflacion : Double = 0
-            insuflacion = Double(datosCorrectos[0]) ?? 0
-            var peso : Double = 0
-            peso = Double(datosCorrectos[1]) ?? 0
-            self.pesoGlobal = peso
-            var posicion : Double = 0
-            posicion = Double(datosCorrectos[3]) ?? 0
+            //Debug para ver cada cuanto se reciben los datos.
+            self.printDate(string: "")
             
-            let insuflacionString : String
-            if insuflacion < 10 {
-                insuflacionString = "Nula"
-            }
-            else if insuflacion > 10 && insuflacion < 50 {
-                insuflacionString = "Baja"
-            }
-            else if insuflacion > 10 && insuflacion < 50 {
-                insuflacionString = "Media"
-            }
-            else{
-                insuflacionString = "Alta"
+            
+            let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
+            let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
+            let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)
+            
+            self.insuflacionLabel.text = insuflacion
+            self.compresionLabel.text = compresion
+            self.posicionLabel.text = posicion
+            
+            let instante : Instante = Instante(insuflacion: insuflacion, compresion: compresion, posicion: posicion)
+            
+            //Si llegue a 60 segundos.
+            if(mediosSegundos == 120){
+                performSegue(withIdentifier: "juegoEstadisticas", sender: self)
             }
             
-            let posicionString : String
-            if posicion == 1 {
-                posicionString = "Acostado"
-            }
-            else {
-                posicionString = "Reclinado"
-            }
             
-            self.insuflacionLabel.text = insuflacionString
-            self.pesoLabel.text = datosCorrectos[1] + " kg"
-            self.clockLabel.text = datosCorrectos[2]
-            self.posicionLabel.text = posicionString
+            //Agregado de instante al vector.
+            self.instantes.append(instante)
             
-            if(peso > 2)
-            {
-                let alert = UIAlertController(title: "Alerta", message: "Se ha detectado una compresión excedida", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
+            //Manejo de variables.
+            
+            self.mediosSegundos += 1;
+            self.contadorY+=5;
+            
+            //Manejo de graficos.
+            
+            self.manejarGraficoAccion()
+            self.manejarGraficoTiempo()
         }
     }
     
-    func scheduledTimerWithTimeInterval(){
-        // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.manejarGrafico), userInfo: nil, repeats: true)
+    func printDate(string: String) {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss.SSSS"
+        print(string + formatter.string(from: date))
     }
     
-    @objc func manejarGrafico(){
-        contadorY += 10
-        var image = UIImage(systemName: "arrow.down")!
-        if(pesoGlobal < 1){
-            image = UIImage(systemName: "arrow.down")!
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "juegoEstadisticas"){
+            var compresionesNulas : Int = 0
+            var compresionesInsuficientes : Int = 0
+            var compresionesCorrectas : Int = 0
+            var compresionesExcesivas : Int = 0
+            for instante in self.instantes {
+                if(instante.Compresion == "Nula"){
+                    compresionesNulas+=1;
+                }
+                if(instante.Compresion == "Insuficiente"){
+                    compresionesInsuficientes+=1;
+                }
+                if(instante.Compresion == "Correcta"){
+                    compresionesCorrectas+=1;
+                }
+                if(instante.Compresion == "Excesiva"){
+                    compresionesExcesivas+=1;
+                }
+            }
+            let estadisticasViewController = segue.destination as! EstadisticasViewController
+            estadisticasViewController.compresionesNulasString = String(compresionesNulas)
+            estadisticasViewController.compresionesInsuficientesString = String(compresionesInsuficientes)
+            estadisticasViewController.compresionesCorrectasString = String(compresionesCorrectas)
+            estadisticasViewController.compresionesExcesivasString = String(compresionesExcesivas)
         }
-        if(pesoGlobal > 1 && pesoGlobal < 3){
-            image = UIImage(systemName: "bookmark")!
+    }
+    
+    func manejarGraficoAccion(){
+        if(mediosSegundos % 2 == 0){
+            let instantesIndice : Int = self.instantes.count - 1
+            let i1 : Instante = self.instantes[instantesIndice-1]
+            let i2 : Instante = self.instantes[instantesIndice]
+            self.tratamientoInstantes(i1: i1, i2: i2)
         }
-        if(pesoGlobal > 3){
-            image = UIImage(systemName: "arrow.up")!
+    }
+    
+    func tratamientoInstantes(i1: Instante, i2: Instante){
+        //Imagenes a utilizar.
+        let compresionNula = UIImage(systemName: "clear")!
+        let compresionInsuficiente = UIImage(systemName: "arrow.down")!
+        let compresionCorrecta = UIImage(systemName: "bookmark")!
+        let compresionExcesiva = UIImage(systemName: "arrow.up")!
+        let insuflacionNula = UIImage(systemName: "stop")!
+        let insuflacionCorrecta = UIImage(systemName: "stop.fill")!
+        
+        //Inicializacion de StackViewHorizontal
+        let stackViewHorizontal = UIStackView()
+        stackViewHorizontal.axis = .horizontal
+        stackViewHorizontal.alignment = .fill // .Leading .FirstBaseline .Center .Trailing .LastBaseline
+        stackViewHorizontal.distribution = .fill // .FillEqually .FillProportionally .EqualSpacing .EqualCentering
+        
+        var imageView1 : UIImageView
+        var imageView2 : UIImageView
+        var imageView3 : UIImageView = UIImageView(image: insuflacionNula)
+        
+        //Evaluacion de compresion de instante 1.
+        if(i1.Compresion == "Nula"){
+            imageView1 = UIImageView(image: compresionNula)
         }
-        let imageView = UIImageView(image: image)
-        imageView.frame = CGRect(x: 0, y: contadorY, width: 10, height: 10)
-        view.addSubview(imageView)
-        self.stackView.addSubview(imageView)
+        if(i1.Compresion == "Insuficiente"){
+            imageView1 = UIImageView(image: compresionInsuficiente)
+        }
+        if(i1.Compresion == "Correcta"){
+            imageView1 = UIImageView(image: compresionCorrecta)
+        }
+        if(i1.Compresion == "Excesiva"){
+            imageView1 = UIImageView(image: compresionExcesiva)
+        }
+        else{
+            imageView1 = UIImageView(image: compresionNula)
+        }
+        
+        //Evaluacion de compresion de instante 2.
+        if(i2.Compresion == "Nula"){
+            imageView2 = UIImageView(image: compresionNula)
+        }
+        if(i2.Compresion == "Insuficiente"){
+            imageView2 = UIImageView(image: compresionInsuficiente)
+        }
+        if(i2.Compresion == "Correcta"){
+            imageView2 = UIImageView(image: compresionCorrecta)
+        }
+        if(i2.Compresion == "Excesiva"){
+            imageView2 = UIImageView(image: compresionCorrecta)
+        }
+        else{
+            imageView2 = UIImageView(image: compresionNula)
+        }
+        
+        //Evaluacion de insuflacion.
+        if(i1.Insuflacion == "Correcta" || i2.Insuflacion == "Correcta"){
+            imageView3 = UIImageView(image: insuflacionCorrecta)
+        }
+        
+        //Posicionamientos
+        imageView1.frame = CGRect(x: 0, y: contadorY, width: 10, height: 10)
+        imageView2.frame = CGRect(x: 20, y: contadorY, width: 10, height: 10)
+        imageView3.frame = CGRect(x: 40, y: contadorY, width: 10, height: 10)
+        
+        stackViewHorizontal.addSubview(imageView1)
+        stackViewHorizontal.addSubview(imageView2)
+        stackViewHorizontal.addSubview(imageView3)
+        self.accionStackView.addSubview(stackViewHorizontal)
+    }
+    
+    func manejarGraficoTiempo(){
+        let segundos : Int = mediosSegundos / 2
+        let segundosString : String = String(segundos)
+        if(mediosSegundos % 2 == 0){
+            self.tiempoLabel.text = segundosString
+        }
+        if(mediosSegundos % 10 == 0){
+            
+            let segundosView : UILabel = UILabel()
+            segundosView.font.withSize(10)
+            segundosView.frame = CGRect(x: 50, y: contadorY, width: 30, height: 20)
+            segundosView.text = segundosString
+            self.tiempoStackView.addSubview(segundosView)
+        }
     }
     
     //Esta funcion activa las "notificaciones" es decir la recepcion de los datos provenientes del ESP32.
@@ -242,7 +341,8 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
         super.viewDidLoad()
         //Se inicia el manager que controla el bluetooth.
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
-        scheduledTimerWithTimeInterval()
+        self.instantes = [Instante]()
+        //scheduledTimerWithTimeInterval()
     }
 }
 
