@@ -226,13 +226,13 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
         if(i1.Compresion == "Nula"){
             imageView1 = UIImageView(image: compresionNula)
         }
-        if(i1.Compresion == "Insuficiente"){
+        else if(i1.Compresion == "Insuficiente"){
             imageView1 = UIImageView(image: compresionInsuficiente)
         }
-        if(i1.Compresion == "Correcta"){
+        else if(i1.Compresion == "Correcta"){
             imageView1 = UIImageView(image: compresionCorrecta)
         }
-        if(i1.Compresion == "Excesiva"){
+        else if(i1.Compresion == "Excesiva"){
             imageView1 = UIImageView(image: compresionExcesiva)
         }
         else{
@@ -243,14 +243,14 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
         if(i2.Compresion == "Nula"){
             imageView2 = UIImageView(image: compresionNula)
         }
-        if(i2.Compresion == "Insuficiente"){
+        else if(i2.Compresion == "Insuficiente"){
             imageView2 = UIImageView(image: compresionInsuficiente)
         }
-        if(i2.Compresion == "Correcta"){
+        else if(i2.Compresion == "Correcta"){
             imageView2 = UIImageView(image: compresionCorrecta)
         }
-        if(i2.Compresion == "Excesiva"){
-            imageView2 = UIImageView(image: compresionCorrecta)
+        else if(i2.Compresion == "Excesiva"){
+            imageView2 = UIImageView(image: compresionExcesiva)
         }
         else{
             imageView2 = UIImageView(image: compresionNula)
