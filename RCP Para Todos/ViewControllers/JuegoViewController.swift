@@ -1,22 +1,6 @@
 import UIKit
 import CoreBluetooth // Para el bluetooth.
 
-//Estos valores estan definidos en el ESP32.
-let kBLEService_UUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E"
-let kBLE_Characteristic_uuid_Rx = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"
-let kBLE_Characteristic_uuid_Tx = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
-
-let BLEService_UUID = CBUUID(string: kBLEService_UUID)
-let BLE_Characteristic_uuid_Tx = CBUUID(string: kBLE_Characteristic_uuid_Tx)//(Property = Write without response)
-let BLE_Characteristic_uuid_Rx = CBUUID(string: kBLE_Characteristic_uuid_Rx)// (Property = Read/Notify)
-public protocol BLEDelegate
-{
-    func bleDidUpdateState()
-    func bleDidConnectToPeripheral()
-    func bleDidDisconenctFromPeripheral()
-    func bleDidReceiveData(data: Data?)
-}
-
 class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate
 {
     public var delegate: BLEDelegate?
@@ -45,118 +29,13 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
     //Los datos se reciben cada 0.5 segundos, pero se necesita actuar sobre ellos cada 1 segundo.
     var mediosSegundos : Int = 0
     
-    
-    
-    //Esta funcion es invocada cuando el dispositivo es conectado, es decir pasa a estado 2.
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral)
+    override func viewDidLoad()
     {
-        print("Conectado")
-        peripheral.discoverServices(nil)
-        estadoConexionLabel.text = "Maniqui conectado";
-        estadoConexionLabel.textColor = UIColor.green;
-    }
-    
-    //Esta funcion es llamada cuando se intenta hacer un "discoverServices" del dispositivo.
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        
-        if error != nil
-        {
-            print("[ERROR] Error descubriendo servicios. \(error!)")
-            return
-        }
-        
-        print("[DEBUG] Servicios encontrados para el dispositivo: \(peripheral.identifier.uuidString)")
-        
-        for service in peripheral.services!
-        {
-            let theCharacteristics = [BLE_Characteristic_uuid_Rx, BLE_Characteristic_uuid_Tx]
-            peripheral.discoverCharacteristics(theCharacteristics, for: service)
-        }
-    }
-    
-    //Funcion que es invocada cuando se "discoverCharacteristics" del dispositivo.
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        
-        if error != nil
-        {
-            print("[ERROR] Error descubriendo caracteristicas. \(error!)")
-            return
-        }
-        
-        print("[DEBUG] Caracteristicas descubiertas para el dispositivo: \(peripheral.identifier.uuidString)")
-        
-        for characteristic in service.characteristics!
-        {
-            self.characteristics[characteristic.uuid.uuidString] = characteristic
-        }
-        
-        //Cuando descubro las caracteristicas del dispositivo a la vez activo las notificaciones. Es decir lo que me manda el ESP32.
-        enableNotifications(enable: true)
-        JuegoViewController.characteristicsShared = self.characteristics
-        //SACAR DE ACA
-        let mensaje = "TEXTO"
-        let data: Data = mensaje.data(using: String.Encoding.utf8)!
-        self.esp32.writeValue(data, for: Array(characteristics)[0].value, type: CBCharacteristicWriteType.withResponse)
-    }
-    
-    //Funcion que determina como se van a realizar la lectura de datos provenientes del ESP32.
-    func read()
-    {
-        guard let lectura = self.characteristics[kBLE_Characteristic_uuid_Tx] else { return }
-        self.esp32?.readValue(for: lectura)
-    }
-    
-    //Esta funcion es invocada cada vez que el ESP32 envia "algo"
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?)
-    {
-        if error != nil
-        {
-            print("[ERROR] Error actualizando valor. \(error!)")
-            return
-        }
-        
-        //Si recibo algo proveniente del ESP32, porque podria estar conectado a mas cosas, y recibir de distintos.
-        if characteristic.uuid.uuidString == kBLE_Characteristic_uuid_Tx
-        {
-            self.delegate?.bleDidReceiveData(data: characteristic.value)
-            let recibido = [UInt8](characteristic.value!)
-            //print(recibido)
-            let cadenaBytetoString = String(bytes: recibido, encoding: .utf8)
-            let datosCorrectos = cadenaBytetoString!.components(separatedBy: ";")
-            
-            //Debug para ver cada cuanto se reciben los datos.
-            self.printDate(string: "")
-            
-            
-            let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
-            let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
-            let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)
-            
-            self.insuflacionLabel.text = insuflacion
-            self.compresionLabel.text = compresion
-            self.posicionLabel.text = posicion
-            
-            let instante : Instante = Instante(insuflacion: insuflacion, compresion: compresion, posicion: posicion)
-            
-            //Si llegue a 60 segundos.
-            if(mediosSegundos == 120){
-                performSegue(withIdentifier: "juegoEstadisticas", sender: self)
-            }
-            
-            
-            //Agregado de instante al vector.
-            self.instantes.append(instante)
-            
-            //Manejo de variables.
-            
-            self.mediosSegundos += 1;
-            self.contadorY+=5;
-            
-            //Manejo de graficos.
-            
-            self.manejarGraficoAccion()
-            self.manejarGraficoTiempo()
-        }
+        super.viewDidLoad()
+        //Se inicia el manager que controla el bluetooth.
+        self.centralManager = CBCentralManager(delegate: self, queue: nil)
+        self.instantes = [Instante]()
+        //scheduledTimerWithTimeInterval()
     }
     
     func printDate(string: String) {
@@ -288,6 +167,118 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
         }
     }
     
+    //Esta funcion es invocada cuando el dispositivo es conectado, es decir pasa a estado 2.
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral)
+    {
+        print("Conectado")
+        peripheral.discoverServices(nil)
+        estadoConexionLabel.text = "Maniqui conectado";
+        estadoConexionLabel.textColor = UIColor.green;
+    }
+    
+    //Esta funcion es llamada cuando se intenta hacer un "discoverServices" del dispositivo.
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        
+        if error != nil
+        {
+            print("[ERROR] Error descubriendo servicios. \(error!)")
+            return
+        }
+        
+        print("[DEBUG] Servicios encontrados para el dispositivo: \(peripheral.identifier.uuidString)")
+        
+        for service in peripheral.services!
+        {
+            let theCharacteristics = [BLE_Characteristic_uuid_Rx, BLE_Characteristic_uuid_Tx]
+            peripheral.discoverCharacteristics(theCharacteristics, for: service)
+        }
+    }
+    
+    //Funcion que es invocada cuando se "discoverCharacteristics" del dispositivo.
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        
+        if error != nil
+        {
+            print("[ERROR] Error descubriendo caracteristicas. \(error!)")
+            return
+        }
+        
+        print("[DEBUG] Caracteristicas descubiertas para el dispositivo: \(peripheral.identifier.uuidString)")
+        
+        for characteristic in service.characteristics!
+        {
+            self.characteristics[characteristic.uuid.uuidString] = characteristic
+        }
+        
+        //Cuando descubro las caracteristicas del dispositivo a la vez activo las notificaciones. Es decir lo que me manda el ESP32.
+        enableNotifications(enable: true)
+        JuegoViewController.characteristicsShared = self.characteristics
+        //SACAR DE ACA
+        let mensaje = "TEXTO"
+        let data: Data = mensaje.data(using: String.Encoding.utf8)!
+        self.esp32.writeValue(data, for: Array(characteristics)[0].value, type: CBCharacteristicWriteType.withResponse)
+    }
+    
+    //Funcion que determina como se van a realizar la lectura de datos provenientes del ESP32.
+    func read()
+    {
+        guard let lectura = self.characteristics[kBLE_Characteristic_uuid_Tx] else { return }
+        self.esp32?.readValue(for: lectura)
+    }
+    
+    //Esta funcion es invocada cada vez que el ESP32 envia "algo"
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?)
+    {
+        if error != nil
+        {
+            print("[ERROR] Error actualizando valor. \(error!)")
+            return
+        }
+        
+        //Si recibo algo proveniente del ESP32, porque podria estar conectado a mas cosas, y recibir de distintos.
+        if characteristic.uuid.uuidString == kBLE_Characteristic_uuid_Tx
+        {
+            self.delegate?.bleDidReceiveData(data: characteristic.value)
+            let recibido = [UInt8](characteristic.value!)
+            //print(recibido)
+            let cadenaBytetoString = String(bytes: recibido, encoding: .utf8)
+            let datosCorrectos = cadenaBytetoString!.components(separatedBy: ";")
+            
+            //Debug para ver cada cuanto se reciben los datos.
+            self.printDate(string: "")
+            
+            
+            let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
+            let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
+            let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)
+            
+            self.insuflacionLabel.text = insuflacion
+            self.compresionLabel.text = compresion
+            self.posicionLabel.text = posicion
+            
+            let instante : Instante = Instante(insuflacion: insuflacion, compresion: compresion, posicion: posicion)
+            
+            //Si llegue a 60 segundos.
+            if(mediosSegundos == 120){
+                performSegue(withIdentifier: "juegoEstadisticas", sender: self)
+            }
+            
+            
+            //Agregado de instante al vector.
+            self.instantes.append(instante)
+            
+            //Manejo de variables.
+            
+            self.mediosSegundos += 1;
+            self.contadorY+=5;
+            
+            //Manejo de graficos.
+            
+            self.manejarGraficoAccion()
+            self.manejarGraficoTiempo()
+        }
+    }
+    
     //Esta funcion activa las "notificaciones" es decir la recepcion de los datos provenientes del ESP32.
     public func enableNotifications(enable: Bool)
     {
@@ -334,15 +325,6 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
             
             JuegoViewController.esp32Shared = self.esp32
         }
-    }
-
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
-        //Se inicia el manager que controla el bluetooth.
-        self.centralManager = CBCentralManager(delegate: self, queue: nil)
-        self.instantes = [Instante]()
-        //scheduledTimerWithTimeInterval()
     }
 }
 

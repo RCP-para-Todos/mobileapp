@@ -19,6 +19,17 @@
 		D44B0A3B245E287D0069A8B4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44B0A3A245E287D0069A8B4 /* LoginViewController.swift */; };
 		D44E9365248D72BD002608EA /* Instante.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44E9364248D72BD002608EA /* Instante.swift */; };
 		D44E9367248D7FB0002608EA /* EstadisticasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44E9366248D7FB0002608EA /* EstadisticasViewController.swift */; };
+		D45267E6249E6902005F7886 /* Aprendizaje.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45267E4249E6902005F7886 /* Aprendizaje.storyboard */; };
+		D45267EC249E6965005F7886 /* Simulacion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45267EA249E6965005F7886 /* Simulacion.storyboard */; };
+		D45267EF249E699C005F7886 /* Juego.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45267ED249E699C005F7886 /* Juego.storyboard */; };
+		D45267F2249E6F32005F7886 /* AprendizajePaso1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45267F1249E6F32005F7886 /* AprendizajePaso1ViewController.swift */; };
+		D47530AF249E71A2008CDCB4 /* CustomNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530AE249E71A2008CDCB4 /* CustomNavigationViewController.swift */; };
+		D47530B1249E7676008CDCB4 /* AprendizajePaso2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B0249E7676008CDCB4 /* AprendizajePaso2ViewController.swift */; };
+		D47530B3249E7690008CDCB4 /* AprendizajePaso3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B2249E7690008CDCB4 /* AprendizajePaso3ViewController.swift */; };
+		D47530B5249E769E008CDCB4 /* AprendizajePaso4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B4249E769E008CDCB4 /* AprendizajePaso4ViewController.swift */; };
+		D47530B7249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B6249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift */; };
+		D47530B9249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B8249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift */; };
+		D47530BB249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530BA249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +47,17 @@
 		D44B0A3A245E287D0069A8B4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D44E9364248D72BD002608EA /* Instante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instante.swift; sourceTree = "<group>"; };
 		D44E9366248D7FB0002608EA /* EstadisticasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstadisticasViewController.swift; sourceTree = "<group>"; };
+		D45267E5249E6902005F7886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Aprendizaje.storyboard; sourceTree = "<group>"; };
+		D45267EB249E6965005F7886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Simulacion.storyboard; sourceTree = "<group>"; };
+		D45267EE249E699C005F7886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Juego.storyboard; sourceTree = "<group>"; };
+		D45267F1249E6F32005F7886 /* AprendizajePaso1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso1ViewController.swift; sourceTree = "<group>"; };
+		D47530AE249E71A2008CDCB4 /* CustomNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationViewController.swift; sourceTree = "<group>"; };
+		D47530B0249E7676008CDCB4 /* AprendizajePaso2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso2ViewController.swift; sourceTree = "<group>"; };
+		D47530B2249E7690008CDCB4 /* AprendizajePaso3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso3ViewController.swift; sourceTree = "<group>"; };
+		D47530B4249E769E008CDCB4 /* AprendizajePaso4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso4ViewController.swift; sourceTree = "<group>"; };
+		D47530B6249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso5ViewController.swift; sourceTree = "<group>"; };
+		D47530B8249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso6ViewController.swift; sourceTree = "<group>"; };
+		D47530BA249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajeEstadisticasViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,12 +90,12 @@
 		D44B0A1F245E21890069A8B4 /* RCP Para Todos */ = {
 			isa = PBXGroup;
 			children = (
+				D45267F0249E6F17005F7886 /* Aprendizaje */,
+				D45267E7249E6914005F7886 /* Storyboards */,
 				D44B0A37245E280D0069A8B4 /* ViewControllers */,
 				D44B0A20245E21890069A8B4 /* AppDelegate.swift */,
 				D44B0A22245E21890069A8B4 /* SceneDelegate.swift */,
-				D44B0A26245E21890069A8B4 /* Main.storyboard */,
 				D44B0A2C245E218A0069A8B4 /* Assets.xcassets */,
-				D44B0A2E245E218A0069A8B4 /* LaunchScreen.storyboard */,
 				D44B0A31245E218A0069A8B4 /* Info.plist */,
 				D44B0A29245E21890069A8B4 /* RCP_Para_Todos.xcdatamodeld */,
 				D12C2480248D6C70009981A0 /* Conversor.swift */,
@@ -89,8 +111,35 @@
 				D44B0A38245E285F0069A8B4 /* InicioViewController.swift */,
 				D44B0A3A245E287D0069A8B4 /* LoginViewController.swift */,
 				D44E9366248D7FB0002608EA /* EstadisticasViewController.swift */,
+				D47530AE249E71A2008CDCB4 /* CustomNavigationViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D45267E7249E6914005F7886 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D45267ED249E699C005F7886 /* Juego.storyboard */,
+				D45267E4249E6902005F7886 /* Aprendizaje.storyboard */,
+				D44B0A2E245E218A0069A8B4 /* LaunchScreen.storyboard */,
+				D44B0A26245E21890069A8B4 /* Main.storyboard */,
+				D45267EA249E6965005F7886 /* Simulacion.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		D45267F0249E6F17005F7886 /* Aprendizaje */ = {
+			isa = PBXGroup;
+			children = (
+				D45267F1249E6F32005F7886 /* AprendizajePaso1ViewController.swift */,
+				D47530B0249E7676008CDCB4 /* AprendizajePaso2ViewController.swift */,
+				D47530B2249E7690008CDCB4 /* AprendizajePaso3ViewController.swift */,
+				D47530B4249E769E008CDCB4 /* AprendizajePaso4ViewController.swift */,
+				D47530B6249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift */,
+				D47530B8249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift */,
+				D47530BA249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift */,
+			);
+			path = Aprendizaje;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,7 +201,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D44B0A30245E218A0069A8B4 /* LaunchScreen.storyboard in Resources */,
+				D45267EF249E699C005F7886 /* Juego.storyboard in Resources */,
 				D44B0A2D245E218A0069A8B4 /* Assets.xcassets in Resources */,
+				D45267E6249E6902005F7886 /* Aprendizaje.storyboard in Resources */,
+				D45267EC249E6965005F7886 /* Simulacion.storyboard in Resources */,
 				D44B0A28245E21890069A8B4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,12 +216,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47530AF249E71A2008CDCB4 /* CustomNavigationViewController.swift in Sources */,
 				D12C2481248D6C70009981A0 /* Conversor.swift in Sources */,
 				D44B0A25245E21890069A8B4 /* JuegoViewController.swift in Sources */,
+				D47530B7249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift in Sources */,
+				D47530B9249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift in Sources */,
 				D44B0A21245E21890069A8B4 /* AppDelegate.swift in Sources */,
 				D44B0A23245E21890069A8B4 /* SceneDelegate.swift in Sources */,
+				D47530B3249E7690008CDCB4 /* AprendizajePaso3ViewController.swift in Sources */,
+				D47530B5249E769E008CDCB4 /* AprendizajePaso4ViewController.swift in Sources */,
 				D44B0A39245E285F0069A8B4 /* InicioViewController.swift in Sources */,
+				D47530BB249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift in Sources */,
+				D45267F2249E6F32005F7886 /* AprendizajePaso1ViewController.swift in Sources */,
 				D44B0A2B245E21890069A8B4 /* RCP_Para_Todos.xcdatamodeld in Sources */,
+				D47530B1249E7676008CDCB4 /* AprendizajePaso2ViewController.swift in Sources */,
 				D44B0A3B245E287D0069A8B4 /* LoginViewController.swift in Sources */,
 				D44E9365248D72BD002608EA /* Instante.swift in Sources */,
 				D44E9367248D7FB0002608EA /* EstadisticasViewController.swift in Sources */,
@@ -193,6 +253,30 @@
 				D44B0A2F245E218A0069A8B4 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D45267E4249E6902005F7886 /* Aprendizaje.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D45267E5249E6902005F7886 /* Base */,
+			);
+			name = Aprendizaje.storyboard;
+			sourceTree = "<group>";
+		};
+		D45267EA249E6965005F7886 /* Simulacion.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D45267EB249E6965005F7886 /* Base */,
+			);
+			name = Simulacion.storyboard;
+			sourceTree = "<group>";
+		};
+		D45267ED249E699C005F7886 /* Juego.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D45267EE249E699C005F7886 /* Base */,
+			);
+			name = Juego.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
