@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,9 +30,17 @@
 		D47530B7249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B6249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift */; };
 		D47530B9249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B8249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift */; };
 		D47530BB249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530BA249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift */; };
+		D47F17AB24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17AA24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift */; };
+		D47F17AE24A8E2B9002C02CA /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17AD24A8E2B9002C02CA /* Services.swift */; };
+		D47F17B024A8E41D002C02CA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47F17AF24A8E41D002C02CA /* Alamofire.framework */; };
+		D47F17B324A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17B224A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift */; };
+		EE4467070EDE9C06343097BA /* Pods_RCP_Para_Todos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD37F094E1EF567D8E42FC6 /* Pods_RCP_Para_Todos.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0084A971782053A09D6B85FA /* Pods-RCP Para Todos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCP Para Todos.release.xcconfig"; path = "Target Support Files/Pods-RCP Para Todos/Pods-RCP Para Todos.release.xcconfig"; sourceTree = "<group>"; };
+		260BCCEE3A0B2B35CEC67527 /* Pods-RCP Para Todos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCP Para Todos.debug.xcconfig"; path = "Target Support Files/Pods-RCP Para Todos/Pods-RCP Para Todos.debug.xcconfig"; sourceTree = "<group>"; };
+		3DD37F094E1EF567D8E42FC6 /* Pods_RCP_Para_Todos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RCP_Para_Todos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D12C2480248D6C70009981A0 /* Conversor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversor.swift; sourceTree = "<group>"; };
 		D44B0A1D245E21890069A8B4 /* RCP Para Todos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RCP Para Todos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D44B0A20245E21890069A8B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +66,10 @@
 		D47530B6249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso5ViewController.swift; sourceTree = "<group>"; };
 		D47530B8249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso6ViewController.swift; sourceTree = "<group>"; };
 		D47530BA249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajeEstadisticasViewController.swift; sourceTree = "<group>"; };
+		D47F17AA24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulacionPaso1ViewController.swift; sourceTree = "<group>"; };
+		D47F17AD24A8E2B9002C02CA /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		D47F17AF24A8E41D002C02CA /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D47F17B224A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrarNuevoUsuarioViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,17 +77,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47F17B024A8E41D002C02CA /* Alamofire.framework in Frameworks */,
+				EE4467070EDE9C06343097BA /* Pods_RCP_Para_Todos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0382DAADFDCEB1F91A47ED45 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				260BCCEE3A0B2B35CEC67527 /* Pods-RCP Para Todos.debug.xcconfig */,
+				0084A971782053A09D6B85FA /* Pods-RCP Para Todos.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		D44B0A14245E21890069A8B4 = {
 			isa = PBXGroup;
 			children = (
 				D44B0A1F245E21890069A8B4 /* RCP Para Todos */,
 				D44B0A1E245E21890069A8B4 /* Products */,
+				0382DAADFDCEB1F91A47ED45 /* Pods */,
+				E73091FB2F1884ACA099897C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +115,8 @@
 		D44B0A1F245E21890069A8B4 /* RCP Para Todos */ = {
 			isa = PBXGroup;
 			children = (
+				D47F17AC24A8E295002C02CA /* Services */,
+				D47F17A924A8DC6E002C02CA /* Simulacion */,
 				D45267F0249E6F17005F7886 /* Aprendizaje */,
 				D45267E7249E6914005F7886 /* Storyboards */,
 				D44B0A37245E280D0069A8B4 /* ViewControllers */,
@@ -112,6 +139,7 @@
 				D44B0A3A245E287D0069A8B4 /* LoginViewController.swift */,
 				D44E9366248D7FB0002608EA /* EstadisticasViewController.swift */,
 				D47530AE249E71A2008CDCB4 /* CustomNavigationViewController.swift */,
+				D47F17B224A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -142,6 +170,31 @@
 			path = Aprendizaje;
 			sourceTree = "<group>";
 		};
+		D47F17A924A8DC6E002C02CA /* Simulacion */ = {
+			isa = PBXGroup;
+			children = (
+				D47F17AA24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift */,
+			);
+			path = Simulacion;
+			sourceTree = "<group>";
+		};
+		D47F17AC24A8E295002C02CA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D47F17AD24A8E2B9002C02CA /* Services.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E73091FB2F1884ACA099897C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D47F17AF24A8E41D002C02CA /* Alamofire.framework */,
+				3DD37F094E1EF567D8E42FC6 /* Pods_RCP_Para_Todos.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,9 +202,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D44B0A34245E218A0069A8B4 /* Build configuration list for PBXNativeTarget "RCP Para Todos" */;
 			buildPhases = (
+				78EDA9316BFD30BB99CDB17A /* [CP] Check Pods Manifest.lock */,
 				D44B0A19245E21890069A8B4 /* Sources */,
 				D44B0A1A245E21890069A8B4 /* Frameworks */,
 				D44B0A1B245E21890069A8B4 /* Resources */,
+				E5D8CDE3A5F96427C74EEE6E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -211,6 +266,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		78EDA9316BFD30BB99CDB17A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RCP Para Todos-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5D8CDE3A5F96427C74EEE6E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RCP Para Todos/Pods-RCP Para Todos-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RCP Para Todos/Pods-RCP Para Todos-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RCP Para Todos/Pods-RCP Para Todos-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D44B0A19245E21890069A8B4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -223,12 +320,15 @@
 				D47530B9249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift in Sources */,
 				D44B0A21245E21890069A8B4 /* AppDelegate.swift in Sources */,
 				D44B0A23245E21890069A8B4 /* SceneDelegate.swift in Sources */,
+				D47F17AB24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift in Sources */,
 				D47530B3249E7690008CDCB4 /* AprendizajePaso3ViewController.swift in Sources */,
 				D47530B5249E769E008CDCB4 /* AprendizajePaso4ViewController.swift in Sources */,
 				D44B0A39245E285F0069A8B4 /* InicioViewController.swift in Sources */,
 				D47530BB249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift in Sources */,
 				D45267F2249E6F32005F7886 /* AprendizajePaso1ViewController.swift in Sources */,
+				D47F17AE24A8E2B9002C02CA /* Services.swift in Sources */,
 				D44B0A2B245E21890069A8B4 /* RCP_Para_Todos.xcdatamodeld in Sources */,
+				D47F17B324A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift in Sources */,
 				D47530B1249E7676008CDCB4 /* AprendizajePaso2ViewController.swift in Sources */,
 				D44B0A3B245E287D0069A8B4 /* LoginViewController.swift in Sources */,
 				D44E9365248D72BD002608EA /* Instante.swift in Sources */,
@@ -398,6 +498,7 @@
 		};
 		D44B0A35245E218A0069A8B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 260BCCEE3A0B2B35CEC67527 /* Pods-RCP Para Todos.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -418,6 +519,7 @@
 		};
 		D44B0A36245E218A0069A8B4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0084A971782053A09D6B85FA /* Pods-RCP Para Todos.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
