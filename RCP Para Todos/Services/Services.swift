@@ -24,7 +24,8 @@ extension String {
 class Services
 {
     public func login(parameters: [String: String], completion: @escaping (Bool) -> Void){
-        AF.request("https://api.rcp.margaale.ddnss.de/auth/login", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        completion(true)
+        /*AF.request("https://api.rcp.margaale.ddnss.de/auth/login", method: .post, parameters: parameters, encoding: JSONEncoding.default)
         .responseJSON { result in
             if let value = result.value as? [String: Any] {
                 if(value["auth"]! as! Int == 0){
@@ -41,7 +42,7 @@ class Services
             else{
                 completion(false)
             }
-        }
+        }*/
     }
     
     public func register(parameters: [String: String], completion: @escaping (Bool) -> Void){

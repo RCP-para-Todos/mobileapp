@@ -17,6 +17,14 @@
 		D44B0A30245E218A0069A8B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44B0A2E245E218A0069A8B4 /* LaunchScreen.storyboard */; };
 		D44B0A39245E285F0069A8B4 /* InicioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44B0A38245E285F0069A8B4 /* InicioViewController.swift */; };
 		D44B0A3B245E287D0069A8B4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44B0A3A245E287D0069A8B4 /* LoginViewController.swift */; };
+		D44CAB5924C38A31006D00FF /* Tutor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44CAB5724C38A31006D00FF /* Tutor.storyboard */; };
+		D44CAB5C24C38A49006D00FF /* Practicante.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44CAB5A24C38A49006D00FF /* Practicante.storyboard */; };
+		D44CAB5F24C38FC3006D00FF /* InicioTutorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CAB5E24C38FC3006D00FF /* InicioTutorViewController.swift */; };
+		D44CAB6124C396E5006D00FF /* CrearCursoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CAB6024C396E5006D00FF /* CrearCursoViewController.swift */; };
+		D44CAB6324C3A62F006D00FF /* VerCursosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CAB6224C3A62F006D00FF /* VerCursosViewController.swift */; };
+		D44CAB6524C3A63C006D00FF /* VerPracticantesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CAB6424C3A63C006D00FF /* VerPracticantesViewController.swift */; };
+		D44CAB6724C3A648006D00FF /* VerActividadesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CAB6624C3A648006D00FF /* VerActividadesViewController.swift */; };
+		D44CAB6924C3A654006D00FF /* VerActividadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CAB6824C3A654006D00FF /* VerActividadViewController.swift */; };
 		D44E9365248D72BD002608EA /* Instante.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44E9364248D72BD002608EA /* Instante.swift */; };
 		D44E9367248D7FB0002608EA /* EstadisticasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44E9366248D7FB0002608EA /* EstadisticasViewController.swift */; };
 		D45267E6249E6902005F7886 /* Aprendizaje.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45267E4249E6902005F7886 /* Aprendizaje.storyboard */; };
@@ -53,6 +61,14 @@
 		D44B0A31245E218A0069A8B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D44B0A38245E285F0069A8B4 /* InicioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InicioViewController.swift; sourceTree = "<group>"; };
 		D44B0A3A245E287D0069A8B4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D44CAB5824C38A31006D00FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Tutor.storyboard; sourceTree = "<group>"; };
+		D44CAB5B24C38A49006D00FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Practicante.storyboard; sourceTree = "<group>"; };
+		D44CAB5E24C38FC3006D00FF /* InicioTutorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InicioTutorViewController.swift; sourceTree = "<group>"; };
+		D44CAB6024C396E5006D00FF /* CrearCursoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrearCursoViewController.swift; sourceTree = "<group>"; };
+		D44CAB6224C3A62F006D00FF /* VerCursosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerCursosViewController.swift; sourceTree = "<group>"; };
+		D44CAB6424C3A63C006D00FF /* VerPracticantesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerPracticantesViewController.swift; sourceTree = "<group>"; };
+		D44CAB6624C3A648006D00FF /* VerActividadesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerActividadesViewController.swift; sourceTree = "<group>"; };
+		D44CAB6824C3A654006D00FF /* VerActividadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerActividadViewController.swift; sourceTree = "<group>"; };
 		D44E9364248D72BD002608EA /* Instante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instante.swift; sourceTree = "<group>"; };
 		D44E9366248D7FB0002608EA /* EstadisticasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstadisticasViewController.swift; sourceTree = "<group>"; };
 		D45267E5249E6902005F7886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Aprendizaje.storyboard; sourceTree = "<group>"; };
@@ -115,6 +131,7 @@
 		D44B0A1F245E21890069A8B4 /* RCP Para Todos */ = {
 			isa = PBXGroup;
 			children = (
+				D44CAB5D24C38F75006D00FF /* Tutor */,
 				D47F17AC24A8E295002C02CA /* Services */,
 				D47F17A924A8DC6E002C02CA /* Simulacion */,
 				D45267F0249E6F17005F7886 /* Aprendizaje */,
@@ -144,6 +161,19 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		D44CAB5D24C38F75006D00FF /* Tutor */ = {
+			isa = PBXGroup;
+			children = (
+				D44CAB5E24C38FC3006D00FF /* InicioTutorViewController.swift */,
+				D44CAB6024C396E5006D00FF /* CrearCursoViewController.swift */,
+				D44CAB6224C3A62F006D00FF /* VerCursosViewController.swift */,
+				D44CAB6424C3A63C006D00FF /* VerPracticantesViewController.swift */,
+				D44CAB6624C3A648006D00FF /* VerActividadesViewController.swift */,
+				D44CAB6824C3A654006D00FF /* VerActividadViewController.swift */,
+			);
+			path = Tutor;
+			sourceTree = "<group>";
+		};
 		D45267E7249E6914005F7886 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +182,8 @@
 				D44B0A2E245E218A0069A8B4 /* LaunchScreen.storyboard */,
 				D44B0A26245E21890069A8B4 /* Main.storyboard */,
 				D45267EA249E6965005F7886 /* Simulacion.storyboard */,
+				D44CAB5724C38A31006D00FF /* Tutor.storyboard */,
+				D44CAB5A24C38A49006D00FF /* Practicante.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -256,7 +288,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D44B0A30245E218A0069A8B4 /* LaunchScreen.storyboard in Resources */,
+				D44CAB5924C38A31006D00FF /* Tutor.storyboard in Resources */,
 				D45267EF249E699C005F7886 /* Juego.storyboard in Resources */,
+				D44CAB5C24C38A49006D00FF /* Practicante.storyboard in Resources */,
 				D44B0A2D245E218A0069A8B4 /* Assets.xcassets in Resources */,
 				D45267E6249E6902005F7886 /* Aprendizaje.storyboard in Resources */,
 				D45267EC249E6965005F7886 /* Simulacion.storyboard in Resources */,
@@ -313,6 +347,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D44CAB6724C3A648006D00FF /* VerActividadesViewController.swift in Sources */,
+				D44CAB5F24C38FC3006D00FF /* InicioTutorViewController.swift in Sources */,
+				D44CAB6324C3A62F006D00FF /* VerCursosViewController.swift in Sources */,
 				D47530AF249E71A2008CDCB4 /* CustomNavigationViewController.swift in Sources */,
 				D12C2481248D6C70009981A0 /* Conversor.swift in Sources */,
 				D44B0A25245E21890069A8B4 /* JuegoViewController.swift in Sources */,
@@ -325,9 +362,12 @@
 				D47530B5249E769E008CDCB4 /* AprendizajePaso4ViewController.swift in Sources */,
 				D44B0A39245E285F0069A8B4 /* InicioViewController.swift in Sources */,
 				D47530BB249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift in Sources */,
+				D44CAB6124C396E5006D00FF /* CrearCursoViewController.swift in Sources */,
 				D45267F2249E6F32005F7886 /* AprendizajePaso1ViewController.swift in Sources */,
 				D47F17AE24A8E2B9002C02CA /* Services.swift in Sources */,
 				D44B0A2B245E21890069A8B4 /* RCP_Para_Todos.xcdatamodeld in Sources */,
+				D44CAB6524C3A63C006D00FF /* VerPracticantesViewController.swift in Sources */,
+				D44CAB6924C3A654006D00FF /* VerActividadViewController.swift in Sources */,
 				D47F17B324A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift in Sources */,
 				D47530B1249E7676008CDCB4 /* AprendizajePaso2ViewController.swift in Sources */,
 				D44B0A3B245E287D0069A8B4 /* LoginViewController.swift in Sources */,
@@ -353,6 +393,22 @@
 				D44B0A2F245E218A0069A8B4 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D44CAB5724C38A31006D00FF /* Tutor.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D44CAB5824C38A31006D00FF /* Base */,
+			);
+			name = Tutor.storyboard;
+			sourceTree = "<group>";
+		};
+		D44CAB5A24C38A49006D00FF /* Practicante.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D44CAB5B24C38A49006D00FF /* Base */,
+			);
+			name = Practicante.storyboard;
 			sourceTree = "<group>";
 		};
 		D45267E4249E6902005F7886 /* Aprendizaje.storyboard */ = {
