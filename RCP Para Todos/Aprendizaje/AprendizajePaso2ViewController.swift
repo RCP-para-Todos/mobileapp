@@ -84,6 +84,7 @@ class AprendizajePaso2ViewController: UIViewController, CBCentralManagerDelegate
     }
     @IBAction func continuarClicked(_ sender: Any) {
         performSegue(withIdentifier: "paso3", sender: nil)
+        self.centralManager = nil
     }
     
     //Esta funcion es invocada cuando el dispositivo es conectado, es decir pasa a estado 2.

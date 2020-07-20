@@ -45,6 +45,7 @@ class LoginViewController: UIViewController
     func completion(result: Bool){
         self.activityIndicatorSpinner.stopAnimating()
         if(result){
+            //performSegue(withIdentifier: "InicioSegue", sender: nil)
             performSegue(withIdentifier: "InicioTutorSegue", sender: nil)
         }
         else{

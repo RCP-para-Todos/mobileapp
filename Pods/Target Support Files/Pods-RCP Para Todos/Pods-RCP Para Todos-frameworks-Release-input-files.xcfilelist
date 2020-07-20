@@ -1,2 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-RCP Para Todos/Pods-RCP Para Todos-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework

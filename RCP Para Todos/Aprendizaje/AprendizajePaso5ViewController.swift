@@ -20,5 +20,8 @@ class AprendizajePaso5ViewController: UIViewController
         backButton.title = "Atras";
         self.navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
     }
-
+    @IBAction func continuarClicked(_ sender: Any) {
+        performSegue(withIdentifier: "paso6", sender: nil)
+    }
+    
 }

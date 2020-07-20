@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,6 +27,8 @@
 		D44CAB6924C3A654006D00FF /* VerActividadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CAB6824C3A654006D00FF /* VerActividadViewController.swift */; };
 		D44E9365248D72BD002608EA /* Instante.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44E9364248D72BD002608EA /* Instante.swift */; };
 		D44E9367248D7FB0002608EA /* EstadisticasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44E9366248D7FB0002608EA /* EstadisticasViewController.swift */; };
+		D451034F24C516C00080EE67 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451034E24C516C00080EE67 /* Gif.swift */; };
+		D451035224C5181C0080EE67 /* CompresionManiobra.gif in Resources */ = {isa = PBXBuildFile; fileRef = D451035124C5181C0080EE67 /* CompresionManiobra.gif */; };
 		D45267E6249E6902005F7886 /* Aprendizaje.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45267E4249E6902005F7886 /* Aprendizaje.storyboard */; };
 		D45267EC249E6965005F7886 /* Simulacion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45267EA249E6965005F7886 /* Simulacion.storyboard */; };
 		D45267EF249E699C005F7886 /* Juego.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45267ED249E699C005F7886 /* Juego.storyboard */; };
@@ -42,6 +44,7 @@
 		D47F17AE24A8E2B9002C02CA /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17AD24A8E2B9002C02CA /* Services.swift */; };
 		D47F17B024A8E41D002C02CA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47F17AF24A8E41D002C02CA /* Alamofire.framework */; };
 		D47F17B324A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17B224A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift */; };
+		D4AEA91424C5214E00F18491 /* CompresionManiobraAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4AEA91324C5214E00F18491 /* CompresionManiobraAudio.mp3 */; };
 		EE4467070EDE9C06343097BA /* Pods_RCP_Para_Todos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD37F094E1EF567D8E42FC6 /* Pods_RCP_Para_Todos.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +74,8 @@
 		D44CAB6824C3A654006D00FF /* VerActividadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerActividadViewController.swift; sourceTree = "<group>"; };
 		D44E9364248D72BD002608EA /* Instante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instante.swift; sourceTree = "<group>"; };
 		D44E9366248D7FB0002608EA /* EstadisticasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstadisticasViewController.swift; sourceTree = "<group>"; };
+		D451034E24C516C00080EE67 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
+		D451035124C5181C0080EE67 /* CompresionManiobra.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = CompresionManiobra.gif; sourceTree = "<group>"; };
 		D45267E5249E6902005F7886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Aprendizaje.storyboard; sourceTree = "<group>"; };
 		D45267EB249E6965005F7886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Simulacion.storyboard; sourceTree = "<group>"; };
 		D45267EE249E699C005F7886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Juego.storyboard; sourceTree = "<group>"; };
@@ -86,6 +91,7 @@
 		D47F17AD24A8E2B9002C02CA /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		D47F17AF24A8E41D002C02CA /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47F17B224A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrarNuevoUsuarioViewController.swift; sourceTree = "<group>"; };
+		D4AEA91324C5214E00F18491 /* CompresionManiobraAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CompresionManiobraAudio.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +137,7 @@
 		D44B0A1F245E21890069A8B4 /* RCP Para Todos */ = {
 			isa = PBXGroup;
 			children = (
+				D451035024C518090080EE67 /* Resources */,
 				D44CAB5D24C38F75006D00FF /* Tutor */,
 				D47F17AC24A8E295002C02CA /* Services */,
 				D47F17A924A8DC6E002C02CA /* Simulacion */,
@@ -144,6 +151,7 @@
 				D44B0A29245E21890069A8B4 /* RCP_Para_Todos.xcdatamodeld */,
 				D12C2480248D6C70009981A0 /* Conversor.swift */,
 				D44E9364248D72BD002608EA /* Instante.swift */,
+				D451034E24C516C00080EE67 /* Gif.swift */,
 			);
 			path = "RCP Para Todos";
 			sourceTree = "<group>";
@@ -172,6 +180,15 @@
 				D44CAB6824C3A654006D00FF /* VerActividadViewController.swift */,
 			);
 			path = Tutor;
+			sourceTree = "<group>";
+		};
+		D451035024C518090080EE67 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4AEA91324C5214E00F18491 /* CompresionManiobraAudio.mp3 */,
+				D451035124C5181C0080EE67 /* CompresionManiobra.gif */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		D45267E7249E6914005F7886 /* Storyboards */ = {
@@ -245,6 +262,8 @@
 			dependencies = (
 			);
 			name = "RCP Para Todos";
+			packageProductDependencies = (
+			);
 			productName = "RCP Para Todos";
 			productReference = D44B0A1D245E21890069A8B4 /* RCP Para Todos.app */;
 			productType = "com.apple.product-type.application";
@@ -273,6 +292,9 @@
 				Base,
 			);
 			mainGroup = D44B0A14245E21890069A8B4;
+			packageReferences = (
+				D451034B24C516090080EE67 /* XCRemoteSwiftPackageReference "UICircularProgressRing" */,
+			);
 			productRefGroup = D44B0A1E245E21890069A8B4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -287,6 +309,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D451035224C5181C0080EE67 /* CompresionManiobra.gif in Resources */,
+				D4AEA91424C5214E00F18491 /* CompresionManiobraAudio.mp3 in Resources */,
 				D44B0A30245E218A0069A8B4 /* LaunchScreen.storyboard in Resources */,
 				D44CAB5924C38A31006D00FF /* Tutor.storyboard in Resources */,
 				D45267EF249E699C005F7886 /* Juego.storyboard in Resources */,
@@ -357,6 +381,7 @@
 				D47530B9249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift in Sources */,
 				D44B0A21245E21890069A8B4 /* AppDelegate.swift in Sources */,
 				D44B0A23245E21890069A8B4 /* SceneDelegate.swift in Sources */,
+				D451034F24C516C00080EE67 /* Gif.swift in Sources */,
 				D47F17AB24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift in Sources */,
 				D47530B3249E7690008CDCB4 /* AprendizajePaso3ViewController.swift in Sources */,
 				D47530B5249E769E008CDCB4 /* AprendizajePaso4ViewController.swift in Sources */,
@@ -616,6 +641,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D451034B24C516090080EE67 /* XCRemoteSwiftPackageReference "UICircularProgressRing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/luispadron/UICircularProgressRing.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		D44B0A29245E21890069A8B4 /* RCP_Para_Todos.xcdatamodeld */ = {

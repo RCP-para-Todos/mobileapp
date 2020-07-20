@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SnapshotTesting",
+        "repositoryURL": "https://github.com/luispadron/swift-snapshot-testing.git",
+        "state": {
+          "branch": "master",
+          "revision": "8e9f6855674c885abfce358f5ad3f2f632d2c51f",
+          "version": null
+        }
+      },
+      {
+        "package": "UICircularProgressRing",
+        "repositoryURL": "https://github.com/luispadron/UICircularProgressRing.git",
+        "state": {
+          "branch": "master",
+          "revision": "83809eb500f5db1eafafd2adcc52721e0267cde1",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -4,8 +4,9 @@
 target 'RCP Para Todos' do
 	# Comment the next line if you don't want to use dynamic frameworks
 	use_frameworks!
+	project './RCP Para Todos.xcodeproj'
 
 	# Pods for RCP Para Todos
 	pod 'Alamofire'
-
+	pod 'UICircularProgressRing'
 end
