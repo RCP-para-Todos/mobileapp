@@ -9,4 +9,5 @@ target 'RCP Para Todos' do
 	# Pods for RCP Para Todos
 	pod 'Alamofire'
 	pod 'UICircularProgressRing'
+	pod 'Charts'
 end

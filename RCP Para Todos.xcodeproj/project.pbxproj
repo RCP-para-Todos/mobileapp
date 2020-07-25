@@ -41,10 +41,17 @@
 		D47530B9249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B8249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift */; };
 		D47530BB249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530BA249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift */; };
 		D47F17AB24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17AA24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift */; };
-		D47F17AE24A8E2B9002C02CA /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17AD24A8E2B9002C02CA /* Services.swift */; };
+		D47F17AE24A8E2B9002C02CA /* ServiceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17AD24A8E2B9002C02CA /* ServiceUser.swift */; };
 		D47F17B024A8E41D002C02CA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47F17AF24A8E41D002C02CA /* Alamofire.framework */; };
 		D47F17B324A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17B224A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift */; };
 		D4AEA91424C5214E00F18491 /* CompresionManiobraAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4AEA91324C5214E00F18491 /* CompresionManiobraAudio.mp3 */; };
+		D4F2CD8D24CC817800A2FA30 /* InsuflacionManiobra.gif in Resources */ = {isa = PBXBuildFile; fileRef = D4F2CD8C24CC817700A2FA30 /* InsuflacionManiobra.gif */; };
+		D4F2CD8F24CC834400A2FA30 /* InsuflacionManiobraAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4F2CD8E24CC834400A2FA30 /* InsuflacionManiobraAudio.mp3 */; };
+		D4F2CD9124CC838500A2FA30 /* AprendizajePaso7ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F2CD9024CC838500A2FA30 /* AprendizajePaso7ViewController.swift */; };
+		D4F2CD9424CC91AB00A2FA30 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F2CD9324CC91AB00A2FA30 /* Extensions.swift */; };
+		D4F2CD9624CC923400A2FA30 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F2CD9524CC923400A2FA30 /* Constants.swift */; };
+		D4F2CD9824CCA6C900A2FA30 /* AprendizajePaso8ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F2CD9724CCA6C900A2FA30 /* AprendizajePaso8ViewController.swift */; };
+		D4F2CD9A24CCA7E300A2FA30 /* AprendizajeAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4F2CD9924CCA7E300A2FA30 /* AprendizajeAudio.mp3 */; };
 		EE4467070EDE9C06343097BA /* Pods_RCP_Para_Todos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD37F094E1EF567D8E42FC6 /* Pods_RCP_Para_Todos.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,10 +95,17 @@
 		D47530B8249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso6ViewController.swift; sourceTree = "<group>"; };
 		D47530BA249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajeEstadisticasViewController.swift; sourceTree = "<group>"; };
 		D47F17AA24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulacionPaso1ViewController.swift; sourceTree = "<group>"; };
-		D47F17AD24A8E2B9002C02CA /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		D47F17AD24A8E2B9002C02CA /* ServiceUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceUser.swift; sourceTree = "<group>"; };
 		D47F17AF24A8E41D002C02CA /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47F17B224A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrarNuevoUsuarioViewController.swift; sourceTree = "<group>"; };
 		D4AEA91324C5214E00F18491 /* CompresionManiobraAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CompresionManiobraAudio.mp3; sourceTree = "<group>"; };
+		D4F2CD8C24CC817700A2FA30 /* InsuflacionManiobra.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = InsuflacionManiobra.gif; sourceTree = "<group>"; };
+		D4F2CD8E24CC834400A2FA30 /* InsuflacionManiobraAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = InsuflacionManiobraAudio.mp3; sourceTree = "<group>"; };
+		D4F2CD9024CC838500A2FA30 /* AprendizajePaso7ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso7ViewController.swift; sourceTree = "<group>"; };
+		D4F2CD9324CC91AB00A2FA30 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D4F2CD9524CC923400A2FA30 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D4F2CD9724CCA6C900A2FA30 /* AprendizajePaso8ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso8ViewController.swift; sourceTree = "<group>"; };
+		D4F2CD9924CCA7E300A2FA30 /* AprendizajeAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = AprendizajeAudio.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,26 +151,24 @@
 		D44B0A1F245E21890069A8B4 /* RCP Para Todos */ = {
 			isa = PBXGroup;
 			children = (
+				D4F2CD9224CC914300A2FA30 /* Utils */,
 				D451035024C518090080EE67 /* Resources */,
 				D44CAB5D24C38F75006D00FF /* Tutor */,
 				D47F17AC24A8E295002C02CA /* Services */,
 				D47F17A924A8DC6E002C02CA /* Simulacion */,
 				D45267F0249E6F17005F7886 /* Aprendizaje */,
 				D45267E7249E6914005F7886 /* Storyboards */,
-				D44B0A37245E280D0069A8B4 /* ViewControllers */,
+				D44B0A37245E280D0069A8B4 /* ViewControllers Iniciales */,
 				D44B0A20245E21890069A8B4 /* AppDelegate.swift */,
 				D44B0A22245E21890069A8B4 /* SceneDelegate.swift */,
 				D44B0A2C245E218A0069A8B4 /* Assets.xcassets */,
 				D44B0A31245E218A0069A8B4 /* Info.plist */,
 				D44B0A29245E21890069A8B4 /* RCP_Para_Todos.xcdatamodeld */,
-				D12C2480248D6C70009981A0 /* Conversor.swift */,
-				D44E9364248D72BD002608EA /* Instante.swift */,
-				D451034E24C516C00080EE67 /* Gif.swift */,
 			);
 			path = "RCP Para Todos";
 			sourceTree = "<group>";
 		};
-		D44B0A37245E280D0069A8B4 /* ViewControllers */ = {
+		D44B0A37245E280D0069A8B4 /* ViewControllers Iniciales */ = {
 			isa = PBXGroup;
 			children = (
 				D44B0A24245E21890069A8B4 /* JuegoViewController.swift */,
@@ -166,7 +178,7 @@
 				D47530AE249E71A2008CDCB4 /* CustomNavigationViewController.swift */,
 				D47F17B224A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift */,
 			);
-			path = ViewControllers;
+			path = "ViewControllers Iniciales";
 			sourceTree = "<group>";
 		};
 		D44CAB5D24C38F75006D00FF /* Tutor */ = {
@@ -185,8 +197,11 @@
 		D451035024C518090080EE67 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D4F2CD8E24CC834400A2FA30 /* InsuflacionManiobraAudio.mp3 */,
+				D4F2CD8C24CC817700A2FA30 /* InsuflacionManiobra.gif */,
 				D4AEA91324C5214E00F18491 /* CompresionManiobraAudio.mp3 */,
 				D451035124C5181C0080EE67 /* CompresionManiobra.gif */,
+				D4F2CD9924CCA7E300A2FA30 /* AprendizajeAudio.mp3 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -214,6 +229,8 @@
 				D47530B4249E769E008CDCB4 /* AprendizajePaso4ViewController.swift */,
 				D47530B6249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift */,
 				D47530B8249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift */,
+				D4F2CD9024CC838500A2FA30 /* AprendizajePaso7ViewController.swift */,
+				D4F2CD9724CCA6C900A2FA30 /* AprendizajePaso8ViewController.swift */,
 				D47530BA249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift */,
 			);
 			path = Aprendizaje;
@@ -230,9 +247,21 @@
 		D47F17AC24A8E295002C02CA /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D47F17AD24A8E2B9002C02CA /* Services.swift */,
+				D47F17AD24A8E2B9002C02CA /* ServiceUser.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		D4F2CD9224CC914300A2FA30 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D12C2480248D6C70009981A0 /* Conversor.swift */,
+				D44E9364248D72BD002608EA /* Instante.swift */,
+				D451034E24C516C00080EE67 /* Gif.swift */,
+				D4F2CD9324CC91AB00A2FA30 /* Extensions.swift */,
+				D4F2CD9524CC923400A2FA30 /* Constants.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		E73091FB2F1884ACA099897C /* Frameworks */ = {
@@ -309,13 +338,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4F2CD8F24CC834400A2FA30 /* InsuflacionManiobraAudio.mp3 in Resources */,
 				D451035224C5181C0080EE67 /* CompresionManiobra.gif in Resources */,
 				D4AEA91424C5214E00F18491 /* CompresionManiobraAudio.mp3 in Resources */,
 				D44B0A30245E218A0069A8B4 /* LaunchScreen.storyboard in Resources */,
 				D44CAB5924C38A31006D00FF /* Tutor.storyboard in Resources */,
+				D4F2CD8D24CC817800A2FA30 /* InsuflacionManiobra.gif in Resources */,
 				D45267EF249E699C005F7886 /* Juego.storyboard in Resources */,
 				D44CAB5C24C38A49006D00FF /* Practicante.storyboard in Resources */,
 				D44B0A2D245E218A0069A8B4 /* Assets.xcassets in Resources */,
+				D4F2CD9A24CCA7E300A2FA30 /* AprendizajeAudio.mp3 in Resources */,
 				D45267E6249E6902005F7886 /* Aprendizaje.storyboard in Resources */,
 				D45267EC249E6965005F7886 /* Simulacion.storyboard in Resources */,
 				D44B0A28245E21890069A8B4 /* Main.storyboard in Resources */,
@@ -372,11 +404,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D44CAB6724C3A648006D00FF /* VerActividadesViewController.swift in Sources */,
+				D4F2CD9124CC838500A2FA30 /* AprendizajePaso7ViewController.swift in Sources */,
 				D44CAB5F24C38FC3006D00FF /* InicioTutorViewController.swift in Sources */,
 				D44CAB6324C3A62F006D00FF /* VerCursosViewController.swift in Sources */,
 				D47530AF249E71A2008CDCB4 /* CustomNavigationViewController.swift in Sources */,
+				D4F2CD9624CC923400A2FA30 /* Constants.swift in Sources */,
 				D12C2481248D6C70009981A0 /* Conversor.swift in Sources */,
 				D44B0A25245E21890069A8B4 /* JuegoViewController.swift in Sources */,
+				D4F2CD9424CC91AB00A2FA30 /* Extensions.swift in Sources */,
 				D47530B7249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift in Sources */,
 				D47530B9249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift in Sources */,
 				D44B0A21245E21890069A8B4 /* AppDelegate.swift in Sources */,
@@ -389,7 +424,8 @@
 				D47530BB249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift in Sources */,
 				D44CAB6124C396E5006D00FF /* CrearCursoViewController.swift in Sources */,
 				D45267F2249E6F32005F7886 /* AprendizajePaso1ViewController.swift in Sources */,
-				D47F17AE24A8E2B9002C02CA /* Services.swift in Sources */,
+				D47F17AE24A8E2B9002C02CA /* ServiceUser.swift in Sources */,
+				D4F2CD9824CCA6C900A2FA30 /* AprendizajePaso8ViewController.swift in Sources */,
 				D44B0A2B245E21890069A8B4 /* RCP_Para_Todos.xcdatamodeld in Sources */,
 				D44CAB6524C3A63C006D00FF /* VerPracticantesViewController.swift in Sources */,
 				D44CAB6924C3A654006D00FF /* VerActividadViewController.swift in Sources */,

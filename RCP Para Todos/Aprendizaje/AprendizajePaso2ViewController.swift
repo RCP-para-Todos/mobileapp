@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
-import CoreBluetooth // Para el bluetooth.
+import CoreBluetooth
 
 class AprendizajePaso2ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate
 {
@@ -15,9 +15,8 @@ class AprendizajePaso2ViewController: UIViewController, CBCentralManagerDelegate
        
     public var centralManager : CBCentralManager!
     public var esp32 : CBPeripheral!
-    public var characteristics = [String : CBCharacteristic]() // Es una variable tipo diccionario.
+    public var characteristics = [String : CBCharacteristic]()
 
-    //Variables estaticas que son compartidas con la vista Secundaria (De configuracion)
     public static var esp32Shared : CBPeripheral!
     public static var characteristicsShared = [String : CBCharacteristic]()
 
@@ -32,7 +31,7 @@ class AprendizajePaso2ViewController: UIViewController, CBCentralManagerDelegate
     {
         super.viewDidLoad()
         self.inicializarBarraSuperior()
-        self.continuarButton.backgroundColor = UIColor(red: 0.39, green: 0.39, blue: 0.39, alpha: 1.00)
+        self.continuarButton.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
@@ -47,45 +46,67 @@ class AprendizajePaso2ViewController: UIViewController, CBCentralManagerDelegate
     
     @IBAction func primerCheckBoxClicked(_ sender: Any) {
         if(self.primeroEstado){
-            primerCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
+            self.primerCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
             self.primeroEstado = false
         }
         else{
-            primerCheckBox.setImage(UIImage(named: "checked"), for: .normal)
+            self.primerCheckBox.setImage(UIImage(named: "checked"), for: .normal)
             self.primeroEstado = true
         }
         if(self.primeroEstado && self.segundoEstado && self.terceroEstado){
-            self.continuarButton.backgroundColor = UIColor(red: 0.00, green: 0.70, blue: 0.01, alpha: 1.00)
+            self.continuarButton.backgroundColor = Constants.COLOR_BOTON_ACTIVADO
             self.continuarButton.isEnabled = true
         }
         else{
-            self.continuarButton.backgroundColor = UIColor(red: 0.39, green: 0.39, blue: 0.39, alpha: 1.00)
+            self.continuarButton.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
             self.continuarButton.isEnabled = false
         }
     }
 
     @IBAction func tercerCheckBoxClicked(_ sender: Any) {
         if(self.terceroEstado){
-            tercerCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
+            self.tercerCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
             self.terceroEstado = false
         }
         else{
-            tercerCheckBox.setImage(UIImage(named: "checked"), for: .normal)
+            self.tercerCheckBox.setImage(UIImage(named: "checked"), for: .normal)
             self.terceroEstado = true
         }
         if(self.primeroEstado && self.segundoEstado && self.terceroEstado){
-            self.continuarButton.backgroundColor = UIColor(red: 0.00, green: 0.70, blue: 0.01, alpha: 1.00)
+            self.continuarButton.backgroundColor = Constants.COLOR_BOTON_ACTIVADO
             self.continuarButton.isEnabled = true
         }
         else{
-            self.continuarButton.backgroundColor = UIColor(red: 0.39, green: 0.39, blue: 0.39, alpha: 1.00)
+            self.continuarButton.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
             self.continuarButton.isEnabled = false
         }
     }
+    
     @IBAction func continuarClicked(_ sender: Any) {
-        performSegue(withIdentifier: "paso3", sender: nil)
+        self.performSegue(withIdentifier: "paso3", sender: nil)
         self.centralManager = nil
     }
+    
+    func tratamientoRecepcionBluetooth(posicion: String){
+        if(posicion == "Reclinado"){
+            segundoCheckBox.setImage(UIImage(named: "checked"), for: .normal)
+            self.segundoEstado = true
+        }
+        else{
+            segundoCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
+            self.segundoEstado = false
+        }
+        if(self.primeroEstado && self.segundoEstado && self.terceroEstado){
+            self.continuarButton.backgroundColor = Constants.COLOR_BOTON_ACTIVADO
+            self.continuarButton.isEnabled = true
+        }
+        else{
+            self.continuarButton.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
+            self.continuarButton.isEnabled = false
+        }
+    }
+    
+    // MARK: DELEGADOS BLUETOOTH
     
     //Esta funcion es invocada cuando el dispositivo es conectado, es decir pasa a estado 2.
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral)
@@ -161,22 +182,7 @@ class AprendizajePaso2ViewController: UIViewController, CBCentralManagerDelegate
             let cadenaBytetoString = String(bytes: recibido, encoding: .utf8)
             let datosCorrectos = cadenaBytetoString!.components(separatedBy: ";")
             let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)
-            if(posicion == "Reclinado"){
-                segundoCheckBox.setImage(UIImage(named: "checked"), for: .normal)
-                self.segundoEstado = true
-            }
-            else{
-                segundoCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
-                self.segundoEstado = false
-            }
-            if(self.primeroEstado && self.segundoEstado && self.terceroEstado){
-                self.continuarButton.backgroundColor = UIColor(red: 0.00, green: 0.70, blue: 0.01, alpha: 1.00)
-                self.continuarButton.isEnabled = true
-            }
-            else{
-                self.continuarButton.backgroundColor = UIColor(red: 0.39, green: 0.39, blue: 0.39, alpha: 1.00)
-                self.continuarButton.isEnabled = false
-            }
+            self.tratamientoRecepcionBluetooth(posicion: posicion)
         }
     }
     

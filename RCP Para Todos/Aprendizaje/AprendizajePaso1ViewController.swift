@@ -18,7 +18,7 @@ class AprendizajePaso1ViewController: UIViewController
     {
         super.viewDidLoad()
         self.inicializarBarraSuperior()
-        self.entornoSeguroButton.backgroundColor = UIColor(red: 0.39, green: 0.39, blue: 0.39, alpha: 1.00)
+        self.entornoSeguroButton.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
     }
     
     func inicializarBarraSuperior()
@@ -31,78 +31,78 @@ class AprendizajePaso1ViewController: UIViewController
     }
     @IBAction func primerCheckBoxClicked(_ sender: Any) {
         if(self.primeroEstado){
-            primerCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
+            self.primerCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
             self.primeroEstado = false
         }
         else{
-            primerCheckBox.setImage(UIImage(named: "checked"), for: .normal)
+            self.primerCheckBox.setImage(UIImage(named: "checked"), for: .normal)
             self.primeroEstado = true
         }
         if(self.primeroEstado && self.segundoEstado && self.terceroEstado && self.cuartoEstado){
-            self.entornoSeguroButton.backgroundColor = UIColor(red: 0.00, green: 0.70, blue: 0.01, alpha: 1.00)
+            self.entornoSeguroButton.backgroundColor = Constants.COLOR_BOTON_ACTIVADO
             self.entornoSeguroButton.isEnabled = true
         }
         else{
-            self.entornoSeguroButton.backgroundColor = UIColor(red: 0.39, green: 0.39, blue: 0.39, alpha: 1.00)
+            self.entornoSeguroButton.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
             self.entornoSeguroButton.isEnabled = false
         }
     }
     @IBAction func segundoCheckBoxClicked(_ sender: Any) {
         if(self.segundoEstado){
-            segundoCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
+            self.segundoCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
             self.segundoEstado = false
         }
         else{
-            segundoCheckBox.setImage(UIImage(named: "checked"), for: .normal)
+            self.segundoCheckBox.setImage(UIImage(named: "checked"), for: .normal)
             self.segundoEstado = true
         }
         if(self.primeroEstado && self.segundoEstado && self.terceroEstado && self.cuartoEstado){
-            self.entornoSeguroButton.backgroundColor = UIColor(red: 0.00, green: 0.70, blue: 0.01, alpha: 1.00)
+            self.entornoSeguroButton.backgroundColor = Constants.COLOR_BOTON_ACTIVADO
             self.entornoSeguroButton.isEnabled = true
         }
         else{
-            self.entornoSeguroButton.backgroundColor = UIColor(red: 0.39, green: 0.39, blue: 0.39, alpha: 1.00)
+            self.entornoSeguroButton.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
             self.entornoSeguroButton.isEnabled = false
         }
     }
     @IBAction func tercerCheckBoxClicked(_ sender: Any) {
         if(self.terceroEstado){
-            tercerCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
+            self.tercerCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
             self.terceroEstado = false
         }
         else{
-            tercerCheckBox.setImage(UIImage(named: "checked"), for: .normal)
+            self.tercerCheckBox.setImage(UIImage(named: "checked"), for: .normal)
             self.terceroEstado = true
         }
         if(self.primeroEstado && self.segundoEstado && self.terceroEstado && self.cuartoEstado){
-            self.entornoSeguroButton.backgroundColor = UIColor(red: 0.00, green: 0.70, blue: 0.01, alpha: 1.00)
+            self.entornoSeguroButton.backgroundColor = Constants.COLOR_BOTON_ACTIVADO
             self.entornoSeguroButton.isEnabled = true
         }
         else{
-            self.entornoSeguroButton.backgroundColor = UIColor(red: 0.39, green: 0.39, blue: 0.39, alpha: 1.00)
+            self.entornoSeguroButton.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
             self.entornoSeguroButton.isEnabled = false
         }
     }
     @IBAction func cuartoCheckBoxClicked(_ sender: Any) {
         if(self.cuartoEstado){
-            cuartoCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
+            self.cuartoCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
             self.cuartoEstado = false
         }
         else{
-            cuartoCheckBox.setImage(UIImage(named: "checked"), for: .normal)
+            self.cuartoCheckBox.setImage(UIImage(named: "checked"), for: .normal)
             self.cuartoEstado = true
         }
         if(self.primeroEstado && self.segundoEstado && self.terceroEstado && self.cuartoEstado){
-            self.entornoSeguroButton.backgroundColor = UIColor(red: 0.00, green: 0.70, blue: 0.01, alpha: 1.00)
+            self.entornoSeguroButton.backgroundColor = Constants.COLOR_BOTON_ACTIVADO
             self.entornoSeguroButton.isEnabled = true
         }
         else{
-            self.entornoSeguroButton.backgroundColor = UIColor(red: 0.39, green: 0.39, blue: 0.39, alpha: 1.00)
+            self.entornoSeguroButton.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
             self.entornoSeguroButton.isEnabled = false
         }
     }
     @IBAction func entornoSeguroClicked(_ sender: Any) {
-        performSegue(withIdentifier: "paso2", sender: nil)
+        self.performSegue(withIdentifier: "paso2", sender: nil)
     }
     
     

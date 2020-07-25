@@ -559,6 +559,7 @@
                         <outlet property="segundoCheckBox" destination="I06-FH-sKF" id="Eym-5L-U57"/>
                         <outlet property="tercerCheckBox" destination="xOP-RY-gc5" id="tuw-L8-7ua"/>
                         <segue destination="9kQ-xO-3XT" kind="show" identifier="paso5" id="rnc-gi-F9X"/>
+                        <segue destination="LSC-c3-5f6" kind="show" identifier="paso6_4" id="ytA-AO-f2V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbz-Lc-8wh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -740,16 +741,17 @@
                         <outlet property="imageGif" destination="dt7-Lz-if6" id="o1G-YK-Re3"/>
                         <outlet property="progressBar" destination="5h9-mh-AJf" id="YaL-82-1mV"/>
                         <outlet property="stackView" destination="FCz-L4-13K" id="8m5-ly-jCT"/>
+                        <segue destination="Mbm-jp-aVJ" kind="show" identifier="paso7" id="D80-eS-H0z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYU-ip-I2I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5271.0144927536239" y="93.75"/>
         </scene>
-        <!--Aprendizaje Estadisticas View Controller-->
+        <!--Aprendizaje Paso7 View Controller-->
         <scene sceneID="oaG-qn-LJC">
             <objects>
-                <viewController storyboardIdentifier="AprendizajeEstadisticas" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mbm-jp-aVJ" customClass="AprendizajeEstadisticasViewController" customModule="RCP_Para_Todos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AprendizajePaso7ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mbm-jp-aVJ" customClass="AprendizajePaso7ViewController" customModule="RCP_Para_Todos" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VqF-2K-dvx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -765,21 +767,198 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PASO 2: Verificar conciencia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lri-8p-IWf">
-                                <rect key="frame" x="77" y="363" width="270" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PASO 7: Práctica de insuflaciones" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lri-8p-IWf">
+                                <rect key="frame" x="47" y="358" width="320" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nX6-gu-zoX">
+                                <rect key="frame" x="33" y="422" width="340" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZhP-vo-U3s" customClass="UICircularTimerRing" customModule="UICircularProgressRing">
+                                <rect key="frame" x="87" y="648" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="fullCircle" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldShowValueText" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="outerRingWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="startAngle">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldDrawMinValueKnob" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="innerRingWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
+                                        <color key="value" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isClockwise" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pmo-qx-Mvc">
+                                <rect key="frame" x="33" y="796" width="340" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="swQ-f0-xPB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="lbM-Sh-AhV"/>
+                    <connections>
+                        <outlet property="imageGif" destination="nX6-gu-zoX" id="Y9e-c9-sR5"/>
+                        <outlet property="progressBar" destination="ZhP-vo-U3s" id="5bO-lr-uOh"/>
+                        <outlet property="stackView" destination="Pmo-qx-Mvc" id="BAr-1p-1Jt"/>
+                        <segue destination="5Iy-qS-Yxp" kind="show" identifier="paso8" id="kek-rE-qGb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kBA-NT-3kG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6192.753623188406" y="95.758928571428569"/>
+        </scene>
+        <!--Aprendizaje Paso8 View Controller-->
+        <scene sceneID="fVv-Zk-0gz">
+            <objects>
+                <viewController storyboardIdentifier="AprendizajePaso8ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Iy-qS-Yxp" customClass="AprendizajePaso8ViewController" customModule="RCP_Para_Todos" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oPo-fC-ko4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="RCP" translatesAutoresizingMaskIntoConstraints="NO" id="aSc-Iq-HPZ">
+                                <rect key="frame" x="87" y="134" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aprendiendo RCP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rX-dV-HCd">
+                                <rect key="frame" x="111" y="303" width="192" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PASO 8: Práctica Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIA-kR-ZCY">
+                                <rect key="frame" x="101" y="358" width="213" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gO9-19-4bL" customClass="UICircularTimerRing" customModule="UICircularProgressRing">
+                                <rect key="frame" x="87" y="648" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="fullCircle" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldShowValueText" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="outerRingWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="startAngle">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldDrawMinValueKnob" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="innerRingWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
+                                        <color key="value" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isClockwise" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jLh-08-BJj" userLabel="Image View Heart">
+                                <rect key="frame" x="228" y="463" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBw-CM-dP9" userLabel="Image View Heart">
+                                <rect key="frame" x="43" y="463" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="xbC-7u-cps"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="O2x-u1-l15"/>
+                    <connections>
+                        <outlet property="imageHeart" destination="OBw-CM-dP9" id="PQb-Uo-073"/>
+                        <outlet property="imageWind" destination="jLh-08-BJj" id="JO1-zD-VKJ"/>
+                        <outlet property="progressBar" destination="gO9-19-4bL" id="DpJ-HS-kuz"/>
+                        <segue destination="8yO-yn-Qzc" kind="show" identifier="pasoEstadisticas" id="mUh-g9-aFQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mb0-fM-cgr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7092.753623188406" y="95.758928571428569"/>
+        </scene>
+        <!--Aprendizaje Estadisticas View Controller-->
+        <scene sceneID="Acr-OZ-bRE">
+            <objects>
+                <viewController storyboardIdentifier="AprendizajeEstadisticasViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8yO-yn-Qzc" customClass="AprendizajeEstadisticasViewController" customModule="RCP_Para_Todos" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bvm-Lz-5bC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="RCP" translatesAutoresizingMaskIntoConstraints="NO" id="TJI-jH-TUV">
+                                <rect key="frame" x="87" y="134" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aprendiendo RCP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CS7-nc-caa">
+                                <rect key="frame" x="111" y="303" width="192" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Resultado" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0PR-ck-sEh">
+                                <rect key="frame" x="159" y="358" width="96" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ou5-8J-2jr">
+                                <rect key="frame" x="46" y="793" width="323" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Ir al inicio">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="entornoSeguroClicked:" destination="cde-BY-nRz" eventType="touchUpInside" id="GnE-Rm-0Lv"/>
+                                    <segue destination="Cag-VN-ban" kind="show" id="2zr-NQ-3Cj"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSo-5K-OKx" customClass="PieChartView" customModule="Charts">
+                                <rect key="frame" x="46" y="406" width="323" height="342"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="ZAr-XI-weB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="88d-OM-Vfk"/>
+                    <connections>
+                        <outlet property="pieChartView" destination="tSo-5K-OKx" id="BYb-1P-4mW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WTy-eM-G1F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8015.9420289855079" y="95.758928571428569"/>
+        </scene>
+        <!--InicioViewController-->
+        <scene sceneID="cGs-J9-H4d">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Practicante" referencedIdentifier="InicioViewController" id="Cag-VN-ban" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="EkN-lc-ObX"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wqw-2y-zeW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8580" y="83"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="X9d-x0-KU9">
@@ -800,6 +979,9 @@
             <point key="canvasLocation" x="-317.39130434782612" y="93.75"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ytA-AO-f2V"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="RCP" width="310" height="145"/>
         <image name="esternon" width="4500" height="4500"/>

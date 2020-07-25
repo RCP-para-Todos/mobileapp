@@ -1,20 +1,26 @@
 PODS:
   - Alamofire (5.1.0)
+  - Charts (3.5.0):
+    - Charts/Core (= 3.5.0)
+  - Charts/Core (3.5.0)
   - UICircularProgressRing (7.0.0)
 
 DEPENDENCIES:
   - Alamofire
+  - Charts
   - UICircularProgressRing
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Charts
     - UICircularProgressRing
 
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
   UICircularProgressRing: 738b48db0ec1fbbd8482d727979392bb8c272e8d
 
-PODFILE CHECKSUM: e9e6ec76d08622791c5f65f138dbcd696819dd3d
+PODFILE CHECKSUM: 46e7d6aaacf7d7aaf98c9e860244a0888fb5cecd
 
 COCOAPODS: 1.9.0

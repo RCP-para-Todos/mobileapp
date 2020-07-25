@@ -1,13 +1,62 @@
 import Foundation
 import UIKit
+import Charts
 
-class AprendizajeEstadisticasViewController: UIViewController
+class AprendizajeEstadisticasViewController: UIViewController, ChartViewDelegate
 {
-
+    @IBOutlet var pieChartView: PieChartView!
+    var instantes : [Instante] = []
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.inicializarBarraSuperior()
+        self.pieChartView.delegate = self
+        self.initGraph()
+    }
+    
+    func initGraph(){
+        let labels = ["Nulas", "Insuficientes", "Correctas", "Excesivas"]
+        var n : Double = 0, i : Double = 0, c : Double = 0, e : Double = 0
+        for ins in self.instantes{
+            print(ins.Compresion)
+            if(ins.Compresion == "Nula"){
+                n = n+1
+            }
+            else if(ins.Compresion == "Insuficiente"){
+                i = i+1
+            }
+            else if(ins.Compresion == "Correcta"){
+                c = c+1
+            }
+            else if(ins.Compresion == "Excesiva"){
+                e = e+1
+            }
+        }
+        let values = [n, i, c, e]
+        self.setChart(dataPoints: labels, values: values)
+    }
+    
+    func setChart(dataPoints: [String], values: [Double]) {
+        var dataEntries: [ChartDataEntry] = []
+        for i in 0..<values.count {
+            let dataEntry1 = PieChartDataEntry(value: values[i], label: dataPoints[i])
+            dataEntries.append(dataEntry1)
+        }
+        let pieChartDataSet = PieChartDataSet(entries: dataEntries, label: nil)
+        let pieChartData = PieChartData(dataSet: pieChartDataSet)
+      
+        var colors: [UIColor] = []
+
+        for _ in 0..<dataPoints.count {
+        let red = Double(arc4random_uniform(256))
+        let green = Double(arc4random_uniform(256))
+        let blue = Double(arc4random_uniform(256))
+
+        let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
+        colors.append(color)
+      }
+        pieChartDataSet.colors = colors
+        self.pieChartView.data = pieChartData
     }
     
     func inicializarBarraSuperior()

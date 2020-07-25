@@ -1,14 +1,6 @@
 import Foundation
 import UIKit
 
-extension UIViewController {
-    func hideKeyboardOnTap(_ selector: Selector) {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: selector)
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-}
-
 class LoginViewController: UIViewController
 {
     
@@ -16,21 +8,21 @@ class LoginViewController: UIViewController
     @IBOutlet weak var passwordInput: UITextField!
     @IBOutlet weak var activityIndicatorSpinner: UIActivityIndicatorView!
     
-    var service : Services?
+    var service : ServiceUser?
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
-        self.service = Services()
-        activityIndicatorSpinner.stopAnimating()
+        self.service = ServiceUser()
+        self.activityIndicatorSpinner.stopAnimating()
     }
     
     @objc func dismissKeyboard() {
-        view.endEditing(true)
+        self.view.endEditing(true)
     }
 
     @IBAction func ingresarClicked(_ sender: Any) {
-        activityIndicatorSpinner.startAnimating()
+        self.activityIndicatorSpinner.startAnimating()
         let parameters: [String: String] = [
             "name" : usuarioInput.text!,
             "password" : passwordInput.text!
@@ -45,8 +37,8 @@ class LoginViewController: UIViewController
     func completion(result: Bool){
         self.activityIndicatorSpinner.stopAnimating()
         if(result){
-            //performSegue(withIdentifier: "InicioSegue", sender: nil)
-            performSegue(withIdentifier: "InicioTutorSegue", sender: nil)
+            performSegue(withIdentifier: "InicioSegue", sender: nil)
+            //performSegue(withIdentifier: "InicioTutorSegue", sender: nil)
         }
         else{
             let alert = UIAlertController(title: "Creedenciales incorrectas", message: "Usuario o contraseña no válidos", preferredStyle: UIAlertController.Style.alert)

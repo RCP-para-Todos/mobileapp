@@ -9,19 +9,7 @@
 import Foundation
 import Alamofire
 
-extension String {
-
-    func slice(from: String, to: String) -> String? {
-
-        return (range(of: from)?.upperBound).flatMap { substringFrom in
-            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
-                String(self[substringFrom..<substringTo])
-            }
-        }
-    }
-}
-
-class Services
+class ServiceUser
 {
     public func login(parameters: [String: String], completion: @escaping (Bool) -> Void){
         completion(true)

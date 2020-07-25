@@ -9,7 +9,7 @@ class AprendizajePaso5ViewController: UIViewController
     {
         super.viewDidLoad()
         self.inicializarBarraSuperior()
-        self.continuarButton.backgroundColor = UIColor(red: 0.00, green: 0.70, blue: 0.01, alpha: 1.00)
+        self.continuarButton.backgroundColor = Constants.COLOR_BOTON_ACTIVADO
     }
     
     func inicializarBarraSuperior()
@@ -21,7 +21,7 @@ class AprendizajePaso5ViewController: UIViewController
         self.navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
     }
     @IBAction func continuarClicked(_ sender: Any) {
-        performSegue(withIdentifier: "paso6", sender: nil)
+        self.performSegue(withIdentifier: "paso6", sender: nil)
     }
     
 }

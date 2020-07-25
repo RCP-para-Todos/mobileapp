@@ -16,13 +16,13 @@ class RegistrarNuevoUsuario: UIViewController
     @IBOutlet weak var activityIndicatorSpinner: UIActivityIndicatorView!
     @IBOutlet weak var perfilInput: UISegmentedControl!
     
-    var service : Services?
+    var service : ServiceUser?
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
-        self.service = Services()
-        activityIndicatorSpinner.stopAnimating()
+        self.service = ServiceUser()
+        self.activityIndicatorSpinner.stopAnimating()
     }
     
     @objc func dismissKeyboard() {
@@ -30,7 +30,7 @@ class RegistrarNuevoUsuario: UIViewController
     }
     
     @IBAction func registrarClicked(_ sender: Any) {
-        activityIndicatorSpinner.startAnimating()
+        self.activityIndicatorSpinner.startAnimating()
         let parameters: [String: String] = [
             "name" : usuarioInput.text!,
             "password" : passwordInput.text!,
@@ -42,7 +42,7 @@ class RegistrarNuevoUsuario: UIViewController
     func completion(result: Bool){
         self.activityIndicatorSpinner.stopAnimating()
         if(result){
-            navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
         else{
             print("ERROR AL REGISTRAR")
