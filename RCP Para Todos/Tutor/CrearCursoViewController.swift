@@ -17,15 +17,20 @@ class CrearCursoViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     
     var practicantes: [String] = []
+    var servicePracticante : ServicePracticante?
+    var serviceCurso : ServiceCurso?
     //ESTO VIENE DEL BACK
-    let suggestionsArray = ["Juan", "Jorge", "Jose", "Tomas", "Matias", "Tiago"]
+    var suggestionsArray : [String] = []
+    //var suggestionsArray = ["Juan", "Jorge", "Jose", "Tomas", "Matias", "Tiago"]
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.servicePracticante = ServicePracticante()
+        self.serviceCurso = ServiceCurso()
+        self.getPracticantesSinCurso()
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
         self.inicializarBarraSuperior()
-        self.textNombrePracticante.delegate = self
     }
     
     @objc func dismissKeyboard() {
@@ -61,10 +66,42 @@ class CrearCursoViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     @IBAction func buttonGuardarCursoClicked(_ sender: Any) {
+        let nombreCurso = self.textNombreCurso.text
+        let usuarioActivo = UserDefaults.standard.string(forKey: "usuarioActivo")
+        let event_date = self.hoy()
+        let practicantes = self.practicantes
+        let parameters : [String: Any] = [
+            "name" : nombreCurso!,
+            "event_date" : event_date,
+            "instructor" : usuarioActivo!,
+            "students" : practicantes
+            ]
+        self.serviceCurso?.newCurso(parameters: parameters, completion: self.cursoCreado)
         self.navigationController?.popViewController(animated: true)
     }
     
+    func getPracticantesSinCurso(){
+        self.servicePracticante?.getPracticantesSinCurso(completion: self.llenarArray)
+    }
     
+    func llenarArray(array:[String]){
+        self.suggestionsArray = array
+        self.textNombrePracticante.delegate = self
+    }
+    
+    func cursoCreado(response: Bool){
+        
+    }
+    
+    func hoy() -> String{
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let result = formatter.string(from: date)
+        return result
+    }
+    
+    // MARK: DELEGADOS
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !self.autoCompleteText( in : textField, using: string, suggestionsArray: suggestionsArray)

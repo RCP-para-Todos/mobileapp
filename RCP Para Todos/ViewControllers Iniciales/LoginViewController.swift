@@ -11,6 +11,7 @@ class LoginViewController: UIViewController
     var service : ServiceUser?
     override func viewDidLoad()
     {
+        self.resetDefaults()
         super.viewDidLoad()
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
         self.service = ServiceUser()
@@ -28,22 +29,40 @@ class LoginViewController: UIViewController
             "password" : passwordInput.text!
         ]
         self.service?.login(parameters: parameters, completion: self.completion)
-        //ESTO ES USADO PARA TESTEAR
-        /*let defaults = UserDefaults.standard
-        let token = defaults.string(forKey: "token")!
-        self.service?.getUserByToken(token: token)*/
     }
     
     func completion(result: Bool){
         self.activityIndicatorSpinner.stopAnimating()
         if(result){
-            performSegue(withIdentifier: "InicioSegue", sender: nil)
-            //performSegue(withIdentifier: "InicioTutorSegue", sender: nil)
+            let rol = UserDefaults.standard.string(forKey: "rol")
+            
+            if(rol == "instructor"){
+                self.performSegue(withIdentifier: "InicioTutorSegue", sender: nil)
+            }
+            else{
+                if let curso = UserDefaults.standard.string(forKey: "curso"){
+                    self.performSegue(withIdentifier: "InicioSegue", sender: nil)
+                }
+                else{
+                    let alert = UIAlertController(title: "Usuario sin curso asignado", message: "El usuario practicante existe pero no posee un curso asignado", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                   
+                }
+            }
         }
         else{
             let alert = UIAlertController(title: "Creedenciales incorrectas", message: "Usuario o contraseña no válidos", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func resetDefaults() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
         }
     }
     

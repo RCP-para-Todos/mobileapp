@@ -3,24 +3,28 @@ PODS:
   - Charts (3.5.0):
     - Charts/Core (= 3.5.0)
   - Charts/Core (3.5.0)
+  - SwiftyJSON (5.0.0)
   - UICircularProgressRing (7.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - Charts
+  - SwiftyJSON
   - UICircularProgressRing
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Charts
+    - SwiftyJSON
     - UICircularProgressRing
 
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   UICircularProgressRing: 738b48db0ec1fbbd8482d727979392bb8c272e8d
 
-PODFILE CHECKSUM: 46e7d6aaacf7d7aaf98c9e860244a0888fb5cecd
+PODFILE CHECKSUM: 5f4829e163bdd38f94bfb5324c8bee0157295f6a
 
 COCOAPODS: 1.9.0

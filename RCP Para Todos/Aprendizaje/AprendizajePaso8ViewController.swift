@@ -24,12 +24,14 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
 
     var characteristicASCIIValue = NSString()
     
+    var serviceEvento : ServiceEvento?
     var instantes : [Instante] = []
     var mediosSegundos : Int = 0
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.serviceEvento = ServiceEvento()
         self.inicializarBarraSuperior()
         self.playSound()
         self.instantes = [Instante]()
@@ -50,7 +52,7 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
     }
     
     func loadProgressCircleBar(){
-        self.progressBar.startTimer(to: 60) { state in
+        self.progressBar.startTimer(to: Constants.APRENDIZAJE_DURACION_SEGUNDOS_FINAL) { state in
             switch state {
             case .finished:
                 print("finished")
@@ -141,7 +143,46 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
     
     func logicaEvaluarAprendizaje(){
         self.centralManager = nil
+        
+        //DATOS DEL EVENTO
+        
+        let usuarioActivo = UserDefaults.standard.string(forKey: "usuarioActivo")
+        let curso = UserDefaults.standard.string(forKey: "curso")
+        let duracion = String(1)
+        let tipo = "aprendizaje"
+        let event_date = self.hoy()
+        var contador : Int = 0
+        var instantes : [[String : Any]] = []
+        for i in self.instantes{
+            let temp = ["nro": contador, "insuflacion": i.Insuflacion, "compresion": i.Compresion, "posicion":i.Posicion] as [String : Any]
+            instantes.append(temp)
+            contador = contador + 1
+        }
+        
+        let parameters : [String: Any] = [
+            "user" : usuarioActivo!,
+            "course" : curso!,
+            "duration" : duracion,
+            "type" : tipo,
+            "event_date": event_date,
+            "instants": instantes
+            ]
+        //DATOS DEL EVENTO
+        
+        self.serviceEvento?.newEvento(parameters: parameters, completion: self.newEvento)
         self.performSegue(withIdentifier: "pasoEstadisticas", sender: nil)
+    }
+    
+    func hoy() -> String{
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let result = formatter.string(from: date)
+        return result
+    }
+    
+    func newEvento(completion: Bool){
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -197,7 +238,7 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
         
         //Cuando descubro las caracteristicas del dispositivo a la vez activo las notificaciones. Es decir lo que me manda el ESP32.
         enableNotifications(enable: true)
-        AprendizajePaso6ViewController.characteristicsShared = self.characteristics
+        AprendizajePaso8ViewController.characteristicsShared = self.characteristics
         //SACAR DE ACA
         let mensaje = "TEXTO"
         let data: Data = mensaje.data(using: String.Encoding.utf8)!

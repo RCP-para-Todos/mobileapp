@@ -10,4 +10,5 @@ target 'RCP Para Todos' do
 	pod 'Alamofire'
 	pod 'UICircularProgressRing'
 	pod 'Charts'
+	pod 'SwiftyJSON'
 end

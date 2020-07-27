@@ -5,6 +5,7 @@ import Charts
 class AprendizajeEstadisticasViewController: UIViewController, ChartViewDelegate
 {
     @IBOutlet var pieChartView: PieChartView!
+    @IBOutlet weak var labelTotalInsuflado: UILabel!
     var instantes : [Instante] = []
     override func viewDidLoad()
     {
@@ -12,6 +13,17 @@ class AprendizajeEstadisticasViewController: UIViewController, ChartViewDelegate
         self.inicializarBarraSuperior()
         self.pieChartView.delegate = self
         self.initGraph()
+        self.totalInsuflado()
+    }
+    
+    func totalInsuflado(){
+        var mediosegundos = 0
+        for i in self.instantes{
+            if(i.Insuflacion == "Correcta"){
+                mediosegundos += 1
+            }
+        }
+        self.labelTotalInsuflado.text = String(mediosegundos/2)
     }
     
     func initGraph(){
@@ -67,5 +79,10 @@ class AprendizajeEstadisticasViewController: UIViewController, ChartViewDelegate
         backButton.title = "Atras";
         self.navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
     }
+    
+    @IBAction func irAlInicioClicked(_ sender: Any) {
+        self.navigationController!.popViewControllers(viewsToPop: 8)
+    }
+    
 
 }

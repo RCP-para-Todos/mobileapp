@@ -34,7 +34,7 @@ class RegistrarNuevoUsuario: UIViewController
         let parameters: [String: String] = [
             "name" : usuarioInput.text!,
             "password" : passwordInput.text!,
-            "perfil" : (perfilInput.selectedSegmentIndex == 0) ? "Practicante" : "Usuario"
+            "rol" : (perfilInput.selectedSegmentIndex == 0) ? "usuario" : "instructor"
         ]
         self.service?.register(parameters: parameters, completion: self.completion)
     }

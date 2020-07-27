@@ -929,36 +929,41 @@
                                 </state>
                                 <connections>
                                     <action selector="entornoSeguroClicked:" destination="cde-BY-nRz" eventType="touchUpInside" id="GnE-Rm-0Lv"/>
-                                    <segue destination="Cag-VN-ban" kind="show" id="2zr-NQ-3Cj"/>
+                                    <action selector="irAlInicioClicked:" destination="8yO-yn-Qzc" eventType="touchUpInside" id="lfu-gd-uCy"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSo-5K-OKx" customClass="PieChartView" customModule="Charts">
-                                <rect key="frame" x="46" y="406" width="323" height="342"/>
+                                <rect key="frame" x="46" y="406" width="323" height="308"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tiempo total insuflado:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqd-ac-VQK">
+                                <rect key="frame" x="46" y="747" width="175" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVF-cb-cF0">
+                                <rect key="frame" x="238" y="747" width="131" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="ZAr-XI-weB"/>
                     </view>
                     <navigationItem key="navigationItem" id="88d-OM-Vfk"/>
                     <connections>
+                        <outlet property="labelTotalInsuflado" destination="OVF-cb-cF0" id="s9p-Db-0Qc"/>
                         <outlet property="pieChartView" destination="tSo-5K-OKx" id="BYb-1P-4mW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WTy-eM-G1F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8015.9420289855079" y="95.758928571428569"/>
-        </scene>
-        <!--InicioViewController-->
-        <scene sceneID="cGs-J9-H4d">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Practicante" referencedIdentifier="InicioViewController" id="Cag-VN-ban" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="EkN-lc-ObX"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wqw-2y-zeW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="8580" y="83"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="X9d-x0-KU9">

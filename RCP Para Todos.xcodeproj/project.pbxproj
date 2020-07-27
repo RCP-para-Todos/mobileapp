@@ -25,6 +25,9 @@
 		D44CAB6524C3A63C006D00FF /* VerPracticantesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CAB6424C3A63C006D00FF /* VerPracticantesViewController.swift */; };
 		D44CAB6724C3A648006D00FF /* VerActividadesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CAB6624C3A648006D00FF /* VerActividadesViewController.swift */; };
 		D44CAB6924C3A654006D00FF /* VerActividadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CAB6824C3A654006D00FF /* VerActividadViewController.swift */; };
+		D44E41F424CDCED60037D408 /* ServicePracticante.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44E41F324CDCED60037D408 /* ServicePracticante.swift */; };
+		D44E41F624CDDA700037D408 /* ServiceCurso.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44E41F524CDDA700037D408 /* ServiceCurso.swift */; };
+		D44E41F824CE27EB0037D408 /* ServiceEvento.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44E41F724CE27EB0037D408 /* ServiceEvento.swift */; };
 		D44E9365248D72BD002608EA /* Instante.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44E9364248D72BD002608EA /* Instante.swift */; };
 		D44E9367248D7FB0002608EA /* EstadisticasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44E9366248D7FB0002608EA /* EstadisticasViewController.swift */; };
 		D451034F24C516C00080EE67 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451034E24C516C00080EE67 /* Gif.swift */; };
@@ -79,6 +82,9 @@
 		D44CAB6424C3A63C006D00FF /* VerPracticantesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerPracticantesViewController.swift; sourceTree = "<group>"; };
 		D44CAB6624C3A648006D00FF /* VerActividadesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerActividadesViewController.swift; sourceTree = "<group>"; };
 		D44CAB6824C3A654006D00FF /* VerActividadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerActividadViewController.swift; sourceTree = "<group>"; };
+		D44E41F324CDCED60037D408 /* ServicePracticante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePracticante.swift; sourceTree = "<group>"; };
+		D44E41F524CDDA700037D408 /* ServiceCurso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCurso.swift; sourceTree = "<group>"; };
+		D44E41F724CE27EB0037D408 /* ServiceEvento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceEvento.swift; sourceTree = "<group>"; };
 		D44E9364248D72BD002608EA /* Instante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instante.swift; sourceTree = "<group>"; };
 		D44E9366248D7FB0002608EA /* EstadisticasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstadisticasViewController.swift; sourceTree = "<group>"; };
 		D451034E24C516C00080EE67 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
@@ -248,6 +254,9 @@
 			isa = PBXGroup;
 			children = (
 				D47F17AD24A8E2B9002C02CA /* ServiceUser.swift */,
+				D44E41F324CDCED60037D408 /* ServicePracticante.swift */,
+				D44E41F524CDDA700037D408 /* ServiceCurso.swift */,
+				D44E41F724CE27EB0037D408 /* ServiceEvento.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -419,8 +428,11 @@
 				D451034F24C516C00080EE67 /* Gif.swift in Sources */,
 				D47F17AB24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift in Sources */,
 				D47530B3249E7690008CDCB4 /* AprendizajePaso3ViewController.swift in Sources */,
+				D44E41F824CE27EB0037D408 /* ServiceEvento.swift in Sources */,
 				D47530B5249E769E008CDCB4 /* AprendizajePaso4ViewController.swift in Sources */,
 				D44B0A39245E285F0069A8B4 /* InicioViewController.swift in Sources */,
+				D44E41F624CDDA700037D408 /* ServiceCurso.swift in Sources */,
+				D44E41F424CDCED60037D408 /* ServicePracticante.swift in Sources */,
 				D47530BB249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift in Sources */,
 				D44CAB6124C396E5006D00FF /* CrearCursoViewController.swift in Sources */,
 				D45267F2249E6F32005F7886 /* AprendizajePaso1ViewController.swift in Sources */,

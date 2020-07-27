@@ -38,12 +38,19 @@
                                     <outlet property="delegate" destination="bz4-qu-7Ts" id="cL9-oj-tWO"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="RKE-fV-X7e">
+                                <rect key="frame" x="197" y="500" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="pF6-7f-Hh7"/>
                     </view>
                     <navigationItem key="navigationItem" title="Ver cursos" id="6Z3-V9-Tvt"/>
                     <connections>
+                        <outlet property="activityIndicatorSpinner" destination="RKE-fV-X7e" id="u3s-W1-qpX"/>
+                        <outlet property="tableView" destination="4TP-K6-9Mz" id="DbY-2y-Yrr"/>
                         <segue destination="nM6-0p-5Ji" kind="show" identifier="VerPracticantesSegue" id="F0W-h2-R4h"/>
                     </connections>
                 </viewController>
@@ -51,7 +58,7 @@
             </objects>
             <point key="canvasLocation" x="737.68115942028987" y="879.91071428571422"/>
         </scene>
-        <!--Ver Practicantes View Controller-->
+        <!--Ver Practicantes-->
         <scene sceneID="7mq-Ag-olZ">
             <objects>
                 <viewController storyboardIdentifier="VerPracticantesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nM6-0p-5Ji" customClass="VerPracticantesViewController" customModule="RCP_Para_Todos" customModuleProvider="target" sceneMemberID="viewController">
@@ -82,12 +89,19 @@
                                     <outlet property="delegate" destination="nM6-0p-5Ji" id="CVd-KD-EOv"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="KKv-bL-NaJ">
+                                <rect key="frame" x="197" y="500" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="pHi-rg-YOb"/>
                     </view>
-                    <navigationItem key="navigationItem" id="flL-fS-rE5"/>
+                    <navigationItem key="navigationItem" title="Ver Practicantes" id="flL-fS-rE5"/>
                     <connections>
+                        <outlet property="activityIndicationSpinner" destination="KKv-bL-NaJ" id="GAM-wn-iJz"/>
+                        <outlet property="tableView" destination="xAm-0g-KVk" id="FsU-1s-tYe"/>
                         <segue destination="1qG-i8-EoD" kind="show" identifier="VerActividadesSegue" id="Ln2-Xf-iNS"/>
                     </connections>
                 </viewController>
@@ -126,12 +140,19 @@
                                     <outlet property="delegate" destination="1qG-i8-EoD" id="nok-P2-NEm"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ULy-Ao-hjM">
+                                <rect key="frame" x="197" y="500" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="eyI-7K-tfG"/>
                     </view>
                     <navigationItem key="navigationItem" title="Ver actividades" id="wgq-Od-B7i"/>
                     <connections>
+                        <outlet property="activityIndicatorSpinner" destination="ULy-Ao-hjM" id="kdK-d9-1VF"/>
+                        <outlet property="tableView" destination="CNQ-3X-Pd1" id="g15-Zd-3JU"/>
                         <segue destination="4Vl-aU-qMq" kind="show" identifier="VerActividadSegue" id="yej-c1-sGM"/>
                     </connections>
                 </viewController>
@@ -283,7 +304,11 @@
                         <viewLayoutGuide key="safeArea" id="L9u-jR-tlb"/>
                     </view>
                     <navigationItem key="navigationItem" title="Crear Curso" id="Kmm-IX-Hvn">
-                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="MUr-Vz-aAn"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="MUr-Vz-aAn">
+                            <connections>
+                                <action selector="buttonGuardarCursoClicked:" destination="qN6-Rl-ICT" id="TEN-St-adX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonAgregarPracticante" destination="Ezm-Tr-fSf" id="grz-No-mCt"/>

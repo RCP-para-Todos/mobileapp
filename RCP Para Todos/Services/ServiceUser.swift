@@ -8,12 +8,13 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 class ServiceUser
 {
     public func login(parameters: [String: String], completion: @escaping (Bool) -> Void){
-        completion(true)
-        /*AF.request("https://api.rcp.margaale.ddnss.de/auth/login", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        //completion(true) //Test sin backend
+        AF.request("\(Constants.GLOBAL_ENDPOINT)auth/login", method: .post, parameters: parameters, encoding: JSONEncoding.default)
         .responseJSON { result in
             if let value = result.value as? [String: Any] {
                 if(value["auth"]! as! Int == 0){
@@ -21,8 +22,17 @@ class ServiceUser
                 }
                 else{
                     let defaults = UserDefaults.standard
+                    let courses = JSON(value["courses"]!)
+                    defaults.set(parameters["name"], forKey: "usuarioActivo")
                     defaults.set(value["token"]!, forKey: "token")
                     defaults.set(value["refreshToken"]!, forKey: "refreshToken")
+                    defaults.set(value["rol"]!, forKey: "rol")
+                    //ELIMINAR ESTA ASQUEROSIDAD
+                    print(courses)
+                    for i in courses{
+                        let cu = (i.1["_id"].stringValue)
+                        defaults.set(cu, forKey: "curso")
+                    }
                     completion(true)
                 }
                 return
@@ -30,11 +40,11 @@ class ServiceUser
             else{
                 completion(false)
             }
-        }*/
+        }
     }
     
     public func register(parameters: [String: String], completion: @escaping (Bool) -> Void){
-        AF.request("https://api.rcp.margaale.ddnss.de/auth/register", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        AF.request("\(Constants.GLOBAL_ENDPOINT)auth/register", method: .post, parameters: parameters, encoding: JSONEncoding.default)
         .responseJSON { result in
             if let value = result.value as? [String: Any] {
                 if(value["auth"]! as! Int == 0){
@@ -54,7 +64,7 @@ class ServiceUser
             "Accept": "application/json"
         ]
 
-        AF.request("https://api.rcp.margaale.ddnss.de/users", method: .get, headers: headers).responseJSON { response in
+        AF.request("\(Constants.GLOBAL_ENDPOINT)users", method: .get, headers: headers).responseJSON { response in
             debugPrint(response)
         }
     }

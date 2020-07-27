@@ -11,13 +11,21 @@ import UIKit
 
 class VerCursosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate{
     
-    //ESTO VIENE DEL BACK
-    let cursos = ["E.T. 37 TM", "UNLM TN", "UBA TT", "Dpto. Ci.", "R.R."]
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicatorSpinner: UIActivityIndicatorView!
+    var cursos : [String] = []
+    var cursosIds : [String] = []
+    //let cursos = ["E.T. 37 TM", "UNLM TN", "UBA TT", "Dpto. Ci.", "R.R."]
     var cursoSeleccionado : String?
+    var cursoSeleccionadoId: String?
+    var serviceCurso : ServiceCurso?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.activityIndicatorSpinner.startAnimating()
+        self.serviceCurso = ServiceCurso()
+        self.getCursosPorTutor()
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
         self.inicializarBarraSuperior()
     }
@@ -33,6 +41,17 @@ class VerCursosViewController: UIViewController, UITableViewDataSource, UITableV
         backButton.isEnabled = true
         backButton.title = "Atras";
         self.navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
+    }
+    
+    func getCursosPorTutor(){
+        self.serviceCurso?.getCursosPorTutor(completion: self.llenarArray)
+    }
+    
+    func llenarArray(arrayIds:[String], array:[String]){
+        self.cursosIds = arrayIds
+        self.cursos = array
+        self.tableView.reloadData()
+        self.activityIndicatorSpinner.stopAnimating()
     }
     
     func tableView(_ tableView:UITableView, numberOfRowsInSection section:Int) -> Int
@@ -51,13 +70,15 @@ class VerCursosViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.cursoSeleccionado = self.cursos[indexPath.row]
-        performSegue(withIdentifier: "VerPracticantesSegue", sender: nil)
+        self.cursoSeleccionadoId = self.cursosIds[indexPath.row]
+        self.performSegue(withIdentifier: "VerPracticantesSegue", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "VerPracticantesSegue" {
             if let destinationVC = segue.destination as? VerPracticantesViewController {
                 destinationVC.titleView = self.cursoSeleccionado
+                destinationVC.cursoId = self.cursoSeleccionadoId
             }
         }
     }

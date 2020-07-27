@@ -56,7 +56,7 @@ class AprendizajePaso7ViewController: UIViewController, CBCentralManagerDelegate
     }
     
     func loadProgressCircleBar(){
-        self.progressBar.startTimer(to: 30) { state in
+        self.progressBar.startTimer(to: Constants.APRENDIZAJE_DURACION_SEGUNDOS_COMPRESION_INSUFLACION) { state in
             switch state {
             case .finished:
                 print("finished")
@@ -220,7 +220,7 @@ class AprendizajePaso7ViewController: UIViewController, CBCentralManagerDelegate
         
         //Cuando descubro las caracteristicas del dispositivo a la vez activo las notificaciones. Es decir lo que me manda el ESP32.
         enableNotifications(enable: true)
-        AprendizajePaso6ViewController.characteristicsShared = self.characteristics
+        AprendizajePaso7ViewController.characteristicsShared = self.characteristics
         //SACAR DE ACA
         let mensaje = "TEXTO"
         let data: Data = mensaje.data(using: String.Encoding.utf8)!

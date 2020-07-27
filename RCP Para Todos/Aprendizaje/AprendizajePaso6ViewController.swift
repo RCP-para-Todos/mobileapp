@@ -57,7 +57,7 @@ class AprendizajePaso6ViewController: UIViewController, CBCentralManagerDelegate
     }
     
     func loadProgressCircleBar(){
-        self.progressBar.startTimer(to: 30) { state in
+        self.progressBar.startTimer(to: Constants.APRENDIZAJE_DURACION_SEGUNDOS_COMPRESION_INSUFLACION) { state in
             switch state {
             case .finished:
                 self.logicaEvaluacionCompresiones()
