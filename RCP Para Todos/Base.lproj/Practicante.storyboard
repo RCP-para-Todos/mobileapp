@@ -46,7 +46,10 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqn-bx-D0n" userLabel="Trivia Button">
                                 <rect key="frame" x="215" y="669" width="142" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="Trivia"/>
+                                <state key="normal" backgroundImage="estadisticas"/>
+                                <connections>
+                                    <action selector="buttonVerEstadisticasClicked:" destination="hwE-eo-tIU" eventType="touchUpInside" id="kVS-Vp-jnB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -60,6 +63,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="erK-fC-zWM" kind="show" identifier="verActividadesInicioSegue" id="hNE-9t-nFw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vw5-68-Po0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -74,6 +80,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gob-vx-OLd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2514" y="565"/>
+        </scene>
+        <!--VerActividadesViewController-->
+        <scene sceneID="wdw-DJ-USj">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="VerActividadesViewController" storyboardName="Tutor" referencedIdentifier="VerActividadesViewController" id="erK-fC-zWM" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="WGr-6A-EDw"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8am-Hm-jZI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3546" y="504"/>
         </scene>
         <!--SimulacionPaso1ViewController-->
         <scene sceneID="UNz-o9-ahF">
@@ -463,6 +479,6 @@
         <image name="Juego" width="133" height="129"/>
         <image name="RCP" width="310" height="145"/>
         <image name="Simulación" width="231" height="101"/>
-        <image name="Trivia" width="232" height="102"/>
+        <image name="estadisticas" width="103" height="46"/>
     </resources>
 </document>

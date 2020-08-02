@@ -45,7 +45,7 @@ class AprendizajePaso6ViewController: UIViewController, CBCentralManagerDelegate
     
     func inicializarBarraSuperior()
     {
-        self.title = "Aprendiendo RCP Paso 6"
+        self.title = "Aprendiendo RCP Paso 5"
         let backButton = UIBarButtonItem()
         backButton.isEnabled = true
         backButton.title = "Atras";

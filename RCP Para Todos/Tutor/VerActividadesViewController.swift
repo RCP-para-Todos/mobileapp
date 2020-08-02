@@ -21,6 +21,7 @@ class VerActividadesViewController: UIViewController, UITableViewDataSource, UIT
     var titleView : String?
     var practicanteId : String?
     var actividadSeleccionada : String?
+    var actividadSeleccionadaId : String?
     
     override func viewDidLoad()
     {
@@ -68,13 +69,15 @@ class VerActividadesViewController: UIViewController, UITableViewDataSource, UIT
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.actividadSeleccionada = self.eventos[indexPath.row]
+        self.actividadSeleccionadaId = self.eventosIds[indexPath.row]
         performSegue(withIdentifier: "VerActividadSegue", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "VerActividadSegue" {
             if let destinationVC = segue.destination as? VerActividadViewController {
-                //destinationVC.titleView = self.practicanteSeleccionado
+                destinationVC.titleView = self.actividadSeleccionada
+                destinationVC.idEvento = self.actividadSeleccionadaId
             }
         }
     }

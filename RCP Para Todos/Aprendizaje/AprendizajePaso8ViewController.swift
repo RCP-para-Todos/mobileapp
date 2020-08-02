@@ -44,7 +44,7 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
     
     func inicializarBarraSuperior()
     {
-        self.title = "Aprendiendo RCP Paso 8"
+        self.title = "Aprendiendo RCP Paso 7"
         let backButton = UIBarButtonItem()
         backButton.isEnabled = true
         backButton.title = "Atras";
@@ -152,35 +152,37 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
         //DATOS DEL EVENTO
         let usuarioActivo = UserDefaults.standard.string(forKey: "usuarioActivo")
         let curso = UserDefaults.standard.string(forKey: "curso")
-        let duracion = String(1)
+        let tiempoTotalManiobra = Instante.tiempoTotalManiobra(instantes: self.instantes)
         let tipo = "aprendizaje"
-        let event_date = self.hoy()
-        var contador : Int = 0
-        var instantes : [[String : Any]] = []
-        for i in self.instantes{
-            let temp = ["nro": contador, "insuflacion": i.Insuflacion, "compresion": i.Compresion, "posicion":i.Posicion] as [String : Any]
-            instantes.append(temp)
-            contador = contador + 1
-        }
+        let event_date = Utils.hoy()
+        let instantes : [[String : Any]] = Instante.toJson(instantes: self.instantes)
+        let tiempoTotalInactividad = Instante.tiempoTotalInactividad(instantes: self.instantes)
+        let porcentajeSobrevida = Instante.porcentajeTotalSobreVida(instantes: self.instantes)
+        let porcentajeInsuflacionesCorrectas = Instante.porcentajeInsuflacionesCorrectas(instantes: self.instantes)
+        let porcentajeCompresionesCorrectas = Instante.porcentajeCompresionesCorrectas(instantes: self.instantes)
+        let cantidadInsuflacionesCorrectasMalaPosicion = Instante.cantidadInsuflacionesCorrectasPosicionCabeza(instantes: self.instantes)
+        let fuerzaPromedioAplicada = Instante.fuerzaPromedioAplicada(instantes: self.instantes)
+        let calidadInsuflaciones = Instante.calidadInsuflaciones(instantes: self.instantes)
         
         let parameters : [String: Any] = [
             "user" : usuarioActivo!,
             "course" : curso!,
-            "duration" : duracion,
+            "duration" : tiempoTotalManiobra,
             "type" : tipo,
             "event_date": event_date,
-            "instants": instantes
+            "instants": instantes,
+            "tiempoInactividad": tiempoTotalInactividad,
+            "porcentajeSobrevida": porcentajeSobrevida,
+            "porcentajeInsuflacionOk": porcentajeInsuflacionesCorrectas,
+            "porcentajeCompresionOk": porcentajeCompresionesCorrectas,
+            "cantidadInsuflacionesOkMalCabeza": cantidadInsuflacionesCorrectasMalaPosicion,
+            "fuerzaPromedioAplicada": fuerzaPromedioAplicada,
+            "calidadInsuflaciones":calidadInsuflaciones
             ]
         self.serviceEvento?.newEvento(parameters: parameters, completion: self.newEvento)
     }
     
-    func hoy() -> String{
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let result = formatter.string(from: date)
-        return result
-    }
+    
     
     func newEvento(completion: Bool){
         

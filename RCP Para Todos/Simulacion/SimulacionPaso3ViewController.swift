@@ -139,7 +139,7 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
         let curso = UserDefaults.standard.string(forKey: "curso")
         let duracion = String(Constants.SIMULACION_DURACION_SEGUNDOS_PASO3)
         let tipo = "simulacion"
-        let event_date = self.hoy()
+        let event_date = Utils.hoy()
         var contador : Int = 0
         var instantes : [[String : Any]] = []
         for i in self.instantes{
@@ -157,14 +157,6 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
             "instants": instantes
             ]
         self.serviceEvento?.newEvento(parameters: parameters, completion: self.newEvento)
-    }
-    
-    func hoy() -> String{
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let result = formatter.string(from: date)
-        return result
     }
     
     func newEvento(completion: Bool){

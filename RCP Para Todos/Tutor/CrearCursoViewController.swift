@@ -68,7 +68,7 @@ class CrearCursoViewController: UIViewController, UITableViewDataSource, UITable
     @IBAction func buttonGuardarCursoClicked(_ sender: Any) {
         let nombreCurso = self.textNombreCurso.text
         let usuarioActivo = UserDefaults.standard.string(forKey: "usuarioActivo")
-        let event_date = self.hoy()
+        let event_date = Utils.hoy()
         let practicantes = self.practicantes
         let parameters : [String: Any] = [
             "name" : nombreCurso!,
@@ -91,14 +91,6 @@ class CrearCursoViewController: UIViewController, UITableViewDataSource, UITable
     
     func cursoCreado(response: Bool){
         
-    }
-    
-    func hoy() -> String{
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let result = formatter.string(from: date)
-        return result
     }
     
     // MARK: DELEGADOS

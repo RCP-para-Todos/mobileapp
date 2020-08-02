@@ -18,12 +18,25 @@ class AprendizajeEstadisticasViewController: UIViewController, ChartViewDelegate
     
     func totalInsuflado(){
         var mediosegundos = 0
+        var primerCiclo = 0
+        var segundoCiclo = 0
         for i in self.instantes{
             if(i.Insuflacion == "Correcta"){
-                mediosegundos += 1
+                /* Forzamos al siguiente esquema cada 30 segundos, se puede insuflar durante 4 segundos. Si se insufla despues de los 30 segundos, es decir en el segundo 31, 32, 33, 34 cuenta como que el primer ciclo de insuflacion se cumplio.
+                    
+                 */
+                if(mediosegundos > 59 && mediosegundos < 68){
+                    primerCiclo = 1
+                }
+                /* Misma idea pero desde el segundo 60, 61, 62, 63
+                 */
+                if(mediosegundos > 119 && mediosegundos < 136){
+                    segundoCiclo = 1
+                }
             }
+            mediosegundos += 1
         }
-        self.labelTotalInsuflado.text = String(mediosegundos/2)
+        self.labelTotalInsuflado.text = String(primerCiclo+segundoCiclo)
     }
     
     func initGraph(){

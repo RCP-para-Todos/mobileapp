@@ -38,4 +38,18 @@ class InicioViewController: UIViewController
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func buttonVerEstadisticasClicked(_ sender: Any) {
+        self.performSegue(withIdentifier: "verActividadesInicioSegue", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "verActividadesInicioSegue" {
+            if let destinationVC = segue.destination as? VerActividadesViewController {
+                let usuarioActivo = UserDefaults.standard.string(forKey: "usuarioActivo")
+                destinationVC.titleView = usuarioActivo
+            }
+        }
+    }
+    
+    
 }

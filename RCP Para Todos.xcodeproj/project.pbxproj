@@ -40,6 +40,7 @@
 		D45267EC249E6965005F7886 /* Simulacion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45267EA249E6965005F7886 /* Simulacion.storyboard */; };
 		D45267EF249E699C005F7886 /* Juego.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45267ED249E699C005F7886 /* Juego.storyboard */; };
 		D45267F2249E6F32005F7886 /* AprendizajePaso1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45267F1249E6F32005F7886 /* AprendizajePaso1ViewController.swift */; };
+		D455EDB924D74D6B00C2888F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D455EDB824D74D6B00C2888F /* Utils.swift */; };
 		D47530AF249E71A2008CDCB4 /* CustomNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530AE249E71A2008CDCB4 /* CustomNavigationViewController.swift */; };
 		D47530B1249E7676008CDCB4 /* AprendizajePaso2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B0249E7676008CDCB4 /* AprendizajePaso2ViewController.swift */; };
 		D47530B3249E7690008CDCB4 /* AprendizajePaso3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B2249E7690008CDCB4 /* AprendizajePaso3ViewController.swift */; };
@@ -47,6 +48,8 @@
 		D47530B7249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B6249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift */; };
 		D47530B9249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530B8249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift */; };
 		D47530BB249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47530BA249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift */; };
+		D478CE7824D7603C001A6030 /* Evento.swift in Sources */ = {isa = PBXBuildFile; fileRef = D478CE7724D7603C001A6030 /* Evento.swift */; };
+		D478CE7A24D768BE001A6030 /* VerObservacionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D478CE7924D768BE001A6030 /* VerObservacionesViewController.swift */; };
 		D47F17AB24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17AA24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift */; };
 		D47F17AE24A8E2B9002C02CA /* ServiceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17AD24A8E2B9002C02CA /* ServiceUser.swift */; };
 		D47F17B024A8E41D002C02CA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47F17AF24A8E41D002C02CA /* Alamofire.framework */; };
@@ -101,6 +104,7 @@
 		D45267EB249E6965005F7886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Simulacion.storyboard; sourceTree = "<group>"; };
 		D45267EE249E699C005F7886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Juego.storyboard; sourceTree = "<group>"; };
 		D45267F1249E6F32005F7886 /* AprendizajePaso1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso1ViewController.swift; sourceTree = "<group>"; };
+		D455EDB824D74D6B00C2888F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		D47530AE249E71A2008CDCB4 /* CustomNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationViewController.swift; sourceTree = "<group>"; };
 		D47530B0249E7676008CDCB4 /* AprendizajePaso2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso2ViewController.swift; sourceTree = "<group>"; };
 		D47530B2249E7690008CDCB4 /* AprendizajePaso3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso3ViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +112,8 @@
 		D47530B6249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso5ViewController.swift; sourceTree = "<group>"; };
 		D47530B8249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajePaso6ViewController.swift; sourceTree = "<group>"; };
 		D47530BA249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AprendizajeEstadisticasViewController.swift; sourceTree = "<group>"; };
+		D478CE7724D7603C001A6030 /* Evento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evento.swift; sourceTree = "<group>"; };
+		D478CE7924D768BE001A6030 /* VerObservacionesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerObservacionesViewController.swift; sourceTree = "<group>"; };
 		D47F17AA24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulacionPaso1ViewController.swift; sourceTree = "<group>"; };
 		D47F17AD24A8E2B9002C02CA /* ServiceUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceUser.swift; sourceTree = "<group>"; };
 		D47F17AF24A8E41D002C02CA /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,6 +210,7 @@
 				D44CAB6424C3A63C006D00FF /* VerPracticantesViewController.swift */,
 				D44CAB6624C3A648006D00FF /* VerActividadesViewController.swift */,
 				D44CAB6824C3A654006D00FF /* VerActividadViewController.swift */,
+				D478CE7924D768BE001A6030 /* VerObservacionesViewController.swift */,
 			);
 			path = Tutor;
 			sourceTree = "<group>";
@@ -281,6 +288,8 @@
 				D451034E24C516C00080EE67 /* Gif.swift */,
 				D4F2CD9324CC91AB00A2FA30 /* Extensions.swift */,
 				D4F2CD9524CC923400A2FA30 /* Constants.swift */,
+				D455EDB824D74D6B00C2888F /* Utils.swift */,
+				D478CE7724D7603C001A6030 /* Evento.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -429,6 +438,7 @@
 				D4F2CD9124CC838500A2FA30 /* AprendizajePaso7ViewController.swift in Sources */,
 				D44CAB5F24C38FC3006D00FF /* InicioTutorViewController.swift in Sources */,
 				D44CAB6324C3A62F006D00FF /* VerCursosViewController.swift in Sources */,
+				D455EDB924D74D6B00C2888F /* Utils.swift in Sources */,
 				D47530AF249E71A2008CDCB4 /* CustomNavigationViewController.swift in Sources */,
 				D4F2CD9624CC923400A2FA30 /* Constants.swift in Sources */,
 				D12C2481248D6C70009981A0 /* Conversor.swift in Sources */,
@@ -447,6 +457,7 @@
 				D44B0A39245E285F0069A8B4 /* InicioViewController.swift in Sources */,
 				D44E41F624CDDA700037D408 /* ServiceCurso.swift in Sources */,
 				D41869BD24D5CB35006EBF78 /* SimulacionEstadisticasViewController.swift in Sources */,
+				D478CE7824D7603C001A6030 /* Evento.swift in Sources */,
 				D44E41F424CDCED60037D408 /* ServicePracticante.swift in Sources */,
 				D47530BB249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift in Sources */,
 				D44CAB6124C396E5006D00FF /* CrearCursoViewController.swift in Sources */,
@@ -456,6 +467,7 @@
 				D44B0A2B245E21890069A8B4 /* RCP_Para_Todos.xcdatamodeld in Sources */,
 				D44CAB6524C3A63C006D00FF /* VerPracticantesViewController.swift in Sources */,
 				D44CAB6924C3A654006D00FF /* VerActividadViewController.swift in Sources */,
+				D478CE7A24D768BE001A6030 /* VerObservacionesViewController.swift in Sources */,
 				D47F17B324A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift in Sources */,
 				D41869BB24D5CAED006EBF78 /* SimulacionPaso3ViewController.swift in Sources */,
 				D47530B1249E7676008CDCB4 /* AprendizajePaso2ViewController.swift in Sources */,
