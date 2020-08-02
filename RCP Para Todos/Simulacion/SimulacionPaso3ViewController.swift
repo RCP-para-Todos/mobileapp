@@ -1,20 +1,25 @@
+//
+//  SimulacionPaso3ViewController.swift
+//  RCP Para Todos
+//
+//  Created by Juan Tocino on 01/08/2020.
+//  Copyright © 2020 Reflejo. All rights reserved.
+//
+
 import Foundation
 import UIKit
-import AVFoundation
-import UICircularProgressRing
 import CoreBluetooth
 
-class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate
+class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate
 {
-
+    @IBOutlet weak var labelTimerCountDown: UILabel!
     @IBOutlet weak var imageHeart: UIImageView!
     @IBOutlet weak var imageWind: UIImageView!
-    @IBOutlet weak var progressBar: UICircularTimerRing!
-    
-    var player: AVAudioPlayer?
+    @IBOutlet weak var labelCountCompresiones: UILabel!
+    @IBOutlet weak var labelCountInsuflaciones: UILabel!
     
     public var delegate: BLEDelegate?
-       
+    
     public var centralManager : CBCentralManager!
     public var esp32 : CBPeripheral!
     public var characteristics = [String : CBCharacteristic]()
@@ -24,66 +29,48 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
 
     var characteristicASCIIValue = NSString()
     
+    //Manejo de instantes.
     var serviceEvento : ServiceEvento?
     var instantes : [Instante] = []
     var mediosSegundos : Int = 0
     
+    //Opciones seleccionadas desde paso2.
+    var ambulanciaClicked : Bool = false
+    var entornoNoSeguroClicked : Bool = false
+    var elEntornoEsSeguro : Bool = false
+    
+    //Countdown
+    var timerCountDown = Timer()
+    var minutes : Int = 0
+    var seconds : Int = 0
+    var totalSeconds : Int = Int(Constants.SIMULACION_DURACION_SEGUNDOS_PASO3)
+    
+    //Compresiones e Insuflaciones correctas.
+    var compresionesCorrectas : Int = 0
+    var insuflacionesCorrectas : Int = 0
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.serviceEvento = ServiceEvento()
         self.inicializarBarraSuperior()
-        self.playSound()
+        self.inicializarTimerCountDown()
         self.instantes = [Instante]()
-        //Despues de reproducir el audio, duracion del audio 8seg.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
-            self.centralManager = CBCentralManager(delegate: self, queue: nil)
-            self.loadProgressCircleBar()
-        })
+        self.scheduledCountDown()
     }
     
     func inicializarBarraSuperior()
     {
-        self.title = "Aprendiendo RCP Paso 8"
+        self.title = "Simulacion RCP Paso 3"
         let backButton = UIBarButtonItem()
         backButton.isEnabled = true
         backButton.title = "Atras";
         self.navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
     }
     
-    func loadProgressCircleBar(){
-        self.progressBar.startTimer(to: Constants.APRENDIZAJE_DURACION_SEGUNDOS_FINAL) { state in
-            switch state {
-            case .finished:
-                print("finished")
-                self.logicaEvaluarAprendizaje()
-            case .continued(let time):
-                print("continued: \(String(describing: time))")
-            case .paused(let time):
-                print("paused: \(String(describing: time))")
-            }
-        }
-    }
-    
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "AprendizajeAudio", withExtension: "mp3") else { return }
-
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-            guard let player = player else { return }
-
-            player.play()
-
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    
     func tratamientoRecepcionBluetooth(datosCorrectos: [String]){
-        print("ReciboBluetoothPaso8")
+        print("ReciboBluetoothPaso3Simulacion")
         let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
         let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
         let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)
@@ -113,6 +100,8 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
         }
         else if(instante.Compresion == "Correcta"){
             self.imageHeart.tintColor = .green
+            self.compresionesCorrectas = self.compresionesCorrectas + 1
+            self.labelCountCompresiones.text = String(self.compresionesCorrectas) + " Compresiones"
         }
         else if(instante.Compresion == "Excesiva"){
             self.imageHeart.tintColor = .red
@@ -128,6 +117,8 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
         }
         else if(instante.Insuflacion == "Correcta"){
             self.imageWind.tintColor = .green
+            self.insuflacionesCorrectas = self.insuflacionesCorrectas + 1
+            self.labelCountInsuflaciones.text = String(self.insuflacionesCorrectas) + " Insuflaciones"
         }
         else if(instante.Insuflacion == "Excesiva"){
             self.imageWind.tintColor = .red
@@ -141,19 +132,13 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
         })
     }
     
-    func logicaEvaluarAprendizaje(){
-        self.centralManager = nil
-        self.subirEvento()
-        self.performSegue(withIdentifier: "pasoEstadisticas", sender: nil)
-    }
-    
     func subirEvento(){
         
         //DATOS DEL EVENTO
         let usuarioActivo = UserDefaults.standard.string(forKey: "usuarioActivo")
         let curso = UserDefaults.standard.string(forKey: "curso")
-        let duracion = String(1)
-        let tipo = "aprendizaje"
+        let duracion = String(Constants.SIMULACION_DURACION_SEGUNDOS_PASO3)
+        let tipo = "simulacion"
         let event_date = self.hoy()
         var contador : Int = 0
         var instantes : [[String : Any]] = []
@@ -186,9 +171,41 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
         
     }
     
+    // MARK: TIMER
+    
+    func inicializarTimerCountDown(){
+        self.minutes = (self.totalSeconds % 3600) / 60
+        self.seconds = (self.totalSeconds % 3600) % 60
+    }
+    
+    //Scheduler Countdown
+    func scheduledCountDown(){
+        self.timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.logicCountDown), userInfo: nil, repeats: true)
+    }
+    
+    //Logic Countdown
+    @objc func logicCountDown(){
+        if self.minutes == 0 && self.seconds == 0 {
+            self.minutes = -1
+            self.seconds = -1
+            self.labelTimerCountDown.text = "00:00:00"
+            self.subirEvento()
+            self.performSegue(withIdentifier: "pasoEstadisticasSimulacion", sender: nil)
+        }
+        else{
+            self.totalSeconds-=1
+            self.minutes = (self.totalSeconds % 3600) / 60
+            self.seconds = (self.totalSeconds % 3600) % 60
+            self.labelTimerCountDown.text = String(format: "%02d:%02d:%02d", 0, minutes, seconds)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "pasoEstadisticas" {
-            if let destinationVC = segue.destination as? AprendizajeEstadisticasViewController {
+        if segue.identifier == "pasoEstadisticasSimulacion" {
+            if let destinationVC = segue.destination as? SimulacionEstadisticasViewController {
+                destinationVC.ambulanciaClicked = self.ambulanciaClicked
+                destinationVC.entornoNoSeguroClicked = self.entornoNoSeguroClicked
+                destinationVC.elEntornoEsSeguro = self.elEntornoEsSeguro
                 destinationVC.instantes = self.instantes
             }
         }
@@ -199,7 +216,7 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
     //Esta funcion es invocada cuando el dispositivo es conectado, es decir pasa a estado 2.
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral)
     {
-        print("Conectado Paso7")
+        print("Conectado Paso3 Simulacion")
         peripheral.discoverServices(nil)
     }
     
@@ -239,7 +256,7 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
         
         //Cuando descubro las caracteristicas del dispositivo a la vez activo las notificaciones. Es decir lo que me manda el ESP32.
         enableNotifications(enable: true)
-        AprendizajePaso8ViewController.characteristicsShared = self.characteristics
+        SimulacionPaso3ViewController.characteristicsShared = self.characteristics
         //SACAR DE ACA
         let mensaje = "TEXTO"
         let data: Data = mensaje.data(using: String.Encoding.utf8)!
@@ -318,8 +335,9 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
             //Empiezo la conexion, debe estar tambien el centralManager.connect de arriba.
             self.centralManager.connect(esp32, options: nil)
             
-            AprendizajePaso8ViewController.esp32Shared = self.esp32
+            SimulacionPaso3ViewController.esp32Shared = self.esp32
         }
     }
-
+    
 }
+

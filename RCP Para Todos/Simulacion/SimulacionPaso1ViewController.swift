@@ -26,6 +26,11 @@ class SimulacionPaso1ViewController: UIViewController
         self.navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
     }
     
+    @IBAction func botonIniciarClicked(_ sender: Any) {
+        print("CLICKED")
+        self.performSegue(withIdentifier: "paso2Simulacion", sender: nil)
+    }
+    
     
 }
 

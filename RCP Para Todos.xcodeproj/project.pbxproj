@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		D12C2481248D6C70009981A0 /* Conversor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12C2480248D6C70009981A0 /* Conversor.swift */; };
+		D41869B924D5CADC006EBF78 /* SimulacionPaso2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41869B824D5CADC006EBF78 /* SimulacionPaso2ViewController.swift */; };
+		D41869BB24D5CAED006EBF78 /* SimulacionPaso3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41869BA24D5CAED006EBF78 /* SimulacionPaso3ViewController.swift */; };
+		D41869BD24D5CB35006EBF78 /* SimulacionEstadisticasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41869BC24D5CB35006EBF78 /* SimulacionEstadisticasViewController.swift */; };
+		D41869BF24D5DA46006EBF78 /* SimulacionPaso3AlternativoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41869BE24D5DA46006EBF78 /* SimulacionPaso3AlternativoViewController.swift */; };
 		D44B0A21245E21890069A8B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44B0A20245E21890069A8B4 /* AppDelegate.swift */; };
 		D44B0A23245E21890069A8B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44B0A22245E21890069A8B4 /* SceneDelegate.swift */; };
 		D44B0A25245E21890069A8B4 /* JuegoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44B0A24245E21890069A8B4 /* JuegoViewController.swift */; };
@@ -63,6 +67,10 @@
 		260BCCEE3A0B2B35CEC67527 /* Pods-RCP Para Todos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCP Para Todos.debug.xcconfig"; path = "Target Support Files/Pods-RCP Para Todos/Pods-RCP Para Todos.debug.xcconfig"; sourceTree = "<group>"; };
 		3DD37F094E1EF567D8E42FC6 /* Pods_RCP_Para_Todos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RCP_Para_Todos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D12C2480248D6C70009981A0 /* Conversor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversor.swift; sourceTree = "<group>"; };
+		D41869B824D5CADC006EBF78 /* SimulacionPaso2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulacionPaso2ViewController.swift; sourceTree = "<group>"; };
+		D41869BA24D5CAED006EBF78 /* SimulacionPaso3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulacionPaso3ViewController.swift; sourceTree = "<group>"; };
+		D41869BC24D5CB35006EBF78 /* SimulacionEstadisticasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulacionEstadisticasViewController.swift; sourceTree = "<group>"; };
+		D41869BE24D5DA46006EBF78 /* SimulacionPaso3AlternativoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulacionPaso3AlternativoViewController.swift; sourceTree = "<group>"; };
 		D44B0A1D245E21890069A8B4 /* RCP Para Todos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RCP Para Todos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D44B0A20245E21890069A8B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D44B0A22245E21890069A8B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +165,7 @@
 		D44B0A1F245E21890069A8B4 /* RCP Para Todos */ = {
 			isa = PBXGroup;
 			children = (
+				D44B0A2C245E218A0069A8B4 /* Assets.xcassets */,
 				D4F2CD9224CC914300A2FA30 /* Utils */,
 				D451035024C518090080EE67 /* Resources */,
 				D44CAB5D24C38F75006D00FF /* Tutor */,
@@ -167,7 +176,6 @@
 				D44B0A37245E280D0069A8B4 /* ViewControllers Iniciales */,
 				D44B0A20245E21890069A8B4 /* AppDelegate.swift */,
 				D44B0A22245E21890069A8B4 /* SceneDelegate.swift */,
-				D44B0A2C245E218A0069A8B4 /* Assets.xcassets */,
 				D44B0A31245E218A0069A8B4 /* Info.plist */,
 				D44B0A29245E21890069A8B4 /* RCP_Para_Todos.xcdatamodeld */,
 			);
@@ -246,6 +254,10 @@
 			isa = PBXGroup;
 			children = (
 				D47F17AA24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift */,
+				D41869B824D5CADC006EBF78 /* SimulacionPaso2ViewController.swift */,
+				D41869BA24D5CAED006EBF78 /* SimulacionPaso3ViewController.swift */,
+				D41869BC24D5CB35006EBF78 /* SimulacionEstadisticasViewController.swift */,
+				D41869BE24D5DA46006EBF78 /* SimulacionPaso3AlternativoViewController.swift */,
 			);
 			path = Simulacion;
 			sourceTree = "<group>";
@@ -412,6 +424,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D41869B924D5CADC006EBF78 /* SimulacionPaso2ViewController.swift in Sources */,
 				D44CAB6724C3A648006D00FF /* VerActividadesViewController.swift in Sources */,
 				D4F2CD9124CC838500A2FA30 /* AprendizajePaso7ViewController.swift in Sources */,
 				D44CAB5F24C38FC3006D00FF /* InicioTutorViewController.swift in Sources */,
@@ -422,6 +435,7 @@
 				D44B0A25245E21890069A8B4 /* JuegoViewController.swift in Sources */,
 				D4F2CD9424CC91AB00A2FA30 /* Extensions.swift in Sources */,
 				D47530B7249E76C4008CDCB4 /* AprendizajePaso5ViewController.swift in Sources */,
+				D41869BF24D5DA46006EBF78 /* SimulacionPaso3AlternativoViewController.swift in Sources */,
 				D47530B9249E76D2008CDCB4 /* AprendizajePaso6ViewController.swift in Sources */,
 				D44B0A21245E21890069A8B4 /* AppDelegate.swift in Sources */,
 				D44B0A23245E21890069A8B4 /* SceneDelegate.swift in Sources */,
@@ -432,6 +446,7 @@
 				D47530B5249E769E008CDCB4 /* AprendizajePaso4ViewController.swift in Sources */,
 				D44B0A39245E285F0069A8B4 /* InicioViewController.swift in Sources */,
 				D44E41F624CDDA700037D408 /* ServiceCurso.swift in Sources */,
+				D41869BD24D5CB35006EBF78 /* SimulacionEstadisticasViewController.swift in Sources */,
 				D44E41F424CDCED60037D408 /* ServicePracticante.swift in Sources */,
 				D47530BB249E76EE008CDCB4 /* AprendizajeEstadisticasViewController.swift in Sources */,
 				D44CAB6124C396E5006D00FF /* CrearCursoViewController.swift in Sources */,
@@ -442,6 +457,7 @@
 				D44CAB6524C3A63C006D00FF /* VerPracticantesViewController.swift in Sources */,
 				D44CAB6924C3A654006D00FF /* VerActividadViewController.swift in Sources */,
 				D47F17B324A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift in Sources */,
+				D41869BB24D5CAED006EBF78 /* SimulacionPaso3ViewController.swift in Sources */,
 				D47530B1249E7676008CDCB4 /* AprendizajePaso2ViewController.swift in Sources */,
 				D44B0A3B245E287D0069A8B4 /* LoginViewController.swift in Sources */,
 				D44E9365248D72BD002608EA /* Instante.swift in Sources */,

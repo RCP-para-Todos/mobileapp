@@ -10,7 +10,6 @@
         <!--Inicio-->
         <scene sceneID="pbu-Fs-6vz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vw5-68-Po0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="InicioViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hwE-eo-tIU" customClass="InicioViewController" customModule="RCP_Para_Todos" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ld2-5Q-mVS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -62,6 +61,7 @@
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vw5-68-Po0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2863.768115942029" y="138.61607142857142"/>
         </scene>
@@ -75,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="2514" y="565"/>
         </scene>
-        <!--SimulacionPaso1-->
+        <!--SimulacionPaso1ViewController-->
         <scene sceneID="UNz-o9-ahF">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="SimulacionPaso1" storyboardName="Simulacion" referencedIdentifier="SimulacionPaso1" id="SWu-5K-uyi" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="SimulacionPaso1ViewController" storyboardName="Simulacion" referencedIdentifier="SimulacionPaso1ViewController" id="SWu-5K-uyi" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Fci-8h-T1e"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IoG-FR-YA9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
