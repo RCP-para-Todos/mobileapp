@@ -52,28 +52,43 @@ class SimulacionPaso2ViewController: UIViewController
     }
     
     func logicaSimulacion(){
+        //ENTORNO SEGURO
+        
         //Si el entorno es seguro y se selecciona llamar a la ambulancia se realiza la simulacion.
-        if(self.elEntornoEsSeguro && self.ambulanciaClicked){
+        if(self.elEntornoEsSeguro && self.ambulanciaClicked && !self.entornoNoSeguroClicked){
             self.performSegue(withIdentifier: "paso3Simulacion", sender: nil)
         }
         //Si el entorno es seguro pero no selecciona para llamar a la ambulancia se realiza la simulacion pero sera invalidada finalmente porque la ambulancia nunca llegara.
         else if(self.elEntornoEsSeguro && !self.ambulanciaClicked && !self.entornoNoSeguroClicked){
             self.performSegue(withIdentifier: "paso3Simulacion", sender: nil)
         }
+            
+        //Si el entorno es seguro pero se selecciona el entorno no es seguro, se finalizara sin simulacion con error ya que el entorno era seguro.
+        else if(self.elEntornoEsSeguro && self.ambulanciaClicked && self.entornoNoSeguroClicked){
+            self.performSegue(withIdentifier: "paso3AlternativoSimulacion", sender: nil)
+        }
+            
         //Si el entorno es seguro pero se selecciona el entorno no es seguro, se finalizara sin simulacion con error ya que el entorno era seguro.
         else if(self.elEntornoEsSeguro && !self.ambulanciaClicked && self.entornoNoSeguroClicked){
             self.performSegue(withIdentifier: "paso3AlternativoSimulacion", sender: nil)
         }
+        
+        //ENTORNO NO SEGURO
+            
         //Si el entorno no es seguro y se selecciona el entorno no es seguro, se finalizara sin simulacion correctamente.
-        else if(!self.elEntornoEsSeguro && self.entornoNoSeguroClicked){
+        else if(!self.elEntornoEsSeguro && self.ambulanciaClicked && self.entornoNoSeguroClicked){
+            self.performSegue(withIdentifier: "paso3AlternativoSimulacion", sender: nil)
+        }
+        //Si el entorno no es seguro y se selecciona el entorno no es seguro, se finalizara sin simulacion con error ya que no se llamo a la ambulancia.
+        else if(!self.elEntornoEsSeguro && !self.ambulanciaClicked && self.entornoNoSeguroClicked){
             self.performSegue(withIdentifier: "paso3AlternativoSimulacion", sender: nil)
         }
         //Si el entorno no es seguro pero no se selecciona el entorno no es seguro, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
-        else if(!self.elEntornoEsSeguro && !self.entornoNoSeguroClicked && !self.ambulanciaClicked){
+        else if(!self.elEntornoEsSeguro && !self.ambulanciaClicked && !self.entornoNoSeguroClicked){
             self.performSegue(withIdentifier: "paso3Simulacion", sender: nil)
         }
         //Si el entorno no es seguro pero se selecciona llamar a la ambulancia, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
-        else if(!self.elEntornoEsSeguro && !self.entornoNoSeguroClicked && self.ambulanciaClicked){
+        else if(!self.elEntornoEsSeguro && self.ambulanciaClicked && !self.entornoNoSeguroClicked){
             self.performSegue(withIdentifier: "paso3Simulacion", sender: nil)
         }
     }
@@ -102,13 +117,11 @@ class SimulacionPaso2ViewController: UIViewController
     @IBAction func buttonEntornoNoSeguroClicked(_ sender: Any) {
         self.entornoNoSeguroClicked = true
         self.buttonLlamarAmbulancia.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
-        self.buttonLlamarAmbulancia.isEnabled = false
     }
     
     @IBAction func buttonLlamarAmbulancia(_ sender: Any) {
         self.ambulanciaClicked = true
         self.buttonElEntornoNoEsSeguro.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
-        self.buttonElEntornoNoEsSeguro.isEnabled = false
     }
     
     

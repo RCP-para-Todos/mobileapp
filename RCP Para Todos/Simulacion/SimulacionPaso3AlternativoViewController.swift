@@ -37,24 +37,25 @@ class SimulacionPaso3AlternativoViewController: UIViewController
     func logicaResultado(){
         //Si el entorno es seguro pero se selecciona el entorno no es seguro, se finalizara sin simulacion con error ya que el entorno era seguro.
        if(self.elEntornoEsSeguro && !self.ambulanciaClicked && self.entornoNoSeguroClicked){
-        self.labelResultado.text = "Lo sentimos, el entorno era seguro, correspondía realizar la maniobra RCP"
+        self.labelResultado.text = "Lo sentimos, el entorno era seguro, correspondía realizar la maniobra RCP y llamar a la ambulancia"
        }
+        //Si el entorno es seguro pero se selecciona el entorno no es seguro, se finalizara sin simulacion con error ya que el entorno era seguro.
+        if(self.elEntornoEsSeguro && self.ambulanciaClicked && self.entornoNoSeguroClicked){
+         self.labelResultado.text = "Lo sentimos, el entorno era seguro, correspondía realizar la maniobra RCP y esperar a la ambulancia"
+        }
        //Si el entorno no es seguro y se selecciona el entorno no es seguro, se finalizara sin simulacion correctamente.
-       else if(!self.elEntornoEsSeguro && self.entornoNoSeguroClicked){
+       else if(!self.elEntornoEsSeguro && self.ambulanciaClicked && self.entornoNoSeguroClicked){
            self.labelResultado.text = "Felicitaciones, el entorno no era seguro y no correspondía realizar la maniobra RCP"
        }
-       //Si el entorno no es seguro pero no se selecciona el entorno no es seguro, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
-       else if(!self.elEntornoEsSeguro && !self.entornoNoSeguroClicked && !self.ambulanciaClicked){
-           self.labelResultado.text = "Lo sentimos, aunque la maniobra RCP fue practicada el entorno no era seguro"
-       }
-       //Si el entorno no es seguro pero se selecciona llamar a la ambulancia, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
-       else if(!self.elEntornoEsSeguro && !self.entornoNoSeguroClicked && self.ambulanciaClicked){
-           self.labelResultado.text = "Lo sentimos, aunque la maniobra RCP fue practicada y la ambulancia fue llamada el entorno no era seguro"
-       }
+        //Si el entorno no es seguro y se selecciona el entorno no es seguro, se finalizara sin simulacion correctamente.
+        else if(!self.elEntornoEsSeguro && !self.ambulanciaClicked && self.entornoNoSeguroClicked){
+            self.labelResultado.text = "Lo sentimos, el entorno no era seguro y no correspondía realizar la maniobra RCP pero se debía llamar a la ambulancia"
+        }
     }
     
     @IBAction func buttonIrAlInicioClicked(_ sender: Any) {
         self.navigationController!.popViewControllers(viewsToPop: 3)
     }
+    
 }
 	

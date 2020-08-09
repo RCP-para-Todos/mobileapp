@@ -27,7 +27,6 @@ class SimulacionPaso1ViewController: UIViewController
     }
     
     @IBAction func botonIniciarClicked(_ sender: Any) {
-        print("CLICKED")
         self.performSegue(withIdentifier: "paso2Simulacion", sender: nil)
     }
     

@@ -52,7 +52,7 @@ class SimulacionEstadisticasViewController: UIViewController, ChartViewDelegate
     
     func logicaResultado(){
         //Si el entorno es seguro y se selecciona llamar a la ambulancia se realiza la simulacion.
-       if(self.elEntornoEsSeguro && self.ambulanciaClicked){
+       if(self.elEntornoEsSeguro && self.ambulanciaClicked && !self.entornoNoSeguroClicked){
         self.labelResultado.text = "Felicitaciones, el entorno estaba seguro y la ambulancia llegó a tiempo luego del RCP"
        }
        //Si el entorno es seguro pero no selecciona para llamar a la ambulancia se realiza la simulacion pero sera invalidada finalmente porque la ambulancia nunca llegara.
@@ -61,11 +61,11 @@ class SimulacionEstadisticasViewController: UIViewController, ChartViewDelegate
        }
        //Si el entorno no es seguro pero no se selecciona el entorno no es seguro, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
        else if(!self.elEntornoEsSeguro && !self.entornoNoSeguroClicked && !self.ambulanciaClicked){
-           self.labelResultado.text = "Lo sentimos, aunque la maniobra RCP fue practicada el entorno no era seguro"
+           self.labelResultado.text = "Lo sentimos, el entorno era no seguro y no se debía interactuar con el simulador"
        }
        //Si el entorno no es seguro pero se selecciona llamar a la ambulancia, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
        else if(!self.elEntornoEsSeguro && !self.entornoNoSeguroClicked && self.ambulanciaClicked){
-           self.labelResultado.text = "Lo sentimos, aunque la maniobra RCP fue practicada y la ambulancia fue llamada el entorno no era seguro"
+           self.labelResultado.text = "Lo sentimos, el entorno era no seguro y no se debía interactuar con el simulador"
        }
     }
     

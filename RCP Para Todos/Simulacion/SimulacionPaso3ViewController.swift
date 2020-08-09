@@ -80,11 +80,30 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
         //Agregado de instante al vector.
         self.instantes.append(instante)
         
+        self.logicaEntornoNoSeguro(instante)
+        
         //Manejo de variables.
         self.mediosSegundos += 1;
         
         //Manejo de graficos.
         self.manejarGrafico(instante: instante)
+    }
+    
+    /*
+     Si el entorno es no seguro, y el usuario no lo declara como no seguro se llega a esta pantalla de todas formas.
+     Se desprenden 4 posibles flujos:
+     1)El entorno no es seguro, no se marca como no seguro, no se llama a la ambulancia y se realiza alguna accion, se sale inmediatamente de esta pantalla.
+     2)El entorno no es seguro, no se marca como no seguro, se llama a la ambulancia y se realiza alguna accion,
+        se sale inmediatamente de esta pantalla.
+     3) El entorno no es seguro, no se marca como no seguro, no se llama a la ambulancia y no se realiza ninguna accion (raro), se espera el tiempo y al final se informa.
+     4) El entorno no es seguro, no se marca como no seguro, se llama a la ambulancia y no se realiza ninguna accion (raro), se espera el tiempo y al final se informa.
+     */
+    func logicaEntornoNoSeguro(instante: Instante){
+        if(self.entornoNoSeguroClicked && !self.elEntornoEsSeguro){
+            if(instante.Compresion != "Nula" || instante.Insuflacion != "Nula"){
+                self.performSegue(withIdentifier: "pasoEstadisticasSimulacion", sender: nil)
+            }
+        }
     }
     
     func manejarGrafico(instante: Instante){
