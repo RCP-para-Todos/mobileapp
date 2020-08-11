@@ -1,8 +1,8 @@
 //
-//  SimulacionPaso3ViewController.swift
+//  JuegoPaso2ViewController.swift
 //  RCP Para Todos
 //
-//  Created by Juan Tocino on 01/08/2020.
+//  Created by Juan Tocino on 11/08/2020.
 //  Copyright © 2020 Reflejo. All rights reserved.
 //
 
@@ -10,13 +10,18 @@ import Foundation
 import UIKit
 import CoreBluetooth
 
-class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate
+class JuegoPaso2ViewController: UIViewController,  CBCentralManagerDelegate, CBPeripheralDelegate
 {
-    @IBOutlet weak var labelTimerCountDown: UILabel!
-    @IBOutlet weak var imageHeart: UIImageView!
-    @IBOutlet weak var imageWind: UIImageView!
-    @IBOutlet weak var labelCountCompresiones: UILabel!
-    @IBOutlet weak var labelCountInsuflaciones: UILabel!
+    
+    @IBOutlet weak var heart1: UIImageView!
+    @IBOutlet weak var heart2: UIImageView!
+    @IBOutlet weak var heart3: UIImageView!
+    @IBOutlet weak var heart4: UIImageView!
+    @IBOutlet weak var wind1: UIImageView!
+    @IBOutlet weak var wind2: UIImageView!
+    @IBOutlet weak var wind3: UIImageView!
+    @IBOutlet weak var wind4: UIImageView!
+    @IBOutlet weak var labelPuntaje: UILabel!
     
     public var delegate: BLEDelegate?
     
@@ -34,35 +39,24 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
     var instantes : [Instante] = []
     var mediosSegundos : Int = 0
     
-    //Opciones seleccionadas desde paso2.
-    var ambulanciaClicked : Bool = false
-    var entornoNoSeguroClicked : Bool = false
-    var elEntornoEsSeguro : Bool = false
-    
-    //Countdown
-    var timerCountDown = Timer()
-    var minutes : Int = 0
-    var seconds : Int = 0
-    var totalSeconds : Int = Int(Constants.SIMULACION_DURACION_SEGUNDOS_PASO3)
-    
-    //Compresiones e Insuflaciones correctas.
-    var compresionesCorrectas : Int = 0
-    var insuflacionesCorrectas : Int = 0
+    var timer = Timer()
+    var count : Int = 0
+    var tiempoSelected : Int = 0
+    var puntaje : Int = 0
+    var inicio : Bool = false
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.serviceEvento = ServiceEvento()
+        self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.inicializarBarraSuperior()
-        self.inicializarTimerCountDown()
-        self.instantes = [Instante]()
-        self.scheduledCountDown()
+        self.tiempoSelected = self.count / 1000
     }
     
     func inicializarBarraSuperior()
     {
-        self.title = "Simulacion RCP Paso 3"
+        self.title = "Juego RCP"
         let backButton = UIBarButtonItem()
         backButton.isEnabled = true
         backButton.title = "Atras";
@@ -70,7 +64,7 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
     }
     
     func tratamientoRecepcionBluetooth(datosCorrectos: [String]){
-        print("ReciboBluetoothPaso3Simulacion")
+        print("ReciboBluetoothPaso2Juego")
         let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
         let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
         let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)
@@ -80,145 +74,139 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
         //Agregado de instante al vector.
         self.instantes.append(instante)
         
-        self.logicaEntornoNoSeguro(instante: instante)
-        
         //Manejo de variables.
         self.mediosSegundos += 1;
-        
-        //Manejo de graficos.
-        self.manejarGrafico(instante: instante)
     }
     
-    /*
-     Si el entorno es no seguro, y el usuario no lo declara como no seguro se llega a esta pantalla de todas formas.
-     Se desprenden 4 posibles flujos:
-     1)El entorno no es seguro, no se marca como no seguro, no se llama a la ambulancia y se realiza alguna accion, se sale inmediatamente de esta pantalla.
-     2)El entorno no es seguro, no se marca como no seguro, se llama a la ambulancia y se realiza alguna accion,
-        se sale inmediatamente de esta pantalla.
-     3) El entorno no es seguro, no se marca como no seguro, no se llama a la ambulancia y no se realiza ninguna accion (raro), se espera el tiempo y al final se informa.
-     4) El entorno no es seguro, no se marca como no seguro, se llama a la ambulancia y no se realiza ninguna accion (raro), se espera el tiempo y al final se informa.
-     */
-    func logicaEntornoNoSeguro(instante: Instante){
-        if(self.entornoNoSeguroClicked && !self.elEntornoEsSeguro){
-            if(instante.Compresion != "Nula" || instante.Insuflacion != "Nula"){
-                self.performSegue(withIdentifier: "pasoEstadisticasSimulacion", sender: nil)
+    func scheduledTimer(){
+        self.timer = Timer.scheduledTimer(timeInterval: 0.250, target: self, selector: #selector(self.logicShow), userInfo: nil, repeats: true)
+    }
+    
+    @objc func logicShow(){
+        //print(count)
+        if(self.count % 1000 == 0 && !(self.count > 29000 && self.count < 34000)){
+            self.heart1.isHidden = false
+            self.heart2.isHidden = true
+            self.heart3.isHidden = true
+            self.heart4.isHidden = true
+        }
+        else if(self.count % 1000 == 750 && !(self.count > 29000 && self.count < 34000)){
+            self.heart1.isHidden = true
+            self.heart2.isHidden = false
+            self.heart3.isHidden = true
+            self.heart4.isHidden = true
+        }
+        else if(self.count % 1000 == 500 && !(self.count > 29000 && self.count < 34000)){
+            self.heart1.isHidden = true
+            self.heart2.isHidden = true
+            self.heart3.isHidden = false
+            self.heart4.isHidden = true
+        }
+        else if(self.count % 1000 == 250 && !(self.count > 29000 && self.count < 34000)){
+            self.heart1.isHidden = true
+            self.heart2.isHidden = true
+            self.heart3.isHidden = true
+            self.heart4.isHidden = false
+            self.logicaColorearCompresion()
+        }
+        //Hardcodeado para un minuto. TODO
+        if(self.count > 29000 && self.count < 34000){
+            self.wind1.isHidden = false
+            self.wind2.isHidden = false
+            self.wind3.isHidden = false
+            self.wind4.isHidden = false
+            self.logicaColorearInsuflacion()
+        }
+        else{
+            self.wind1.isHidden = true
+            self.wind2.isHidden = true
+            self.wind3.isHidden = true
+            self.wind4.isHidden = true
+        }
+        self.count = self.count - 250
+        if(self.count == 0){
+            self.subirEvento()
+            self.centralManager = nil
+            self.performSegue(withIdentifier: "juego3Segue", sender: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "juego3Segue" {
+            if let destinationVC = segue.destination as? JuegoPaso3ViewController {
+                destinationVC.puntaje = self.puntaje
             }
         }
     }
     
-    func manejarGrafico(instante: Instante){
-        self.imageHeart.isHidden = false
-        self.imageWind.isHidden = false
-        self.imageHeart.image = Constants.IMAGE_COMPRESION
-        self.imageWind.image = Constants.IMAGE_INSUFLACION
-        if(instante.Compresion == "Nula"){
-            self.imageHeart.tintColor = .white
-        }
-        else if(instante.Compresion == "Insuficiente"){
-            self.imageHeart.tintColor = .lightGray
-        }
-        else if(instante.Compresion == "Correcta"){
-            self.imageHeart.tintColor = .green
-            self.compresionesCorrectas = self.compresionesCorrectas + 1
-            self.labelCountCompresiones.text = String(self.compresionesCorrectas) + " Compresiones"
-        }
-        else if(instante.Compresion == "Excesiva"){
-            self.imageHeart.tintColor = .red
-        }
-        else{
-            self.imageHeart.tintColor = .white
-        }
-        if(instante.Insuflacion == "Nula"){
-            self.imageWind.tintColor = .white
-        }
-        else if(instante.Insuflacion == "Insuficiente"){
-            self.imageWind.tintColor = .lightGray
-        }
-        else if(instante.Insuflacion == "Correcta"){
-            self.imageWind.tintColor = .green
-            self.insuflacionesCorrectas = self.insuflacionesCorrectas + 1
-            self.labelCountInsuflaciones.text = String(self.insuflacionesCorrectas) + " Insuflaciones"
-        }
-        else if(instante.Insuflacion == "Excesiva"){
-            self.imageWind.tintColor = .red
-        }
-        else{
-            self.imageWind.tintColor = .white
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.imageHeart.isHidden = true
-            self.imageWind.isHidden = true
-        })
-    }
-    
     func subirEvento(){
-        
         //DATOS DEL EVENTO
         let usuarioActivo = UserDefaults.standard.string(forKey: "usuarioActivo")
         let curso = UserDefaults.standard.string(forKey: "curso")
-        let duracion = String(Constants.SIMULACION_DURACION_SEGUNDOS_PASO3)
-        let tipo = "simulacion"
+        let tiempoTotalManiobra = Instante.tiempoTotalManiobra(instantes: self.instantes)
+        let tipo = "juego"
         let event_date = Utils.hoy()
-        var contador : Int = 0
-        var instantes : [[String : Any]] = []
-        for i in self.instantes{
-            let temp = ["nro": contador, "insuflacion": i.Insuflacion, "compresion": i.Compresion, "posicion":i.Posicion] as [String : Any]
-            instantes.append(temp)
-            contador = contador + 1
-        }
-        
+        let instantes : [[String : Any]] = Instante.toJson(instantes: self.instantes)
+        let puntaje = self.puntaje
+
+
         let parameters : [String: Any] = [
-            "user" : usuarioActivo!,
-            "course" : curso!,
-            "duration" : duracion,
-            "type" : tipo,
-            "event_date": event_date,
-            "instants": instantes
-            ]
-        self.serviceEvento?.newEvento(parameters: parameters, completion: self.newEvento)
+           "user" : usuarioActivo!,
+           "course" : curso!,
+           "duration" : tiempoTotalManiobra,
+           "type" : tipo,
+           "event_date": event_date,
+           "instants": instantes,
+           "puntaje": puntaje
+           ]
+        self.serviceEvento!.newEvento(parameters: parameters, completion: self.newEvento)
     }
     
     func newEvento(completion: Bool){
         
     }
     
-    // MARK: TIMER
-    
-    func inicializarTimerCountDown(){
-        self.minutes = (self.totalSeconds % 3600) / 60
-        self.seconds = (self.totalSeconds % 3600) % 60
-    }
-    
-    //Scheduler Countdown
-    func scheduledCountDown(){
-        self.timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.logicCountDown), userInfo: nil, repeats: true)
-    }
-    
-    //Logic Countdown
-    @objc func logicCountDown(){
-        if self.minutes == 0 && self.seconds == 0 {
-            self.minutes = -1
-            self.seconds = -1
-            self.labelTimerCountDown.text = "00:00:00"
-            self.subirEvento()
-            self.performSegue(withIdentifier: "pasoEstadisticasSimulacion", sender: nil)
+    func logicaColorearCompresion(){
+        let instante = self.instantes[self.instantes.count-1]
+        if(instante.Compresion == "Nula"){
+            self.heart4.tintColor = .white
+            self.puntaje = self.puntaje - 40
         }
-        else{
-            self.totalSeconds-=1
-            self.minutes = (self.totalSeconds % 3600) / 60
-            self.seconds = (self.totalSeconds % 3600) % 60
-            self.labelTimerCountDown.text = String(format: "%02d:%02d:%02d", 0, minutes, seconds)
+        else if(instante.Compresion == "Insuficiente"){
+            self.heart4.tintColor = .lightGray
+            self.puntaje = self.puntaje - 40
         }
+        else if(instante.Compresion == "Correcta"){
+            self.heart4.tintColor = .green
+            self.puntaje = self.puntaje + 100
+        }
+        else if(instante.Compresion == "Excesiva"){
+            self.heart4.tintColor = .red
+            self.puntaje = self.puntaje - 40
+        }
+        if(self.puntaje < 0){
+            self.puntaje = 0
+        }
+        self.labelPuntaje.text = String(self.puntaje)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "pasoEstadisticasSimulacion" {
-            if let destinationVC = segue.destination as? SimulacionEstadisticasViewController {
-                destinationVC.ambulanciaClicked = self.ambulanciaClicked
-                destinationVC.entornoNoSeguroClicked = self.entornoNoSeguroClicked
-                destinationVC.elEntornoEsSeguro = self.elEntornoEsSeguro
-                destinationVC.instantes = self.instantes
-            }
+    func logicaColorearInsuflacion(){
+        let instante = self.instantes[self.instantes.count-1]
+        if(instante.Insuflacion == "Nula"){
+            self.heart4.tintColor = .white
+            self.puntaje = self.puntaje - 60
+        }
+        else if(instante.Insuflacion == "Insuficiente"){
+            self.heart4.tintColor = .lightGray
+            self.puntaje = self.puntaje - 60
+        }
+        else if(instante.Insuflacion == "Correcta"){
+            self.heart4.tintColor = .green
+            self.puntaje = self.puntaje + 50
+        }
+        else if(instante.Insuflacion == "Excesiva"){
+            self.heart4.tintColor = .red
+            self.puntaje = self.puntaje - 60
         }
     }
     
@@ -227,7 +215,7 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
     //Esta funcion es invocada cuando el dispositivo es conectado, es decir pasa a estado 2.
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral)
     {
-        print("Conectado Paso3 Simulacion")
+        print("Conectado Paso2 Juego")
         peripheral.discoverServices(nil)
     }
     
@@ -267,7 +255,7 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
         
         //Cuando descubro las caracteristicas del dispositivo a la vez activo las notificaciones. Es decir lo que me manda el ESP32.
         enableNotifications(enable: true)
-        SimulacionPaso3ViewController.characteristicsShared = self.characteristics
+        JuegoPaso2ViewController.characteristicsShared = self.characteristics
         //SACAR DE ACA
         let mensaje = "TEXTO"
         let data: Data = mensaje.data(using: String.Encoding.utf8)!
@@ -288,6 +276,11 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
         {
             print("[ERROR] Error actualizando valor. \(error!)")
             return
+        }
+        
+        if(!self.inicio){
+            self.scheduledTimer()
+            self.inicio = true
         }
         
         //Si recibo algo proveniente del ESP32, porque podria estar conectado a mas cosas, y recibir de distintos.
@@ -314,7 +307,7 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
     {
         if central.state == .poweredOn
         {
-            print("Bluetooth activado Paso 8")
+            print("Bluetooth activado Paso 2")
             //Escaneo los dispositivos.
             self.centralManager.scanForPeripherals(withServices: nil, options: nil)
         }
@@ -346,9 +339,7 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
             //Empiezo la conexion, debe estar tambien el centralManager.connect de arriba.
             self.centralManager.connect(esp32, options: nil)
             
-            SimulacionPaso3ViewController.esp32Shared = self.esp32
+            JuegoPaso2ViewController.esp32Shared = self.esp32
         }
     }
-    
 }
-

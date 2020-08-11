@@ -54,6 +54,9 @@
 		D47F17AE24A8E2B9002C02CA /* ServiceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17AD24A8E2B9002C02CA /* ServiceUser.swift */; };
 		D47F17B024A8E41D002C02CA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47F17AF24A8E41D002C02CA /* Alamofire.framework */; };
 		D47F17B324A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F17B224A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift */; };
+		D49F367624E2FDBB0083EE50 /* JuegoPaso1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49F367524E2FDBB0083EE50 /* JuegoPaso1ViewController.swift */; };
+		D49F367824E2FDD30083EE50 /* JuegoPaso2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49F367724E2FDD30083EE50 /* JuegoPaso2ViewController.swift */; };
+		D49F367A24E2FDE00083EE50 /* JuegoPaso3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49F367924E2FDE00083EE50 /* JuegoPaso3ViewController.swift */; };
 		D4AEA91424C5214E00F18491 /* CompresionManiobraAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4AEA91324C5214E00F18491 /* CompresionManiobraAudio.mp3 */; };
 		D4F2CD8D24CC817800A2FA30 /* InsuflacionManiobra.gif in Resources */ = {isa = PBXBuildFile; fileRef = D4F2CD8C24CC817700A2FA30 /* InsuflacionManiobra.gif */; };
 		D4F2CD8F24CC834400A2FA30 /* InsuflacionManiobraAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4F2CD8E24CC834400A2FA30 /* InsuflacionManiobraAudio.mp3 */; };
@@ -118,6 +121,9 @@
 		D47F17AD24A8E2B9002C02CA /* ServiceUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceUser.swift; sourceTree = "<group>"; };
 		D47F17AF24A8E41D002C02CA /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47F17B224A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrarNuevoUsuarioViewController.swift; sourceTree = "<group>"; };
+		D49F367524E2FDBB0083EE50 /* JuegoPaso1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuegoPaso1ViewController.swift; sourceTree = "<group>"; };
+		D49F367724E2FDD30083EE50 /* JuegoPaso2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuegoPaso2ViewController.swift; sourceTree = "<group>"; };
+		D49F367924E2FDE00083EE50 /* JuegoPaso3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuegoPaso3ViewController.swift; sourceTree = "<group>"; };
 		D4AEA91324C5214E00F18491 /* CompresionManiobraAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CompresionManiobraAudio.mp3; sourceTree = "<group>"; };
 		D4F2CD8C24CC817700A2FA30 /* InsuflacionManiobra.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = InsuflacionManiobra.gif; sourceTree = "<group>"; };
 		D4F2CD8E24CC834400A2FA30 /* InsuflacionManiobraAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = InsuflacionManiobraAudio.mp3; sourceTree = "<group>"; };
@@ -176,8 +182,9 @@
 				D451035024C518090080EE67 /* Resources */,
 				D44CAB5D24C38F75006D00FF /* Tutor */,
 				D47F17AC24A8E295002C02CA /* Services */,
-				D47F17A924A8DC6E002C02CA /* Simulacion */,
 				D45267F0249E6F17005F7886 /* Aprendizaje */,
+				D47F17A924A8DC6E002C02CA /* Simulacion */,
+				D49F367424E2FD9D0083EE50 /* Juego */,
 				D45267E7249E6914005F7886 /* Storyboards */,
 				D44B0A37245E280D0069A8B4 /* ViewControllers Iniciales */,
 				D44B0A20245E21890069A8B4 /* AppDelegate.swift */,
@@ -278,6 +285,16 @@
 				D44E41F724CE27EB0037D408 /* ServiceEvento.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		D49F367424E2FD9D0083EE50 /* Juego */ = {
+			isa = PBXGroup;
+			children = (
+				D49F367524E2FDBB0083EE50 /* JuegoPaso1ViewController.swift */,
+				D49F367724E2FDD30083EE50 /* JuegoPaso2ViewController.swift */,
+				D49F367924E2FDE00083EE50 /* JuegoPaso3ViewController.swift */,
+			);
+			path = Juego;
 			sourceTree = "<group>";
 		};
 		D4F2CD9224CC914300A2FA30 /* Utils */ = {
@@ -437,6 +454,7 @@
 				D44CAB6724C3A648006D00FF /* VerActividadesViewController.swift in Sources */,
 				D4F2CD9124CC838500A2FA30 /* AprendizajePaso7ViewController.swift in Sources */,
 				D44CAB5F24C38FC3006D00FF /* InicioTutorViewController.swift in Sources */,
+				D49F367624E2FDBB0083EE50 /* JuegoPaso1ViewController.swift in Sources */,
 				D44CAB6324C3A62F006D00FF /* VerCursosViewController.swift in Sources */,
 				D455EDB924D74D6B00C2888F /* Utils.swift in Sources */,
 				D47530AF249E71A2008CDCB4 /* CustomNavigationViewController.swift in Sources */,
@@ -452,6 +470,7 @@
 				D451034F24C516C00080EE67 /* Gif.swift in Sources */,
 				D47F17AB24A8DCAC002C02CA /* SimulacionPaso1ViewController.swift in Sources */,
 				D47530B3249E7690008CDCB4 /* AprendizajePaso3ViewController.swift in Sources */,
+				D49F367824E2FDD30083EE50 /* JuegoPaso2ViewController.swift in Sources */,
 				D44E41F824CE27EB0037D408 /* ServiceEvento.swift in Sources */,
 				D47530B5249E769E008CDCB4 /* AprendizajePaso4ViewController.swift in Sources */,
 				D44B0A39245E285F0069A8B4 /* InicioViewController.swift in Sources */,
@@ -471,6 +490,7 @@
 				D47F17B324A8F583002C02CA /* RegistrarNuevoUsuarioViewController.swift in Sources */,
 				D41869BB24D5CAED006EBF78 /* SimulacionPaso3ViewController.swift in Sources */,
 				D47530B1249E7676008CDCB4 /* AprendizajePaso2ViewController.swift in Sources */,
+				D49F367A24E2FDE00083EE50 /* JuegoPaso3ViewController.swift in Sources */,
 				D44B0A3B245E287D0069A8B4 /* LoginViewController.swift in Sources */,
 				D44E9365248D72BD002608EA /* Instante.swift in Sources */,
 				D44E9367248D7FB0002608EA /* EstadisticasViewController.swift in Sources */,
