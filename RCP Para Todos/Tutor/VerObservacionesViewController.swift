@@ -44,6 +44,7 @@ class VerObservacionesViewController: UIViewController{
     }
     
     func initInterface(){
+        self.buttonRegistrar.layer.cornerRadius = 15
         self.labelFecha.text = Utils.translateDateMongo(date: evento!.fecha)
         self.labelPracticante.text = "Ian" //Hardcodeado jaja ya me canse por hoy.
         self.primeroEstado = evento!.brazosFlexionados ?? false

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -76,6 +76,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="J5I-8I-aE6"/>
                     <connections>
+                        <outlet property="buttonIniciar" destination="fwL-39-0hh" id="76K-QT-DEL"/>
                         <segue destination="V19-cD-XXe" kind="show" identifier="paso2Simulacion" id="zP4-In-hr0"/>
                     </connections>
                 </viewController>
@@ -211,6 +212,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZC5-6s-Nc3"/>
                     <connections>
+                        <outlet property="buttonIrAlInicio" destination="WRR-fw-iR0" id="Bnv-L5-hYK"/>
                         <outlet property="labelResultado" destination="70C-fn-Ztt" id="U6t-NL-2iL"/>
                     </connections>
                 </viewController>
@@ -357,6 +359,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="P2f-Hd-r1J"/>
                     <connections>
+                        <outlet property="buttonIrAlInicio" destination="0jH-Lo-bna" id="xMk-vz-Jo5"/>
                         <outlet property="labelResultado" destination="DtG-TX-mKu" id="bUd-Il-9Sm"/>
                         <outlet property="labelTotalInsuflado" destination="Rev-2j-aZq" id="3q4-DZ-l5u"/>
                         <outlet property="pieChartView" destination="5iT-aJ-42t" id="F08-v9-Xj5"/>

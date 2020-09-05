@@ -26,6 +26,12 @@ class SimulacionPaso2ViewController: UIViewController
         super.viewDidLoad()
         self.inicializarBarraSuperior()
         self.loadProgressCircleBar()
+        self.initInterface()
+    }
+        
+    func initInterface(){
+        self.buttonElEntornoNoEsSeguro.layer.cornerRadius = 15
+        self.buttonLlamarAmbulancia.layer.cornerRadius = 15
     }
     
     func inicializarBarraSuperior()

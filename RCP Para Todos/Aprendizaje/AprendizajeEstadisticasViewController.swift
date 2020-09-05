@@ -6,6 +6,7 @@ class AprendizajeEstadisticasViewController: UIViewController, ChartViewDelegate
 {
     @IBOutlet var pieChartView: PieChartView!
     @IBOutlet weak var labelTotalInsuflado: UILabel!
+    @IBOutlet weak var buttonIrAlInicio: UIButton!
     var instantes : [Instante] = []
     override func viewDidLoad()
     {
@@ -14,6 +15,11 @@ class AprendizajeEstadisticasViewController: UIViewController, ChartViewDelegate
         self.pieChartView.delegate = self
         self.initGraph()
         self.totalInsuflado()
+        self.initInterface()
+    }
+        
+    func initInterface(){
+        self.buttonIrAlInicio.layer.cornerRadius = 15
     }
     
     func totalInsuflado(){

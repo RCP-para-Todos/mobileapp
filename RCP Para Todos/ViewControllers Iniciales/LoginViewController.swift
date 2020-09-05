@@ -4,23 +4,61 @@ import UIKit
 class LoginViewController: UIViewController
 {
     
+    @IBOutlet weak var buttonIngresar: UIButton!
+    @IBOutlet weak var buttonCrearUsuario: UIButton!
+    @IBOutlet weak var buttonCheckRecordarContrasena: UIButton!
     @IBOutlet weak var usuarioInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     @IBOutlet weak var activityIndicatorSpinner: UIActivityIndicatorView!
     
     var service : ServiceUser?
+    var stateCheckBox : Bool = true
     override func viewDidLoad()
     {
+        self.service = ServiceUser()
+        self.autoLogin()
         self.resetDefaults()
         super.viewDidLoad()
+        self.initInterface()
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
-        self.service = ServiceUser()
         self.activityIndicatorSpinner.stopAnimating()
+    }
+    
+    func initInterface(){
+        self.buttonIngresar.layer.cornerRadius = 15
+        self.buttonCrearUsuario.layer.cornerRadius = 15
+        self.buttonCheckRecordarContrasena.layer.borderWidth = 1
+        self.buttonCheckRecordarContrasena.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    func autoLogin(){
+        let usuario = service!.obtenerCredencialesProximoInicio().0
+        let contrasena = service!.obtenerCredencialesProximoInicio().1
+        if(usuario != nil && contrasena != nil){
+            let parameters: [String: String] = [
+                "name" : usuario!,
+                "password" : contrasena!
+            ]
+            self.activityIndicatorSpinner.startAnimating()
+            self.service?.login(parameters: parameters, completion: self.completion)
+        }
     }
     
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
     }
+    
+    @IBAction func buttonCheckRecordarContrasenaClicked(_ sender: Any) {
+        if(!self.stateCheckBox){
+            self.buttonCheckRecordarContrasena.setImage(UIImage(systemName: "checkmark"), for: .normal)
+            self.stateCheckBox = true
+        }
+        else{
+            self.buttonCheckRecordarContrasena.setImage(nil, for: .normal)
+            self.stateCheckBox = false
+        }
+    }
+    
 
     @IBAction func ingresarClicked(_ sender: Any) {
         self.activityIndicatorSpinner.startAnimating()
@@ -28,6 +66,9 @@ class LoginViewController: UIViewController
             "name" : usuarioInput.text!,
             "password" : passwordInput.text!
         ]
+        if(self.stateCheckBox){
+            service?.guardarCreedencialesProximoinicio(usuario: usuarioInput.text!, contrasena: passwordInput.text!)
+        }
         self.service?.login(parameters: parameters, completion: self.completion)
     }
     

@@ -15,6 +15,7 @@ class SimulacionEstadisticasViewController: UIViewController, ChartViewDelegate
     @IBOutlet weak var labelResultado: UILabel!
     @IBOutlet weak var pieChartView: PieChartView!
     @IBOutlet weak var labelTotalInsuflado: UILabel!
+    @IBOutlet weak var buttonIrAlInicio: UIButton!
     
     var instantes : [Instante] = []
     var ambulanciaClicked : Bool = false
@@ -29,6 +30,11 @@ class SimulacionEstadisticasViewController: UIViewController, ChartViewDelegate
         self.initGraph()
         self.totalInsuflado()
         self.logicaResultado()
+        self.initInterface()
+    }
+        
+    func initInterface(){
+        self.buttonIrAlInicio.layer.cornerRadius = 15
     }
     
     func inicializarBarraSuperior()

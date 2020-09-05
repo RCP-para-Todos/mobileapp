@@ -54,6 +54,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZZC-1J-VmJ"/>
                     <connections>
+                        <outlet property="buttonJugar" destination="FQ4-dk-vf2" id="Fx7-p0-KQu"/>
                         <outlet property="pickerDificultad" destination="6LY-M8-DO2" id="yzV-ga-MVM"/>
                         <segue destination="Dhc-rS-iDz" kind="show" identifier="juego2Segue" id="yOh-Bd-bRB"/>
                     </connections>
@@ -212,6 +213,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fWA-Nw-gLh"/>
                     <connections>
+                        <outlet property="buttonIrAlInicio" destination="uDs-w7-HA8" id="BQ7-HF-02c"/>
                         <outlet property="labelPuntaje" destination="NrF-jq-wlN" id="7ZX-uB-9yb"/>
                     </connections>
                 </viewController>

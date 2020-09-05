@@ -34,6 +34,11 @@ class VerActividadViewController: UIViewController{
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
         self.serviceEvento!.getEventoById(id: self.idEvento!, completion: self.getEventoById)
         self.inicializarBarraSuperior()
+        self.initInterface()
+    }
+    
+    func initInterface(){
+        self.buttonObservacionesTutor.layer.cornerRadius = 15
     }
     
     func inicializarBarraSuperior()

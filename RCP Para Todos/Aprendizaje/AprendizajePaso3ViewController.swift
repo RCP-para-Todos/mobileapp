@@ -20,6 +20,11 @@ class AprendizajePaso3ViewController: UIViewController
         super.viewDidLoad()
         self.inicializarBarraSuperior()
         self.continuarButton.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
+        self.initInterface()
+    }
+        
+    func initInterface(){
+        self.continuarButton.layer.cornerRadius = 15
     }
     
     func inicializarBarraSuperior()

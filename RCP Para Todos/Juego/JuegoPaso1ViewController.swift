@@ -12,6 +12,8 @@ import UIKit
 class JuegoPaso1ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var pickerDificultad: UIPickerView!
+    @IBOutlet weak var buttonJugar: UIButton!
+    
     
     let arrayDificultad : [String] = ["Facil (1M)", "Medio (3M)", "Dificil (5M)"]
     
@@ -23,6 +25,11 @@ class JuegoPaso1ViewController: UIViewController, UIPickerViewDelegate, UIPicker
         super.viewDidLoad()
         self.initDelegates()
         self.inicializarBarraSuperior()
+        self.initInterface()
+    }
+        
+    func initInterface(){
+        self.buttonJugar.layer.cornerRadius = 15
     }
     
     func inicializarBarraSuperior()

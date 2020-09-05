@@ -13,6 +13,7 @@ class JuegoPaso3ViewController: UIViewController
 {
     
     @IBOutlet weak var labelPuntaje: UILabel!
+    @IBOutlet weak var buttonIrAlInicio: UIButton!
     
     var puntaje : Int = 0
     
@@ -21,6 +22,11 @@ class JuegoPaso3ViewController: UIViewController
         super.viewDidLoad()
         self.inicializarBarraSuperior()
         self.labelPuntaje.text  = String(self.puntaje)
+        self.initInterface()
+    }
+        
+    func initInterface(){
+        self.buttonIrAlInicio.layer.cornerRadius = 15
     }
     
     func inicializarBarraSuperior()

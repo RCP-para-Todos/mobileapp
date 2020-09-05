@@ -11,6 +11,8 @@ import UIKit
 
 class SimulacionPaso3AlternativoViewController: UIViewController
 {
+    @IBOutlet weak var buttonIrAlInicio: UIButton!
+    
     var ambulanciaClicked : Bool = false
     var entornoNoSeguroClicked : Bool = false
     var elEntornoEsSeguro : Bool = false
@@ -23,6 +25,11 @@ class SimulacionPaso3AlternativoViewController: UIViewController
         super.viewDidLoad()
         self.inicializarBarraSuperior()
         self.logicaResultado()
+        self.initInterface()
+    }
+        
+    func initInterface(){
+        self.buttonIrAlInicio.layer.cornerRadius = 15
     }
     
     func inicializarBarraSuperior()

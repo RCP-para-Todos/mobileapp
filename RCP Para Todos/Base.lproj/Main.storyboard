@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ydu-nz-gPW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ydu-nz-gPW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -39,11 +39,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="he5-eN-ocX">
-                                <rect key="frame" x="45" y="426" width="19" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="checkmark" catalog="system"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recordar contraseña" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioe-Uz-PR1">
                                 <rect key="frame" x="87" y="426" width="160" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -52,9 +47,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2zZ-Zh-r7t">
-                                <rect key="frame" x="179" y="476" width="56" height="30"/>
+                                <rect key="frame" x="137" y="476" width="139" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Ingresar"/>
+                                <color key="backgroundColor" red="0.18178902029999999" green="0.58340525369999996" blue="0.073841895929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Ingresar">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="ingresarClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nro-5I-aJb"/>
                                 </connections>
@@ -71,11 +69,22 @@
                                 <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZa-4o-xyq">
-                                <rect key="frame" x="161" y="514" width="92" height="30"/>
+                                <rect key="frame" x="137" y="514" width="139" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Crear usuario"/>
+                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Crear usuario">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <segue destination="zGf-Xf-Al0" kind="show" id="cxC-aw-kdt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="he5-eN-ocX">
+                                <rect key="frame" x="45" y="426" width="19" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="checkmark" catalog="system"/>
+                                <connections>
+                                    <action selector="buttonCheckRecordarContrasenaClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NOd-HK-1Es"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -85,6 +94,9 @@
                     <navigationItem key="navigationItem" id="HAg-DG-A8r"/>
                     <connections>
                         <outlet property="activityIndicatorSpinner" destination="Qb7-Tz-i1i" id="XLE-ee-lnu"/>
+                        <outlet property="buttonCheckRecordarContrasena" destination="he5-eN-ocX" id="kkh-2b-qHo"/>
+                        <outlet property="buttonCrearUsuario" destination="jZa-4o-xyq" id="N6E-1P-YOD"/>
+                        <outlet property="buttonIngresar" destination="2zZ-Zh-r7t" id="EyZ-ad-Wsh"/>
                         <outlet property="passwordInput" destination="cZg-FP-AtY" id="Uk8-E9-Rqx"/>
                         <outlet property="usuarioInput" destination="wL9-My-W1S" id="Fdy-Ha-vee"/>
                         <segue destination="HrC-5V-PHw" kind="show" identifier="InicioSegue" id="c16-qn-96q"/>
@@ -171,7 +183,10 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyB-zh-exp">
                                 <rect key="frame" x="128" y="493" width="158" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Registrar nueva cuenta"/>
+                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Registrar nueva cuenta">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="registrarClicked:" destination="zGf-Xf-Al0" eventType="touchUpInside" id="N8H-mo-qHc"/>
                                 </connections>
@@ -188,6 +203,7 @@
                     <navigationItem key="navigationItem" id="53V-xA-Sn4"/>
                     <connections>
                         <outlet property="activityIndicatorSpinner" destination="YHF-ti-Q5x" id="DOk-h7-Yd0"/>
+                        <outlet property="buttonRegistrarNuevaCuenta" destination="cyB-zh-exp" id="Z2n-NC-h2F"/>
                         <outlet property="passwordInput" destination="w3M-hk-f2S" id="eo7-nM-DMb"/>
                         <outlet property="perfilInput" destination="16f-ux-FPK" id="7gN-fB-jh3"/>
                         <outlet property="usuarioInput" destination="j6V-OH-4Yv" id="QVH-vc-Ry9"/>

@@ -13,7 +13,11 @@ import SwiftyJSON
 class ServiceUser
 {
     public func login(parameters: [String: String], completion: @escaping (Bool) -> Void){
-        //completion(true) //Test sin backend
+        //Test sin backend
+        /*let defaults = UserDefaults.standard
+        defaults.set("practicante", forKey: "rol")
+        defaults.set("test", forKey: "curso")
+        completion(true)*/
         AF.request("\(Constants.GLOBAL_ENDPOINT)auth/login", method: .post, parameters: parameters, encoding: JSONEncoding.default)
         .responseJSON { result in
             if let value = result.value as? [String: Any] {
@@ -67,5 +71,15 @@ class ServiceUser
         AF.request("\(Constants.GLOBAL_ENDPOINT)users", method: .get, headers: headers).responseJSON { response in
             debugPrint(response)
         }
+    }
+    
+    public func guardarCreedencialesProximoinicio(usuario: String, contrasena: String){
+        let defaults = UserDefaults.standard
+        defaults.set(usuario, forKey: "usuarioRecordar")
+        defaults.set(contrasena, forKey: "contrasenaRecordar")
+    }
+    
+    public func obtenerCredencialesProximoInicio() -> (String?, String?){
+        return (UserDefaults.standard.string(forKey: "usuarioRecordar"), UserDefaults.standard.string(forKey: "contrasenaRecordar"))
     }
 }

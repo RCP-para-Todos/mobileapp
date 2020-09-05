@@ -11,10 +11,17 @@ import UIKit
 
 class SimulacionPaso1ViewController: UIViewController
 {
+    @IBOutlet weak var buttonIniciar: UIButton!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.inicializarBarraSuperior()
+        self.initInterface()
+    }
+        
+    func initInterface(){
+        self.buttonIniciar.layer.cornerRadius = 15
     }
     
     func inicializarBarraSuperior()

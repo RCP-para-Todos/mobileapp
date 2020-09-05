@@ -15,6 +15,7 @@ class RegistrarNuevoUsuario: UIViewController
     @IBOutlet weak var passwordInput: UITextField!
     @IBOutlet weak var activityIndicatorSpinner: UIActivityIndicatorView!
     @IBOutlet weak var perfilInput: UISegmentedControl!
+    @IBOutlet weak var buttonRegistrarNuevaCuenta: UIButton!
     
     var service : ServiceUser?
     override func viewDidLoad()
@@ -23,6 +24,11 @@ class RegistrarNuevoUsuario: UIViewController
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
         self.service = ServiceUser()
         self.activityIndicatorSpinner.stopAnimating()
+        self.initInterface()
+    }
+    
+    func initInterface(){
+        self.buttonRegistrarNuevaCuenta.layer.cornerRadius = 15
     }
     
     @objc func dismissKeyboard() {

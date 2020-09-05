@@ -19,6 +19,11 @@ class AprendizajePaso1ViewController: UIViewController
         super.viewDidLoad()
         self.inicializarBarraSuperior()
         self.entornoSeguroButton.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
+        self.initInterface()
+    }
+        
+    func initInterface(){
+        self.entornoSeguroButton.layer.cornerRadius = 15
     }
     
     func inicializarBarraSuperior()
