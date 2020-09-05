@@ -41,9 +41,10 @@ class JuegoPaso2ViewController: UIViewController,  CBCentralManagerDelegate, CBP
     
     var timer = Timer()
     var count : Int = 0
-    var tiempoSelected : Int = 0
+    var antiCount : Int = 0
     var puntaje : Int = 0
     var inicio : Bool = false
+    var insuflacionesMomento : Bool = false
     
     override func viewDidLoad()
     {
@@ -51,7 +52,6 @@ class JuegoPaso2ViewController: UIViewController,  CBCentralManagerDelegate, CBP
         self.serviceEvento = ServiceEvento()
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.inicializarBarraSuperior()
-        self.tiempoSelected = self.count / 1000
     }
     
     func inicializarBarraSuperior()
@@ -79,38 +79,62 @@ class JuegoPaso2ViewController: UIViewController,  CBCentralManagerDelegate, CBP
     }
     
     func scheduledTimer(){
-        self.timer = Timer.scheduledTimer(timeInterval: 0.250, target: self, selector: #selector(self.logicShow), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 0.125, target: self, selector: #selector(self.logicShow), userInfo: nil, repeats: true)
     }
     
     @objc func logicShow(){
-        //print(count)
-        if(self.count % 1000 == 0 && !(self.count > 29000 && self.count < 34000)){
-            self.heart1.isHidden = false
-            self.heart2.isHidden = true
-            self.heart3.isHidden = true
-            self.heart4.isHidden = true
-        }
-        else if(self.count % 1000 == 750 && !(self.count > 29000 && self.count < 34000)){
-            self.heart1.isHidden = true
-            self.heart2.isHidden = false
-            self.heart3.isHidden = true
-            self.heart4.isHidden = true
-        }
-        else if(self.count % 1000 == 500 && !(self.count > 29000 && self.count < 34000)){
-            self.heart1.isHidden = true
-            self.heart2.isHidden = true
-            self.heart3.isHidden = false
-            self.heart4.isHidden = true
-        }
-        else if(self.count % 1000 == 250 && !(self.count > 29000 && self.count < 34000)){
+        if(self.antiCount % 1000 == 0 && !self.insuflacionesMomento && self.antiCount != 0){
             self.heart1.isHidden = true
             self.heart2.isHidden = true
             self.heart3.isHidden = true
             self.heart4.isHidden = false
             self.logicaColorearCompresion()
         }
-        //Hardcodeado para un minuto. TODO
-        if(self.count > 29000 && self.count < 34000){
+        else if(self.antiCount % 1000 == 875 && !self.insuflacionesMomento){
+            self.heart1.isHidden = true
+            self.heart2.isHidden = true
+            self.heart3.isHidden = false
+            self.heart4.isHidden = true
+        }
+        else if(self.antiCount % 1000 == 750 && !self.insuflacionesMomento){
+            self.heart1.isHidden = true
+            self.heart2.isHidden = false
+            self.heart3.isHidden = true
+            self.heart4.isHidden = true
+        }
+        else if(self.antiCount % 1000 == 625 && !self.insuflacionesMomento){
+            self.heart1.isHidden = false
+            self.heart2.isHidden = true
+            self.heart3.isHidden = true
+            self.heart4.isHidden = true
+        }
+        else if(self.antiCount % 1000 == 500 && !self.insuflacionesMomento){
+            self.heart1.isHidden = true
+            self.heart2.isHidden = true
+            self.heart3.isHidden = true
+            self.heart4.isHidden = false
+        }
+        else if(self.antiCount % 1000 == 375 && !self.insuflacionesMomento){
+            self.heart1.isHidden = true
+            self.heart2.isHidden = true
+            self.heart3.isHidden = false
+            self.heart4.isHidden = true
+        }
+        else if(self.antiCount % 1000 == 250 && !self.insuflacionesMomento){
+            self.heart1.isHidden = true
+            self.heart2.isHidden = false
+            self.heart3.isHidden = true
+            self.heart4.isHidden = true
+        }
+        else if(self.antiCount % 1000 == 125 && !self.insuflacionesMomento){
+            self.heart1.isHidden = false
+            self.heart2.isHidden = true
+            self.heart3.isHidden = true
+            self.heart4.isHidden = true
+        }
+        //Cada condicion representa 30 segundos, cada 30 segundos se paran las compresiones y se realizan las insuflaciones.
+        if((self.antiCount > 29000 && self.antiCount < 34000) || (self.antiCount > 64000 && self.antiCount < 69000) || (self.antiCount > 99000 && self.antiCount < 104000) || (self.antiCount > 134000 && self.antiCount < 139000) || (self.antiCount > 169000 && self.antiCount < 174000) || (self.antiCount > 204000 && self.antiCount < 209000) || (self.antiCount > 239000 && self.antiCount < 244000) || (self.antiCount > 274000 && self.antiCount < 279000) || (self.antiCount > 309000 && self.antiCount < 314000) || (self.antiCount > 344000 && self.antiCount < 349000) || (self.antiCount > 379000 && self.antiCount < 384000) || (self.antiCount > 414000 && self.antiCount < 419000) || (self.antiCount > 449000 && self.antiCount < 454000) || (self.antiCount > 484000 && self.antiCount < 489000)){
+            self.insuflacionesMomento = true
             self.wind1.isHidden = false
             self.wind2.isHidden = false
             self.wind3.isHidden = false
@@ -118,13 +142,15 @@ class JuegoPaso2ViewController: UIViewController,  CBCentralManagerDelegate, CBP
             self.logicaColorearInsuflacion()
         }
         else{
+            self.insuflacionesMomento = false
             self.wind1.isHidden = true
             self.wind2.isHidden = true
             self.wind3.isHidden = true
             self.wind4.isHidden = true
         }
-        self.count = self.count - 250
-        if(self.count == 0){
+        self.antiCount = self.antiCount + 125
+        if(self.antiCount >= self.count){
+            self.timer.invalidate()
             self.subirEvento()
             self.centralManager = nil
             self.performSegue(withIdentifier: "juego3Segue", sender: nil)

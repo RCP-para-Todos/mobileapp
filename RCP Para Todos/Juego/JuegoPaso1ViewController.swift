@@ -12,13 +12,10 @@ import UIKit
 class JuegoPaso1ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var pickerDificultad: UIPickerView!
-    @IBOutlet weak var pickerTiempo: UIPickerView!
     
-    let arrayDificultad : [String] = ["Facil", "Medio", "Dificil"]
-    let arrayTiempo : [String] = ["1M", "2M", "3M","4M", "5M", "6M","7M", "8M", "9M"]
+    let arrayDificultad : [String] = ["Facil (1M)", "Medio (3M)", "Dificil (5M)"]
     
-    var dificultadSelected : String = "Facil"
-    var tiempoSelected : String = "1M"
+    var dificultadSelected : String = "Facil (1M)"
     
     
     override func viewDidLoad()
@@ -40,8 +37,6 @@ class JuegoPaso1ViewController: UIViewController, UIPickerViewDelegate, UIPicker
     func initDelegates(){
         self.pickerDificultad.delegate = self
         self.pickerDificultad.dataSource = self
-        self.pickerTiempo.delegate = self
-        self.pickerTiempo.dataSource = self
     }
     
     
@@ -52,10 +47,17 @@ class JuegoPaso1ViewController: UIViewController, UIPickerViewDelegate, UIPicker
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "juego2Segue" {
             if let destinationVC = segue.destination as? JuegoPaso2ViewController {
-                var tiempoSelectedTemp = self.tiempoSelected
-                tiempoSelectedTemp = String(tiempoSelectedTemp.dropLast())
-                let tiempo : Int = Int(tiempoSelectedTemp)!*60000 //MILISEGUNDOS
-                destinationVC.count = tiempo
+                var tiempoSelected : Int
+                if(self.dificultadSelected == "Facil (1M)"){
+                    tiempoSelected = 1 * 60000
+                }
+                else if(self.dificultadSelected == "Medio (3M)"){
+                    tiempoSelected = 3 * 60000
+                }
+                else{
+                    tiempoSelected = 5 * 60000
+                }
+                destinationVC.count = tiempoSelected
             }
         }
     }
@@ -67,8 +69,6 @@ class JuegoPaso1ViewController: UIViewController, UIPickerViewDelegate, UIPicker
     internal func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == self.pickerDificultad {
             return self.arrayDificultad.count
-        } else if pickerView == self.pickerTiempo{
-            return self.arrayTiempo.count
         }
         return 0
     }
@@ -76,19 +76,14 @@ class JuegoPaso1ViewController: UIViewController, UIPickerViewDelegate, UIPicker
     internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == self.pickerDificultad {
             return self.arrayDificultad[row]
-        } else if pickerView == self.pickerTiempo{
-            return self.arrayTiempo[row]
         }
         return nil
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    internal func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == self.pickerDificultad {
             self.dificultadSelected = self.arrayDificultad[row]
-        } else if pickerView == self.pickerTiempo{
-            self.tiempoSelected = self.arrayTiempo[row]
         }
-
     }
     
 }
