@@ -20,7 +20,7 @@ public class Request {
     }
 
     public void sendLogin(String username, String password, String rol, final RequestCallbacks requestCallbacks) {
-        mAPIService.login(username, password, rol).enqueue(new Callback<UserPost>() {
+        mAPIService.login(username, password).enqueue(new Callback<UserPost>() {
             @Override
             public void onResponse(Call<UserPost> call, Response<UserPost> response) {
                 if (requestCallbacks != null) {

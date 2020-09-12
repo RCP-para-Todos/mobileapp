@@ -19,9 +19,8 @@ public interface APIService {
     // Inicio metodos de Auth
     @POST("auth/login")
     @FormUrlEncoded
-    Call<UserPost> login(@Field("username") String username,
-                         @Field("password") String password,
-                         @Field("rol") String rol
+    Call<UserPost> login(@Field("name") String username,
+                         @Field("password") String password
     );
 
     @POST("auth/register")
