@@ -18,6 +18,7 @@
         <activity
             android:name="com.jk.rcp.main.activities.RegisterActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="com.jk.rcp.main.activities.HomeAlertActivity"

@@ -43,8 +43,7 @@ public class Request {
         });
     }
 
-    public void sendRegister(String name, String surname, String dni, String email, String
-            password) {
+    public void sendRegister(String name, String surname, String rol) {
 //        mAPIService.register(ENV, name, surname, Integer.valueOf(dni), email, password, COMMISION, GROUP).enqueue(new Callback<UserPost>() {
 //            @Override
 //            public void onResponse(Call<UserPost> call, Response<UserPost> response) {

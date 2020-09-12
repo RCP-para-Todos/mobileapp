@@ -9,4 +9,9 @@
     <color name="icons">#212121</color>
     <color name="divider">#BDBDBD</color>
     <color name="clock">#676365</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="black_overlay">#434343</color>
+    <color name="colorGray">#676365</color>
+    <color name="gray_light">#B3B2B3</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>

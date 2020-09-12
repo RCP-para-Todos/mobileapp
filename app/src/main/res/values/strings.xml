@@ -26,4 +26,7 @@
     <string name="menu_history">Historial de alarmas</string>
     <string name="stop">Detener</string>
     <string name="createUser">Crear usuario</string>
+    <string name="register_new_account">Registrar nueva cuenta</string>
+    <string name="instructor">Instructor</string>
+    <string name="practicante">Practicante</string>
 </resources>

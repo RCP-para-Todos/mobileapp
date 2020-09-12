@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -22,22 +21,15 @@ import butterknife.ButterKnife;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
-    @Bind(R.id.input_name)
-    EditText _nameText;
-    @Bind(R.id.input_surname)
-    EditText _surnameText;
     @Bind(R.id.input_user)
-    EditText _emailText;
-    @Bind(R.id.input_dni)
-    EditText _dniText;
+    EditText _usernameText;
+
     @Bind(R.id.input_password)
     EditText _passwordText;
-    @Bind(R.id.input_repeat_password)
-    EditText _confirmPasswordText;
-    @Bind(R.id.btn_signup)
+
+    @Bind(R.id.btn_create_user)
     Button _signupButton;
-    @Bind(R.id.link_login)
-    TextView _loginLink;
+
     private Request request;
 
     @Override
@@ -59,12 +51,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        _loginLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
 
@@ -95,13 +81,10 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog.setMessage("Creando cuenta...");
         progressDialog.show();
 
-        String name = _nameText.getText().toString();
-        String surname = _surnameText.getText().toString();
-        String email = _emailText.getText().toString();
-        String dni = _dniText.getText().toString();
+        String name = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        sendRegister(name, surname, dni, email, password);
+        sendRegister(name, password, "Practicante");
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -124,10 +107,10 @@ public class RegisterActivity extends AppCompatActivity {
         _signupButton.setEnabled(true);
     }
 
-    public void sendRegister(String name, String surname, String dni, String email, String password) {
+    public void sendRegister(String name, String surname, String rol) {
         if (DeviceUtils.isDeviceOnline(this)) {
             Request request = new Request();
-            request.sendRegister(name, surname, dni, email, password);
+            request.sendRegister(name, surname, rol);
         } else {
             Toast.makeText(this, "No hay internet", Toast.LENGTH_SHORT).show();
         }
@@ -136,40 +119,16 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean validate() {
         boolean valid = true;
 
-        String name = _nameText.getText().toString();
-        String surname = _surnameText.getText().toString();
-        String email = _emailText.getText().toString();
-        String dni = _dniText.getText().toString();
+        String name = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
-        String confirmPassword = _confirmPasswordText.getText().toString();
 
         if (name.isEmpty() || name.length() < 4) {
-            _nameText.setError("Al menos 4 caracteres");
+            _usernameText.setError("Al menos 4 caracteres");
             valid = false;
         } else {
-            _nameText.setError(null);
-        }
-        if (surname.isEmpty() || surname.length() < 4) {
-            _surnameText.setError("Al menos 4 caracteres");
-            valid = false;
-        } else {
-            _surnameText.setError(null);
+            _usernameText.setError(null);
         }
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("Ingrese una dirección de correo electrónico válida");
-            valid = false;
-        } else {
-            _emailText.setError(null);
-        }
-
-        String regex = "\\d+";
-        if (dni.isEmpty() || dni.length() < 7 || dni.length() > 8 || !dni.matches(regex)) {
-            _dniText.setError("Ingrese un DNI válido");
-            valid = false;
-        } else {
-            _dniText.setError(null);
-        }
 
         if (password.isEmpty() || password.length() < 8 || password.length() > 20) {
             _passwordText.setError("La contraseña debe tener entre 8 y 20 caracteres");
@@ -178,12 +137,6 @@ public class RegisterActivity extends AppCompatActivity {
             _passwordText.setError(null);
         }
 
-        if (confirmPassword.isEmpty() || confirmPassword.length() < 8 || confirmPassword.length() > 20 || !confirmPassword.equals(password)) {
-            _confirmPasswordText.setError("Las contraseñas no coinciden");
-            valid = false;
-        } else {
-            _confirmPasswordText.setError(null);
-        }
         return valid;
     }
 }
