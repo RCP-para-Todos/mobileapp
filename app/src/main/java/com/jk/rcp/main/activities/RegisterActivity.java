@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText _nameText;
     @Bind(R.id.input_surname)
     EditText _surnameText;
-    @Bind(R.id.input_email)
+    @Bind(R.id.input_user)
     EditText _emailText;
     @Bind(R.id.input_dni)
     EditText _dniText;

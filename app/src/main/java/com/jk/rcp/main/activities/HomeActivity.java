@@ -153,12 +153,12 @@ public class HomeActivity extends AppCompatActivity
                 FragmentManager fragmentFeltHistoryManager = getSupportFragmentManager();
                 fragmentFeltHistoryManager.beginTransaction().replace(R.id.home_content, fragmentFeltHistory, "history").addToBackStack("home").commit();
                 break;
-            case R.string.menu_inpres:
-                Fragment fragmentHistory = OfficialHistoryContentFragment.newInstance();
-                FragmentManager fragmentHistoryManager = getSupportFragmentManager();
-                fragmentHistoryManager.beginTransaction().replace(R.id.home_content, fragmentHistory, "official-history").addToBackStack("home")
-                        .commit();
-                break;
+//            case R.string.menu_inpres:
+//                Fragment fragmentHistory = OfficialHistoryContentFragment.newInstance();
+//                FragmentManager fragmentHistoryManager = getSupportFragmentManager();
+//                fragmentHistoryManager.beginTransaction().replace(R.id.home_content, fragmentHistory, "official-history").addToBackStack("home")
+//                        .commit();
+//                break;
             case R.string.exit:
                 finish();
                 break;

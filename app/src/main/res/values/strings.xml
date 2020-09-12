@@ -1,6 +1,7 @@
 <resources>
     <string name="detailed_app_name">RCP Para Todos</string>
     <string name="app_name">RCP Para Todos</string>
+    <string name="user">Usuario</string>
     <string name="title_activity_login">Sign in</string>
     <string name="register">Registrarse</string>
     <string name="login">Entrar</string>
@@ -24,4 +25,5 @@
     <string name="exit">Salir</string>
     <string name="menu_history">Historial de alarmas</string>
     <string name="stop">Detener</string>
+    <string name="createUser">Crear usuario</string>
 </resources>

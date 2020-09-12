@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        final EditText email = findViewById(R.id.input_email);
+        final EditText email = findViewById(R.id.input_user);
         final EditText password = findViewById(R.id.input_password);
         final CheckBox rememberPassword = findViewById(R.id.rememberPassword);
 
@@ -75,13 +75,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         eventManager = new EventManager(this);
-        final EditText username = findViewById(R.id.input_email);
+        final EditText username = findViewById(R.id.input_user);
         final EditText password = findViewById(R.id.input_password);
         final EditText rol = findViewById(R.id.input_password);
         final CheckBox rememberPassword = findViewById(R.id.rememberPassword);
 
         Button submitBtn = findViewById(R.id.btn_login);
-        TextView register = findViewById(R.id.register);
+        TextView register = findViewById(R.id.btn_create_user);
         mAPIService = ApiUtils.getAPIService();
         preferences = getSharedPreferences("preferences", MODE_PRIVATE);
 
