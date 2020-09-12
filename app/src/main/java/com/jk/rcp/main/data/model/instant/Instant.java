@@ -19,7 +19,6 @@ public class Instant {
     private String posicion;
 
     /**
-     *
      * @param posicion
      * @param insuflacion
      * @param nro

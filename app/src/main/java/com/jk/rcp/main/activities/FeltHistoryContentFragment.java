@@ -41,7 +41,7 @@ public class FeltHistoryContentFragment extends Fragment {
             Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.activity_felt_history, container, false);
         prefs = getActivity().getSharedPreferences("preferences", MODE_PRIVATE);
-        
+
         Gson gson = new Gson();
 
         if (prefs.contains("history")) {

@@ -37,6 +37,7 @@ public class Request {
                 if (requestCallbacks != null) {
                     requestCallbacks.onError(t);
                 }
+t.printStackTrace();
                 Log.e(TAG, "Error al enviar el request.");
             }
 

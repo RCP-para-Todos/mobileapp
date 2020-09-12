@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,6 +19,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.security.ProviderInstaller;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -74,11 +79,23 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        // Con esto levanta el HTTPS!
+        try {
+            ProviderInstaller.installIfNeeded(this);
+        } catch (GooglePlayServicesRepairableException e) {
+            // Thrown when Google Play Services is not installed, up-to-date, or enabled
+            // Show dialog to allow users to install, update, or otherwise enable Google Play services.
+            GooglePlayServicesUtil.getErrorDialog(e.getConnectionStatusCode(), this, 0);
+        } catch (GooglePlayServicesNotAvailableException e) {
+            Log.e("SecurityException", "Google Play Services not available.");
+        }
+
         eventManager = new EventManager(this);
         final EditText username = findViewById(R.id.input_user);
         final EditText password = findViewById(R.id.input_password);
         final EditText rol = findViewById(R.id.input_password);
         final CheckBox rememberPassword = findViewById(R.id.rememberPassword);
+
 
         Button submitBtn = findViewById(R.id.btn_login);
         TextView register = findViewById(R.id.btn_create_user);
@@ -128,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                     String trimmedRol = "practicante";
                     Boolean savePassword = rememberPassword.isChecked();
                     if (!TextUtils.isEmpty(trimmedEmail) && !TextUtils.isEmpty(trimmedPassword)) {
-                        sendLogin(trimmedEmail, trimmedPassword, trimmedRol,savePassword);
+                        sendLogin(trimmedEmail, trimmedPassword, trimmedRol, savePassword);
                     }
                 }
             }
@@ -180,19 +197,17 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onErrorBody(@NonNull ResponseBody errorBody) {
-                if (errorBody != null) {
-                    JsonParser parser = new JsonParser();
-                    JsonElement mJson = null;
-                    try {
-                        mJson = parser.parse(errorBody.string());
-                        Gson gson = new Gson();
-                        UserPost errorResponse = gson.fromJson(mJson, UserPost.class);
-
-                        Toast.makeText(getApplicationContext(), errorResponse.getMsg(), Toast.LENGTH_LONG).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                Log.d(TAG,errorBody.toString());
+//                if (errorBody != null) {
+//                    JsonParser parser = new JsonParser();
+//                    JsonElement mJson = null;
+//                    //                        Log.d(TAG, errorBody.toString());
+////                        mJson = parser.parse(errorBody.string());
+//                    Gson gson = new Gson();
+//                    UserPost errorResponse = gson.fromJson(mJson, UserPost.class);
+//
+//                    Toast.makeText(getApplicationContext(), errorResponse.getMsg(), Toast.LENGTH_LONG).show();
+//                }
             }
         });
     }
