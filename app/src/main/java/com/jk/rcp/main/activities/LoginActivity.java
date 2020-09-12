@@ -23,20 +23,14 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.security.ProviderInstaller;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.jk.rcp.R;
-import com.jk.rcp.main.data.model.user.UserPost;
+import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.remote.APIService;
 import com.jk.rcp.main.data.remote.ApiUtils;
 import com.jk.rcp.main.data.remote.Request;
 import com.jk.rcp.main.data.remote.RequestCallbacks;
-import com.jk.rcp.main.utils.Constants;
 import com.jk.rcp.main.utils.DeviceUtils;
 import com.jk.rcp.main.utils.EventManager;
-
-import java.io.IOException;
 
 import okhttp3.ResponseBody;
 
@@ -164,29 +158,27 @@ public class LoginActivity extends AppCompatActivity {
         Request request = new Request();
         request.sendLogin(username, password, rol, new RequestCallbacks() {
             @Override
-            public void onSuccess(@NonNull UserPost value) {
+            public void onSuccess(@NonNull LoginPost value) {
                 if (value != null) {
-                    if (value.getState().equals("success")) {
-                        preferences.edit().putString("token", value.getToken()).commit();
+                    preferences.edit().putString("token", value.getToken()).commit();
 
-                        // Recordar usuario y contraseña
-                        if (savePassword) {
-                            preferences.edit().putString("user", username).commit();
-                            preferences.edit().putString("password", password).commit();
-                            preferences.edit().putString("rememberPassword", "true").commit();
-                        } else {
-                            preferences.edit().putString("user", username).commit();
-                            preferences.edit().remove("password").commit();
-                            preferences.edit().remove("rememberPassword").commit();
-                        }
-
-                        EventManager.registerEvent(Constants.LOGIN_CORRECT);
-
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(intent);
+                    // Recordar usuario y contraseña
+                    if (savePassword) {
+                        preferences.edit().putString("user", username).commit();
+                        preferences.edit().putString("password", password).commit();
+                        preferences.edit().putString("rememberPassword", "true").commit();
                     } else {
-                        Toast.makeText(getApplicationContext(), value.getMsg(), Toast.LENGTH_LONG).show();
+                        preferences.edit().putString("user", username).commit();
+                        preferences.edit().remove("password").commit();
+                        preferences.edit().remove("rememberPassword").commit();
                     }
+
+//                    EventManager.registerEvent(Constants.LOGIN_CORRECT);
+
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -197,7 +189,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onErrorBody(@NonNull ResponseBody errorBody) {
-                Log.d(TAG,errorBody.toString());
+                Log.d(TAG, errorBody.toString());
 //                if (errorBody != null) {
 //                    JsonParser parser = new JsonParser();
 //                    JsonElement mJson = null;

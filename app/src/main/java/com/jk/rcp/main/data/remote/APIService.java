@@ -1,6 +1,7 @@
 package com.jk.rcp.main.data.remote;
 
 import com.jk.rcp.main.data.model.instant.Instant;
+import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.UserPost;
 
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public interface APIService {
     // Inicio metodos de Auth
     @POST("auth/login")
     @FormUrlEncoded
-    Call<UserPost> login(@Field("name") String username,
-                         @Field("password") String password
+    Call<LoginPost> login(@Field("name") String username,
+                          @Field("password") String password
     );
 
     @POST("auth/register")
