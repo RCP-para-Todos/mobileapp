@@ -44,8 +44,9 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
 
     // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
     // JSON Parsing
     implementation 'com.google.code.gson:gson:2.6.1'
@@ -58,7 +59,7 @@ dependencies {
     //GPS
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
-
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
     //Buttkernife
     annotationProcessor 'com.jakewharton:butterknife:7.0.1'
     implementation 'com.jakewharton:butterknife:7.0.1'

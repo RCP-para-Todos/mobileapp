@@ -39,6 +39,14 @@ public class Course {
         this.instructor = instructor;
     }
 
+    /**
+     * @param id
+     */
+    public Course(String id) {
+        super();
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }

@@ -13,7 +13,6 @@ public class Instructor {
     private String name;
 
     /**
-     *
      * @param name
      * @param id
      */

@@ -2,7 +2,7 @@ package com.jk.rcp.main.data.remote;
 
 import android.util.Log;
 
-import com.jk.rcp.main.data.model.user.UserPost;
+import com.jk.rcp.main.data.model.user.LoginPost;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,9 +20,9 @@ public class Request {
     }
 
     public void sendLogin(String username, String password, String rol, final RequestCallbacks requestCallbacks) {
-        mAPIService.login(username, password, rol).enqueue(new Callback<UserPost>() {
+        mAPIService.login(username, password).enqueue(new Callback<LoginPost>() {
             @Override
-            public void onResponse(Call<UserPost> call, Response<UserPost> response) {
+            public void onResponse(Call<LoginPost> call, Response<LoginPost> response) {
                 if (requestCallbacks != null) {
                     if (response.isSuccessful()) {
                         requestCallbacks.onSuccess(response.body());
@@ -33,10 +33,11 @@ public class Request {
             }
 
             @Override
-            public void onFailure(Call<UserPost> call, Throwable t) {
+            public void onFailure(Call<LoginPost> call, Throwable t) {
                 if (requestCallbacks != null) {
                     requestCallbacks.onError(t);
                 }
+                t.printStackTrace();
                 Log.e(TAG, "Error al enviar el request.");
             }
 
