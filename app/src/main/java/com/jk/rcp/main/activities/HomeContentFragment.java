@@ -34,21 +34,7 @@ public class HomeContentFragment extends Fragment {
         // Pongo por default ese contenido
         View layout = inflater.inflate(R.layout.activity_home_content, container, false);
 
-        TextClock textClock = layout.findViewById(R.id.hk_time);
-        // Formato del reloj
-        textClock.setFormat24Hour("kk:mm:ss");
 
-        // Distintos metodos utilizados para poder convertir el textView en un href
-        helpText = layout.findViewById(R.id.helpText);
-        helpText.setPaintFlags(helpText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        helpText.setMovementMethod(LinkMovementMethod.getInstance());
-        helpText.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-                browserIntent.setData(Uri.parse("https://www.argentina.gob.ar/salud/desastres/cuidados-terremotos"));
-                startActivity(browserIntent);
-            }
-        });
         return layout;
     }
 }
