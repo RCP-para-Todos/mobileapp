@@ -2,7 +2,7 @@ package com.jk.rcp.main.data.remote;
 
 public class ApiUtils {
 
-    public static final String BASE_URL = "http://api.rcp.margaale.ddnss.de/";
+    public static final String BASE_URL = "https://api.rcp.margaale.ddnss.de/";
 
     public static APIService getAPIService() {
 

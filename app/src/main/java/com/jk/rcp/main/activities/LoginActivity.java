@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     String trimmedEmail = username.getText().toString().trim();
                     String trimmedPassword = password.getText().toString().trim();
-                    String trimmedRol = rol.getText().toString().trim();
+                    String trimmedRol = "practicante";
                     Boolean savePassword = rememberPassword.isChecked();
                     if (!TextUtils.isEmpty(trimmedEmail) && !TextUtils.isEmpty(trimmedPassword)) {
                         sendLogin(trimmedEmail, trimmedPassword, trimmedRol,savePassword);
