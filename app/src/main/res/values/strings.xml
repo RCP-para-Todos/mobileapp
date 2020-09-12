@@ -1,0 +1,27 @@
+<resources>
+    <string name="detailed_app_name">RCP Para Todos</string>
+    <string name="app_name">RCP Para Todos</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="register">Registrarse</string>
+    <string name="login">Entrar</string>
+    <string name="password">Contraseña</string>
+    <string name="email">Correo electrónico</string>
+    <string name="noAccountQuestion">¿No tiene una cuenta?</string>
+    <string name="firstLineTitle">Sistema de Señalización de</string>
+    <string name="secondLineTable">Movimientos Sísmicos</string>
+    <string name="logo">Logo</string>
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Cerrar</string>
+    <string name="title_click">Title click</string>
+    <string name="menu_camera">Historial de alarmas</string>
+    <string name="menu_inpres">Últimos sismos (INPRES)</string>
+    <string name="menu_tools">Opciones</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_group">Group</string>
+    <string name="healthCare">Cuidados de la salud ante terremotos</string>
+    <string name="menu_home">Bienvenido</string>
+    <string name="exit">Salir</string>
+    <string name="menu_history">Historial de alarmas</string>
+    <string name="stop">Detener</string>
+</resources>
