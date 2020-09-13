@@ -23,14 +23,21 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.security.ProviderInstaller;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.jk.rcp.R;
+import com.jk.rcp.main.activities.practicante.HomeActivityPracticante;
 import com.jk.rcp.main.data.model.user.LoginPost;
+import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.remote.APIService;
 import com.jk.rcp.main.data.remote.ApiUtils;
 import com.jk.rcp.main.data.remote.Request;
 import com.jk.rcp.main.data.remote.RequestCallbacks;
 import com.jk.rcp.main.utils.DeviceUtils;
 import com.jk.rcp.main.utils.EventManager;
+
+import java.io.IOException;
 
 import okhttp3.ResponseBody;
 
@@ -41,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences preferences;
     private APIService mAPIService;
     private EventManager eventManager;
+    User globalUser;
 
     @Override
     protected void onResume() {
@@ -73,6 +81,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        globalUser = (User) getApplicationContext();
+
         // Con esto levanta el HTTPS!
         try {
             ProviderInstaller.installIfNeeded(this);
@@ -136,10 +147,9 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     String trimmedEmail = username.getText().toString().trim();
                     String trimmedPassword = password.getText().toString().trim();
-                    String trimmedRol = "practicante";
                     Boolean savePassword = rememberPassword.isChecked();
                     if (!TextUtils.isEmpty(trimmedEmail) && !TextUtils.isEmpty(trimmedPassword)) {
-                        sendLogin(trimmedEmail, trimmedPassword, trimmedRol, savePassword);
+                        sendLogin(trimmedEmail, trimmedPassword, savePassword);
                     }
                 }
             }
@@ -154,13 +164,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void sendLogin(final String username, final String password, final String rol, final Boolean savePassword) {
+    public void sendLogin(final String username, final String password, final Boolean savePassword) {
         Request request = new Request();
-        request.sendLogin(username, password, rol, new RequestCallbacks() {
+        request.sendLogin(username, password, new RequestCallbacks() {
             @Override
             public void onSuccess(@NonNull LoginPost value) {
                 if (value != null) {
-                    preferences.edit().putString("token", value.getToken()).commit();
+                    globalUser.setToken(value.getToken());
 
                     // Recordar usuario y contraseña
                     if (savePassword) {
@@ -173,9 +183,8 @@ public class LoginActivity extends AppCompatActivity {
                         preferences.edit().remove("rememberPassword").commit();
                     }
 
-//                    EventManager.registerEvent(Constants.LOGIN_CORRECT);
 
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, HomeActivityPracticante.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
@@ -189,17 +198,22 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onErrorBody(@NonNull ResponseBody errorBody) {
-                Log.d(TAG, errorBody.toString());
-//                if (errorBody != null) {
-//                    JsonParser parser = new JsonParser();
-//                    JsonElement mJson = null;
-//                    //                        Log.d(TAG, errorBody.toString());
-////                        mJson = parser.parse(errorBody.string());
-//                    Gson gson = new Gson();
-//                    UserPost errorResponse = gson.fromJson(mJson, UserPost.class);
-//
-//                    Toast.makeText(getApplicationContext(), errorResponse.getMsg(), Toast.LENGTH_LONG).show();
-//                }
+                if (errorBody != null) {
+                    JsonParser parser = new JsonParser();
+                    JsonElement mJson = null;
+                    try {
+                        mJson = parser.parse(errorBody.string());
+                        Gson gson = new Gson();
+                        LoginPost errorResponse = gson.fromJson(mJson, LoginPost.class);
+                        if (errorResponse.getAuth() == "false" && errorResponse.getToken() == null) {
+                            Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Ocurrió un error al intentar iniciar sesión", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }

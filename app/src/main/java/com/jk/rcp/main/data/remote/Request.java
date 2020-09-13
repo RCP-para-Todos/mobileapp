@@ -19,7 +19,7 @@ public class Request {
         mAPIService = ApiUtils.getAPIService();
     }
 
-    public void sendLogin(String username, String password, String rol, final RequestCallbacks requestCallbacks) {
+    public void sendLogin(String username, String password, final RequestCallbacks requestCallbacks) {
         mAPIService.login(username, password).enqueue(new Callback<LoginPost>() {
             @Override
             public void onResponse(Call<LoginPost> call, Response<LoginPost> response) {

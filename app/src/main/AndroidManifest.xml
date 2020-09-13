@@ -4,6 +4,7 @@
     package="com.jk.rcp">
 
     <application
+        android:name=".main.data.model.user.User"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,28 +13,54 @@
         android:theme="@style/AppThemeActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.jk.rcp.main.activities.DetailFragment"
+            android:name=".main.activities.instructor.HomeActivityInstructor"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.jk.rcp.main.activities.RegisterActivity"
+            android:name=".main.activities.instructor.CrearCursoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.instructor.EstadisticasActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.instructor.MisCursosActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.HomeActivityPracticante"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.AprendiendoRCPActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.ModoJuegoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.SimuladorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.jk.rcp.main.activities.HomeAlertActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name="com.jk.rcp.main.activities.HomeActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name="com.jk.rcp.main.activities.LoginActivity"
+            android:name=".main.activities.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             tools:ignore="LockedOrientationActivity">
@@ -47,16 +74,15 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBAPWyt3eheET57f1KU7LB_4ayavxFsY0E" />
-        <service
-            android:name="com.jk.rcp.main.service.ShakeService"
-            android:enabled="true"
-            android:exported="true"></service>
 
+        <service
+            android:name=".main.service.ShakeService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
