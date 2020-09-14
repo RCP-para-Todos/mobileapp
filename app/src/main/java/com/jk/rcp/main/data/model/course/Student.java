@@ -3,7 +3,9 @@ package com.jk.rcp.main.data.model.course;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
 
     @SerializedName("_id")
     @Expose

@@ -34,6 +34,11 @@
             android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".main.activities.practicante.ActividadActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".main.activities.instructor.MisCursosActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"

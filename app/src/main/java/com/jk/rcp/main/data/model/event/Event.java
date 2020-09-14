@@ -6,9 +6,10 @@ import com.jk.rcp.main.data.model.course.Student;
 import com.jk.rcp.main.data.model.instant.Instant;
 import com.jk.rcp.main.data.model.user.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Event {
+public class Event implements Serializable {
 
     @SerializedName("_id")
     @Expose

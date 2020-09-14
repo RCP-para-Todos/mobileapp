@@ -1,16 +1,23 @@
 package com.jk.rcp.main.activities.practicante;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jk.rcp.R;
+import com.jk.rcp.main.data.adapter.EventListAdapter;
 import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventPost;
 import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
@@ -25,6 +32,8 @@ import okhttp3.ResponseBody;
 public class EstadisticasActivity extends AppCompatActivity {
     private static final String TAG = "EstadisticasActivity";
     private User globalUser;
+    private ListView eventList;
+    private EventListAdapter eventListAdapter;
 
     //En esto usar fragmentos
     @Override
@@ -36,17 +45,37 @@ public class EstadisticasActivity extends AppCompatActivity {
 
         // Obtengo los eventos de la API, con el token
         getEvents(globalUser.getBearerToken());
+
+        // Configuro la toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Estadisticas");
+        // Boton para ir atras
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void getEvents(String token) {
         Request request = new Request();
         request.getEvents(token, new EventRequestCallbacks() {
             @Override
-            public void onSuccess(@NonNull List<Event> value) {
-                for (Event evento : value
+            public void onSuccess(@NonNull final List<Event> eventos) {
+                for (Event evento : eventos
                 ) {
                     Log.d(TAG, evento.toString());
                 }
+                eventList = findViewById(R.id.eventsList);
+                eventListAdapter = new EventListAdapter(getApplicationContext(), eventos);
+                eventList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                                            long id) {
+                        Intent intent = new Intent(getApplicationContext(), ActividadActivity.class);
+                        intent.putExtra("event", eventos.get(position));
+                        startActivity(intent);
+                    }
+                });
+                eventList.setAdapter(eventListAdapter);
             }
 
             @Override
@@ -72,5 +101,12 @@ public class EstadisticasActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Log.d(TAG, "Finalizando activity");
+        finish();
+        return true;
     }
 }

@@ -3,7 +3,9 @@ package com.jk.rcp.main.data.model.instant;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Instant {
+import java.io.Serializable;
+
+public class Instant implements Serializable {
 
     @SerializedName("nro")
     @Expose
