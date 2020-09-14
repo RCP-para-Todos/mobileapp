@@ -64,4 +64,13 @@ public class Instant {
         this.posicion = posicion;
     }
 
+    @Override
+    public String toString() {
+        return "Instant{" +
+                "nro='" + nro + '\'' +
+                ", insuflacion='" + insuflacion + '\'' +
+                ", compresion='" + compresion + '\'' +
+                ", posicion='" + posicion + '\'' +
+                '}';
+    }
 }

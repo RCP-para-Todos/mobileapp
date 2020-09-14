@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.jk.rcp.main.data.model.course.Course;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class User extends Application {
 
@@ -22,7 +22,7 @@ public class User extends Application {
 
     private String token;
     private String refreshToken;
-    private ArrayList<Course> courses;
+    private List<Course> courses;
     private Boolean auth;
 
     public User() {
@@ -40,7 +40,7 @@ public class User extends Application {
         this.rol = rol;
     }
 
-    public User(String username, String rol, String token, String refreshToken, ArrayList<Course> courses, Boolean auth) {
+    public User(String username, String rol, String token, String refreshToken, List<Course> courses, Boolean auth) {
         this.username = username;
         this.rol = rol;
         this.token = token;
@@ -91,11 +91,11 @@ public class User extends Application {
         this.refreshToken = refreshToken;
     }
 
-    public ArrayList<Course> getCourses() {
+    public List<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(ArrayList<Course> courses) {
+    public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
 
@@ -105,6 +105,14 @@ public class User extends Application {
 
     public void setAuth(Boolean auth) {
         this.auth = auth;
+    }
+
+    public Boolean isPracticante() {
+        return this.rol.equals("usuario");
+    }
+
+    public String getBearerToken() {
+        return "Bearer " + this.token;
     }
 
     @Override

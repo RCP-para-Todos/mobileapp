@@ -52,7 +52,7 @@
         tools:layout_editor_absoluteY="419dp" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/logo"
         android:layout_width="224dp"
         android:layout_height="113dp"
         android:layout_marginStart="78dp"

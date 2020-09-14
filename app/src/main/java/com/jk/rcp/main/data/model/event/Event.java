@@ -2,7 +2,9 @@ package com.jk.rcp.main.data.model.event;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.jk.rcp.main.data.model.course.Student;
 import com.jk.rcp.main.data.model.instant.Instant;
+import com.jk.rcp.main.data.model.user.User;
 
 import java.util.ArrayList;
 
@@ -11,12 +13,12 @@ public class Event {
     @SerializedName("_id")
     @Expose
     private String id;
-    @SerializedName("event_date")
+    @SerializedName("Created_date")
     @Expose
     private String eventDate;
     @SerializedName("user")
     @Expose
-    private String user;
+    private Student user;
     @SerializedName("course")
     @Expose
     private String course;
@@ -95,7 +97,7 @@ public class Event {
      * @param disponeAyudaNoSolicita
      * @param eventDate
      */
-    public Event(String id, String eventDate, String user, String course, String type, String duration, String puntaje, String tiempoInactividad, String porcentajeSobrevida, String porcentajeInsuflacionOk, String porcentajeCompresionOk, String cantidadInsuflacionesOkMalCabeza, String fuerzaPromedioAplicada, String calidadInsuflaciones, ArrayList<Instant> instants, String observations, String brazosFlexionados, String noConsultaEstadoVictima, String noEstaAtentoAlEscenario, String disponeAyudaNoSolicita, String demoraTomaDesiciones) {
+    public Event(String id, String eventDate, Student user, String course, String type, String duration, String puntaje, String tiempoInactividad, String porcentajeSobrevida, String porcentajeInsuflacionOk, String porcentajeCompresionOk, String cantidadInsuflacionesOkMalCabeza, String fuerzaPromedioAplicada, String calidadInsuflaciones, ArrayList<Instant> instants, String observations, String brazosFlexionados, String noConsultaEstadoVictima, String noEstaAtentoAlEscenario, String disponeAyudaNoSolicita, String demoraTomaDesiciones) {
         super();
         this.id = id;
         this.eventDate = eventDate;
@@ -136,11 +138,11 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    public String getUser() {
+    public Student getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(Student user) {
         this.user = user;
     }
 
@@ -293,7 +295,7 @@ public class Event {
         return "Event{" +
                 "id='" + id + '\'' +
                 ", eventDate='" + eventDate + '\'' +
-                ", user='" + user + '\'' +
+                ", user=" + user +
                 ", course='" + course + '\'' +
                 ", type='" + type + '\'' +
                 ", duration='" + duration + '\'' +
@@ -305,7 +307,7 @@ public class Event {
                 ", cantidadInsuflacionesOkMalCabeza='" + cantidadInsuflacionesOkMalCabeza + '\'' +
                 ", fuerzaPromedioAplicada='" + fuerzaPromedioAplicada + '\'' +
                 ", calidadInsuflaciones='" + calidadInsuflaciones + '\'' +
-                ", instants='" + instants + '\'' +
+                ", instants=" + instants +
                 ", observations='" + observations + '\'' +
                 ", brazosFlexionados='" + brazosFlexionados + '\'' +
                 ", noConsultaEstadoVictima='" + noConsultaEstadoVictima + '\'' +

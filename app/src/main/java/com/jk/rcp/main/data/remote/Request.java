@@ -2,16 +2,19 @@ package com.jk.rcp.main.data.remote;
 
 import android.util.Log;
 
+import com.jk.rcp.main.data.model.event.Event;
+import com.jk.rcp.main.data.model.event.EventPost;
+import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
 import com.jk.rcp.main.data.model.user.LoginPost;
+import com.jk.rcp.main.data.model.user.LoginRequestCallbacks;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Request {
-    private final static Integer GROUP = 614;
-    private final static Integer COMMISION = 2900;
-    private final static String ENV = "DEV";
     private final static String TAG = "REQUEST";
     private APIService mAPIService;
 
@@ -19,7 +22,7 @@ public class Request {
         mAPIService = ApiUtils.getAPIService();
     }
 
-    public void sendLogin(String username, String password, final RequestCallbacks requestCallbacks) {
+    public void sendLogin(String username, String password, final LoginRequestCallbacks requestCallbacks) {
         mAPIService.login(username, password).enqueue(new Callback<LoginPost>() {
             @Override
             public void onResponse(Call<LoginPost> call, Response<LoginPost> response) {
@@ -34,6 +37,32 @@ public class Request {
 
             @Override
             public void onFailure(Call<LoginPost> call, Throwable t) {
+                if (requestCallbacks != null) {
+                    requestCallbacks.onError(t);
+                }
+                t.printStackTrace();
+                Log.e(TAG, "Error al enviar el request.");
+            }
+
+        });
+    }
+
+    public void getEvents(String token, final EventRequestCallbacks requestCallbacks) {
+        mAPIService.getEvents(token).enqueue(new Callback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                if (requestCallbacks != null) {
+                    if (response.isSuccessful()) {
+                        assert response.body() != null;
+                        requestCallbacks.onSuccess(response.body());
+                    } else {
+                        requestCallbacks.onErrorBody(response.errorBody());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
                 if (requestCallbacks != null) {
                     requestCallbacks.onError(t);
                 }

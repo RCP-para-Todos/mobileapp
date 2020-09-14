@@ -80,4 +80,14 @@ public class LoginPost {
         this.courses = courses;
     }
 
+    @Override
+    public String toString() {
+        return "LoginPost{" +
+                "auth='" + auth + '\'' +
+                ", token='" + token + '\'' +
+                ", refreshToken='" + refreshToken + '\'' +
+                ", rol='" + rol + '\'' +
+                ", courses=" + courses +
+                '}';
+    }
 }

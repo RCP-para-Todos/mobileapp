@@ -38,4 +38,11 @@ public class Instructor {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

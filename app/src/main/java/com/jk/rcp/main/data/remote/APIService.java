@@ -1,20 +1,24 @@
 package com.jk.rcp.main.data.remote;
 
+import com.jk.rcp.main.data.model.event.Event;
+import com.jk.rcp.main.data.model.event.EventPost;
 import com.jk.rcp.main.data.model.instant.Instant;
 import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.UserPost;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Url;
+import retrofit2.http.Path;
 
 public interface APIService {
     // Inicio metodos de Auth
@@ -32,56 +36,59 @@ public interface APIService {
 
     @POST("auth/token")
     @FormUrlEncoded
-    Call<UserPost> token(@Field("refreshToken") String refreshToken);
+    Call<UserPost> token(@Field("refreshToken") String refreshToken,
+                         @Header("Authorization") String auth);
 
     @POST("auth/me")
     @FormUrlEncoded
-    Call<UserPost> me();
+    Call<UserPost> me(@Header("Authorization") String auth);
 
     @POST("auth/logout")
     @FormUrlEncoded
-    Call<UserPost> logout();
+    Call<UserPost> logout(@Header("Authorization") String auth);
 
     // Fin metodos de Auth
 
     // Inicio metodos de Courses
     @POST("courses")
     @FormUrlEncoded
-    Call<UserPost> addCourse(@Field("name") String name,
+    Call<UserPost> addCourse(@Header("Authorization") String auth,
+                             @Field("name") String name,
                              @Field("event_date") String eventDate,
                              @Field("instructor") String instructor,
                              @Field("student") ArrayList<String> students
     );
 
     @GET("courses")
-    @FormUrlEncoded
-    Call<UserPost> getCourses();
+    Call<UserPost> getCourses(@Header("Authorization") String auth);
 
-    @GET
-    @FormUrlEncoded
-    Call<UserPost> getCourse(@Url String url);
+    @GET("courses/{courseId}")
+    Call<UserPost> getCourse(@Path("courseId") String id,
+                             @Header("Authorization") String auth);
 
-    @PUT
+    @PUT("courses/{courseId}")
     @FormUrlEncoded
-    Call<UserPost> updateCourse(@Url String url,
+    Call<UserPost> updateCourse(@Path("courseId") String id,
+                                @Header("Authorization") String auth,
                                 @Field("name") String name,
                                 @Field("event_date") String eventDate,
                                 @Field("instructor") String instructor,
                                 @Field("student") ArrayList<String> students);
 
-    @DELETE
+    @DELETE("courses/{courseId}")
     @FormUrlEncoded
-    Call<UserPost> deleteCourse(@Url String url);
+    Call<UserPost> deleteCourse(@Path("courseId") String id,
+                                @Header("Authorization") String auth);
     // Fin metodos de Courses
 
     // Inicio metodos de Events
     @GET("events")
-    @FormUrlEncoded
-    Call<UserPost> getEvents();
+    Call<List<Event>> getEvents(@Header("Authorization") String auth);
 
     @POST("events")
     @FormUrlEncoded
-    Call<UserPost> addEvent(@Field("_id") Integer id,
+    Call<UserPost> addEvent(@Header("Authorization") String auth,
+                            @Field("_id") Integer id,
                             @Field("event_date") String eventDate,
                             @Field("user") String user,
                             @Field("course") String course,
@@ -103,28 +110,27 @@ public interface APIService {
                             @Field("demoraTomaDesiciones") Boolean demoraTomaDesiciones
     );
 
-    @GET
-    @FormUrlEncoded
-    Call<UserPost> getEvent(@Url String url);
+    @GET("events/{eventId}")
+    Call<UserPost> getEvent(@Path("eventId") String id,
+                            @Header("Authorization") String auth);
 
-    @PATCH
+    @PATCH("events/{eventId}")
     @FormUrlEncoded
-    Call<UserPost> patchEvent(@Url String url);
+    Call<UserPost> patchEvent(@Path("eventId") String id,
+                              @Header("Authorization") String auth);
     // Fin metodos de Courses
 
     // Inicio metodos de Roles
     @GET("roles")
-    @FormUrlEncoded
-    Call<UserPost> getRoles();
+    Call<UserPost> getRoles(@Header("Authorization") String auth);
     // Fin metodos de Roles
 
     // Inicio metodos de Users
     @GET("users")
-    @FormUrlEncoded
-    Call<UserPost> getUsers();
+    Call<UserPost> getUsers(@Header("Authorization") String auth);
 
-    @GET
-    @FormUrlEncoded
-    Call<UserPost> getUser(@Url String url);
+    @GET("users/{userId}")
+    Call<UserPost> getUser(@Path("userId") String id,
+                           @Header("Authorization") String auth);
     // Fin metodos de Users
 }

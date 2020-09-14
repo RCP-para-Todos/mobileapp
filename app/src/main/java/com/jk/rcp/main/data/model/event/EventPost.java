@@ -3,61 +3,23 @@ package com.jk.rcp.main.data.model.event;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class EventPost {
 
-    @SerializedName("state")
+    @SerializedName("events")
     @Expose
-    private String state;
-    @SerializedName("env")
-    @Expose
-    private String env;
-    @SerializedName("event")
-    @Expose
-    private Event event;
-    @SerializedName("msg")
-    @Expose
-    private String msg;
+    private List<Event> events = null;
 
-    public String getState() {
-        return state;
+    public EventPost(List<Event> events) {
+        this.events = events;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public List<Event> getEvents() {
+        return events;
     }
 
-    public String getEnv() {
-        return env;
-    }
-
-    public void setEnv(String env) {
-        this.env = env;
-    }
-
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
-    @Override
-    public String toString() {
-        return "EventPost{" +
-                "state='" + state + '\'' +
-                ", env='" + env + '\'' +
-                ", event=" + event +
-                ", msg='" + msg + '\'' +
-                '}';
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }

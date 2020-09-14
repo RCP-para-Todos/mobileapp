@@ -27,13 +27,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jk.rcp.R;
+import com.jk.rcp.main.activities.instructor.HomeActivityInstructor;
 import com.jk.rcp.main.activities.practicante.HomeActivityPracticante;
 import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.remote.APIService;
 import com.jk.rcp.main.data.remote.ApiUtils;
 import com.jk.rcp.main.data.remote.Request;
-import com.jk.rcp.main.data.remote.RequestCallbacks;
+import com.jk.rcp.main.data.model.user.LoginRequestCallbacks;
 import com.jk.rcp.main.utils.DeviceUtils;
 import com.jk.rcp.main.utils.EventManager;
 
@@ -45,37 +46,11 @@ import okhttp3.ResponseBody;
 public class LoginActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static final String TAG = "LoginActivity";
-    SharedPreferences preferences;
+    private SharedPreferences preferences;
     private APIService mAPIService;
     private EventManager eventManager;
-    User globalUser;
+    private User globalUser;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        final EditText email = findViewById(R.id.input_user);
-        final EditText password = findViewById(R.id.input_password);
-        final CheckBox rememberPassword = findViewById(R.id.rememberPassword);
-
-        if (preferences.contains("user")) {
-            email.setText(preferences.getString("user", null));
-        } else {
-            email.setText("");
-        }
-
-        if (preferences.contains("password")) {
-            password.setText(preferences.getString("password", null));
-        } else {
-            password.setText("");
-        }
-
-        if (preferences.contains("rememberPassword")) {
-            rememberPassword.setChecked(preferences.getString("rememberPassword", null).equals("true"));
-        } else {
-            rememberPassword.setChecked(false);
-        }
-        password.clearFocus();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,27 +139,64 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final EditText email = findViewById(R.id.input_user);
+        final EditText password = findViewById(R.id.input_password);
+        final CheckBox rememberPassword = findViewById(R.id.rememberPassword);
+
+        if (preferences.contains("user")) {
+            email.setText(preferences.getString("user", null));
+        } else {
+            email.setText("");
+        }
+
+        if (preferences.contains("password")) {
+            password.setText(preferences.getString("password", null));
+        } else {
+            password.setText("");
+        }
+
+        if (preferences.contains("rememberPassword")) {
+            rememberPassword.setChecked(preferences.getString("rememberPassword", null).equals("true"));
+        } else {
+            rememberPassword.setChecked(false);
+        }
+        password.clearFocus();
+    }
+
     public void sendLogin(final String username, final String password, final Boolean savePassword) {
         Request request = new Request();
-        request.sendLogin(username, password, new RequestCallbacks() {
+        request.sendLogin(username, password, new LoginRequestCallbacks() {
             @Override
             public void onSuccess(@NonNull LoginPost value) {
                 if (value != null) {
+                    Log.d(TAG, value.toString());
                     globalUser.setToken(value.getToken());
-
-                    // Recordar usuario y contraseña
-                    if (savePassword) {
-                        preferences.edit().putString("user", username).commit();
-                        preferences.edit().putString("password", password).commit();
-                        preferences.edit().putString("rememberPassword", "true").commit();
-                    } else {
-                        preferences.edit().putString("user", username).commit();
-                        preferences.edit().remove("password").commit();
-                        preferences.edit().remove("rememberPassword").commit();
-                    }
+                    globalUser.setAuth(value.getAuth().equals("true") ? true : false);
+                    globalUser.setRefreshToken(value.getRefreshToken());
+                    globalUser.setRol(value.getRol());
+                    globalUser.setCourses(value.getCourses());
 
 
+                }
+                // Recordar usuario y contraseña
+                if (savePassword) {
+                    preferences.edit().putString("user", username).commit();
+                    preferences.edit().putString("password", password).commit();
+                    preferences.edit().putString("rememberPassword", "true").commit();
+                } else {
+                    preferences.edit().putString("user", username).commit();
+                    preferences.edit().remove("password").commit();
+                    preferences.edit().remove("rememberPassword").commit();
+                }
+
+                if (globalUser.isPracticante()) {
                     Intent intent = new Intent(LoginActivity.this, HomeActivityPracticante.class);
+                    startActivity(intent);
+                } else if (!globalUser.isPracticante()) {
+                    Intent intent = new Intent(LoginActivity.this, HomeActivityInstructor.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();

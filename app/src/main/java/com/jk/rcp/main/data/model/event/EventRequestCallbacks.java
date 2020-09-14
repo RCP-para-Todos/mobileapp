@@ -1,13 +1,13 @@
-package com.jk.rcp.main.data.remote;
+package com.jk.rcp.main.data.model.event;
 
 import androidx.annotation.NonNull;
 
-import com.jk.rcp.main.data.model.user.LoginPost;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 
-public interface RequestCallbacks {
-    void onSuccess(@NonNull LoginPost value);
+public interface EventRequestCallbacks {
+    void onSuccess(@NonNull List<Event> value);
 
     void onError(@NonNull Throwable throwable);
 

@@ -8,58 +8,44 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="224dp"
-        android:layout_height="113dp"
-        android:layout_marginStart="78dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="78dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/rcp_logo" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btn_modo_juego"
         android:layout_width="119dp"
         android:layout_height="119dp"
         android:layout_marginStart="63dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintEnd_toStartOf="@+id/btn_simulacion"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/btn_aprender_rcp"
         app:srcCompat="@drawable/juego" />
 
+
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btn_ver_estadisticas"
         android:layout_width="105dp"
         android:layout_height="54dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="117dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton3"
+        app:layout_constraintStart_toEndOf="@+id/btn_modo_juego"
+        app:layout_constraintTop_toBottomOf="@+id/btn_simulacion"
         app:layout_constraintVertical_bias="0.007"
         app:srcCompat="@drawable/estadisticas" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btn_simulacion"
         android:layout_width="105dp"
         android:layout_height="56dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintStart_toEndOf="@+id/btn_modo_juego"
+        app:layout_constraintTop_toBottomOf="@+id/btn_aprender_rcp"
         app:srcCompat="@drawable/simulacion" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btn_aprender_rcp"
         android:layout_width="238dp"
         android:layout_height="157dp"
         android:layout_marginStart="53dp"
@@ -68,7 +54,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
         app:srcCompat="@drawable/aprender" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="224dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_aprender_rcp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:srcCompat="@drawable/rcp_logo" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/AppTheme.Toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

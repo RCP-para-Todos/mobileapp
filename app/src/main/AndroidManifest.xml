@@ -29,6 +29,11 @@
             android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".main.activities.practicante.EstadisticasActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".main.activities.instructor.MisCursosActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
@@ -80,6 +85,7 @@
             android:enabled="true"
             android:exported="true" />
     </application>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
