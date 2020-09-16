@@ -2,8 +2,9 @@ package com.jk.rcp.main.data.remote;
 
 import android.util.Log;
 
+import com.jk.rcp.main.data.model.course.Course;
+import com.jk.rcp.main.data.model.course.CoursesRequestCallbacks;
 import com.jk.rcp.main.data.model.event.Event;
-import com.jk.rcp.main.data.model.event.EventPost;
 import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
 import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.LoginRequestCallbacks;
@@ -63,6 +64,58 @@ public class Request {
 
             @Override
             public void onFailure(Call<List<Event>> call, Throwable t) {
+                if (requestCallbacks != null) {
+                    requestCallbacks.onError(t);
+                }
+                t.printStackTrace();
+                Log.e(TAG, "Error al enviar el request.");
+            }
+
+        });
+    }
+
+    public void getEventsByPracticant(String student, String token, final EventRequestCallbacks requestCallbacks) {
+        mAPIService.getEventsByPracticant(student, token).enqueue(new Callback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                if (requestCallbacks != null) {
+                    if (response.isSuccessful()) {
+                        assert response.body() != null;
+                        requestCallbacks.onSuccess(response.body());
+                    } else {
+                        requestCallbacks.onErrorBody(response.errorBody());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
+                if (requestCallbacks != null) {
+                    requestCallbacks.onError(t);
+                }
+                t.printStackTrace();
+                Log.e(TAG, "Error al enviar el request.");
+            }
+
+        });
+    }
+
+    public void getCourses(String token, final CoursesRequestCallbacks requestCallbacks) {
+        mAPIService.getCourses(token).enqueue(new Callback<List<Course>>() {
+            @Override
+            public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
+                if (requestCallbacks != null) {
+                    if (response.isSuccessful()) {
+                        assert response.body() != null;
+                        requestCallbacks.onSuccess(response.body());
+                    } else {
+                        requestCallbacks.onErrorBody(response.errorBody());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Course>> call, Throwable t) {
                 if (requestCallbacks != null) {
                     requestCallbacks.onError(t);
                 }

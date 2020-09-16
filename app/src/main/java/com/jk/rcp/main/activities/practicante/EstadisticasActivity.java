@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +17,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jk.rcp.R;
 import com.jk.rcp.main.data.adapter.EventListAdapter;
+import com.jk.rcp.main.data.model.course.Student;
 import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventPost;
 import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
@@ -41,11 +41,15 @@ public class EstadisticasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estadisticas);
         globalUser = (User) getApplicationContext();
-        Log.d(TAG, globalUser.toString());
 
-        // Obtengo los eventos de la API, con el token
-        getEvents(globalUser.getBearerToken());
-
+        if (getIntent().getExtras() != null) {
+            Student student = (Student) getIntent().getSerializableExtra("Student");
+            // Obtengo los eventos de la API, con el token
+            getEventsByPracticant(student.getName(), globalUser.getBearerToken());
+        } else {
+            // Obtengo los eventos de la API, con el token
+            getEvents(globalUser.getBearerToken());
+        }
         // Configuro la toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,10 +64,50 @@ public class EstadisticasActivity extends AppCompatActivity {
         request.getEvents(token, new EventRequestCallbacks() {
             @Override
             public void onSuccess(@NonNull final List<Event> eventos) {
-                for (Event evento : eventos
-                ) {
-                    Log.d(TAG, evento.toString());
+                eventList = findViewById(R.id.eventsList);
+                eventListAdapter = new EventListAdapter(getApplicationContext(), eventos);
+                eventList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                                            long id) {
+                        Intent intent = new Intent(getApplicationContext(), ActividadActivity.class);
+                        intent.putExtra("event", eventos.get(position));
+                        startActivity(intent);
+                    }
+                });
+                eventList.setAdapter(eventListAdapter);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                Toast.makeText(getApplicationContext(), "Ocurrió un error: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onErrorBody(@NonNull ResponseBody errorBody) {
+                if (errorBody != null) {
+                    JsonParser parser = new JsonParser();
+                    JsonElement mJson = null;
+                    try {
+                        mJson = parser.parse(errorBody.string());
+                        Gson gson = new Gson();
+                        EventPost errorResponse = gson.fromJson(mJson, EventPost.class);
+
+                        Toast.makeText(getApplicationContext(), "Ocurrió un error", Toast.LENGTH_LONG).show();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+            }
+        });
+    }
+
+    public void getEventsByPracticant(String practicant, String token) {
+        Request request = new Request();
+        request.getEventsByPracticant(practicant, token, new EventRequestCallbacks() {
+            @Override
+            public void onSuccess(@NonNull final List<Event> eventos) {
                 eventList = findViewById(R.id.eventsList);
                 eventListAdapter = new EventListAdapter(getApplicationContext(), eventos);
                 eventList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

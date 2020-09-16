@@ -1,7 +1,7 @@
 package com.jk.rcp.main.data.remote;
 
+import com.jk.rcp.main.data.model.course.Course;
 import com.jk.rcp.main.data.model.event.Event;
-import com.jk.rcp.main.data.model.event.EventPost;
 import com.jk.rcp.main.data.model.instant.Instant;
 import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.UserPost;
@@ -19,6 +19,7 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface APIService {
     // Inicio metodos de Auth
@@ -60,7 +61,7 @@ public interface APIService {
     );
 
     @GET("courses")
-    Call<UserPost> getCourses(@Header("Authorization") String auth);
+    Call<List<Course>> getCourses(@Header("Authorization") String auth);
 
     @GET("courses/{courseId}")
     Call<UserPost> getCourse(@Path("courseId") String id,
@@ -84,6 +85,9 @@ public interface APIService {
     // Inicio metodos de Events
     @GET("events")
     Call<List<Event>> getEvents(@Header("Authorization") String auth);
+
+    @GET("events")
+    Call<List<Event>> getEventsByPracticant(@Query("practicantName") String practicant, @Header("Authorization") String auth);
 
     @POST("events")
     @FormUrlEncoded

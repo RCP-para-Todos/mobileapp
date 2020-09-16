@@ -27,7 +27,6 @@ public class ActividadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad);
         globalUser = (User) getApplicationContext();
-        Log.d(TAG, globalUser.toString());
 
         // Configuro la toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -38,7 +37,6 @@ public class ActividadActivity extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
             event = (Event) getIntent().getSerializableExtra("event");
-            Log.d(TAG, event.toString());
 
             TextView tiempoTotalManiobra = findViewById(R.id.valueTiempoTotalManiobra);
             tiempoTotalManiobra.setText(String.valueOf(Instant.tiempoTotalManiobra(event.getInstants())));

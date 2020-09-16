@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.jk.rcp.main.data.model.course.Student;
 import com.jk.rcp.main.data.model.instant.Instant;
-import com.jk.rcp.main.data.model.user.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;

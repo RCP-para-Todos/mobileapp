@@ -35,38 +35,6 @@ public class Instant implements Serializable {
         this.posicion = posicion;
     }
 
-    public String getNro() {
-        return nro;
-    }
-
-    public void setNro(String nro) {
-        this.nro = nro;
-    }
-
-    public String getInsuflacion() {
-        return insuflacion;
-    }
-
-    public void setInsuflacion(String insuflacion) {
-        this.insuflacion = insuflacion;
-    }
-
-    public String getCompresion() {
-        return compresion;
-    }
-
-    public void setCompresion(String compresion) {
-        this.compresion = compresion;
-    }
-
-    public String getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(String posicion) {
-        this.posicion = posicion;
-    }
-
     // Funciones de calculo
     public static int tiempoTotalManiobra(List<Instant> instantes) {
         int tiempoTotal = 0;
@@ -150,6 +118,38 @@ public class Instant implements Serializable {
         } else {
             return "Mala";
         }
+    }
+
+    public String getNro() {
+        return nro;
+    }
+
+    public void setNro(String nro) {
+        this.nro = nro;
+    }
+
+    public String getInsuflacion() {
+        return insuflacion;
+    }
+
+    public void setInsuflacion(String insuflacion) {
+        this.insuflacion = insuflacion;
+    }
+
+    public String getCompresion() {
+        return compresion;
+    }
+
+    public void setCompresion(String compresion) {
+        this.compresion = compresion;
+    }
+
+    public String getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(String posicion) {
+        this.posicion = posicion;
     }
 
     @Override

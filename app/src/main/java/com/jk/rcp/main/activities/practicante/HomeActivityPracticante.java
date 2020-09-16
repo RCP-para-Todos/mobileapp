@@ -22,8 +22,6 @@ public class HomeActivityPracticante extends AppCompatActivity {
         setContentView(R.layout.activity_home_content_practicante);
         globalUser = (User) getApplicationContext();
 
-        Log.d(TAG, globalUser.toString());
-
         // Configuro la toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

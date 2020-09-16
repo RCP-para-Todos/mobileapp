@@ -30,11 +30,11 @@ import com.jk.rcp.R;
 import com.jk.rcp.main.activities.instructor.HomeActivityInstructor;
 import com.jk.rcp.main.activities.practicante.HomeActivityPracticante;
 import com.jk.rcp.main.data.model.user.LoginPost;
+import com.jk.rcp.main.data.model.user.LoginRequestCallbacks;
 import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.remote.APIService;
 import com.jk.rcp.main.data.remote.ApiUtils;
 import com.jk.rcp.main.data.remote.Request;
-import com.jk.rcp.main.data.model.user.LoginRequestCallbacks;
 import com.jk.rcp.main.utils.DeviceUtils;
 import com.jk.rcp.main.utils.EventManager;
 

@@ -44,6 +44,11 @@
             android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".main.activities.instructor.VerPracticantesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".main.activities.practicante.HomeActivityPracticante"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
