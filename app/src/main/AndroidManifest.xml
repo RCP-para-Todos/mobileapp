@@ -24,11 +24,6 @@
             android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".main.activities.instructor.EstadisticasActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
             android:name=".main.activities.practicante.EstadisticasActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
