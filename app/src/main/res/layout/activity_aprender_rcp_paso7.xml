@@ -43,27 +43,27 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="213dp" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="172dp"
-        android:layout_height="209dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sujetate" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView5"-->
+<!--        android:layout_width="172dp"-->
+<!--        android:layout_height="209dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.066"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/sujetate" />-->
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="172dp"
-        android:layout_height="209dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sujetate" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView6"-->
+<!--        android:layout_width="172dp"-->
+<!--        android:layout_height="209dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.411"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/imageView5"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/sujetate" />-->
 
     <TextView
         android:id="@+id/textView8"

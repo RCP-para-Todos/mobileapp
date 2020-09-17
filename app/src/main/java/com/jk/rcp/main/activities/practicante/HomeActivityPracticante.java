@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.jk.rcp.R;
 import com.jk.rcp.main.activities.common.EstadisticasActivity;
+import com.jk.rcp.main.activities.practicante.aprendizaje.AprendiendoRCPPaso1Activity;
 import com.jk.rcp.main.data.model.user.User;
 
 public class HomeActivityPracticante extends AppCompatActivity {
@@ -34,6 +35,14 @@ public class HomeActivityPracticante extends AppCompatActivity {
         buttonVerEstadisticas.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivityPracticante.this, EstadisticasActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton btnAprenderRCP = (ImageButton) findViewById(R.id.btn_aprender_rcp);
+        btnAprenderRCP.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivityPracticante.this, AprendiendoRCPPaso1Activity.class);
                 startActivity(intent);
             }
         });

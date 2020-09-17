@@ -43,16 +43,16 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="213dp" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="322dp"
-        android:layout_height="227dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sujetate" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView5"-->
+<!--        android:layout_width="322dp"-->
+<!--        android:layout_height="227dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.494"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/sujetate" />-->
 
     <TextView
         android:id="@+id/textView8"

@@ -55,7 +55,42 @@
             android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".main.activities.practicante.AprendiendoRCPActivity"
+            android:name=".main.activities.practicante.aprendizaje.AprendiendoRCPPaso1Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.aprendizaje.AprendiendoRCPPaso2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.aprendizaje.AprendiendoRCPPaso3Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.aprendizaje.AprendiendoRCPPaso4Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.aprendizaje.AprendiendoRCPPaso5Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.aprendizaje.AprendiendoRCPPaso6Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.aprendizaje.AprendiendoRCPPaso7Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.aprendizaje.AprendiendoRCPPaso8Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity" />
