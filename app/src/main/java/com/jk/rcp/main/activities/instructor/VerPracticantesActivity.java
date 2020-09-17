@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.jk.rcp.R;
-import com.jk.rcp.main.activities.practicante.EstadisticasActivity;
+import com.jk.rcp.main.activities.common.EstadisticasActivity;
 import com.jk.rcp.main.data.adapter.StudentsListAdapter;
 import com.jk.rcp.main.data.model.course.Course;
 

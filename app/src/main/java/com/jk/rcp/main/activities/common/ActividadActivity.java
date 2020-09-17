@@ -1,7 +1,10 @@
-package com.jk.rcp.main.activities.practicante;
+package com.jk.rcp.main.activities.common;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -61,6 +64,15 @@ public class ActividadActivity extends AppCompatActivity {
 
             TextView calidadInsuflaciones = findViewById(R.id.valueCalidadInsuflasiones);
             calidadInsuflaciones.setText(Instant.calidadInsuflaciones(event.getInstants()));
+
+            Button buttonVerObservaciones = (Button) findViewById(R.id.btnVerObs);
+            buttonVerObservaciones.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(ActividadActivity.this, ObservacionesActivity.class);
+                    intent.putExtra("event", event);
+                    startActivity(intent);
+                }
+            });
         }
     }
 

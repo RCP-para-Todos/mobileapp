@@ -2,8 +2,10 @@ package com.jk.rcp.main.data.remote;
 
 import com.jk.rcp.main.data.model.course.Course;
 import com.jk.rcp.main.data.model.event.Event;
+import com.jk.rcp.main.data.model.event.EventPatch;
 import com.jk.rcp.main.data.model.instant.Instant;
 import com.jk.rcp.main.data.model.user.LoginPost;
+import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.model.user.UserPost;
 
 import java.util.ArrayList;
@@ -120,8 +122,14 @@ public interface APIService {
 
     @PATCH("events/{eventId}")
     @FormUrlEncoded
-    Call<UserPost> patchEvent(@Path("eventId") String id,
-                              @Header("Authorization") String auth);
+    Call<EventPatch> patchEvent(@Path("eventId") String id,
+                                @Header("Authorization") String auth,
+                                @Field("observations") String observations,
+                                @Field("brazosFlexionados") Boolean brazosFlexionados,
+                                @Field("noConsultaEstadoVictima") Boolean noConsultaEstadoVictima,
+                                @Field("noEstaAtentoAlEscenario") Boolean noEstaAtentoAlEscenario,
+                                @Field("disponeAyudaNoSolicita") Boolean disponeAyudaNoSolicita,
+                                @Field("demoraTomaDesiciones") Boolean demoraTomaDesiciones);
     // Fin metodos de Courses
 
     // Inicio metodos de Roles
@@ -131,7 +139,10 @@ public interface APIService {
 
     // Inicio metodos de Users
     @GET("users")
-    Call<UserPost> getUsers(@Header("Authorization") String auth);
+    Call<List<User>> getUsers(@Header("Authorization") String auth);
+
+    @GET("users")
+    Call<List<User>> getUsers(@Query("q") String noCourse, @Header("Authorization") String auth);
 
     @GET("users/{userId}")
     Call<UserPost> getUser(@Path("userId") String id,

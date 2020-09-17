@@ -5,6 +5,8 @@ import android.util.Log;
 import com.jk.rcp.main.data.model.course.Course;
 import com.jk.rcp.main.data.model.course.CoursesRequestCallbacks;
 import com.jk.rcp.main.data.model.event.Event;
+import com.jk.rcp.main.data.model.event.EventListRequestCallbacks;
+import com.jk.rcp.main.data.model.event.EventPatch;
 import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
 import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.LoginRequestCallbacks;
@@ -48,7 +50,36 @@ public class Request {
         });
     }
 
-    public void getEvents(String token, final EventRequestCallbacks requestCallbacks) {
+    public void updateObservations(Event event, String token, final EventRequestCallbacks requestCallbacks) {
+        mAPIService.patchEvent(event.getId(), token, event.getObservations(), event.getBrazosFlexionados(),
+                event.getNoConsultaEstadoVictima(), event.getNoEstaAtentoAlEscenario(),
+                event.getDisponeAyudaNoSolicita(), event.getDemoraTomaDesiciones()
+        ).enqueue(new Callback<EventPatch>() {
+            @Override
+            public void onResponse(Call<EventPatch> call, Response<EventPatch> response) {
+                if (requestCallbacks != null) {
+                    if (response.isSuccessful()) {
+                        assert response.body() != null;
+                        requestCallbacks.onSuccess(response.body());
+                    } else {
+                        requestCallbacks.onErrorBody(response.errorBody());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventPatch> call, Throwable t) {
+                if (requestCallbacks != null) {
+                    requestCallbacks.onError(t);
+                }
+                t.printStackTrace();
+                Log.e(TAG, "Error al enviar el request.");
+            }
+
+        });
+    }
+
+    public void getEvents(String token, final EventListRequestCallbacks requestCallbacks) {
         mAPIService.getEvents(token).enqueue(new Callback<List<Event>>() {
             @Override
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
@@ -74,7 +105,7 @@ public class Request {
         });
     }
 
-    public void getEventsByPracticant(String student, String token, final EventRequestCallbacks requestCallbacks) {
+    public void getEventsByPracticant(String student, String token, final EventListRequestCallbacks requestCallbacks) {
         mAPIService.getEventsByPracticant(student, token).enqueue(new Callback<List<Event>>() {
             @Override
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {

@@ -1,4 +1,4 @@
-package com.jk.rcp.main.activities.practicante;
+package com.jk.rcp.main.activities.common;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import com.jk.rcp.main.data.adapter.EventListAdapter;
 import com.jk.rcp.main.data.model.course.Student;
 import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventPost;
-import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
+import com.jk.rcp.main.data.model.event.EventListRequestCallbacks;
 import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.remote.Request;
 
@@ -42,8 +42,9 @@ public class EstadisticasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_estadisticas);
         globalUser = (User) getApplicationContext();
 
-        if (getIntent().getExtras() != null) {
+        if (getIntent().getExtras() != null && getIntent().getSerializableExtra("Student") != null) {
             Student student = (Student) getIntent().getSerializableExtra("Student");
+            Log.d(TAG, student.toString());
             // Obtengo los eventos de la API, con el token
             getEventsByPracticant(student.getName(), globalUser.getBearerToken());
         } else {
@@ -61,7 +62,7 @@ public class EstadisticasActivity extends AppCompatActivity {
 
     public void getEvents(String token) {
         Request request = new Request();
-        request.getEvents(token, new EventRequestCallbacks() {
+        request.getEvents(token, new EventListRequestCallbacks() {
             @Override
             public void onSuccess(@NonNull final List<Event> eventos) {
                 eventList = findViewById(R.id.eventsList);
@@ -105,7 +106,7 @@ public class EstadisticasActivity extends AppCompatActivity {
 
     public void getEventsByPracticant(String practicant, String token) {
         Request request = new Request();
-        request.getEventsByPracticant(practicant, token, new EventRequestCallbacks() {
+        request.getEventsByPracticant(practicant, token, new EventListRequestCallbacks() {
             @Override
             public void onSuccess(@NonNull final List<Event> eventos) {
                 eventList = findViewById(R.id.eventsList);

@@ -60,19 +60,19 @@ public class Event implements Serializable {
     private String observations;
     @SerializedName("brazosFlexionados")
     @Expose
-    private String brazosFlexionados;
+    private Boolean brazosFlexionados;
     @SerializedName("noConsultaEstadoVictima")
     @Expose
-    private String noConsultaEstadoVictima;
+    private Boolean noConsultaEstadoVictima;
     @SerializedName("noEstaAtentoAlEscenario")
     @Expose
-    private String noEstaAtentoAlEscenario;
+    private Boolean noEstaAtentoAlEscenario;
     @SerializedName("disponeAyudaNoSolicita")
     @Expose
-    private String disponeAyudaNoSolicita;
+    private Boolean disponeAyudaNoSolicita;
     @SerializedName("demoraTomaDesiciones")
     @Expose
-    private String demoraTomaDesiciones;
+    private Boolean demoraTomaDesiciones;
 
     /**
      * @param tiempoInactividad
@@ -97,7 +97,7 @@ public class Event implements Serializable {
      * @param disponeAyudaNoSolicita
      * @param eventDate
      */
-    public Event(String id, String eventDate, Student user, String course, String type, String duration, String puntaje, String tiempoInactividad, String porcentajeSobrevida, String porcentajeInsuflacionOk, String porcentajeCompresionOk, String cantidadInsuflacionesOkMalCabeza, String fuerzaPromedioAplicada, String calidadInsuflaciones, ArrayList<Instant> instants, String observations, String brazosFlexionados, String noConsultaEstadoVictima, String noEstaAtentoAlEscenario, String disponeAyudaNoSolicita, String demoraTomaDesiciones) {
+    public Event(String id, String eventDate, Student user, String course, String type, String duration, String puntaje, String tiempoInactividad, String porcentajeSobrevida, String porcentajeInsuflacionOk, String porcentajeCompresionOk, String cantidadInsuflacionesOkMalCabeza, String fuerzaPromedioAplicada, String calidadInsuflaciones, ArrayList<Instant> instants, String observations, Boolean brazosFlexionados, Boolean noConsultaEstadoVictima, Boolean noEstaAtentoAlEscenario, Boolean disponeAyudaNoSolicita, Boolean demoraTomaDesiciones) {
         super();
         this.id = id;
         this.eventDate = eventDate;
@@ -250,43 +250,43 @@ public class Event implements Serializable {
         this.observations = observations;
     }
 
-    public String getBrazosFlexionados() {
+    public Boolean getBrazosFlexionados() {
         return brazosFlexionados;
     }
 
-    public void setBrazosFlexionados(String brazosFlexionados) {
+    public void setBrazosFlexionados(Boolean brazosFlexionados) {
         this.brazosFlexionados = brazosFlexionados;
     }
 
-    public String getNoConsultaEstadoVictima() {
+    public Boolean getNoConsultaEstadoVictima() {
         return noConsultaEstadoVictima;
     }
 
-    public void setNoConsultaEstadoVictima(String noConsultaEstadoVictima) {
+    public void setNoConsultaEstadoVictima(Boolean noConsultaEstadoVictima) {
         this.noConsultaEstadoVictima = noConsultaEstadoVictima;
     }
 
-    public String getNoEstaAtentoAlEscenario() {
+    public Boolean getNoEstaAtentoAlEscenario() {
         return noEstaAtentoAlEscenario;
     }
 
-    public void setNoEstaAtentoAlEscenario(String noEstaAtentoAlEscenario) {
+    public void setNoEstaAtentoAlEscenario(Boolean noEstaAtentoAlEscenario) {
         this.noEstaAtentoAlEscenario = noEstaAtentoAlEscenario;
     }
 
-    public String getDisponeAyudaNoSolicita() {
+    public Boolean getDisponeAyudaNoSolicita() {
         return disponeAyudaNoSolicita;
     }
 
-    public void setDisponeAyudaNoSolicita(String disponeAyudaNoSolicita) {
+    public void setDisponeAyudaNoSolicita(Boolean disponeAyudaNoSolicita) {
         this.disponeAyudaNoSolicita = disponeAyudaNoSolicita;
     }
 
-    public String getDemoraTomaDesiciones() {
+    public Boolean getDemoraTomaDesiciones() {
         return demoraTomaDesiciones;
     }
 
-    public void setDemoraTomaDesiciones(String demoraTomaDesiciones) {
+    public void setDemoraTomaDesiciones(Boolean demoraTomaDesiciones) {
         this.demoraTomaDesiciones = demoraTomaDesiciones;
     }
 

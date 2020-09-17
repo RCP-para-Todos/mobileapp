@@ -6,8 +6,8 @@ import java.util.List;
 
 import okhttp3.ResponseBody;
 
-public interface EventRequestCallbacks {
-    void onSuccess(@NonNull EventPatch value);
+public interface EventListRequestCallbacks {
+    void onSuccess(@NonNull List<Event> value);
 
     void onError(@NonNull Throwable throwable);
 

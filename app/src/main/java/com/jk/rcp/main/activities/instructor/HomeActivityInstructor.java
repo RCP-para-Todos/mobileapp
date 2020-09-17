@@ -37,4 +37,11 @@ public class HomeActivityInstructor extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Log.d(TAG, "Finalizando activity");
+        finish();
+        return true;
+    }
 }
