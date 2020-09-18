@@ -9,23 +9,23 @@ import java.io.IOException;
 
 import static android.content.Context.AUDIO_SERVICE;
 
-public class AlarmManager implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
-    private static AlarmManager singleInstance = null;
+public class AlarmManager implements MediaPlayer.OnPreparedListener {
+//    private static AlarmManager singleInstance = null;
     private final MediaPlayer mPlayer;
     private int mVolumeLevel = -1;
 
-    public AlarmManager() {
+    public AlarmManager(MediaPlayer.OnCompletionListener onCompletionListener) {
         mPlayer = new MediaPlayer();
         mPlayer.setOnPreparedListener(this);
-        mPlayer.setOnCompletionListener(this);
+        mPlayer.setOnCompletionListener(onCompletionListener);
     }
 
-    public static AlarmManager getInstance() {
-        if (singleInstance == null)
-            singleInstance = new AlarmManager();
-
-        return singleInstance;
-    }
+//    public static AlarmManager getInstance() {
+//        if (singleInstance == null)
+//            singleInstance = new AlarmManager();
+//
+//        return singleInstance;
+//    }
 
     public void stopSound() {
         mPlayer.stop();
@@ -65,12 +65,6 @@ public class AlarmManager implements MediaPlayer.OnPreparedListener, MediaPlayer
                 }
             }
         }
-    }
-
-
-    @Override
-    public void onCompletion(MediaPlayer mediaPlayer) {
-
     }
 
     @Override
