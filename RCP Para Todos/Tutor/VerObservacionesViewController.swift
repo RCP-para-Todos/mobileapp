@@ -46,7 +46,6 @@ class VerObservacionesViewController: UIViewController{
     func initInterface(){
         self.buttonRegistrar.layer.cornerRadius = 15
         self.labelFecha.text = Utils.translateDateMongo(date: evento!.fecha)
-        self.labelPracticante.text = "Ian" //Hardcodeado jaja ya me canse por hoy.
         self.primeroEstado = evento!.brazosFlexionados ?? false
         self.segundoEstado = evento!.noConsultaEstadoVictima ?? false
         self.terceroEstado = evento!.noEstaAtentoAlEscenario ?? false
@@ -62,6 +61,7 @@ class VerObservacionesViewController: UIViewController{
         self.logicaCheckBox5()
         
         if(self.rol == "instructor"){
+            self.labelPracticante.text = UserDefaults.standard.string(forKey: "practicanteSeleccionado")
             self.primerCheckBox.isEnabled = true
             self.segundoCheckBox.isEnabled = true
             self.tercerCheckBox.isEnabled = true
@@ -71,6 +71,7 @@ class VerObservacionesViewController: UIViewController{
             self.buttonRegistrar.setTitle("Registrar", for: .normal)
         }
         else{
+            self.labelPracticante.text = UserDefaults.standard.string(forKey: "usuarioActivo")
             self.primerCheckBox.isEnabled = false
             self.segundoCheckBox.isEnabled = false
             self.tercerCheckBox.isEnabled = false

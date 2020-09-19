@@ -51,6 +51,11 @@ class VerPracticantesViewController: UIViewController, UITableViewDataSource, UI
         self.activityIndicationSpinner.stopAnimating()
     }
     
+    func guardarPracticanteSeleccionado(practicanteSeleccionado: String){
+        let defaults = UserDefaults.standard
+        defaults.set(practicanteSeleccionado, forKey: "practicanteSeleccionado")
+    }
+    
     func tableView(_ tableView:UITableView, numberOfRowsInSection section:Int) -> Int
     {
         return self.practicantes.count
@@ -67,6 +72,7 @@ class VerPracticantesViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.practicanteSeleccionado = self.practicantes[indexPath.row]
+        self.guardarPracticanteSeleccionado(practicanteSeleccionado: self.practicanteSeleccionado ?? "")
         self.performSegue(withIdentifier: "VerActividadesSegue", sender: nil)
     }
     
