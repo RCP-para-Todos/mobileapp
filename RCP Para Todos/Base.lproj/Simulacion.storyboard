@@ -95,6 +95,7 @@
                     <navigationItem key="navigationItem" id="J5I-8I-aE6"/>
                     <connections>
                         <outlet property="buttonIniciar" destination="fwL-39-0hh" id="76K-QT-DEL"/>
+                        <outlet property="imagenSimuacion" destination="CPb-xc-rhk" id="IN0-G2-WyZ"/>
                         <segue destination="V19-cD-XXe" kind="show" identifier="paso2Simulacion" id="zP4-In-hr0"/>
                     </connections>
                 </viewController>
@@ -194,6 +195,7 @@
                     <connections>
                         <outlet property="buttonElEntornoNoEsSeguro" destination="5L8-pr-Ol1" id="w8l-qF-4YN"/>
                         <outlet property="buttonLlamarAmbulancia" destination="uBu-43-dVO" id="v5v-jz-Wdv"/>
+                        <outlet property="imagenSimulacion" destination="8ox-mq-jdV" id="GvW-X9-23Z"/>
                         <outlet property="progressBar" destination="4w8-Lf-nza" id="c6E-r8-qk2"/>
                         <segue destination="0dW-gl-7a9" kind="show" identifier="paso3Simulacion" id="2QG-nE-z4a"/>
                         <segue destination="ksD-mb-m34" kind="show" identifier="paso3AlternativoSimulacion" id="A2S-uO-ghP"/>

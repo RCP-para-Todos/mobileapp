@@ -12,6 +12,9 @@ import UIKit
 class SimulacionPaso1ViewController: UIViewController
 {
     @IBOutlet weak var buttonIniciar: UIButton!
+    @IBOutlet weak var imagenSimuacion: UIImageView!
+    
+    var escenarioRandom : Int = 0
     
     override func viewDidLoad()
     {
@@ -22,6 +25,16 @@ class SimulacionPaso1ViewController: UIViewController
         
     func initInterface(){
         self.buttonIniciar.layer.cornerRadius = 15
+    }
+    
+    func elegirEscenarioRandom(){
+        self.escenarioRandom = Int.random(in: 0...1)
+        if(self.escenarioRandom == 0){
+            self.imagenSimuacion.image = UIImage(named: "SimulacionPaso1")
+        }
+        else if(self.escenarioRandom == 1){
+            //TODO
+        }
     }
     
     func inicializarBarraSuperior()
@@ -35,6 +48,14 @@ class SimulacionPaso1ViewController: UIViewController
     
     @IBAction func botonIniciarClicked(_ sender: Any) {
         self.performSegue(withIdentifier: "paso2Simulacion", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "paso2Simulacion" {
+            if let destinationVC = segue.destination as? SimulacionPaso2ViewController {
+                destinationVC.escenarioRandom = self.escenarioRandom
+            }
+        }
     }
     
     

@@ -15,14 +15,15 @@ class SimulacionPaso2ViewController: UIViewController
     @IBOutlet weak var progressBar: UICircularTimerRing!
     @IBOutlet weak var buttonElEntornoNoEsSeguro: UIButton!
     @IBOutlet weak var buttonLlamarAmbulancia: UIButton!
+    @IBOutlet weak var imagenSimulacion: UIImageView!
     
+    var escenarioRandom : Int = 0
     var ambulanciaClicked : Bool = false
     var entornoNoSeguroClicked : Bool = false
     var elEntornoEsSeguro : Bool = false
     
     override func viewDidLoad()
     {
-        self.recibirSimuladorSiElEntornoEsSeguro()
         super.viewDidLoad()
         self.inicializarBarraSuperior()
         self.loadProgressCircleBar()
@@ -30,8 +31,19 @@ class SimulacionPaso2ViewController: UIViewController
     }
         
     func initInterface(){
+        self.initLogica()
         self.buttonElEntornoNoEsSeguro.layer.cornerRadius = 15
         self.buttonLlamarAmbulancia.layer.cornerRadius = 15
+    }
+    
+    func initLogica(){
+        if(self.escenarioRandom == 0){
+            self.imagenSimulacion.image = UIImage(named: "SimulacionPaso1")
+            self.elEntornoEsSeguro = true
+        }
+        else if(self.escenarioRandom == 1){
+            //TODO
+        }
     }
     
     func inicializarBarraSuperior()
@@ -114,10 +126,6 @@ class SimulacionPaso2ViewController: UIViewController
                 destinationVC.elEntornoEsSeguro = self.elEntornoEsSeguro
             }
         }
-    }
-    
-    func recibirSimuladorSiElEntornoEsSeguro(){
-        self.elEntornoEsSeguro = true
     }
     
     @IBAction func buttonEntornoNoSeguroClicked(_ sender: Any) {
