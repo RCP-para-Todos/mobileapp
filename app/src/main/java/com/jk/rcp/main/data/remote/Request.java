@@ -157,44 +157,29 @@ public class Request {
         });
     }
 
-    public void sendRegister(String name, String surname, String rol) {
-//        mAPIService.register(ENV, name, surname, Integer.valueOf(dni), email, password, COMMISION, GROUP).enqueue(new Callback<UserPost>() {
-//            @Override
-//            public void onResponse(Call<UserPost> call, Response<UserPost> response) {
-//                if (response.isSuccessful()) {
-//                    EventManager.registerEvent(Constants.USER_REGISTERED);
-//                    showResponse(response.body().toString());
-//                } else {
-//                    EventManager.registerEvent(Constants.USER_COULDNT_REGISTER);
-//                    Log.i(TAG, "Ocurrió un error.");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserPost> call, Throwable t) {
-//                Log.e(TAG, "Error al enviar el request.");
-//                EventManager.registerEvent(Constants.USER_COULDNT_REGISTER);
-//            }
-//        });
-    }
+    public void sendRegister(String name, String password, String rol, final LoginRequestCallbacks requestCallbacks) {
+        mAPIService.register(name, password, rol).enqueue(new Callback<LoginPost>() {
+            @Override
+            public void onResponse(Call<LoginPost> call, Response<LoginPost> response) {
+                if (requestCallbacks != null) {
+                    if (response.isSuccessful()) {
+                        requestCallbacks.onSuccess(response.body());
+                    } else {
+                        requestCallbacks.onErrorBody(response.errorBody());
+                    }
+                }
+            }
 
-    public void registerEvent(String token, String typeEvents, String state, String description) {
-//        mAPIService.registerEvent(token, ENV, typeEvents, state, description).enqueue(new Callback<EventPost>() {
-//            @Override
-//            public void onResponse(Call<EventPost> call, Response<EventPost> response) {
-//                if (response.isSuccessful()) {
-//                    showResponse(response.body().toString());
-//                } else {
-//
-//                    Log.i(TAG, "Ocurrió un error.");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<EventPost> call, Throwable t) {
-//                Log.e(TAG, "Error al enviar el request.");
-//            }
-//        });
+            @Override
+            public void onFailure(Call<LoginPost> call, Throwable t) {
+                if (requestCallbacks != null) {
+                    requestCallbacks.onError(t);
+                }
+                t.printStackTrace();
+                Log.e(TAG, "Error al enviar el request.");
+            }
+
+        });
     }
 
     public void showResponse(String response) {

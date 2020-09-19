@@ -88,7 +88,7 @@ public class EventManager {
         }
 
         if (!typeEvents.equals("") && !description.equals("") && !state.equals("") && !token.equals("")) {
-            request.registerEvent(token, typeEvents, state, description);
+//            request.registerEvent(token, typeEvents, state, description);
         }
     }
 }
