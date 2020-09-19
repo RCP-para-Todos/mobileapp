@@ -6,12 +6,32 @@
     android:baselineAligned="false"
     android:focusable="true"
     android:focusableInTouchMode="true">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/AppTheme.Toolbar"
+
+    <Button
+        android:id="@+id/btn_crear_curso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#2196F3"
+        android:text="Crear curso"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+    <ImageButton
+        android:id="@+id/btn_mis_cursos"
+        android:layout_width="253dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="36dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_crear_curso"
+        app:srcCompat="@drawable/miscursos" />
+
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="224dp"
@@ -27,30 +47,12 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@drawable/rcp_logo" />
 
-
-    <ImageButton
-        android:id="@+id/btn_mis_cursos"
-        android:layout_width="253dp"
-        android:layout_height="132dp"
-        android:layout_marginTop="36dp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_crear_curso"
-        app:srcCompat="@drawable/miscursos" />
-
-    <Button
-        android:id="@+id/btn_crear_curso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="#2196F3"
-        android:text="Crear curso"
-        android:textColor="#FFFFFF"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/AppTheme.Toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

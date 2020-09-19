@@ -1,19 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/AppTheme.Toolbar"
+    <Button
+        android:id="@+id/btnAmbulanciaIncoming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:backgroundTint="#4CAF50"
+        android:text="La ambulancia esta en camino"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/cbAguardarConfirmacionOperador" />
+
+    <CheckBox
+        android:id="@+id/cbCalleEntreCalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Indica calle y entre calles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <CheckBox
+        android:id="@+id/cbBarrio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Indica barrio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbCalleEntreCalle" />
+
+    <CheckBox
+        android:id="@+id/cbIndicarInicioRCP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Indicar que se iniciará el RCP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbBarrio" />
+
+    <CheckBox
+        android:id="@+id/cbAguardarConfirmacionOperador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aguardar confirmación del operador"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbIndicarInicioRCP" />
 
     <ImageView
         android:id="@+id/logo"
@@ -68,58 +113,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <CheckBox
-        android:id="@+id/cbCalleEntreCalle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Indica calle y entre calles"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.34"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <CheckBox
-        android:id="@+id/cbBarrio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Indica barrio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbCalleEntreCalle" />
-
-    <CheckBox
-        android:id="@+id/cbIndicarInicioRCP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Indicar que se iniciará el RCP"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbBarrio" />
-
-    <CheckBox
-        android:id="@+id/cbAguardarConfirmacionOperador"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aguardar confirmación del operador"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbIndicarInicioRCP" />
-
-    <Button
-        android:id="@+id/btnAmbulanciaIncoming"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:backgroundTint="#4CAF50"
-        android:text="La ambulancia esta en camino"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/AppTheme.Toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbAguardarConfirmacionOperador" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

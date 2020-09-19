@@ -1,19 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/AppTheme.Toolbar"
+    <Button
+        android:id="@+id/btnVictimaRespondioFinalizarProtocolo"
+        android:layout_width="298dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#03A9F4"
+        android:text="Si la víctima responde, asistirla y no continuar con el protocolo"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbPreguntarVozAlta" />
+
+    <Button
+        android:id="@+id/btnVictimaNoResponde"
+        android:layout_width="298dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#4CAF50"
+        android:text="La víctima no responde continuar con el protocolo"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVictimaRespondioFinalizarProtocolo" />
+
+    <CheckBox
+        android:id="@+id/cbArrodillateAlLado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Arrodillate al lado de la victima (simulador)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <CheckBox
+        android:id="@+id/cbSacudirVictima"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sacudir a la victima por los hombros (simulador)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbArrodillateAlLado" />
+
+    <CheckBox
+        android:id="@+id/cbPreguntarVozAlta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Preguntarle en voz alta si te escucha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbSacudirVictima" />
 
     <ImageView
         android:id="@+id/logo"
@@ -74,62 +123,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <CheckBox
-        android:id="@+id/cbArrodillateAlLado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Arrodillate al lado de la victima (simulador)"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/AppTheme.Toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <CheckBox
-        android:id="@+id/cbSacudirVictima"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sacudir a la victima por los hombros (simulador)"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbArrodillateAlLado" />
-
-    <CheckBox
-        android:id="@+id/cbPreguntarVozAlta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Preguntarle en voz alta si te escucha"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbSacudirVictima" />
-
-    <Button
-        android:id="@+id/btnVictimaRespondioFinalizarProtocolo"
-        android:layout_width="298dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#03A9F4"
-        android:text="Si la víctima responde, asistirla y no continuar con el protocolo"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbPreguntarVozAlta" />
-
-    <Button
-        android:id="@+id/btnVictimaNoResponde"
-        android:layout_width="298dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#4CAF50"
-        android:text="La víctima no responde continuar con el protocolo"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnVictimaRespondioFinalizarProtocolo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

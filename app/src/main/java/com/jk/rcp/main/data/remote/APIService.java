@@ -34,8 +34,8 @@ public interface APIService {
     @POST("auth/register")
     @FormUrlEncoded
     Call<LoginPost> register(@Field("name") String username,
-                            @Field("password") String password,
-                            @Field("rol") String rol);
+                             @Field("password") String password,
+                             @Field("rol") String rol);
 
     @POST("auth/token")
     @FormUrlEncoded

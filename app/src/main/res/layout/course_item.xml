@@ -12,10 +12,10 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
 
-         <TextView
+        <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></TextView>
 
-       </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

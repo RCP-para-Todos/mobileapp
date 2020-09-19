@@ -7,6 +7,23 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
+    <Button
+        android:id="@+id/btnVerObs"
+        android:layout_width="293dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#007AFF "
+        android:drawableRight="@drawable/ic_remove_red_eye_black_24dp"
+        android:text="Ver observaciones tutor"
+        android:textColor="#FFFFFF"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/valueCalidadInsuflasiones"
+        app:layout_constraintVertical_bias="0.0" />
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="224dp"
@@ -19,6 +36,294 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@drawable/rcp_logo" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="55dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/valueTiempoTotalManiobra"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        app:srcCompat="@drawable/ic_access_time_black_24dp" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="55dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/valuePorcentajeSobrevida"
+        app:layout_constraintEnd_toEndOf="@+id/view3"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:srcCompat="@drawable/ic_access_time_black_24dp" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="55dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/valueTiempoInactividad"
+        app:layout_constraintEnd_toEndOf="@+id/view4"
+        app:layout_constraintStart_toStartOf="@+id/view4"
+        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        app:srcCompat="@drawable/ic_warning_black_24dp" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="55dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/valuePorcentajeInsuflacionesCorrectas"
+        app:layout_constraintEnd_toEndOf="@+id/view5"
+        app:layout_constraintStart_toStartOf="@+id/view5"
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        app:srcCompat="@drawable/ic_warning_black_24dp" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="55dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/valuePorcentajeCompresionesCorrectas"
+        app:layout_constraintEnd_toEndOf="@+id/view6"
+        app:layout_constraintStart_toStartOf="@+id/view6"
+        app:layout_constraintTop_toBottomOf="@+id/textView22"
+        app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="55dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/valueCantidadInsuflacionesIncorrectasPorMalaPosicion"
+        app:layout_constraintEnd_toEndOf="@+id/view7"
+        app:layout_constraintStart_toStartOf="@+id/view7"
+        app:layout_constraintTop_toBottomOf="@+id/textView24"
+        app:srcCompat="@drawable/ic_person_black_24dp" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="55dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/valueFuerzaPromedioAplicada"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toBottomOf="@+id/textView26"
+        app:srcCompat="@drawable/ic_info_outline_black_24dp" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="55dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/valueCalidadInsuflasiones"
+        app:layout_constraintEnd_toEndOf="@+id/view9"
+        app:layout_constraintStart_toStartOf="@+id/view9"
+        app:layout_constraintTop_toBottomOf="@+id/textView28"
+        app:srcCompat="@drawable/ic_network_wifi_black_24dp" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="105dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Tiempo total maniobra"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/valueTiempoTotalManiobra"
+        android:layout_width="105dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="80dp"
+        android:text="00:01:00"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="105dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Porcentaje sobrevida"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view3"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="@+id/view3" />
+
+    <TextView
+        android:id="@+id/valuePorcentajeSobrevida"
+        android:layout_width="105dp"
+        android:layout_height="13dp"
+        android:layout_marginTop="80dp"
+        android:text="60%"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view3"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="@+id/view3" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="105dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Tiempo de inactividad"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view4"
+        app:layout_constraintStart_toStartOf="@+id/view4"
+        app:layout_constraintTop_toTopOf="@+id/view4" />
+
+    <TextView
+        android:id="@+id/valueTiempoInactividad"
+        android:layout_width="105dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="80dp"
+        android:text="00:00:03"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view4"
+        app:layout_constraintStart_toStartOf="@+id/view4"
+        app:layout_constraintTop_toTopOf="@+id/view4" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="110dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:text="Porcentaje insuflasiones correctas"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view5"
+        app:layout_constraintStart_toStartOf="@+id/view5"
+        app:layout_constraintTop_toTopOf="@+id/view5" />
+
+    <TextView
+        android:id="@+id/valuePorcentajeInsuflacionesCorrectas"
+        android:layout_width="105dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="80dp"
+        android:text="80%"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view5"
+        app:layout_constraintStart_toStartOf="@+id/view5"
+        app:layout_constraintTop_toTopOf="@+id/view5" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="110dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:text="Porcentaje compresiones correctas"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view6"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/view6"
+        app:layout_constraintTop_toTopOf="@+id/view6" />
+
+    <TextView
+        android:id="@+id/valuePorcentajeCompresionesCorrectas"
+        android:layout_width="105dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="80dp"
+        android:text="93%"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view6"
+        app:layout_constraintStart_toStartOf="@+id/view6"
+        app:layout_constraintTop_toTopOf="@+id/view6" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="110dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:text="Cantidad ins. incorrectas por mala posición"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view7"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/view7"
+        app:layout_constraintTop_toTopOf="@+id/view7" />
+
+    <TextView
+        android:id="@+id/valueCantidadInsuflacionesIncorrectasPorMalaPosicion"
+        android:layout_width="105dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="80dp"
+        android:text="1"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view7"
+        app:layout_constraintStart_toStartOf="@+id/view7"
+        app:layout_constraintTop_toTopOf="@+id/view7" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="105dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Fuerza promedio apl."
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toTopOf="@+id/view8" />
+
+    <TextView
+        android:id="@+id/valueFuerzaPromedioAplicada"
+        android:layout_width="105dp"
+        android:layout_height="13dp"
+        android:layout_marginTop="80dp"
+        android:text="30 Kg"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toTopOf="@+id/view8" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="105dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Calidad insuflaciones"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view9"
+        app:layout_constraintStart_toStartOf="@+id/view9"
+        app:layout_constraintTop_toTopOf="@+id/view9" />
+
+    <TextView
+        android:id="@+id/valueCalidadInsuflasiones"
+        android:layout_width="105dp"
+        android:layout_height="13dp"
+        android:layout_marginTop="80dp"
+        android:text="Óptima"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/view9"
+        app:layout_constraintStart_toStartOf="@+id/view9"
+        app:layout_constraintTop_toTopOf="@+id/view9" />
 
     <View
         android:id="@+id/view"
@@ -130,306 +435,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="105dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Tiempo total maniobra"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view" />
-
-    <TextView
-        android:id="@+id/valueTiempoTotalManiobra"
-        android:layout_width="105dp"
-        android:layout_height="14dp"
-        android:layout_marginTop="80dp"
-        android:text="00:01:00"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="55dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toTopOf="@+id/valueTiempoTotalManiobra"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:srcCompat="@drawable/ic_access_time_black_24dp" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="105dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Porcentaje sobrevida"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view3"
-        app:layout_constraintStart_toStartOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="@+id/view3" />
-
-    <TextView
-        android:id="@+id/valuePorcentajeSobrevida"
-        android:layout_width="105dp"
-        android:layout_height="13dp"
-        android:layout_marginTop="80dp"
-        android:text="60%"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view3"
-        app:layout_constraintStart_toStartOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="@+id/view3" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="55dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toTopOf="@+id/valuePorcentajeSobrevida"
-        app:layout_constraintEnd_toEndOf="@+id/view3"
-        app:layout_constraintStart_toStartOf="@+id/view3"
-        app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:srcCompat="@drawable/ic_access_time_black_24dp" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="105dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Tiempo de inactividad"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view4"
-        app:layout_constraintStart_toStartOf="@+id/view4"
-        app:layout_constraintTop_toTopOf="@+id/view4" />
-
-    <TextView
-        android:id="@+id/valueTiempoInactividad"
-        android:layout_width="105dp"
-        android:layout_height="14dp"
-        android:layout_marginTop="80dp"
-        android:text="00:00:03"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view4"
-        app:layout_constraintStart_toStartOf="@+id/view4"
-        app:layout_constraintTop_toTopOf="@+id/view4" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="55dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toTopOf="@+id/valueTiempoInactividad"
-        app:layout_constraintEnd_toEndOf="@+id/view4"
-        app:layout_constraintStart_toStartOf="@+id/view4"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        app:srcCompat="@drawable/ic_warning_black_24dp" />
-
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="110dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:text="Porcentaje insuflasiones correctas"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view5"
-        app:layout_constraintStart_toStartOf="@+id/view5"
-        app:layout_constraintTop_toTopOf="@+id/view5" />
-
-    <TextView
-        android:id="@+id/valuePorcentajeInsuflacionesCorrectas"
-        android:layout_width="105dp"
-        android:layout_height="14dp"
-        android:layout_marginTop="80dp"
-        android:text="80%"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view5"
-        app:layout_constraintStart_toStartOf="@+id/view5"
-        app:layout_constraintTop_toTopOf="@+id/view5" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="55dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toTopOf="@+id/valuePorcentajeInsuflacionesCorrectas"
-        app:layout_constraintEnd_toEndOf="@+id/view5"
-        app:layout_constraintStart_toStartOf="@+id/view5"
-        app:layout_constraintTop_toBottomOf="@+id/textView20"
-        app:srcCompat="@drawable/ic_warning_black_24dp" />
-
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="110dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:text="Porcentaje compresiones correctas"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view6"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/view6"
-        app:layout_constraintTop_toTopOf="@+id/view6" />
-
-    <TextView
-        android:id="@+id/valuePorcentajeCompresionesCorrectas"
-        android:layout_width="105dp"
-        android:layout_height="14dp"
-        android:layout_marginTop="80dp"
-        android:text="93%"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view6"
-        app:layout_constraintStart_toStartOf="@+id/view6"
-        app:layout_constraintTop_toTopOf="@+id/view6" />
-
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="55dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toTopOf="@+id/valuePorcentajeCompresionesCorrectas"
-        app:layout_constraintEnd_toEndOf="@+id/view6"
-        app:layout_constraintStart_toStartOf="@+id/view6"
-        app:layout_constraintTop_toBottomOf="@+id/textView22"
-        app:srcCompat="@drawable/ic_favorite_black_24dp" />
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="110dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:text="Cantidad ins. incorrectas por mala posición"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view7"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/view7"
-        app:layout_constraintTop_toTopOf="@+id/view7" />
-
-    <TextView
-        android:id="@+id/valueCantidadInsuflacionesIncorrectasPorMalaPosicion"
-        android:layout_width="105dp"
-        android:layout_height="14dp"
-        android:layout_marginTop="80dp"
-        android:text="1"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view7"
-        app:layout_constraintStart_toStartOf="@+id/view7"
-        app:layout_constraintTop_toTopOf="@+id/view7" />
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="55dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toTopOf="@+id/valueCantidadInsuflacionesIncorrectasPorMalaPosicion"
-        app:layout_constraintEnd_toEndOf="@+id/view7"
-        app:layout_constraintStart_toStartOf="@+id/view7"
-        app:layout_constraintTop_toBottomOf="@+id/textView24"
-        app:srcCompat="@drawable/ic_person_black_24dp" />
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="105dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Fuerza promedio apl."
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view8"
-        app:layout_constraintStart_toStartOf="@+id/view8"
-        app:layout_constraintTop_toTopOf="@+id/view8" />
-
-    <TextView
-        android:id="@+id/valueFuerzaPromedioAplicada"
-        android:layout_width="105dp"
-        android:layout_height="13dp"
-        android:layout_marginTop="80dp"
-        android:text="30 Kg"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view8"
-        app:layout_constraintStart_toStartOf="@+id/view8"
-        app:layout_constraintTop_toTopOf="@+id/view8" />
-
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="55dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toTopOf="@+id/valueFuerzaPromedioAplicada"
-        app:layout_constraintEnd_toEndOf="@+id/view8"
-        app:layout_constraintStart_toStartOf="@+id/view8"
-        app:layout_constraintTop_toBottomOf="@+id/textView26"
-        app:srcCompat="@drawable/ic_info_outline_black_24dp" />
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="105dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Calidad insuflaciones"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view9"
-        app:layout_constraintStart_toStartOf="@+id/view9"
-        app:layout_constraintTop_toTopOf="@+id/view9" />
-
-    <TextView
-        android:id="@+id/valueCalidadInsuflasiones"
-        android:layout_width="105dp"
-        android:layout_height="13dp"
-        android:layout_marginTop="80dp"
-        android:text="Óptima"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/view9"
-        app:layout_constraintStart_toStartOf="@+id/view9"
-        app:layout_constraintTop_toTopOf="@+id/view9" />
-
-    <ImageView
-        android:id="@+id/imageView16"
-        android:layout_width="55dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toTopOf="@+id/valueCalidadInsuflasiones"
-        app:layout_constraintEnd_toEndOf="@+id/view9"
-        app:layout_constraintStart_toStartOf="@+id/view9"
-        app:layout_constraintTop_toBottomOf="@+id/textView28"
-        app:srcCompat="@drawable/ic_network_wifi_black_24dp" />
-
-    <Button
-        android:id="@+id/btnVerObs"
-        android:layout_width="293dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#007AFF "
-        android:drawableRight="@drawable/ic_remove_red_eye_black_24dp"
-        android:text="Ver observaciones tutor"
-        android:textColor="#FFFFFF"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/valueCalidadInsuflasiones"
-        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

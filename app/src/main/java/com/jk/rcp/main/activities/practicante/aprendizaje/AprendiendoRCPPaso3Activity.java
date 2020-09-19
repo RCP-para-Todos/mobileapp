@@ -22,6 +22,7 @@ public class AprendiendoRCPPaso3Activity extends AppCompatActivity {
     private CheckBox cbBarrio;
     private CheckBox cbIndicarInicioRCP;
     private CheckBox cbAguardarConfirmacionOperador;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

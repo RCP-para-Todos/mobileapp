@@ -22,13 +22,11 @@ import com.jk.rcp.main.data.adapter.EventListAdapter;
 import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventPatch;
 import com.jk.rcp.main.data.model.event.EventPost;
-import com.jk.rcp.main.data.model.event.EventListRequestCallbacks;
 import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
 import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.remote.Request;
 
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 

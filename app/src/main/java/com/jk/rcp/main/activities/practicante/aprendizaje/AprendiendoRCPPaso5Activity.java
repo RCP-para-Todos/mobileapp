@@ -110,7 +110,7 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
             public void onFinish() {
                 tv_time.setText("0 secs");
                 setProgress(progress, endTime);
-                    alert11.show();
+                alert11.show();
 
             }
         };

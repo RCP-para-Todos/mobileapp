@@ -10,7 +10,7 @@ import java.io.IOException;
 import static android.content.Context.AUDIO_SERVICE;
 
 public class AlarmManager implements MediaPlayer.OnPreparedListener {
-//    private static AlarmManager singleInstance = null;
+    //    private static AlarmManager singleInstance = null;
     private final MediaPlayer mPlayer;
     private int mVolumeLevel = -1;
 
