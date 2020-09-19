@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,7 +50,12 @@ public class LoginActivity extends AppCompatActivity {
     private APIService mAPIService;
     private EventManager eventManager;
     private User globalUser;
-
+    private ProgressBar progressBar;
+    private Button submitBtn;
+    private Button registerButton;
+    private EditText usernameEditText;
+    private EditText passwordEditText;
+    private CheckBox cbRememberPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,33 +76,33 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         eventManager = new EventManager(this);
-        final EditText username = findViewById(R.id.input_user);
-        final EditText password = findViewById(R.id.input_password);
-        final EditText rol = findViewById(R.id.input_password);
-        final CheckBox rememberPassword = findViewById(R.id.rememberPassword);
+        usernameEditText = findViewById(R.id.input_user);
+        passwordEditText = findViewById(R.id.input_password);
+        cbRememberPassword = findViewById(R.id.rememberPassword);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
 
-
-        Button submitBtn = findViewById(R.id.btn_login);
-        TextView register = findViewById(R.id.btn_create_user);
+        submitBtn = findViewById(R.id.btn_login);
+        registerButton = findViewById(R.id.btn_create_user);
         mAPIService = ApiUtils.getAPIService();
         preferences = getSharedPreferences("preferences", MODE_PRIVATE);
 
         if (preferences.contains("user")) {
-            username.setText(preferences.getString("user", null));
+            usernameEditText.setText(preferences.getString("user", null));
         } else {
-            username.setText("");
+            usernameEditText.setText("");
         }
 
         if (preferences.contains("password")) {
-            password.setText(preferences.getString("password", null));
+            passwordEditText.setText(preferences.getString("password", null));
         } else {
-            password.setText("");
+            passwordEditText.setText("");
         }
 
         if (preferences.contains("rememberPassword")) {
-            rememberPassword.setChecked(preferences.getString("rememberPassword", null).equals("true"));
+            cbRememberPassword.setChecked(preferences.getString("rememberPassword", null).equals("true"));
         } else {
-            rememberPassword.setChecked(false);
+            cbRememberPassword.setChecked(false);
         }
 
         if (!DeviceUtils.isDeviceOnline(getApplicationContext())) {
@@ -120,9 +125,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (!DeviceUtils.isDeviceOnline(getApplicationContext())) {
                     Toast.makeText(getApplicationContext(), "No hay conexión a internet", Toast.LENGTH_SHORT).show();
                 } else {
-                    String trimmedEmail = username.getText().toString().trim();
-                    String trimmedPassword = password.getText().toString().trim();
-                    Boolean savePassword = rememberPassword.isChecked();
+                    String trimmedEmail = usernameEditText.getText().toString().trim();
+                    String trimmedPassword = passwordEditText.getText().toString().trim();
+                    Boolean savePassword = cbRememberPassword.isChecked();
                     if (!TextUtils.isEmpty(trimmedEmail) && !TextUtils.isEmpty(trimmedPassword)) {
                         sendLogin(trimmedEmail, trimmedPassword, savePassword);
                     }
@@ -130,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        register.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -142,35 +147,48 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        final EditText email = findViewById(R.id.input_user);
-        final EditText password = findViewById(R.id.input_password);
-        final CheckBox rememberPassword = findViewById(R.id.rememberPassword);
+        usernameEditText = findViewById(R.id.input_user);
+        passwordEditText = findViewById(R.id.input_password);
+        cbRememberPassword = findViewById(R.id.rememberPassword);
 
         if (preferences.contains("user")) {
-            email.setText(preferences.getString("user", null));
+            usernameEditText.setText(preferences.getString("user", null));
         } else {
-            email.setText("");
+            usernameEditText.setText("");
         }
 
         if (preferences.contains("password")) {
-            password.setText(preferences.getString("password", null));
+            passwordEditText.setText(preferences.getString("password", null));
         } else {
-            password.setText("");
+            passwordEditText.setText("");
         }
 
         if (preferences.contains("rememberPassword")) {
-            rememberPassword.setChecked(preferences.getString("rememberPassword", null).equals("true"));
+            cbRememberPassword.setChecked(preferences.getString("rememberPassword", null).equals("true"));
         } else {
-            rememberPassword.setChecked(false);
+            cbRememberPassword.setChecked(false);
         }
-        password.clearFocus();
+        passwordEditText.clearFocus();
     }
 
     public void sendLogin(final String username, final String password, final Boolean savePassword) {
+        progressBar.setVisibility(View.VISIBLE);
+        registerButton.setEnabled(false);
+        submitBtn.setEnabled(false);
+        usernameEditText.setEnabled(false);
+        passwordEditText.setEnabled(false);
+        cbRememberPassword.setEnabled(false);
+
         Request request = new Request();
         request.sendLogin(username, password, new LoginRequestCallbacks() {
             @Override
             public void onSuccess(@NonNull LoginPost value) {
+                progressBar.setVisibility(View.GONE);
+                registerButton.setEnabled(true);
+                submitBtn.setEnabled(true);
+                usernameEditText.setEnabled(true);
+                passwordEditText.setEnabled(true);
+                cbRememberPassword.setEnabled(true);
                 if (value != null) {
                     Log.d(TAG, value.toString());
                     globalUser.setToken(value.getToken());
@@ -205,11 +223,23 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onError(@NonNull Throwable throwable) {
+                progressBar.setVisibility(View.GONE);
+                registerButton.setEnabled(true);
+                submitBtn.setEnabled(true);
+                usernameEditText.setEnabled(true);
+                passwordEditText.setEnabled(true);
+                cbRememberPassword.setEnabled(true);
                 Toast.makeText(getApplicationContext(), "Ocurrió un error: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onErrorBody(@NonNull ResponseBody errorBody) {
+                progressBar.setVisibility(View.GONE);
+                registerButton.setEnabled(true);
+                submitBtn.setEnabled(true);
+                usernameEditText.setEnabled(true);
+                passwordEditText.setEnabled(true);
+                cbRememberPassword.setEnabled(true);
                 if (errorBody != null) {
                     JsonParser parser = new JsonParser();
                     JsonElement mJson = null;

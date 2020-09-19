@@ -12,6 +12,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.jk.rcp.R;
 import com.jk.rcp.main.activities.common.EstadisticasActivity;
 import com.jk.rcp.main.activities.practicante.aprendizaje.AprendiendoRCPPaso1Activity;
+import com.jk.rcp.main.activities.practicante.juego.JuegoPaso1Activity;
+import com.jk.rcp.main.activities.practicante.simulacion.SimulacionPaso1Activity;
 import com.jk.rcp.main.data.model.user.User;
 
 public class HomeActivityPracticante extends AppCompatActivity {
@@ -43,6 +45,22 @@ public class HomeActivityPracticante extends AppCompatActivity {
         btnAprenderRCP.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivityPracticante.this, AprendiendoRCPPaso1Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton btnSimulacion = (ImageButton) findViewById(R.id.btn_simulacion);
+        btnSimulacion.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivityPracticante.this, SimulacionPaso1Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton btnJuego = (ImageButton) findViewById(R.id.btn_modo_juego);
+        btnJuego.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivityPracticante.this, JuegoPaso1Activity.class);
                 startActivity(intent);
             }
         });

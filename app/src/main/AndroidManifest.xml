@@ -55,6 +55,26 @@
             android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".main.activities.practicante.juego.JuegoPaso1Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.juego.JuegoPaso2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.simulacion.SimulacionPaso1Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.simulacion.SimulacionPaso2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".main.activities.practicante.aprendizaje.AprendiendoRCPPaso1Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
