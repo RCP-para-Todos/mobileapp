@@ -16,6 +16,8 @@ class SimulacionEstadisticasViewController: UIViewController, ChartViewDelegate
     @IBOutlet weak var pieChartView: PieChartView!
     @IBOutlet weak var labelTotalInsuflado: UILabel!
     @IBOutlet weak var buttonIrAlInicio: UIButton!
+    @IBOutlet weak var backButton: UINavigationItem!
+    
     
     var instantes : [Instante] = []
     var ambulanciaClicked : Bool = false
@@ -34,6 +36,7 @@ class SimulacionEstadisticasViewController: UIViewController, ChartViewDelegate
     }
         
     func initInterface(){
+        self.backButton.backBarButtonItem?.isEnabled = false //PROBAR
         self.buttonIrAlInicio.layer.cornerRadius = 15
     }
     
