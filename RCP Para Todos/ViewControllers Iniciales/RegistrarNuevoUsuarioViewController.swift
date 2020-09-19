@@ -28,6 +28,7 @@ class RegistrarNuevoUsuario: UIViewController
     }
     
     func initInterface(){
+        self.navigationController!.navigationBar.items![0].backBarButtonItem!.isEnabled = true
         self.buttonRegistrarNuevaCuenta.layer.cornerRadius = 15
     }
     
