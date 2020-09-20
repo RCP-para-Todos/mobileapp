@@ -56,7 +56,7 @@ class Instante {
     public static func porcentajeTotalSobreVida(instantes: [Instante]) -> Double{
         let porcentajeTotalSobreVida : Double = 100
         let tiempoTotalInactividad = Instante.tiempoTotalInactividad(instantes: instantes)
-        return porcentajeTotalSobreVida - tiempoTotalInactividad * 10
+        return porcentajeTotalSobreVida - (tiempoTotalInactividad / 60) * 10
     }
     
     public static func porcentajeInsuflacionesCorrectas(instantes: [Instante]) -> Double{
