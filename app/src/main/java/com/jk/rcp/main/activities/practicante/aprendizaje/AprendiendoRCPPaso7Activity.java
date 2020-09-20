@@ -113,7 +113,19 @@ public class AprendiendoRCPPaso7Activity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         Log.d(TAG, "Finalizando activity");
+        if(countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+
         finish();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(countDownTimer != null) {
+            countDownTimer.cancel();
+        }
     }
 }

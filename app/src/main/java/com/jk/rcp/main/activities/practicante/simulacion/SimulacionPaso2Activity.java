@@ -109,10 +109,11 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                tv_time.setText("0 secs");
+                if (getApplicationContext() == SimulacionPaso2Activity.this) {
+                                tv_time.setText("0 secs");
                 setProgress(progress, endTime);
                 alert11.show();
-
+            }
             }
         };
         Log.d(TAG, "arranca");
@@ -129,7 +130,18 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         Log.d(TAG, "Finalizando activity");
+        if(countDownTimer != null) {
+            countDownTimer.cancel();
+        }
         finish();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(countDownTimer != null) {
+            countDownTimer.cancel();
+        }
     }
 }

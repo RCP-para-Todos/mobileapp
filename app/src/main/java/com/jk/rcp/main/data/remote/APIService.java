@@ -117,7 +117,7 @@ public interface APIService {
     );
 
     @GET("events/{eventId}")
-    Call<UserPost> getEvent(@Path("eventId") String id,
+    Call<EventPatch> getEvent(@Path("eventId") String id,
                             @Header("Authorization") String auth);
 
     @PATCH("events/{eventId}")

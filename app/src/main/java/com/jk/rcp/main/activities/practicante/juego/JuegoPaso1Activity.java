@@ -15,23 +15,22 @@ import com.jk.rcp.R;
 
 public class JuegoPaso1Activity extends AppCompatActivity {
     private static final String TAG = "JuegoPaso1Activity";
-    private Button btnIniciarSimulacion;
+    private Button btnJugar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aprender_rcp_paso1);
+        setContentView(R.layout.activity_juego_paso1);
         // Configuro la toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Modo Juego");
         // Boton para ir atras
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnIniciarSimulacion = findViewById(R.id.btnIniciarSimulacion);
-        btnIniciarSimulacion.setEnabled(false);
-        btnIniciarSimulacion.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
-        btnIniciarSimulacion.setOnClickListener(new View.OnClickListener() {
+        btnJugar = (Button) findViewById(R.id.btnJugar);
+
+        btnJugar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(JuegoPaso1Activity.this, JuegoPaso2Activity.class);
                 startActivity(intent);

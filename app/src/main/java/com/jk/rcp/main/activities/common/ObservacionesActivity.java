@@ -19,10 +19,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jk.rcp.R;
 import com.jk.rcp.main.data.adapter.EventListAdapter;
-import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventPatch;
+import com.jk.rcp.main.data.model.event.EventPatchRequestCallbacks;
 import com.jk.rcp.main.data.model.event.EventPost;
-import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
 import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.remote.Request;
 
@@ -35,13 +34,14 @@ public class ObservacionesActivity extends AppCompatActivity {
     private User globalUser;
     private ListView eventList;
     private EventListAdapter eventListAdapter;
-    private Event event = null;
+    private EventPatch event = null;
     private CheckBox cbDisponeAyuda;
     private CheckBox cbBrazosFlexionados;
     private CheckBox cbDemora;
     private CheckBox cbNoConsulta;
     private CheckBox cbNoAtento;
     private EditText multilineText;
+    private String name;
 
     //En esto usar fragmentos
     @Override
@@ -58,13 +58,16 @@ public class ObservacionesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (getIntent().getExtras() != null) {
-            event = (Event) getIntent().getSerializableExtra("event");
+            event = (EventPatch) getIntent().getSerializableExtra("event");
             Log.d(TAG, event.toString());
+
+            name = (String) getIntent().getSerializableExtra("name");
+
             TextView practicante = (TextView) findViewById(R.id.practicanteTextView);
-            practicante.setText(event.getUser().getName());
+            practicante.setText(name);
 
             TextView fecha = (TextView) findViewById(R.id.fechaTextView);
-            fecha.setText(event.getEventDate());
+            fecha.setText(event.getCreatedDate());
 
             cbBrazosFlexionados = (CheckBox) findViewById(R.id.cbBrazosFlexionados);
             if (event.getBrazosFlexionados() != null) {
@@ -112,9 +115,9 @@ public class ObservacionesActivity extends AppCompatActivity {
         }
     }
 
-    private void updateObservation(Event event, String token) {
+    private void updateObservation(EventPatch event, String token) {
         Request request = new Request();
-        request.updateObservations(event, token, new EventRequestCallbacks() {
+        request.updateObservations(event, token, new EventPatchRequestCallbacks() {
             @Override
             public void onSuccess(@NonNull final EventPatch event) {
                 Log.d(TAG, event.toString());

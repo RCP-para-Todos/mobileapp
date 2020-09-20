@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 
 import okhttp3.ResponseBody;
 
-public interface EventRequestCallbacks {
-    void onSuccess(@NonNull Event value);
+public interface EventPatchRequestCallbacks {
+    void onSuccess(@NonNull EventPatch value);
 
     void onError(@NonNull Throwable throwable);
 

@@ -32,6 +32,8 @@
             android:name=".main.activities.common.ObservacionesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
+            android:launchMode="singleTask"
+
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".main.activities.common.ActividadActivity"
