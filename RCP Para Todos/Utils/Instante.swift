@@ -12,11 +12,13 @@ class Instante {
     var Insuflacion: String
     var Compresion: String
     var Posicion: String
+    var PosicionCabeza: String
 
-    init(insuflacion: String, compresion: String, posicion: String) {
+    init(insuflacion: String, compresion: String, posicion: String, posicionCabeza: String) {
         self.Insuflacion = insuflacion
         self.Compresion = compresion
         self.Posicion = posicion
+        self.PosicionCabeza = posicionCabeza
     }
     
     public static func toJson(instantes: [Instante]) -> [[String : Any]]{
@@ -31,11 +33,7 @@ class Instante {
     }
     
     public static func tiempoTotalManiobra(instantes: [Instante]) -> Int{
-        var tiempoTotal : Int = 0
-        for _ in instantes{
-            tiempoTotal+=1
-        }
-        return tiempoTotal/2
+        return instantes.count / 2
     }
     
     /* El tiempo de inactividad es solo contar las nulas sumando al tiempo de inactividad.
@@ -85,8 +83,18 @@ class Instante {
     }
     
     // TODO
-    public static func cantidadInsuflacionesCorrectasPosicionCabeza(instantes: [Instante]) -> Double{
-        return 1.0;
+    public static func cantidadInsuflacionesIncorrectasPosicionCabeza(instantes: [Instante]) -> Double{
+        var cantidadInsuflacionesTotales : Double = 0
+        var cantidadInsuflacionesIncorrectas : Double = 0
+        for i in instantes{
+            if(i.Insuflacion == "Insuficiente" || i.Insuflacion == "Correcta" || i.Insuflacion == "Excesiva"){
+                cantidadInsuflacionesTotales = cantidadInsuflacionesTotales + 1
+                if(i.PosicionCabeza == "Incorrecta"){
+                    cantidadInsuflacionesIncorrectas = cantidadInsuflacionesIncorrectas + 1
+                }
+            }
+        }
+        return (cantidadInsuflacionesIncorrectas / cantidadInsuflacionesTotales) * 100
     }
     
     // TODO

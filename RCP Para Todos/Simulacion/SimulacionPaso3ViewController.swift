@@ -60,22 +60,36 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
         self.scheduledCountDown()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.centralManager = nil
+        self.timerCountDown.invalidate()
+    }
+    
     func inicializarBarraSuperior()
     {
         self.title = "Simulacion RCP Paso 3"
         let backButton = UIBarButtonItem()
         backButton.isEnabled = true
-        backButton.title = "Atras";
-        self.navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
+        backButton.title = "Atras"
+        backButton.target = self
+        backButton.action = #selector(volverAtras2Views)
+        self.navigationController!.navigationBar.topItem!.rightBarButtonItem = backButton //TODO
     }
+    
+    @objc func volverAtras2Views() {
+        print("PUSH")
+        self.navigationController!.popViewControllers(viewsToPop: 3)
+    }
+
     
     func tratamientoRecepcionBluetooth(datosCorrectos: [String]){
         print("ReciboBluetoothPaso3Simulacion")
         let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
         let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
         let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)
+        let posicionCabeza: String = Conversor.posicionCabezaToString(n: Int(datosCorrectos[3])!)
         
-        let instante : Instante = Instante(insuflacion: insuflacion, compresion: compresion, posicion: posicion)
+        let instante : Instante = Instante(insuflacion: insuflacion, compresion: compresion, posicion: posicion, posicionCabeza: posicionCabeza)
         
         //Agregado de instante al vector.
         self.instantes.append(instante)
@@ -101,6 +115,7 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
     func logicaEntornoNoSeguro(instante: Instante){
         if(self.entornoNoSeguroClicked && !self.elEntornoEsSeguro){
             if(instante.Compresion != "Nula" || instante.Insuflacion != "Nula"){
+                self.centralManager = nil
                 self.performSegue(withIdentifier: "pasoEstadisticasSimulacion", sender: nil)
             }
         }
@@ -159,13 +174,14 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
         let duracion = String(Constants.SIMULACION_DURACION_SEGUNDOS_PASO3)
         let tipo = "simulacion"
         let event_date = Utils.hoy()
-        var contador : Int = 0
-        var instantes : [[String : Any]] = []
-        for i in self.instantes{
-            let temp = ["nro": contador, "insuflacion": i.Insuflacion, "compresion": i.Compresion, "posicion":i.Posicion] as [String : Any]
-            instantes.append(temp)
-            contador = contador + 1
-        }
+        let instantes : [[String : Any]] = Instante.toJson(instantes: self.instantes)
+        let tiempoTotalInactividad = Instante.tiempoTotalInactividad(instantes: self.instantes)
+        let porcentajeSobrevida = Instante.porcentajeTotalSobreVida(instantes: self.instantes)
+        let porcentajeInsuflacionesCorrectas = Instante.porcentajeInsuflacionesCorrectas(instantes: self.instantes)
+        let porcentajeCompresionesCorrectas = Instante.porcentajeCompresionesCorrectas(instantes: self.instantes)
+        let cantidadInsuflacionesCorrectasMalaPosicion = Instante.cantidadInsuflacionesIncorrectasPosicionCabeza(instantes: self.instantes)
+        let fuerzaPromedioAplicada = Instante.fuerzaPromedioAplicada(instantes: self.instantes)
+        let calidadInsuflaciones = Instante.calidadInsuflaciones(instantes: self.instantes)
         
         let parameters : [String: Any] = [
             "user" : usuarioActivo!,
@@ -173,7 +189,14 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
             "duration" : duracion,
             "type" : tipo,
             "event_date": event_date,
-            "instants": instantes
+            "instants": instantes,
+            "tiempoInactividad": tiempoTotalInactividad,
+            "porcentajeSobrevida": porcentajeSobrevida,
+            "porcentajeInsuflacionOk": porcentajeInsuflacionesCorrectas,
+            "porcentajeCompresionOk": porcentajeCompresionesCorrectas,
+            "cantidadInsuflacionesOkMalCabeza": cantidadInsuflacionesCorrectasMalaPosicion,
+            "fuerzaPromedioAplicada": fuerzaPromedioAplicada,
+            "calidadInsuflaciones":calidadInsuflaciones
             ]
         self.serviceEvento?.newEvento(parameters: parameters, completion: self.newEvento)
     }
@@ -201,6 +224,7 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
             self.seconds = -1
             self.labelTimerCountDown.text = "00:00:00"
             self.subirEvento()
+            self.centralManager = nil
             self.performSegue(withIdentifier: "pasoEstadisticasSimulacion", sender: nil)
         }
         else{

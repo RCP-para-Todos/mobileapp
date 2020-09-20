@@ -98,10 +98,6 @@ class AprendizajePaso2ViewController: UIViewController, CBCentralManagerDelegate
             segundoCheckBox.setImage(UIImage(named: "checked"), for: .normal)
             self.segundoEstado = true
         }
-        else{
-            segundoCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
-            self.segundoEstado = false
-        }
         if(self.primeroEstado && self.segundoEstado && self.terceroEstado){
             self.continuarButton.backgroundColor = Constants.COLOR_BOTON_ACTIVADO
             self.continuarButton.isEnabled = true

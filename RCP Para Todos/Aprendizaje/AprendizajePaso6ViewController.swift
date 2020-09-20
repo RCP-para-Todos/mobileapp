@@ -128,8 +128,9 @@ class AprendizajePaso6ViewController: UIViewController, CBCentralManagerDelegate
         let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
         let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
         let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)
+        let posicionCabeza: String = Conversor.posicionCabezaToString(n: Int(datosCorrectos[3])!)
         
-        let instante : Instante = Instante(insuflacion: insuflacion, compresion: compresion, posicion: posicion)
+        let instante : Instante = Instante(insuflacion: insuflacion, compresion: compresion, posicion: posicion, posicionCabeza: posicionCabeza)
         
         //Llegado los 30 segundos.
         if(mediosSegundos == 60){

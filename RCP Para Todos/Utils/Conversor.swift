@@ -39,4 +39,12 @@ class Conversor{
             return ""
         }
     }
+    
+    class func posicionCabezaToString(n: Int) -> String{
+        switch(n){
+        case 0: return "Incorrecta"
+        case 1: return "Correcta"
+        default: return ""
+        }
+    }
 }

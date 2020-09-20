@@ -87,8 +87,9 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
         let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
         let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
         let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)
+        let posicionCabeza: String = Conversor.posicionCabezaToString(n: Int(datosCorrectos[3])!)
         
-        let instante : Instante = Instante(insuflacion: insuflacion, compresion: compresion, posicion: posicion)
+        let instante : Instante = Instante(insuflacion: insuflacion, compresion: compresion, posicion: posicion, posicionCabeza: posicionCabeza)
         
         //Agregado de instante al vector.
         self.instantes.append(instante)
@@ -160,7 +161,7 @@ class AprendizajePaso8ViewController: UIViewController, CBCentralManagerDelegate
         let porcentajeSobrevida = Instante.porcentajeTotalSobreVida(instantes: self.instantes)
         let porcentajeInsuflacionesCorrectas = Instante.porcentajeInsuflacionesCorrectas(instantes: self.instantes)
         let porcentajeCompresionesCorrectas = Instante.porcentajeCompresionesCorrectas(instantes: self.instantes)
-        let cantidadInsuflacionesCorrectasMalaPosicion = Instante.cantidadInsuflacionesCorrectasPosicionCabeza(instantes: self.instantes)
+        let cantidadInsuflacionesCorrectasMalaPosicion = Instante.cantidadInsuflacionesIncorrectasPosicionCabeza(instantes: self.instantes)
         let fuerzaPromedioAplicada = Instante.fuerzaPromedioAplicada(instantes: self.instantes)
         let calidadInsuflaciones = Instante.calidadInsuflaciones(instantes: self.instantes)
         

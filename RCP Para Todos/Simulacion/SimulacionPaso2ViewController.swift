@@ -38,11 +38,28 @@ class SimulacionPaso2ViewController: UIViewController
     
     func initLogica(){
         if(self.escenarioRandom == 0){
-            self.imagenSimulacion.image = UIImage(named: "SimulacionPaso1")
+            self.imagenSimulacion.image = UIImage(named: "escenario1")
             self.elEntornoEsSeguro = true
         }
         else if(self.escenarioRandom == 1){
-            //TODO
+            self.imagenSimulacion.image = UIImage(named: "escenario2")
+            self.elEntornoEsSeguro = false
+        }
+        else if(self.escenarioRandom == 2){
+            self.imagenSimulacion.image = UIImage(named: "escenario3")
+            self.elEntornoEsSeguro = false
+        }
+        else if(self.escenarioRandom == 3){
+            self.imagenSimulacion.image = UIImage(named: "escenario4")
+            self.elEntornoEsSeguro = false
+        }
+        else if(self.escenarioRandom == 4){
+            self.imagenSimulacion.image = UIImage(named: "escenario5")
+            self.elEntornoEsSeguro = true
+        }
+        else if(self.escenarioRandom == 5){
+            self.imagenSimulacion.image = UIImage(named: "escenario6")
+            self.elEntornoEsSeguro = true
         }
     }
     
@@ -130,12 +147,12 @@ class SimulacionPaso2ViewController: UIViewController
     
     @IBAction func buttonEntornoNoSeguroClicked(_ sender: Any) {
         self.entornoNoSeguroClicked = true
-        self.buttonLlamarAmbulancia.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
+        self.buttonElEntornoNoEsSeguro.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
     }
     
     @IBAction func buttonLlamarAmbulancia(_ sender: Any) {
         self.ambulanciaClicked = true
-        self.buttonElEntornoNoEsSeguro.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
+        self.buttonLlamarAmbulancia.backgroundColor = Constants.COLOR_BOTON_DESACTIVADO
     }
     
     

@@ -58,11 +58,11 @@ class VerActividadViewController: UIViewController{
         self.evento = evento
         self.labelTiempoTotalManiobra.text = String(evento.duracion)
         self.labelTiempoInactividad.text = String(evento.tiempoInactividad!)
-        self.labelPorcentajeCompresiones.text = String(evento.porcentajeCompresion!)+"%"
+        self.labelPorcentajeCompresiones.text = String(evento.porcentajeCompresion!).trunc(length: 4)+"%"
         self.labelFuerzaPromedioAplicada.text = String(evento.fuerzaPromedioAplicada!)
-        self.labelPorcentajeSobrevida.text = String(evento.porcentajeSobrevida!)+"%"
-        self.labelPorcentajeInsuflaciones.text = String(evento.porcentajeInsuflacion!)+"%"
-        self.labelCabezaPosicion.text = String(evento.cabezaPosicion!)
+        self.labelPorcentajeSobrevida.text = String(evento.porcentajeSobrevida!).trunc(length: 4)+"%"
+        self.labelPorcentajeInsuflaciones.text = String(evento.porcentajeInsuflacion!).trunc(length: 4)+"%"
+        self.labelCabezaPosicion.text = String(evento.cabezaPosicion!).trunc(length: 4)+"%"
         self.labelCalidadInsuflaciones.text = String(evento.calidadInsuflaciones!)
     }
     

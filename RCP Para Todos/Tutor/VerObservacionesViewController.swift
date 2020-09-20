@@ -44,14 +44,15 @@ class VerObservacionesViewController: UIViewController{
     }
     
     func initInterface(){
+        
         self.buttonRegistrar.layer.cornerRadius = 15
         self.labelFecha.text = Utils.translateDateMongo(date: evento!.fecha)
-        self.primeroEstado = evento!.brazosFlexionados ?? false
-        self.segundoEstado = evento!.noConsultaEstadoVictima ?? false
-        self.terceroEstado = evento!.noEstaAtentoAlEscenario ?? false
+        self.primeroEstado = !evento!.brazosFlexionados!
+        self.segundoEstado = !evento!.noConsultaEstadoVictima!
+        self.terceroEstado = !evento!.noEstaAtentoAlEscenario!
         self.cuartoEstado
-            = evento!.disponeAyudaNoSolicita ?? false
-        self.quintoEstado = evento!.demoraTomaDecisiones ?? false
+            = !evento!.disponeAyudaNoSolicita!
+        self.quintoEstado = !evento!.demoraTomaDecisiones!
         self.textObservaciones.text = evento!.observaciones
         
         self.logicaCheckBox1()
@@ -115,57 +116,57 @@ class VerObservacionesViewController: UIViewController{
     }
     
     func logicaCheckBox1(){
-        if(self.primeroEstado){
+        if(!self.primeroEstado){
             self.primerCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
-            self.primeroEstado = false
+            self.primeroEstado = true
         }
         else{
             self.primerCheckBox.setImage(UIImage(named: "checked"), for: .normal)
-            self.primeroEstado = true
+            self.primeroEstado = false
         }
     }
     
     func logicaCheckBox2(){
-        if(self.segundoEstado){
+        if(!self.segundoEstado){
             self.segundoCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
-            self.segundoEstado = false
+            self.segundoEstado = true
         }
         else{
             self.segundoCheckBox.setImage(UIImage(named: "checked"), for: .normal)
-            self.segundoEstado = true
+            self.segundoEstado = false
         }
     }
     
     func logicaCheckBox3(){
-        if(self.terceroEstado){
+        if(!self.terceroEstado){
             self.tercerCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
-            self.terceroEstado = false
+            self.terceroEstado = true
         }
         else{
             self.tercerCheckBox.setImage(UIImage(named: "checked"), for: .normal)
-            self.terceroEstado = true
+            self.terceroEstado = false
         }
     }
     
     func logicaCheckBox4(){
-        if(self.cuartoEstado){
+        if(!self.cuartoEstado){
             self.cuartoCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
-            self.cuartoEstado = false
+            self.cuartoEstado = true
         }
         else{
             self.cuartoCheckBox.setImage(UIImage(named: "checked"), for: .normal)
-            self.cuartoEstado = true
+            self.cuartoEstado = false
         }
     }
     
     func logicaCheckBox5(){
-        if(self.quintoEstado){
+        if(!self.quintoEstado){
             self.quintoCheckBox.setImage(UIImage(named: "unchecked"), for: .normal)
-            self.quintoEstado = false
+            self.quintoEstado = true
         }
         else{
             self.quintoCheckBox.setImage(UIImage(named: "checked"), for: .normal)
-            self.quintoEstado = true
+            self.quintoEstado = false
         }
     }
     
