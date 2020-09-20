@@ -8,9 +8,11 @@ import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventListRequestCallbacks;
 import com.jk.rcp.main.data.model.event.EventPatch;
 import com.jk.rcp.main.data.model.event.EventPatchRequestCallbacks;
-import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
 import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.LoginRequestCallbacks;
+import com.jk.rcp.main.data.model.user.User;
+import com.jk.rcp.main.data.model.user.Users;
+import com.jk.rcp.main.data.model.user.UsersRequestCallbacks;
 
 import java.util.List;
 
@@ -174,6 +176,32 @@ public class Request {
 
             @Override
             public void onFailure(Call<List<Course>> call, Throwable t) {
+                if (requestCallbacks != null) {
+                    requestCallbacks.onError(t);
+                }
+                t.printStackTrace();
+                Log.e(TAG, "Error al enviar el request.");
+            }
+
+        });
+    }
+
+    public void getUnasignedPeople(String token, final UsersRequestCallbacks requestCallbacks) {
+        mAPIService.getUsers("nocourse", token).enqueue(new Callback<List<Users>>() {
+            @Override
+            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
+                if (requestCallbacks != null) {
+                    if (response.isSuccessful()) {
+                        assert response.body() != null;
+                        requestCallbacks.onSuccess(response.body());
+                    } else {
+                        requestCallbacks.onErrorBody(response.errorBody());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Users>> call, Throwable t) {
                 if (requestCallbacks != null) {
                     requestCallbacks.onError(t);
                 }

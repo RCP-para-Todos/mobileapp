@@ -115,7 +115,7 @@ public class User extends Application {
         return "Bearer " + this.token;
     }
 
-    @Override
+      @Override
     public String toString() {
         return "User{" +
                 "username='" + username + '\'' +

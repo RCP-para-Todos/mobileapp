@@ -7,6 +7,7 @@ import com.jk.rcp.main.data.model.instant.Instant;
 import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.model.user.UserPost;
+import com.jk.rcp.main.data.model.user.Users;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,11 +140,10 @@ public interface APIService {
 
     // Inicio metodos de Users
     @GET("users")
-    Call<List<User>> getUsers(@Header("Authorization") String auth);
+    Call<List<User>> getAllUsers(@Header("Authorization") String auth);
 
     @GET("users")
-    Call<List<User>> getUsers(@Query("q") String noCourse, @Header("Authorization") String auth);
-
+    Call<List<Users>> getUsers(@Query("q") String noCourse, @Header("Authorization") String auth);
     @GET("users/{userId}")
     Call<UserPost> getUser(@Path("userId") String id,
                            @Header("Authorization") String auth);
