@@ -9,6 +9,8 @@ import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.model.user.UserPost;
 import com.jk.rcp.main.data.model.user.Users;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,11 +58,11 @@ public interface APIService {
     // Inicio metodos de Courses
     @POST("courses")
     @FormUrlEncoded
-    Call<UserPost> addCourse(@Header("Authorization") String auth,
+    Call<Course> addCourse(@Header("Authorization") String auth,
                              @Field("name") String name,
                              @Field("event_date") String eventDate,
                              @Field("instructor") String instructor,
-                             @Field("student") ArrayList<String> students
+                             @Field("students") JSONArray students
     );
 
     @GET("courses")

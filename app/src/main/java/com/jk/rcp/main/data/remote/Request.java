@@ -3,6 +3,7 @@ package com.jk.rcp.main.data.remote;
 import android.util.Log;
 
 import com.jk.rcp.main.data.model.course.Course;
+import com.jk.rcp.main.data.model.course.CourseRequestCallbacks;
 import com.jk.rcp.main.data.model.course.CoursesRequestCallbacks;
 import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventListRequestCallbacks;
@@ -14,6 +15,9 @@ import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.model.user.Users;
 import com.jk.rcp.main.data.model.user.UsersRequestCallbacks;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -241,4 +245,33 @@ public class Request {
         Log.d(TAG, response);
     }
 
+    public void crearCurso(String nombre, String fechaActual, String nombreInstructor, List<String> userIds, String token, final CourseRequestCallbacks requestCallbacks) {
+        JSONArray ids = new JSONArray();
+        for (String id:userIds
+             ) {
+            ids.put(id);
+        }
+        mAPIService.addCourse(token, nombre, fechaActual, nombreInstructor, ids).enqueue(new Callback<Course>() {
+            @Override
+            public void onResponse(Call<Course> call, Response<Course> response) {
+                if (requestCallbacks != null) {
+                    if (response.isSuccessful()) {
+                        requestCallbacks.onSuccess(response.body());
+                    } else {
+                        requestCallbacks.onErrorBody(response.errorBody());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Course> call, Throwable t) {
+                if (requestCallbacks != null) {
+                    requestCallbacks.onError(t);
+                }
+                t.printStackTrace();
+                Log.e(TAG, "Error al enviar el request.");
+            }
+
+        });
+    }
 }

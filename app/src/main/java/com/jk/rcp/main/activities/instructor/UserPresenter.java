@@ -14,10 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jk.rcp.R;
+import com.jk.rcp.main.data.model.course.Student;
 import com.jk.rcp.main.data.model.user.Users;
 import com.otaliastudios.autocomplete.RecyclerViewPresenter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -53,7 +55,6 @@ public class UserPresenter extends RecyclerViewPresenter<Users> {
 
     @Override
     protected void onQuery(@Nullable CharSequence query) {
-        Log.d(TAG, CrearCursoActivity.getPersonas().toString());
         if (TextUtils.isEmpty(query)) {
             Log.d("prueba", "todo");
             adapter.setData(all);
@@ -61,16 +62,27 @@ public class UserPresenter extends RecyclerViewPresenter<Users> {
             query = query.toString().toLowerCase();
             List<Users> list = new ArrayList<>();
             for (Users u : all) {
-                Log.d("prueba", u.getName());
-                if (u.getName().toLowerCase().contains(query) ||
-                        u.getName().toLowerCase().contains(query)) {
-                    list.add(u);
+                if(!containsName(CrearCursoActivity.getPersonas(), u.getName())) {
+                    Log.d("ad", "adentro");
+                    if (u.getName().toLowerCase().contains(query) ||
+                            u.getName().toLowerCase().contains(query)) {
+                        list.add(u);
+                    }
                 }
             }
             adapter.setData(list);
-            Log.e("UserPresenter", "found " + list.size() + " users for query " + query);
+//            Log.e("UserPresenter", "found " + list.size() + " users for query " + query);
         }
         adapter.notifyDataSetChanged();
+    }
+
+    public static boolean containsName(Collection<Student> c, String name) {
+        for(Student o : c) {
+            if(o != null && o.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected class Adapter extends RecyclerView.Adapter<Adapter.Holder> {

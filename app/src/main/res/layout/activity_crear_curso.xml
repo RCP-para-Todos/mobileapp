@@ -9,7 +9,7 @@
     android:focusableInTouchMode="true">
 
     <Button
-        android:id="@+id/btnRegistrarObservaciones"
+        android:id="@+id/btnCrearCurso"
         android:layout_width="293dp"
         android:layout_height="46dp"
         android:layout_marginBottom="16dp"

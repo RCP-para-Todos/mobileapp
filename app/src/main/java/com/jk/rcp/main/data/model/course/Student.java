@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Student implements Serializable {
 
@@ -22,6 +23,18 @@ public class Student implements Serializable {
         super();
         this.id = id;
         this.name = name;
+    }
+
+    /**
+     * @param name
+     */
+    public Student(String name) {
+        super();
+        this.name = name;
+    }
+
+    public Student() {
+
     }
 
     public String getId() {
@@ -46,5 +59,21 @@ public class Student implements Serializable {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        boolean sameSame = false;
+
+        if (object != null && object instanceof Student) {
+            sameSame = this.name == ((Student) object).name;
+        }
+
+        return sameSame;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jk.rcp.R;
+import com.jk.rcp.main.data.adapter.StudentsListAdapter;
+import com.jk.rcp.main.data.model.course.Course;
+import com.jk.rcp.main.data.model.course.CourseRequestCallbacks;
+import com.jk.rcp.main.data.model.course.Student;
 import com.jk.rcp.main.data.model.event.EventPost;
 import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.model.user.Users;
@@ -29,19 +35,26 @@ import com.otaliastudios.autocomplete.AutocompleteCallback;
 import com.otaliastudios.autocomplete.AutocompletePresenter;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.ResponseBody;
 
 public class CrearCursoActivity extends AppCompatActivity {
     private static final String TAG = "CrearCursoActivity";
-    private static List<String> personas;
+    private static List<Student> personas;
     private Autocomplete userAutocomplete;
     private User globalUser;
     private EditText edit;
+    private ListView studentsList;
+    private StudentsListAdapter studentsListAdapter;
+    private List<Users> usersWithoutCourse;
+    private EditText courseName;
 
-    public static List<String> getPersonas() {
+    public static List<Student> getPersonas() {
         return personas;
     }
 
@@ -50,7 +63,7 @@ public class CrearCursoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_curso);
         globalUser = (User) getApplicationContext();
-    personas = new ArrayList<String>();
+        personas = new ArrayList<Student>();
         // Obtengo los eventos de la API, con el token
         obtenerGenteDisponible(globalUser.getBearerToken());
 
@@ -65,17 +78,87 @@ public class CrearCursoActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String nombre = edit.getText().toString().trim();
-
-                if(nombre != null && !nombre.equals("")){
-                    personas.add(nombre);
+                if (nombre != null && !nombre.equals("")) {
+                    personas.add(new Student(nombre));
                     Log.d(TAG, personas.toString());
                     edit.setText("");
+                    studentsListAdapter.notifyDataSetChanged();
                 }
-
-
             }
         });
 
+        studentsList = findViewById(R.id.studentsList);
+        studentsListAdapter = new StudentsListAdapter(getApplicationContext(), personas);
+        studentsList.setAdapter(studentsListAdapter);
+
+        courseName = findViewById(R.id.nombreCursoEditText);
+        Button btnCrearCurso = findViewById(R.id.btnCrearCurso);
+        btnCrearCurso.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (personas.size() > 0 && !courseName.getText().toString().equals("")) {
+                    Log.d(TAG, personas.toString());
+                    Log.d(TAG, usersWithoutCourse.toString());
+                    List<String> userIds = new ArrayList<String>();
+                    for (Student student : personas
+                    ) {
+                        String id = getId(usersWithoutCourse, student.getName());
+                        if (!id.equals("")) {
+                            userIds.add(id);
+                        }
+                    }
+                    Log.d(TAG, userIds.toString());
+                    crearCurso(courseName.getText().toString(), userIds, globalUser.getUsername(), globalUser.getBearerToken());
+                }
+
+            }
+        });
+    }
+
+
+    public static String getId(List<Users> c, String name) {
+        for (Users o : c) {
+            if (o != null && o.getName().equals(name)) {
+                return o.getId();
+            }
+        }
+        return "";
+    }
+
+    private void crearCurso(String nombre, List<String> userIds, String nombreInstructor, String token) {
+        Request request = new Request();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String fechaActual = dateFormat.format(date);
+        request.crearCurso(nombre, fechaActual, nombreInstructor, userIds, token, new CourseRequestCallbacks() {
+            @Override
+            public void onSuccess(@NonNull final Course course) {
+                Toast.makeText(getApplicationContext(), "Curso creado correctamente", Toast.LENGTH_LONG).show();
+                finish();
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                Toast.makeText(getApplicationContext(), "Ocurrió un error: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onErrorBody(@NonNull ResponseBody errorBody) {
+                if (errorBody != null) {
+                    JsonParser parser = new JsonParser();
+                    JsonElement mJson = null;
+                    try {
+                        mJson = parser.parse(errorBody.string());
+                        Gson gson = new Gson();
+                        EventPost errorResponse = gson.fromJson(mJson, EventPost.class);
+
+                        Toast.makeText(getApplicationContext(), "Ocurrió un error", Toast.LENGTH_LONG).show();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     private void obtenerGenteDisponible(String token) {
@@ -85,6 +168,7 @@ public class CrearCursoActivity extends AppCompatActivity {
             public void onSuccess(@NonNull final List<Users> personas) {
                 Log.d(TAG, personas.toString());
                 setupUserAutocomplete(personas);
+                usersWithoutCourse = personas;
             }
 
             @Override
