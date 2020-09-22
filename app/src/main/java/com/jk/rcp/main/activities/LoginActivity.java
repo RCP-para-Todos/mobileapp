@@ -196,8 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                     globalUser.setRefreshToken(value.getRefreshToken());
                     globalUser.setRol(value.getRol());
                     globalUser.setCourses(value.getCourses());
-
-
+                    globalUser.setUsername(username);
                 }
                 // Recordar usuario y contraseña
                 if (savePassword) {

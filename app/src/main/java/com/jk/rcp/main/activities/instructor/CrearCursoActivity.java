@@ -80,7 +80,6 @@ public class CrearCursoActivity extends AppCompatActivity {
                 String nombre = edit.getText().toString().trim();
                 if (nombre != null && !nombre.equals("")) {
                     personas.add(new Student(nombre));
-                    Log.d(TAG, personas.toString());
                     edit.setText("");
                     studentsListAdapter.notifyDataSetChanged();
                 }
@@ -96,8 +95,6 @@ public class CrearCursoActivity extends AppCompatActivity {
         btnCrearCurso.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (personas.size() > 0 && !courseName.getText().toString().equals("")) {
-                    Log.d(TAG, personas.toString());
-                    Log.d(TAG, usersWithoutCourse.toString());
                     List<String> userIds = new ArrayList<String>();
                     for (Student student : personas
                     ) {
@@ -106,7 +103,6 @@ public class CrearCursoActivity extends AppCompatActivity {
                             userIds.add(id);
                         }
                     }
-                    Log.d(TAG, userIds.toString());
                     crearCurso(courseName.getText().toString(), userIds, globalUser.getUsername(), globalUser.getBearerToken());
                 }
 
@@ -118,7 +114,7 @@ public class CrearCursoActivity extends AppCompatActivity {
     public static String getId(List<Users> c, String name) {
         for (Users o : c) {
             if (o != null && o.getName().equals(name)) {
-                return o.getId();
+                return o.getName();
             }
         }
         return "";
@@ -166,7 +162,6 @@ public class CrearCursoActivity extends AppCompatActivity {
         request.getUnasignedPeople(token, new UsersRequestCallbacks() {
             @Override
             public void onSuccess(@NonNull final List<Users> personas) {
-                Log.d(TAG, personas.toString());
                 setupUserAutocomplete(personas);
                 usersWithoutCourse = personas;
             }

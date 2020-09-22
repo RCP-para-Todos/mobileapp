@@ -1,6 +1,7 @@
 package com.jk.rcp.main.data.remote;
 
 import com.jk.rcp.main.data.model.course.Course;
+import com.jk.rcp.main.data.model.course.NewCourse;
 import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventPatch;
 import com.jk.rcp.main.data.model.instant.Instant;
@@ -9,12 +10,11 @@ import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.model.user.UserPost;
 import com.jk.rcp.main.data.model.user.Users;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -57,12 +57,8 @@ public interface APIService {
 
     // Inicio metodos de Courses
     @POST("courses")
-    @FormUrlEncoded
     Call<Course> addCourse(@Header("Authorization") String auth,
-                             @Field("name") String name,
-                             @Field("event_date") String eventDate,
-                             @Field("instructor") String instructor,
-                             @Field("students") JSONArray students
+                           @Body NewCourse newCourse
     );
 
     @GET("courses")
@@ -121,7 +117,7 @@ public interface APIService {
 
     @GET("events/{eventId}")
     Call<EventPatch> getEvent(@Path("eventId") String id,
-                            @Header("Authorization") String auth);
+                              @Header("Authorization") String auth);
 
     @PATCH("events/{eventId}")
     @FormUrlEncoded
@@ -146,6 +142,7 @@ public interface APIService {
 
     @GET("users")
     Call<List<Users>> getUsers(@Query("q") String noCourse, @Header("Authorization") String auth);
+
     @GET("users/{userId}")
     Call<UserPost> getUser(@Path("userId") String id,
                            @Header("Authorization") String auth);
