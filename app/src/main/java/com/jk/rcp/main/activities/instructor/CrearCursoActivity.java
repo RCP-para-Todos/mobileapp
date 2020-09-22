@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jk.rcp.R;
-import com.jk.rcp.main.data.adapter.StudentsListAdapter;
+import com.jk.rcp.main.data.adapter.StudentsEditableListAdapter;
 import com.jk.rcp.main.data.model.course.Course;
 import com.jk.rcp.main.data.model.course.CourseRequestCallbacks;
 import com.jk.rcp.main.data.model.course.Student;
@@ -50,7 +50,7 @@ public class CrearCursoActivity extends AppCompatActivity {
     private User globalUser;
     private EditText edit;
     private ListView studentsList;
-    private StudentsListAdapter studentsListAdapter;
+    private StudentsEditableListAdapter studentsListAdapter;
     private List<Users> usersWithoutCourse;
     private EditText courseName;
 
@@ -87,7 +87,7 @@ public class CrearCursoActivity extends AppCompatActivity {
         });
 
         studentsList = findViewById(R.id.studentsList);
-        studentsListAdapter = new StudentsListAdapter(getApplicationContext(), personas);
+        studentsListAdapter = new StudentsEditableListAdapter(getApplicationContext(), personas);
         studentsList.setAdapter(studentsListAdapter);
 
         courseName = findViewById(R.id.nombreCursoEditText);
