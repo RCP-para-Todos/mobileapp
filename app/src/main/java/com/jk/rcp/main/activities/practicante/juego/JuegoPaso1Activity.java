@@ -116,13 +116,13 @@ public class JuegoPaso1Activity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-//        if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
-//            scanLeDevice(false);
-//        }
-//        if (mBluetoothGatt != null) {
-//            mBluetoothGatt.close();
-//        }
-//        if (timer != null) timer.cancel();
+        if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
+            scanLeDevice(false);
+        }
+        if (mBluetoothGatt != null) {
+            mBluetoothGatt.close();
+        }
+        if (timer != null) timer.cancel();
     }
 
 

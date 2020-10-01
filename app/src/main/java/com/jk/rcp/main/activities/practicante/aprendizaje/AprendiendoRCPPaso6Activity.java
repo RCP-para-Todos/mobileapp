@@ -18,6 +18,7 @@ import com.jk.rcp.R;
 import com.jk.rcp.main.utils.AlarmManager;
 
 import static android.view.animation.Animation.RELATIVE_TO_SELF;
+import static androidx.lifecycle.Lifecycle.State.STARTED;
 
 public class AprendiendoRCPPaso6Activity extends AppCompatActivity {
     private static final String TAG = "AprendiendoRC_paso_6_PActivity";
@@ -108,10 +109,15 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                tv_time.setText("0 secs");
-                setProgress(progress, endTime);
-                alert11.show();
+                if (getLifecycle().getCurrentState().isAtLeast(STARTED)
+                ) {
 
+                    tv_time.setText("0 secs");
+                    setProgress(progress, endTime);
+                    alert11.show();
+                } else {
+                    cancel();
+                }
             }
         };
         Log.d(TAG, "arranca");
@@ -128,7 +134,7 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         Log.d(TAG, "Finalizando activity");
-        if(countDownTimer != null) {
+        if (countDownTimer != null) {
             countDownTimer.cancel();
         }
         finish();
@@ -138,7 +144,7 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(countDownTimer != null) {
+        if (countDownTimer != null) {
             countDownTimer.cancel();
         }
     }

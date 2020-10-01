@@ -60,7 +60,7 @@ public class HomeActivityPracticante extends AppCompatActivity {
         ImageButton btnJuego = (ImageButton) findViewById(R.id.btn_modo_juego);
         btnJuego.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivityPracticante.this, JuegoPaso1Activity.class);
+                Intent intent = new Intent(HomeActivityPracticante.this, ModoJuegoActivity.class);
                 startActivity(intent);
             }
         });

@@ -43,16 +43,16 @@ public class AlarmManager implements MediaPlayer.OnPreparedListener {
 
             AudioManager am = (AudioManager) context.getSystemService(AUDIO_SERVICE);
             if (am != null) {
-                mVolumeLevel = am.getStreamVolume(AudioManager.STREAM_ALARM);
-                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), 0);
+                mVolumeLevel = am.getStreamVolume(AudioManager.STREAM_MUSIC);
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, 3, 0);
             }
 
-            mPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mPlayer.stop();
             mPlayer.reset();
             mPlayer.setLooping(repeat);
             mPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-            mPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mPlayer.prepareAsync();
         } catch (IOException e) {
             e.printStackTrace();

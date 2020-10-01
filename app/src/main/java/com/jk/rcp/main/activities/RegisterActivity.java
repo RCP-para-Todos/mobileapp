@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.jk.rcp.R;
 import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.LoginRequestCallbacks;
@@ -44,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioGroup toggle;
     private RadioButton practicante;
     private RadioButton instructor;
-    private String rol = "practicante";
+    private String rol = "usuario";
     private ProgressBar progressBar;
 
     @Override
@@ -76,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                                               public void onCheckedChanged(RadioGroup group, int checkedId) {
                                                   switch (checkedId) {
                                                       case R.id.off:
-                                                          rol = "practicante";
+                                                          rol = "usuario";
                                                           break;
                                                       case R.id.on:
                                                           rol = "instructor";
@@ -180,6 +181,8 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
+                        } catch (JsonSyntaxException e1) {
+                            e1.printStackTrace();
                         }
                     }
                 }

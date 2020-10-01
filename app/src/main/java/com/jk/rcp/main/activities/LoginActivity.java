@@ -26,6 +26,7 @@ import com.google.android.gms.security.ProviderInstaller;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.jk.rcp.R;
 import com.jk.rcp.main.activities.instructor.HomeActivityInstructor;
 import com.jk.rcp.main.activities.practicante.HomeActivityPracticante;
@@ -253,6 +254,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } catch (JsonSyntaxException e1) {
+                        e1.printStackTrace();
                     }
                 }
             }
