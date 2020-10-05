@@ -92,27 +92,20 @@ public interface APIService {
 
     @POST("events")
     @FormUrlEncoded
-    Call<UserPost> addEvent(@Header("Authorization") String auth,
-                            @Field("_id") Integer id,
-                            @Field("event_date") String eventDate,
+    Call<Event> addEvent(@Header("Authorization") String auth,
                             @Field("user") String user,
                             @Field("course") String course,
+                            @Field("duration") Integer duration,
                             @Field("type") String type,
-                            @Field("duration") String duration,
-                            @Field("puntaje") Double puntaje,
+                            @Field("event_date") String eventDate,
+                            @Field("instants") List<Instant> instants,
+                            @Field("calidadInsuflaciones") String calidadInsuflaciones,
                             @Field("tiempoInactividad") Double tiempoInactividad,
                             @Field("porcentajeSobrevida") Double porcentajeSobrevida,
                             @Field("porcentajeInsuflacionOk") Double porcentajeInsuflacionOk,
                             @Field("porcentajeCompresionOk") Double porcentajeCompresionOk,
                             @Field("cantidadInsuflacionesOkMalCabeza") Double cantidadInsuflacionesOkMalCabeza,
-                            @Field("fuerzaPromedioAplicada") Double fuerzaPromedioAplicada,
-                            @Field("instants") ArrayList<Instant> instants,
-                            @Field("observations") String observations,
-                            @Field("brazosFlexionados") Boolean brazosFlexionados,
-                            @Field("noConsultaEstadoVictima") Boolean noConsultaEstadoVictima,
-                            @Field("noEstaAtentoAlEscenario") Boolean noEstaAtentoAlEscenario,
-                            @Field("disponeAyudaNoSolicita") Boolean disponeAyudaNoSolicita,
-                            @Field("demoraTomaDesiciones") Boolean demoraTomaDesiciones
+                            @Field("fuerzaPromedioAplicada") Double fuerzaPromedioAplicada
     );
 
     @GET("events/{eventId}")

@@ -34,6 +34,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
+    <TextView
+        android:id="@+id/puntaje"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/AppTheme.Toolbar"
@@ -42,7 +54,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/corazon1"
         android:layout_width="86dp"
         android:layout_height="74dp"
         android:layout_marginStart="64dp"
@@ -53,33 +65,74 @@
         app:srcCompat="@drawable/ic_favorite_red_24dp" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/viento1"
+        android:layout_width="86dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="24dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/corazon1"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/viento" />
+
+    <ImageView
+        android:id="@+id/viento2"
+        android:layout_width="86dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="68dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/corazon2"
+        app:layout_constraintTop_toBottomOf="@+id/viento1"
+        app:srcCompat="@drawable/viento" />
+
+    <ImageView
+        android:id="@+id/viento3"
+        android:layout_width="86dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="68dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/corazon3"
+        app:layout_constraintTop_toBottomOf="@+id/viento2"
+        app:srcCompat="@drawable/viento" />
+
+    <ImageView
+        android:id="@+id/viento4"
+        android:layout_width="86dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="68dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/corazon4"
+        app:layout_constraintTop_toBottomOf="@+id/viento3"
+        app:srcCompat="@drawable/viento" />
+
+    <ImageView
+        android:id="@+id/corazon2"
         android:layout_width="86dp"
         android:layout_height="74dp"
         android:layout_marginStart="64dp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/corazon1"
         app:srcCompat="@drawable/ic_favorite_red_24dp" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/corazon3"
         android:layout_width="86dp"
         android:layout_height="74dp"
         android:layout_marginStart="64dp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/corazon2"
         app:srcCompat="@drawable/ic_favorite_red_24dp" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/corazon4"
         android:layout_width="86dp"
         android:layout_height="74dp"
         android:layout_marginStart="64dp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/corazon3"
         app:srcCompat="@drawable/ic_favorite_red_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

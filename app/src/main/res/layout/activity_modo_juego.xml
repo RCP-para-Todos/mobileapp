@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:backgroundTint="#4CAF50"
-        android:enabled="false"
         android:text="Jugar"
         android:textColor="#FFFFFF"
         android:textStyle="bold"

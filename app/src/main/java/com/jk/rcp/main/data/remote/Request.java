@@ -10,11 +10,14 @@ import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventListRequestCallbacks;
 import com.jk.rcp.main.data.model.event.EventPatch;
 import com.jk.rcp.main.data.model.event.EventPatchRequestCallbacks;
+import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
+import com.jk.rcp.main.data.model.instant.Instant;
 import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.LoginRequestCallbacks;
 import com.jk.rcp.main.data.model.user.Users;
 import com.jk.rcp.main.data.model.user.UsersRequestCallbacks;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -262,6 +265,60 @@ public class Request {
 
             @Override
             public void onFailure(Call<Course> call, Throwable t) {
+                if (requestCallbacks != null) {
+                    requestCallbacks.onError(t);
+                }
+                t.printStackTrace();
+                Log.e(TAG, "Error al enviar el request.");
+            }
+
+        });
+    }
+
+    public void crearEvento(String usuarioActivo,
+                            String curso,
+                            Integer duration,
+                            String tipo,
+                            String event_date,
+                            List<Instant> instantes,
+                            Double tiempoInactividad,
+                            Double porcentajeSobrevida,
+                            String calidadInsuflaciones,
+                            Double porcentajeInsuflacionOk,
+                            Double porcentajeCompresionOk,
+                            Double cantidadInsuflacionesOkMalCabeza,
+                            Double fuerzaPromedioAplicada,
+                            String bearerToken,
+                            final EventRequestCallbacks requestCallbacks) {
+        mAPIService.addEvent(
+                bearerToken,
+                usuarioActivo,
+                curso,
+                duration,
+                tipo,
+                event_date,
+                instantes,
+                calidadInsuflaciones,
+                tiempoInactividad,
+                porcentajeSobrevida,
+                porcentajeInsuflacionOk,
+                porcentajeCompresionOk,
+                cantidadInsuflacionesOkMalCabeza,
+                fuerzaPromedioAplicada
+        ).enqueue(new Callback<Event>() {
+            @Override
+            public void onResponse(Call<Event> call, Response<Event> response) {
+                if (requestCallbacks != null) {
+                    if (response.isSuccessful()) {
+                        requestCallbacks.onSuccess(response.body());
+                    } else {
+                        requestCallbacks.onErrorBody(response.errorBody());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Event> call, Throwable t) {
                 if (requestCallbacks != null) {
                     requestCallbacks.onError(t);
                 }

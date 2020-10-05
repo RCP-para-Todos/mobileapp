@@ -35,6 +35,19 @@ public class Instant implements Serializable {
         this.posicion = posicion;
     }
 
+    /**
+     * @param posicion
+     * @param insuflacion
+     * @param compresion
+     */
+    public Instant(String insuflacion, String compresion, String posicion) {
+        super();
+        this.insuflacion = insuflacion;
+        this.compresion = compresion;
+        this.posicion = posicion;
+    }
+
+
     // Funciones de calculo
     public static int tiempoTotalManiobra(List<Instant> instantes) {
         int tiempoTotal = 0;
