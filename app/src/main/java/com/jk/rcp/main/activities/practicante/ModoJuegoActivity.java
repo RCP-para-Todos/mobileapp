@@ -1,6 +1,7 @@
 package com.jk.rcp.main.activities.practicante;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,9 @@ import com.jk.rcp.main.activities.practicante.juego.JuegoPaso2Activity;
 public class ModoJuegoActivity extends AppCompatActivity {
     private static final String TAG = "ModoJuegoActivity";
     private Button btnJugar;
+    private BluetoothAdapter mBluetoothAdapter;
+    private static final int REQUEST_ENABLE_BT = 200;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,7 @@ public class ModoJuegoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        beginBLE();
     }
 
     public void beginBLE() {
