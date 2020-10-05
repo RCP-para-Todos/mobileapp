@@ -11,13 +11,13 @@ import com.jk.rcp.main.data.model.event.EventListRequestCallbacks;
 import com.jk.rcp.main.data.model.event.EventPatch;
 import com.jk.rcp.main.data.model.event.EventPatchRequestCallbacks;
 import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
+import com.jk.rcp.main.data.model.event.NewEvent;
 import com.jk.rcp.main.data.model.instant.Instant;
 import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.LoginRequestCallbacks;
 import com.jk.rcp.main.data.model.user.Users;
 import com.jk.rcp.main.data.model.user.UsersRequestCallbacks;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -290,21 +290,26 @@ public class Request {
                             Double fuerzaPromedioAplicada,
                             String bearerToken,
                             final EventRequestCallbacks requestCallbacks) {
+
+        NewEvent newEvent = new NewEvent();
+
+        newEvent.setUser(usuarioActivo);
+        newEvent.setCourse(curso);
+        newEvent.setDuration(duration);
+        newEvent.setType(tipo);
+        newEvent.setEventDate(event_date);
+        newEvent.setInstants(instantes);
+        newEvent.setCalidadInsuflaciones(calidadInsuflaciones);
+        newEvent.setTiempoInactividad(tiempoInactividad);
+        newEvent.setPorcentajeSobrevida(porcentajeSobrevida);
+        newEvent.setPorcentajeInsuflacionOk(porcentajeInsuflacionOk);
+        newEvent.setPorcentajeSobrevida(porcentajeCompresionOk);
+        newEvent.setCantidadInsuflacionesOkMalCabeza(cantidadInsuflacionesOkMalCabeza);
+        newEvent.setFuerzaPromedioAplicada(fuerzaPromedioAplicada);
+
         mAPIService.addEvent(
-                bearerToken,
-                usuarioActivo,
-                curso,
-                duration,
-                tipo,
-                event_date,
-                instantes,
-                calidadInsuflaciones,
-                tiempoInactividad,
-                porcentajeSobrevida,
-                porcentajeInsuflacionOk,
-                porcentajeCompresionOk,
-                cantidadInsuflacionesOkMalCabeza,
-                fuerzaPromedioAplicada
+                bearerToken, newEvent
+
         ).enqueue(new Callback<Event>() {
             @Override
             public void onResponse(Call<Event> call, Response<Event> response) {

@@ -287,7 +287,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
                 new EventRequestCallbacks() {
                     @Override
                     public void onSuccess(@NonNull final Event event) {
-                        Toast.makeText(getApplicationContext(), "Curso creado correctamente", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), "Evento creado correctamente", Toast.LENGTH_LONG).show();
                         finish();
                     }
 

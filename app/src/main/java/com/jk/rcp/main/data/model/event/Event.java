@@ -122,6 +122,10 @@ public class Event implements Serializable {
         this.demoraTomaDesiciones = demoraTomaDesiciones;
     }
 
+    public Event() {
+
+    }
+
     public String getId() {
         return id;
     }

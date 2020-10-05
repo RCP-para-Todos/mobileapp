@@ -4,6 +4,7 @@ import com.jk.rcp.main.data.model.course.Course;
 import com.jk.rcp.main.data.model.course.NewCourse;
 import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventPatch;
+import com.jk.rcp.main.data.model.event.NewEvent;
 import com.jk.rcp.main.data.model.instant.Instant;
 import com.jk.rcp.main.data.model.user.LoginPost;
 import com.jk.rcp.main.data.model.user.User;
@@ -91,21 +92,8 @@ public interface APIService {
     Call<List<Event>> getEventsByPracticant(@Query("practicantName") String practicant, @Header("Authorization") String auth);
 
     @POST("events")
-    @FormUrlEncoded
     Call<Event> addEvent(@Header("Authorization") String auth,
-                            @Field("user") String user,
-                            @Field("course") String course,
-                            @Field("duration") Integer duration,
-                            @Field("type") String type,
-                            @Field("event_date") String eventDate,
-                            @Field("instants") List<Instant> instants,
-                            @Field("calidadInsuflaciones") String calidadInsuflaciones,
-                            @Field("tiempoInactividad") Double tiempoInactividad,
-                            @Field("porcentajeSobrevida") Double porcentajeSobrevida,
-                            @Field("porcentajeInsuflacionOk") Double porcentajeInsuflacionOk,
-                            @Field("porcentajeCompresionOk") Double porcentajeCompresionOk,
-                            @Field("cantidadInsuflacionesOkMalCabeza") Double cantidadInsuflacionesOkMalCabeza,
-                            @Field("fuerzaPromedioAplicada") Double fuerzaPromedioAplicada
+                         @Body NewEvent newEvent
     );
 
     @GET("events/{eventId}")
