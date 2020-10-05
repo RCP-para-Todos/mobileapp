@@ -211,6 +211,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
             if (mBluetoothGatt != null) {
                 mBluetoothGatt.close();
             }
+            subirEvento();
             Intent intent = new Intent(JuegoPaso1Activity.this, JuegoPaso2Activity.class);
             intent.putExtra("puntaje", puntaje);
             startActivity(intent);
