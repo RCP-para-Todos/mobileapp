@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerItems">
+        <item>Seleccionar dificultad</item>
+        <item>Facil (1 M)</item>
+        <item>Medio (3 M)</item>
+        <item>Dificil (5 M)</item>
+    </string-array>
+</resources>

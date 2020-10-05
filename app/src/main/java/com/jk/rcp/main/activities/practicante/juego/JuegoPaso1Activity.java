@@ -38,6 +38,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jk.rcp.R;
+import com.jk.rcp.main.activities.practicante.ModoJuegoActivity;
 import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventPost;
 import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
@@ -78,7 +79,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
     ProgressDialog progress;
     private List<Instant> instantes;
     private int mediosSegundos = 0;
-    private int count = 1000 * 45;
+    private int count = 1 * 60 * 1000;
     private int antiCount = 0;
     private int puntaje = 0;
     private Boolean inicio = false;
@@ -137,6 +138,11 @@ public class JuegoPaso1Activity extends AppCompatActivity {
             }
         }
         beginBLE();
+
+        if (getIntent().getExtras() != null && getIntent().getSerializableExtra("tiempo") != null) {
+            int tiempo = (int) getIntent().getSerializableExtra("tiempo");
+            this.count = tiempo;
+        }
     }
 
     private void sistemaIconos() {
@@ -201,6 +207,13 @@ public class JuegoPaso1Activity extends AppCompatActivity {
 
         if (this.antiCount >= this.count) {
             Log.d(TAG, "Termine!");
+            timer.cancel();
+            if (mBluetoothGatt != null) {
+                mBluetoothGatt.close();
+            }
+            Intent intent = new Intent(JuegoPaso1Activity.this, JuegoPaso2Activity.class);
+            intent.putExtra("puntaje", puntaje);
+            startActivity(intent);
         }
     }
 
@@ -391,7 +404,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
                 mBluetoothAdapter.getBluetoothLeScanner();
 
         if (enable) {
-            progress = ProgressDialog.show(this, "Scaning", "wait a min.");
+            progress = ProgressDialog.show(this, "Escaneando", "Aguarde un momento por favor");
 
             bluetoothLeScanner.startScan(mLeScanCallback);
             Log.i("scanLeDevice", "Start scan");
