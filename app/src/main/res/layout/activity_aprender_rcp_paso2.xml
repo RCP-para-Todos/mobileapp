@@ -27,6 +27,7 @@
         android:layout_height="66dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="#4CAF50"
+        android:enabled="false"
         android:text="La víctima no responde continuar con el protocolo"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
@@ -48,6 +49,7 @@
     <CheckBox
         android:id="@+id/cbSacudirVictima"
         android:layout_width="wrap_content"
+        android:enabled="false"
         android:layout_height="wrap_content"
         android:text="Sacudir a la victima por los hombros (simulador)"
         app:layout_constraintEnd_toEndOf="parent"

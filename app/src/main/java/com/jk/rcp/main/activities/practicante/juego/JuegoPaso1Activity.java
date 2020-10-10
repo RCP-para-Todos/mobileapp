@@ -38,7 +38,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jk.rcp.R;
-import com.jk.rcp.main.activities.practicante.ModoJuegoActivity;
 import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventPost;
 import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
@@ -70,8 +69,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothGatt mBluetoothGatt;
 
-    BluetoothGattCharacteristic mGattCharGetTemperature;
-    BluetoothGattCharacteristic mGattCharWriteLED;
+    BluetoothGattCharacteristic mGattChar;
 
     private static final int REQUEST_ENABLE_BT = 200;
     Timer timer;
@@ -433,17 +431,6 @@ public class JuegoPaso1Activity extends AppCompatActivity {
     };
 
     public final BluetoothGattCallback mBluetoothGattCallback = new BluetoothGattCallback() {
-//        @Override
-//        public void onCharacteristicRead (BluetoothGatt gatt,
-//                                          BluetoothGattCharacteristic characteristic,
-//                                          int status) {
-//            Log.i("onCharacteristicRead", characteristic.getStringValue(0));
-//            // mBluetoothGatt.disconnect();
-//
-//            // textView.setText("Temperature: " + characteristic.getStringValue(0) + " *C");
-//            setText(textView, "Temperature: " + characteristic.getStringValue(0) + " *C");
-//        }
-
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
@@ -456,15 +443,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
             // mBluetoothGatt.disconnect();
         }
 
-//        @Override
-//        public void onCharacteristicWrite(BluetoothGatt gatt,
-//                                          BluetoothGattCharacteristic characteristic,
-//                                          int status) {
-//            Log.i("onCharacteristicWrite", characteristic.getStringValue(0));
-//            // mBluetoothGatt.disconnect();
-//        }
-
-        @Override
+       @Override
         public void onConnectionStateChange(BluetoothGatt gatt,
                                             int status,
                                             int newState) {
@@ -484,34 +463,34 @@ public class JuegoPaso1Activity extends AppCompatActivity {
                     Log.i("onServicesDiscovered",
                             "Service characteristic UUID found: " + mGattService.getUuid().toString());
 
-                    mGattCharGetTemperature =
+                    mGattChar =
                             mGattService.getCharacteristic(UUID.fromString("6E400003-B5A3-F393-E0A9-E50E24DCCA9E"));
 
-                    if (mGattCharGetTemperature != null) {
+                    if (mGattChar != null) {
 
-                        if (gatt.setCharacteristicNotification(mGattCharGetTemperature, true) == true) {
+                        if (gatt.setCharacteristicNotification(mGattChar, true) == true) {
                             Log.d("gatt.setCharacteristicNotification", "SUCCESS!");
                         } else {
                             Log.d("gatt.setCharacteristicNotification", "FAILURE!");
                         }
-                        BluetoothGattDescriptor descriptor = mGattCharGetTemperature.getDescriptors().get(0);
-                        if (0 != (mGattCharGetTemperature.getProperties() & BluetoothGattCharacteristic.PROPERTY_INDICATE)) {
+                        BluetoothGattDescriptor descriptor = mGattChar.getDescriptors().get(0);
+                        if (0 != (mGattChar.getProperties() & BluetoothGattCharacteristic.PROPERTY_INDICATE)) {
                             // It's an indicate characteristic
-                            Log.d("onServicesDiscovered", "Characteristic (" + mGattCharGetTemperature.getUuid() + ") is INDICATE");
+                            Log.d("onServicesDiscovered", "Characteristic (" + mGattChar.getUuid() + ") is INDICATE");
                             if (descriptor != null) {
                                 descriptor.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
                                 gatt.writeDescriptor(descriptor);
                             }
                         } else {
                             // It's a notify characteristic
-                            Log.d("onServicesDiscovered", "Characteristic (" + mGattCharGetTemperature.getUuid() + ") is NOTIFY");
+                            Log.d("onServicesDiscovered", "Characteristic (" + mGattChar.getUuid() + ") is NOTIFY");
                             if (descriptor != null) {
                                 descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
                                 gatt.writeDescriptor(descriptor);
                             }
                         }
                         Log.i("onServicesDiscovered",
-                                "characteristic UUID found: " + mGattCharGetTemperature.getUuid().toString());
+                                "characteristic UUID found: " + mGattChar.getUuid().toString());
 
                         final Runnable modifyIcons = new Runnable() {
                             public void run() {
@@ -531,7 +510,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
 
                     } else {
                         Log.i("onServicesDiscovered",
-                                "characteristic not found for UUID: " + mGattCharGetTemperature.getUuid().toString());
+                                "characteristic not found for UUID: " + mGattChar.getUuid().toString());
 
                     }
 
