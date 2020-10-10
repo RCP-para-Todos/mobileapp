@@ -85,7 +85,7 @@ public class Instant implements Serializable {
     public static Double porcentajeTotalSobreVida(List<Instant> instantes) {
         Double porcentajeTotalSobreVida = 100.0;
         Double tiempoTotalInactividad = Instant.tiempoTotalInactividad(instantes);
-        return porcentajeTotalSobreVida - tiempoTotalInactividad * 10;
+        return porcentajeTotalSobreVida - (tiempoTotalInactividad / 60) * 10;
     }
 
     public static Double porcentajeInsuflacionesCorrectas(List<Instant> instantes) {
