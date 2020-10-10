@@ -242,6 +242,8 @@ public class LoginActivity extends AppCompatActivity {
                 usernameEditText.setEnabled(true);
                 passwordEditText.setEnabled(true);
                 cbRememberPassword.setEnabled(true);
+                Intent intent = new Intent(LoginActivity.this, HomeActivityPracticante.class);
+                startActivity(intent);
                 if (errorBody != null) {
                     JsonParser parser = new JsonParser();
                     JsonElement mJson = null;

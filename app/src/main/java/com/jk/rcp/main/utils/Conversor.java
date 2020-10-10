@@ -41,4 +41,15 @@ public class Conversor {
                 return "";
         }
     }
+
+    public static String posicionCabezaToString(Integer n) {
+        switch (n) {
+            case 0:
+                return "Incorrecta";
+            case 1:
+                return "Correcta";
+            default:
+                return "";
+        }
+    }
 }

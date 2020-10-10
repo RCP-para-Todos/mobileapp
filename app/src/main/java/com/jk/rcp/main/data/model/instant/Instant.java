@@ -20,6 +20,9 @@ public class Instant implements Serializable {
     @SerializedName("Posicion")
     @Expose
     private String posicion;
+    @SerializedName("PosicionCabeza")
+    @Expose
+    private String posicionCabeza;
 
     /**
      * @param posicion
@@ -27,12 +30,13 @@ public class Instant implements Serializable {
      * @param nro
      * @param compresion
      */
-    public Instant(String nro, String insuflacion, String compresion, String posicion) {
+    public Instant(String nro, String insuflacion, String compresion, String posicion, String posicionCabeza) {
         super();
         this.nro = nro;
         this.insuflacion = insuflacion;
         this.compresion = compresion;
         this.posicion = posicion;
+        this.posicionCabeza = posicionCabeza;
     }
 
     /**
@@ -40,11 +44,12 @@ public class Instant implements Serializable {
      * @param insuflacion
      * @param compresion
      */
-    public Instant(String insuflacion, String compresion, String posicion) {
+    public Instant(String insuflacion, String compresion, String posicion, String posicionCabeza) {
         super();
         this.insuflacion = insuflacion;
         this.compresion = compresion;
         this.posicion = posicion;
+        this.posicionCabeza = posicionCabeza;
     }
 
 
@@ -165,6 +170,14 @@ public class Instant implements Serializable {
         this.posicion = posicion;
     }
 
+    public String getPosicionCabeza() {
+        return posicionCabeza;
+    }
+
+    public void setPosicionCabeza(String posicionCabeza) {
+        this.posicionCabeza = posicionCabeza;
+    }
+
     @Override
     public String toString() {
         return "Instant{" +
@@ -172,6 +185,7 @@ public class Instant implements Serializable {
                 ", insuflacion='" + insuflacion + '\'' +
                 ", compresion='" + compresion + '\'' +
                 ", posicion='" + posicion + '\'' +
+                ", posicionCabeza='" + posicionCabeza + '\'' +
                 '}';
     }
 }

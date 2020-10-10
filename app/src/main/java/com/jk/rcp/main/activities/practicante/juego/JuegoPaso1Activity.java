@@ -443,7 +443,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
             // mBluetoothGatt.disconnect();
         }
 
-       @Override
+        @Override
         public void onConnectionStateChange(BluetoothGatt gatt,
                                             int status,
                                             int newState) {
@@ -531,8 +531,9 @@ public class JuegoPaso1Activity extends AppCompatActivity {
         String insuflacion = Conversor.insuflacionToString(Integer.valueOf(datosCorrectos[0]));
         String compresion = Conversor.compresionToString(Integer.valueOf(datosCorrectos[1]));
         String posicion = Conversor.posicionToString(Integer.valueOf(datosCorrectos[2]));
+        String posicionCabeza = Conversor.posicionCabezaToString(Integer.valueOf(datosCorrectos[3]));
 
-        Instant instante = new Instant(insuflacion, compresion, posicion);
+        Instant instante = new Instant(insuflacion, compresion, posicion, posicionCabeza);
 
         //Agregado de instante al vector.
         this.instantes.add(instante);

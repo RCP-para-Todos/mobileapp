@@ -83,5 +83,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2_paso6" />
 
+    <ImageView
+        android:id="@+id/viento1"
+        android:layout_width="52dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
+        app:srcCompat="@drawable/viento" />
+
+    <ImageView
+        android:id="@+id/viento2"
+        android:layout_width="52dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/viento1"
+        app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
+        app:srcCompat="@drawable/viento" />
+
+    <ImageView
+        android:id="@+id/viento3"
+        android:layout_width="52dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/viento2"
+        app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
+        app:srcCompat="@drawable/viento" />
+
+    <ImageView
+        android:id="@+id/viento4"
+        android:layout_width="52dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/viento3"
+        app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
+        app:srcCompat="@drawable/viento" />
+
+    <ImageView
+        android:id="@+id/viento5"
+        android:layout_width="52dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/viento4"
+        app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
+        app:srcCompat="@drawable/viento" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
