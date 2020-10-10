@@ -113,7 +113,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
         viento2 = findViewById(R.id.viento2);
         viento3 = findViewById(R.id.viento3);
         viento4 = findViewById(R.id.viento4);
-        puntajeTextView = findViewById(R.id.puntaje);
+        puntajeTextView = findViewById(R.id.resultado);
 
         instantes = new ArrayList<Instant>();
 

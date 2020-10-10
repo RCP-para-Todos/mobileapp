@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jk.rcp">
 
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
     <application
         android:name=".main.data.model.user.User"
         android:allowBackup="true"
@@ -33,9 +30,9 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".main.activities.common.ObservacionesActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:launchMode="singleTask"
 
             tools:ignore="LockedOrientationActivity" />
         <activity
@@ -76,6 +73,16 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".main.activities.practicante.simulacion.SimulacionPaso2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.simulacion.SimulacionPaso3AlternativoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main.activities.practicante.simulacion.SimulacionPaso3Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity" />
@@ -145,16 +152,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBAPWyt3eheET57f1KU7LB_4ayavxFsY0E" />
-
-        <service
-            android:name=".main.service.ShakeService"
-            android:enabled="true"
-            android:exported="true" />
     </application>
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

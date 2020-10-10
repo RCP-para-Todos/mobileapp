@@ -25,7 +25,7 @@
         android:id="@+id/textView"
         android:layout_width="152dp"
         android:layout_height="21dp"
-        android:text="Juego RCP"
+        android:text="Simulación"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -37,7 +37,7 @@
     <TextView
         android:id="@+id/resultado"
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:textAlignment="center"
         android:textSize="18sp"

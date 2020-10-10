@@ -52,7 +52,7 @@
 
 
     <ImageView
-        android:id="@+id/gifImageView_paso2"
+        android:id="@+id/imagen_paso2"
         android:layout_width="wrap_content"
         android:layout_height="185dp"
         android:src="@drawable/simulacionpaso1"
@@ -72,7 +72,7 @@
         android:progressDrawable="@drawable/drawable_circularprogressbar"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gifImageView_paso2" />
+        app:layout_constraintTop_toBottomOf="@+id/imagen_paso2" />
 
     <TextView
         android:id="@+id/textView_paso2"

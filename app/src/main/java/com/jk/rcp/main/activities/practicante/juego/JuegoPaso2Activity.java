@@ -24,7 +24,7 @@ public class JuegoPaso2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego_paso2);
 
-        tvPuntaje = findViewById(R.id.puntaje);
+        tvPuntaje = findViewById(R.id.resultado);
         // Configuro la toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

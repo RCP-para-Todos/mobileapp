@@ -1,35 +1,38 @@
 package com.jk.rcp.main.activities.practicante.simulacion;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.jk.rcp.R;
-import com.jk.rcp.main.activities.practicante.aprendizaje.AprendiendoRCPPaso6Activity;
-import com.jk.rcp.main.utils.AlarmManager;
 
 import static android.view.animation.Animation.RELATIVE_TO_SELF;
 
 public class SimulacionPaso2Activity extends AppCompatActivity {
     private static final String TAG = "SimulacionPaso2Activity";
-    private AlarmManager alarmManager;
     private ProgressBar progressBarView;
     private TextView tv_time;
     private int progress;
     private CountDownTimer countDownTimer;
     private int endTime = 250;
     private int myProgress = 0;
-    private AlertDialog alert11;
+    private ImageView imagen;
+    private boolean elEntornoEsSeguro;
+    private Button btnAmbulancia;
+    private Button btnEntornoNoSerguro;
+    private boolean ambulanciaClicked = false;
+    private boolean entornoNoSeguroClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         // Boton para ir atras
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        imagen = findViewById(R.id.imagen_paso2);
         progressBarView = (ProgressBar) findViewById(R.id.view_progress_bar_paso2);
         tv_time = (TextView) findViewById(R.id.tv_timer_paso2);
         MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
@@ -59,26 +62,59 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
         progressBarView.setSecondaryProgress(endTime);
         progressBarView.setProgress(0);
 
-        alarmManager = new AlarmManager(onCompletionListener);
-        alarmManager.startSound(this, "CompresionManiobraAudio.mp3", false, true);
+        if (getIntent().getExtras() != null && getIntent().getSerializableExtra("escenario") != null) {
+            String escenario = (String) getIntent().getSerializableExtra("escenario");
+            elegirEscenarioRandom(escenario.charAt(escenario.length() - 1));
+        }
 
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("Aprendizaje de compresiones realizado correctamente");
-        builder1.setTitle("Compresiones Finalizadas");
-        builder1.setCancelable(true);
+        btnAmbulancia = findViewById(R.id.btnEntornoSeguro4);
+        btnEntornoNoSerguro = findViewById(R.id.btnEntornoSeguro3);
 
-        builder1.setPositiveButton(
-                "Aceptar",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                        Intent intent = new Intent(SimulacionPaso2Activity.this, AprendiendoRCPPaso6Activity.class);
-                        startActivity(intent);
-                    }
-                });
+        btnAmbulancia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ambulanciaClicked = true;
+                btnAmbulancia.setEnabled(false);
+            }
+        });
 
+        btnEntornoNoSerguro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                entornoNoSeguroClicked = true;
+                btnEntornoNoSerguro.setEnabled(false);
+            }
+        });
+    }
 
-        alert11 = builder1.create();
+    private void elegirEscenarioRandom(int escenario) {
+        switch (escenario) {
+            case 0:
+                imagen.setImageDrawable(getResources().getDrawable(R.drawable.escenario1, getApplicationContext().getTheme()));
+                this.elEntornoEsSeguro = true;
+                break;
+            case 1:
+                imagen.setImageDrawable(getResources().getDrawable(R.drawable.escenario2, getApplicationContext().getTheme()));
+                this.elEntornoEsSeguro = false;
+                break;
+            case 2:
+                imagen.setImageDrawable(getResources().getDrawable(R.drawable.escenario3, getApplicationContext().getTheme()));
+                this.elEntornoEsSeguro = false;
+                break;
+            case 3:
+                imagen.setImageDrawable(getResources().getDrawable(R.drawable.escenario4, getApplicationContext().getTheme()));
+                this.elEntornoEsSeguro = false;
+                break;
+            case 4:
+                imagen.setImageDrawable(getResources().getDrawable(R.drawable.escenario5, getApplicationContext().getTheme()));
+                this.elEntornoEsSeguro = true;
+
+                break;
+            case 5:
+                imagen.setImageDrawable(getResources().getDrawable(R.drawable.escenario6, getApplicationContext().getTheme()));
+                this.elEntornoEsSeguro = true;
+                break;
+        }
     }
 
     private void fn_countdown() {
@@ -110,14 +146,77 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 if (getApplicationContext() == SimulacionPaso2Activity.this) {
-                                tv_time.setText("0 secs");
-                setProgress(progress, endTime);
-                alert11.show();
-            }
+                    tv_time.setText("0 secs");
+                    setProgress(progress, endTime);
+                    logicaSimulacion();
+                }
             }
         };
         Log.d(TAG, "arranca");
         countDownTimer.start();
+    }
+
+    private void logicaSimulacion() {
+
+        //ENTORNO SEGURO
+
+        //Si el entorno es seguro y se selecciona llamar a la ambulancia se realiza la simulacion.
+        if (this.elEntornoEsSeguro && this.ambulanciaClicked && !this.entornoNoSeguroClicked) {
+            Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3Activity.class);
+            startActivity(intent);
+        }
+        //Si el entorno es seguro pero no selecciona para llamar a la ambulancia se realiza la simulacion pero sera invalidada finalmente porque la ambulancia nunca llegara.
+        else if (this.elEntornoEsSeguro && !this.ambulanciaClicked && !this.entornoNoSeguroClicked) {
+            Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3Activity.class);
+            startActivity(intent);
+        }
+
+        //Si el entorno es seguro pero se selecciona el entorno no es seguro, se finalizara sin simulacion con error ya que el entorno era seguro.
+        else if (this.elEntornoEsSeguro && this.ambulanciaClicked && this.entornoNoSeguroClicked) {
+            Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3AlternativoActivity.class);
+            intent.putExtra("ambulanciaClicked", ambulanciaClicked);
+            intent.putExtra("entornoNoSeguroClicked", entornoNoSeguroClicked);
+            intent.putExtra("elEntornoEsSeguro", elEntornoEsSeguro);
+            startActivity(intent);
+        }
+
+        //Si el entorno es seguro pero se selecciona el entorno no es seguro, se finalizara sin simulacion con error ya que el entorno era seguro.
+        else if (this.elEntornoEsSeguro && !this.ambulanciaClicked && this.entornoNoSeguroClicked) {
+            Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3AlternativoActivity.class);
+            intent.putExtra("ambulanciaClicked", ambulanciaClicked);
+            intent.putExtra("entornoNoSeguroClicked", entornoNoSeguroClicked);
+            intent.putExtra("elEntornoEsSeguro", elEntornoEsSeguro);
+            startActivity(intent);
+        }
+
+        //ENTORNO NO SEGURO
+
+        //Si el entorno no es seguro y se selecciona el entorno no es seguro, se finalizara sin simulacion correctamente.
+        else if (!this.elEntornoEsSeguro && this.ambulanciaClicked && this.entornoNoSeguroClicked) {
+            Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3AlternativoActivity.class);
+            intent.putExtra("ambulanciaClicked", ambulanciaClicked);
+            intent.putExtra("entornoNoSeguroClicked", entornoNoSeguroClicked);
+            intent.putExtra("elEntornoEsSeguro", elEntornoEsSeguro);
+            startActivity(intent);
+        }
+        //Si el entorno no es seguro y se selecciona el entorno no es seguro, se finalizara sin simulacion con error ya que no se llamo a la ambulancia.
+        else if (!this.elEntornoEsSeguro && !this.ambulanciaClicked && this.entornoNoSeguroClicked) {
+            Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3AlternativoActivity.class);
+            intent.putExtra("ambulanciaClicked", ambulanciaClicked);
+            intent.putExtra("entornoNoSeguroClicked", entornoNoSeguroClicked);
+            intent.putExtra("elEntornoEsSeguro", elEntornoEsSeguro);
+            startActivity(intent);
+        }
+        //Si el entorno no es seguro pero no se selecciona el entorno no es seguro, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
+        else if (!this.elEntornoEsSeguro && !this.ambulanciaClicked && !this.entornoNoSeguroClicked) {
+            Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3Activity.class);
+            startActivity(intent);
+        }
+        //Si el entorno no es seguro pero se selecciona llamar a la ambulancia, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
+        else if (!this.elEntornoEsSeguro && this.ambulanciaClicked && !this.entornoNoSeguroClicked) {
+            Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3Activity.class);
+            startActivity(intent);
+        }
     }
 
     public void setProgress(int startTime, int endTime) {
@@ -130,7 +229,7 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         Log.d(TAG, "Finalizando activity");
-        if(countDownTimer != null) {
+        if (countDownTimer != null) {
             countDownTimer.cancel();
         }
         finish();
@@ -140,7 +239,7 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(countDownTimer != null) {
+        if (countDownTimer != null) {
             countDownTimer.cancel();
         }
     }
