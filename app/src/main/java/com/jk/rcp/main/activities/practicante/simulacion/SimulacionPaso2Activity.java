@@ -1,7 +1,6 @@
 package com.jk.rcp.main.activities.practicante.simulacion;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -48,12 +47,8 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
         imagen = findViewById(R.id.imagen_paso2);
         progressBarView = (ProgressBar) findViewById(R.id.view_progress_bar_paso2);
         tv_time = (TextView) findViewById(R.id.tv_timer_paso2);
-        MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                fn_countdown();
-            }
-        };
+
+
 
         /*Animation*/
         RotateAnimation makeVertical = new RotateAnimation(0, -90, RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f);
@@ -85,10 +80,13 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
                 btnEntornoNoSerguro.setEnabled(false);
             }
         });
+
+        fn_countdown();
     }
 
-    private void elegirEscenarioRandom(int escenario) {
-        switch (escenario) {
+    private void elegirEscenarioRandom(char escenario) {
+        int num = Integer.parseInt(String.valueOf(escenario));
+        switch (num) {
             case 0:
                 imagen.setImageDrawable(getResources().getDrawable(R.drawable.escenario1, getApplicationContext().getTheme()));
                 this.elEntornoEsSeguro = true;
@@ -145,11 +143,10 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                if (getApplicationContext() == SimulacionPaso2Activity.this) {
-                    tv_time.setText("0 secs");
-                    setProgress(progress, endTime);
-                    logicaSimulacion();
-                }
+                tv_time.setText("0 secs");
+                setProgress(progress, endTime);
+                logicaSimulacion();
+
             }
         };
         Log.d(TAG, "arranca");
@@ -157,7 +154,7 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
     }
 
     private void logicaSimulacion() {
-
+        Log.d(TAG, "ACA!");
         //ENTORNO SEGURO
 
         //Si el entorno es seguro y se selecciona llamar a la ambulancia se realiza la simulacion.

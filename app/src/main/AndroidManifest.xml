@@ -72,6 +72,11 @@
             android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".main.activities.practicante.simulacion.SimulacionEstadisticasActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".main.activities.practicante.simulacion.SimulacionPaso2Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
