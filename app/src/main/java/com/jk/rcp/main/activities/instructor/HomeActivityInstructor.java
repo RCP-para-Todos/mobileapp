@@ -30,7 +30,7 @@ public class HomeActivityInstructor extends AppCompatActivity {
         // Boton para ir atras
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ImageButton buttonVerMisCursos = (ImageButton) findViewById(R.id.btn_mis_cursos);
+        ImageButton buttonVerMisCursos = findViewById(R.id.btn_mis_cursos);
         buttonVerMisCursos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivityInstructor.this, MisCursosActivity.class);
@@ -38,7 +38,7 @@ public class HomeActivityInstructor extends AppCompatActivity {
             }
         });
 
-        Button btnCrearCurso = (Button) findViewById(R.id.btn_crear_curso);
+        Button btnCrearCurso = findViewById(R.id.btn_crear_curso);
         btnCrearCurso.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivityInstructor.this, CrearCursoActivity.class);

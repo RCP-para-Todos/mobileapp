@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
         practicante = findViewById(R.id.on);
         instructor = findViewById(R.id.off);
-        toggle = (RadioGroup) findViewById(R.id.toggle);
+        toggle = findViewById(R.id.toggle);
         toggle.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                                               @Override
                                               public void onCheckedChanged(RadioGroup group, int checkedId) {

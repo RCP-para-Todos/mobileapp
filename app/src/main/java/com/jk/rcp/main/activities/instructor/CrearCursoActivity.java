@@ -58,6 +58,15 @@ public class CrearCursoActivity extends AppCompatActivity {
         return personas;
     }
 
+    public static String getId(List<Users> c, String name) {
+        for (Users o : c) {
+            if (o != null && o.getName().equals(name)) {
+                return o.getName();
+            }
+        }
+        return "";
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +83,7 @@ public class CrearCursoActivity extends AppCompatActivity {
         // Boton para ir atras
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ImageButton btnAdd = (ImageButton) findViewById(R.id.btnAdd);
+        ImageButton btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String nombre = edit.getText().toString().trim();
@@ -108,16 +117,6 @@ public class CrearCursoActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-
-    public static String getId(List<Users> c, String name) {
-        for (Users o : c) {
-            if (o != null && o.getName().equals(name)) {
-                return o.getName();
-            }
-        }
-        return "";
     }
 
     private void crearCurso(String nombre, List<String> userIds, String nombreInstructor, String token) {

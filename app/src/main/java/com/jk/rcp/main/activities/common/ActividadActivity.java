@@ -72,7 +72,7 @@ public class ActividadActivity extends AppCompatActivity {
         fuerzaPromedioAplicada = findViewById(R.id.valueFuerzaPromedioAplicada);
         calidadInsuflaciones = findViewById(R.id.valueCalidadInsuflasiones);
         cantInsIncorrectasMalaPosicion = findViewById(R.id.valueCantidadInsuflacionesIncorrectasPorMalaPosicion);
-        buttonVerObservaciones = (Button) findViewById(R.id.btnVerObs);
+        buttonVerObservaciones = findViewById(R.id.btnVerObs);
         progressBarActividad = findViewById(R.id.progressBarActividad);
 
         if (getIntent().getExtras() != null) {

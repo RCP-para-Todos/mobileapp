@@ -63,42 +63,42 @@ public class ObservacionesActivity extends AppCompatActivity {
 
             name = (String) getIntent().getSerializableExtra("name");
 
-            TextView practicante = (TextView) findViewById(R.id.practicanteTextView);
+            TextView practicante = findViewById(R.id.practicanteTextView);
             practicante.setText(name);
 
-            TextView fecha = (TextView) findViewById(R.id.fechaTextView);
+            TextView fecha = findViewById(R.id.fechaTextView);
             fecha.setText(event.getCreatedDate());
 
-            cbBrazosFlexionados = (CheckBox) findViewById(R.id.cbBrazosFlexionados);
+            cbBrazosFlexionados = findViewById(R.id.cbBrazosFlexionados);
             if (event.getBrazosFlexionados() != null) {
                 cbBrazosFlexionados.setChecked(event.getBrazosFlexionados());
             }
 
-            cbDisponeAyuda = (CheckBox) findViewById(R.id.cbDisponeAyuda);
+            cbDisponeAyuda = findViewById(R.id.cbDisponeAyuda);
             if (event.getDisponeAyudaNoSolicita() != null) {
                 cbDisponeAyuda.setChecked(event.getDisponeAyudaNoSolicita());
             }
 
-            cbDemora = (CheckBox) findViewById(R.id.cbDisponeAyuda2);
+            cbDemora = findViewById(R.id.cbDisponeAyuda2);
             if (event.getDemoraTomaDesiciones() != null) {
                 cbDemora.setChecked(event.getDemoraTomaDesiciones());
             }
 
-            cbNoConsulta = (CheckBox) findViewById(R.id.cbNoConsulta);
+            cbNoConsulta = findViewById(R.id.cbNoConsulta);
             if (event.getNoConsultaEstadoVictima() != null) {
                 cbNoConsulta.setChecked(event.getNoConsultaEstadoVictima());
             }
 
-            cbNoAtento = (CheckBox) findViewById(R.id.cbNoAtento);
+            cbNoAtento = findViewById(R.id.cbNoAtento);
             if (event.getNoEstaAtentoAlEscenario() != null) {
                 cbNoAtento.setChecked(event.getNoEstaAtentoAlEscenario());
             }
-            multilineText = (EditText) findViewById(R.id.observationsText);
+            multilineText = findViewById(R.id.observationsText);
             if (event.getObservations() != null) {
                 multilineText.setText(event.getObservations());
             }
 
-            Button btnRegistrar = (Button) findViewById(R.id.btnRegistrarObservaciones);
+            Button btnRegistrar = findViewById(R.id.btnRegistrarObservaciones);
             btnRegistrar.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     event.setBrazosFlexionados(cbBrazosFlexionados.isChecked());

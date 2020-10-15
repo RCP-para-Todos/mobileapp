@@ -25,9 +25,9 @@ import java.util.List;
 
 public class UserPresenter extends RecyclerViewPresenter<Users> {
     private static final String TAG = "UserPresenter";
-    private List<Users> all;
     @SuppressWarnings("WeakerAccess")
     protected Adapter adapter;
+    private List<Users> all;
 
     @SuppressWarnings("WeakerAccess")
     public UserPresenter(@NonNull Context context, List<Users> users) {
@@ -35,6 +35,15 @@ public class UserPresenter extends RecyclerViewPresenter<Users> {
         this.all = users;
         Log.d("prueba", "contruscvtor");
 
+    }
+
+    public static boolean containsName(Collection<Student> c, String name) {
+        for (Student o : c) {
+            if (o != null && o.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @NonNull
@@ -62,7 +71,7 @@ public class UserPresenter extends RecyclerViewPresenter<Users> {
             query = query.toString().toLowerCase();
             List<Users> list = new ArrayList<>();
             for (Users u : all) {
-                if(!containsName(CrearCursoActivity.getPersonas(), u.getName())) {
+                if (!containsName(CrearCursoActivity.getPersonas(), u.getName())) {
                     Log.d("ad", "adentro");
                     if (u.getName().toLowerCase().contains(query) ||
                             u.getName().toLowerCase().contains(query)) {
@@ -76,30 +85,9 @@ public class UserPresenter extends RecyclerViewPresenter<Users> {
         adapter.notifyDataSetChanged();
     }
 
-    public static boolean containsName(Collection<Student> c, String name) {
-        for(Student o : c) {
-            if(o != null && o.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     protected class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
 
         private List<Users> data;
-
-        @SuppressWarnings("WeakerAccess")
-        protected class Holder extends RecyclerView.ViewHolder {
-            private View root;
-            private TextView fullname;
-
-            Holder(View itemView) {
-                super(itemView);
-                root = itemView;
-                fullname = itemView.findViewById(R.id.fullname);
-            }
-        }
 
         @SuppressWarnings("WeakerAccess")
         protected void setData(@Nullable List<Users> data) {
@@ -137,6 +125,18 @@ public class UserPresenter extends RecyclerViewPresenter<Users> {
                     dispatchClick(user);
                 }
             });
+        }
+
+        @SuppressWarnings("WeakerAccess")
+        protected class Holder extends RecyclerView.ViewHolder {
+            private View root;
+            private TextView fullname;
+
+            Holder(View itemView) {
+                super(itemView);
+                root = itemView;
+                fullname = itemView.findViewById(R.id.fullname);
+            }
         }
     }
 }

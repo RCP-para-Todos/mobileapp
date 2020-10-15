@@ -193,7 +193,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (value != null) {
                     Log.d(TAG, value.toString());
                     globalUser.setToken(value.getToken());
-                    globalUser.setAuth(value.getAuth().equals("true") ? true : false);
+                    globalUser.setAuth(value.getAuth().equals("true"));
                     globalUser.setRefreshToken(value.getRefreshToken());
                     globalUser.setRol(value.getRol());
                     globalUser.setCourses(value.getCourses());
