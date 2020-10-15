@@ -18,9 +18,8 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso2" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/btnEntornoSeguro4"
@@ -31,16 +30,15 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEntornoSeguro3" />
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="224dp"
-        android:layout_height="113dp"
+        android:layout_height="100dp"
         android:layout_marginStart="78dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="78dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
@@ -52,30 +50,56 @@
     <ImageView
         android:id="@+id/imagen_paso2"
         android:layout_width="wrap_content"
-        android:layout_height="185dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/simulacionpaso1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_paso2" />
 
-    <ProgressBar
-        android:id="@+id/view_progress_bar_paso2"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="113dp"
-        android:layout_height="113dp"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="130dp"
-        android:progressDrawable="@drawable/drawable_circularprogressbar"
-        android:visibility="visible"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagen_paso2" />
+        app:layout_constraintTop_toBottomOf="@+id/imagen_paso2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/view_progress_bar_paso2"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="113dp"
+                android:layout_height="113dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:progressDrawable="@drawable/drawable_circularprogressbar"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_timer_paso2"
+                android:layout_width="113dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="48dp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/view_progress_bar_paso2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view_progress_bar_paso2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/textView_paso2"
         android:layout_width="152dp"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:text="Simulación"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -85,15 +109,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-    <TextView
-        android:id="@+id/tv_timer_paso2"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="28dp"
-        app:layout_constraintEnd_toEndOf="@+id/view_progress_bar_paso2"
-        app:layout_constraintTop_toTopOf="@+id/view_progress_bar_paso2" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

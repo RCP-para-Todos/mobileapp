@@ -8,77 +8,33 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="194dp"
-        android:layout_height="61dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#31A111 "
-        android:text="@string/login"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/btn_create_user"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rememberPassword" />
-
-    <Button
-        android:id="@+id/btn_create_user"
-        android:layout_width="202dp"
-        android:layout_height="61dp"
-        android:layout_marginBottom="56dp"
-        android:backgroundTint="#0385FD"
-        android:text="@string/createUser"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
-
-    <CheckBox
-        android:id="@+id/rememberPassword"
-        android:layout_width="246dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="24dp"
-        android:text="Recordar contraseña"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_password" />
-
     <EditText
         android:id="@+id/input_user"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
         android:hint="@string/user"
         android:inputType="textEmailAddress"
         android:textColorLink="#FF9800"
-        app:layout_constraintBottom_toTopOf="@+id/input_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+
     <EditText
         android:id="@+id/input_password"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:singleLine="true"
-        app:layout_constraintBottom_toTopOf="@+id/rememberPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_user" />
@@ -86,28 +42,97 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="345dp"
-        android:layout_height="145dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="54dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="33dp"
         android:contentDescription="@string/logo"
-        app:layout_constraintBottom_toTopOf="@+id/input_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rcp_logo" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="37dp"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_login"
-        app:layout_constraintEnd_toEndOf="parent"
+    <LinearLayout
+        android:id="@+id/btnLoginContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rememberPassword"
-        tools:visibility="gone" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCreateUserContainer">
 
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="250dp"
+            android:layout_height="65dp"
+            android:backgroundTint="#31A111 "
+            android:text="@string/login"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCreateUserContainer" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnCreateUserContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rememberPasswordContainer">
+
+        <Button
+            android:id="@+id/btn_create_user"
+            android:layout_width="250dp"
+            android:layout_height="65dp"
+            android:backgroundTint="#0385FD"
+            android:text="@string/createUser"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rememberPasswordContainer" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rememberPasswordContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_password">
+
+        <CheckBox
+            android:id="@+id/rememberPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Recordar contraseña"
+            android:textAlignment="viewStart"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_password" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/progressContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLoginContainer">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLoginContainer"
+            tools:visibility="invisible" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="152dp"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:text="Simulación"
         android:textAlignment="center"
         android:textSize="18sp"
