@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,6 +50,7 @@ import com.jk.rcp.main.utils.Constants;
 import com.jk.rcp.main.utils.Conversor;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -220,7 +222,9 @@ public class SimulacionPaso3Activity extends AppCompatActivity {
                     public void onSuccess(@NonNull final Event event) {
 //                        Toast.makeText(getApplicationContext(), "Evento creado correctamente", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(SimulacionPaso3Activity.this, SimulacionEstadisticasActivity.class);
-                        intent.putExtra("evento", event);
+
+                        intent.putExtra("instantes", (Serializable) instantes);
+
                         startActivity(intent);
                     }
 

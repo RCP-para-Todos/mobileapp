@@ -35,6 +35,28 @@
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <TextView
+        android:id="@+id/tvCiclos"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginTop="16dp"
+        android:text="Ciclo de insuflaciones: 0"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chart1" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
         android:id="@+id/resultado"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
@@ -58,14 +80,14 @@
         android:id="@+id/btnBackHome"
         android:layout_width="265dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#2196F3"
         android:text="Volver al inicio"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultado" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCiclos" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
