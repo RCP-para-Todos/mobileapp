@@ -293,6 +293,7 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                             progressBarView.setVisibility(View.GONE);
+                            mBluetoothGatt.close();
                             Intent intent = new Intent(AprendiendoRCPPaso6Activity.this, AprendiendoRCPPaso7Activity.class);
                             startActivity(intent);
                         }
@@ -313,6 +314,7 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             progressBarView.setVisibility(View.GONE);
                             dialog.cancel();
+                            mBluetoothGatt.close();
                             Intent intent = new Intent(AprendiendoRCPPaso6Activity.this, AprendiendoRCPPaso7Activity.class);
                             startActivity(intent);
                         }

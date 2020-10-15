@@ -294,6 +294,7 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
                             dialog.cancel();
                             progressBarView.setVisibility(View.GONE);
                             countDownTimer.cancel();
+                            mBluetoothGatt.close();
                             Intent intent = new Intent(AprendiendoRCPPaso5Activity.this, AprendiendoRCPPaso6Activity.class);
                             startActivity(intent);
                         }

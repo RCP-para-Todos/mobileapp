@@ -165,6 +165,7 @@ public class AprendiendoRCPPaso2Activity extends AppCompatActivity {
         btnVictimaNoResponde.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
         btnVictimaNoResponde.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                mBluetoothGatt.close();
                 Intent intent = new Intent(AprendiendoRCPPaso2Activity.this, AprendiendoRCPPaso3Activity.class);
                 startActivity(intent);
             }
@@ -173,6 +174,7 @@ public class AprendiendoRCPPaso2Activity extends AppCompatActivity {
         btnVictimaRespondioFinalizarProtocolo = findViewById(R.id.btnVictimaRespondioFinalizarProtocolo);
         btnVictimaRespondioFinalizarProtocolo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                mBluetoothGatt.close();
                 Intent intent = new Intent(AprendiendoRCPPaso2Activity.this, AprendiendoRCPPaso8Activity.class);
                 startActivity(intent);
             }
