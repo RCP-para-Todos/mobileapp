@@ -20,9 +20,9 @@ import java.util.Random;
 
 public class SimulacionPaso1Activity extends AppCompatActivity {
     private static final String TAG = "SimulacionPaso1Activity";
+    private static final int REQUEST_ENABLE_BT = 200;
     private Button btnIniciarSimulacion;
     private BluetoothAdapter mBluetoothAdapter;
-    private static final int REQUEST_ENABLE_BT = 200;
     private TextView labelDescripcion;
     private ImageView imagen;
     private int escenario;

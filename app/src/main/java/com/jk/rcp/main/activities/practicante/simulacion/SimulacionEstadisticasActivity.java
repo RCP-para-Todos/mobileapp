@@ -102,9 +102,12 @@ public class SimulacionEstadisticasActivity extends AppCompatActivity {
                     i = i + 1;
                 } else if (instante.getCompresion().equals("Correcta")) {
                     c = c + 1;
-                    mediosegundos += 1;
                 } else if (instante.getCompresion().equals("Excesiva")) {
                     e = e + 1;
+                }
+
+                if (instante.getInsuflacion().equals("Correcta")) {
+                    mediosegundos += 1;
                 }
             }
 

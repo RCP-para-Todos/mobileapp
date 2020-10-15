@@ -17,9 +17,9 @@ import com.jk.rcp.main.activities.practicante.juego.JuegoPaso1Activity;
 
 public class ModoJuegoActivity extends AppCompatActivity {
     private static final String TAG = "ModoJuegoActivity";
+    private static final int REQUEST_ENABLE_BT = 200;
     private Button btnJugar;
     private BluetoothAdapter mBluetoothAdapter;
-    private static final int REQUEST_ENABLE_BT = 200;
     private Spinner spinner;
     private int tiempo;
 
@@ -28,7 +28,7 @@ public class ModoJuegoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modo_juego);
 
-        btnJugar = (Button) findViewById(R.id.btnJugar);
+        btnJugar = findViewById(R.id.btnJugar);
 
         btnJugar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

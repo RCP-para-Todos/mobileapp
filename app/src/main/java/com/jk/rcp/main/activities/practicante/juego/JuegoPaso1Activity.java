@@ -60,21 +60,16 @@ import okhttp3.ResponseBody;
 
 public class JuegoPaso1Activity extends AppCompatActivity {
     private static final String TAG = "JuegoPaso1Activity";
-    private Button btnJugar;
+    private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
+    private static final int REQUEST_ENABLE_BT = 200;
     public ToggleButton toggleButton;
     public TextView textView;
-
-    private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
-
+    BluetoothGattCharacteristic mGattChar;
+    Timer timer;
+    ProgressDialog progress;
+    private Button btnJugar;
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothGatt mBluetoothGatt;
-
-    BluetoothGattCharacteristic mGattChar;
-
-    private static final int REQUEST_ENABLE_BT = 200;
-    Timer timer;
-
-    ProgressDialog progress;
     private List<Instant> instantes;
     private int mediosSegundos = 0;
     private int count = 1 * 60 * 1000;
@@ -92,6 +87,114 @@ public class JuegoPaso1Activity extends AppCompatActivity {
     private ImageView viento4;
     private TextView puntajeTextView;
     private User globalUser;
+    public final BluetoothGattCallback mBluetoothGattCallback = new BluetoothGattCallback() {
+        @Override
+        public void onCharacteristicChanged(BluetoothGatt gatt,
+                                            BluetoothGattCharacteristic characteristic) {
+            byte[] data = characteristic.getValue();
+            String s = new String(data);
+            String converted = s.substring(0, 8);
+            String[] splitted = converted.split(";");
+            Log.d(TAG, "Recibo ESP32: " + converted);
+            tratamientoRecepcionBluetooth(splitted);
+            // mBluetoothGatt.disconnect();
+        }
+
+        @Override
+        public void onConnectionStateChange(BluetoothGatt gatt,
+                                            int status,
+                                            int newState) {
+            if (newState == BluetoothProfile.STATE_CONNECTED) {
+                mBluetoothGatt.discoverServices();
+            }
+        }
+
+        @Override
+        public void onServicesDiscovered(BluetoothGatt gatt,
+                                         int status) {
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                BluetoothGattService mGattService =
+                        mBluetoothGatt.getService(UUID.fromString("6E400001-B5A3-F393-E0A9-E50E24DCCA9E"));
+                if (mGattService != null) {
+
+                    Log.i("onServicesDiscovered",
+                            "Service characteristic UUID found: " + mGattService.getUuid().toString());
+
+                    mGattChar =
+                            mGattService.getCharacteristic(UUID.fromString("6E400003-B5A3-F393-E0A9-E50E24DCCA9E"));
+
+                    if (mGattChar != null) {
+
+                        if (gatt.setCharacteristicNotification(mGattChar, true) == true) {
+                            Log.d("gatt.setCharacteristicNotification", "SUCCESS!");
+                        } else {
+                            Log.d("gatt.setCharacteristicNotification", "FAILURE!");
+                        }
+                        BluetoothGattDescriptor descriptor = mGattChar.getDescriptors().get(0);
+                        if (0 != (mGattChar.getProperties() & BluetoothGattCharacteristic.PROPERTY_INDICATE)) {
+                            // It's an indicate characteristic
+                            Log.d("onServicesDiscovered", "Characteristic (" + mGattChar.getUuid() + ") is INDICATE");
+                            if (descriptor != null) {
+                                descriptor.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
+                                gatt.writeDescriptor(descriptor);
+                            }
+                        } else {
+                            // It's a notify characteristic
+                            Log.d("onServicesDiscovered", "Characteristic (" + mGattChar.getUuid() + ") is NOTIFY");
+                            if (descriptor != null) {
+                                descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+                                gatt.writeDescriptor(descriptor);
+                            }
+                        }
+                        Log.i("onServicesDiscovered",
+                                "characteristic UUID found: " + mGattChar.getUuid().toString());
+
+                        final Runnable modifyIcons = new Runnable() {
+                            public void run() {
+                                sistemaIconos();
+                            }
+                        };
+
+                        TimerTask task = new TimerTask() {
+                            public void run() {
+                                runOnUiThread(modifyIcons);
+                            }
+                        };
+
+                        //Set timer, read temperature every 2S
+                        timer = new Timer();
+                        timer.scheduleAtFixedRate(task, 5, 125);
+
+                    } else {
+                        Log.i("onServicesDiscovered",
+                                "characteristic not found for UUID: " + mGattChar.getUuid().toString());
+
+                    }
+
+                } else {
+                    Log.i("onServicesDiscovered",
+                            "Service characteristic not found for UUID: " + mGattService.getUuid().toString());
+
+                }
+
+                if (progress.isIndeterminate()) progress.dismiss();
+            }
+        }
+
+    };
+    private ScanCallback mLeScanCallback = new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, ScanResult result) {
+            super.onScanResult(callbackType, result);
+
+            Log.i("onScanResult", result.getDevice().getAddress());
+            Log.i("onScanResult", result.getDevice().getName());
+
+            scanLeDevice(false);
+
+            mBluetoothGatt = result.getDevice().connectGatt(getApplicationContext(), false, mBluetoothGattCallback);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -345,7 +448,6 @@ public class JuegoPaso1Activity extends AppCompatActivity {
         if (timer != null) timer.cancel();
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -374,7 +476,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[],
+                                           String[] permissions,
                                            int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_REQUEST_COARSE_LOCATION: {
@@ -415,116 +517,6 @@ public class JuegoPaso1Activity extends AppCompatActivity {
             Log.i("scanLeDevice", "Stop scan");
         }
     }
-
-    private ScanCallback mLeScanCallback = new ScanCallback() {
-        @Override
-        public void onScanResult(int callbackType, ScanResult result) {
-            super.onScanResult(callbackType, result);
-
-            Log.i("onScanResult", result.getDevice().getAddress());
-            Log.i("onScanResult", result.getDevice().getName());
-
-            scanLeDevice(false);
-
-            mBluetoothGatt = result.getDevice().connectGatt(getApplicationContext(), false, mBluetoothGattCallback);
-        }
-    };
-
-    public final BluetoothGattCallback mBluetoothGattCallback = new BluetoothGattCallback() {
-        @Override
-        public void onCharacteristicChanged(BluetoothGatt gatt,
-                                            BluetoothGattCharacteristic characteristic) {
-            byte[] data = characteristic.getValue();
-            String s = new String(data);
-            String converted = s.substring(0, 8);
-            String[] splitted = converted.split(";");
-            Log.d(TAG, "Recibo ESP32: " + converted);
-            tratamientoRecepcionBluetooth(splitted);
-            // mBluetoothGatt.disconnect();
-        }
-
-        @Override
-        public void onConnectionStateChange(BluetoothGatt gatt,
-                                            int status,
-                                            int newState) {
-            if (newState == BluetoothProfile.STATE_CONNECTED) {
-                mBluetoothGatt.discoverServices();
-            }
-        }
-
-        @Override
-        public void onServicesDiscovered(BluetoothGatt gatt,
-                                         int status) {
-            if (status == BluetoothGatt.GATT_SUCCESS) {
-                BluetoothGattService mGattService =
-                        mBluetoothGatt.getService(UUID.fromString("6E400001-B5A3-F393-E0A9-E50E24DCCA9E"));
-                if (mGattService != null) {
-
-                    Log.i("onServicesDiscovered",
-                            "Service characteristic UUID found: " + mGattService.getUuid().toString());
-
-                    mGattChar =
-                            mGattService.getCharacteristic(UUID.fromString("6E400003-B5A3-F393-E0A9-E50E24DCCA9E"));
-
-                    if (mGattChar != null) {
-
-                        if (gatt.setCharacteristicNotification(mGattChar, true) == true) {
-                            Log.d("gatt.setCharacteristicNotification", "SUCCESS!");
-                        } else {
-                            Log.d("gatt.setCharacteristicNotification", "FAILURE!");
-                        }
-                        BluetoothGattDescriptor descriptor = mGattChar.getDescriptors().get(0);
-                        if (0 != (mGattChar.getProperties() & BluetoothGattCharacteristic.PROPERTY_INDICATE)) {
-                            // It's an indicate characteristic
-                            Log.d("onServicesDiscovered", "Characteristic (" + mGattChar.getUuid() + ") is INDICATE");
-                            if (descriptor != null) {
-                                descriptor.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
-                                gatt.writeDescriptor(descriptor);
-                            }
-                        } else {
-                            // It's a notify characteristic
-                            Log.d("onServicesDiscovered", "Characteristic (" + mGattChar.getUuid() + ") is NOTIFY");
-                            if (descriptor != null) {
-                                descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-                                gatt.writeDescriptor(descriptor);
-                            }
-                        }
-                        Log.i("onServicesDiscovered",
-                                "characteristic UUID found: " + mGattChar.getUuid().toString());
-
-                        final Runnable modifyIcons = new Runnable() {
-                            public void run() {
-                                sistemaIconos();
-                            }
-                        };
-
-                        TimerTask task = new TimerTask() {
-                            public void run() {
-                                runOnUiThread(modifyIcons);
-                            }
-                        };
-
-                        //Set timer, read temperature every 2S
-                        timer = new Timer();
-                        timer.scheduleAtFixedRate(task, 5, 125);
-
-                    } else {
-                        Log.i("onServicesDiscovered",
-                                "characteristic not found for UUID: " + mGattChar.getUuid().toString());
-
-                    }
-
-                } else {
-                    Log.i("onServicesDiscovered",
-                            "Service characteristic not found for UUID: " + mGattService.getUuid().toString());
-
-                }
-
-                if (progress.isIndeterminate()) progress.dismiss();
-            }
-        }
-
-    };
 
     private void tratamientoRecepcionBluetooth(String[] datosCorrectos) {
         Log.d(TAG, "ReciboBluetoothPaso2Juego");

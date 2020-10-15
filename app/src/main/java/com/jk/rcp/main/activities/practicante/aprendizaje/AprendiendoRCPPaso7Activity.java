@@ -41,8 +41,8 @@ public class AprendiendoRCPPaso7Activity extends AppCompatActivity {
         // Boton para ir atras
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        progressBarView = (ProgressBar) findViewById(R.id.view_progress_bar_paso7);
-        tv_time = (TextView) findViewById(R.id.tv_timer_paso7);
+        progressBarView = findViewById(R.id.view_progress_bar_paso7);
+        tv_time = findViewById(R.id.tv_timer_paso7);
         MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -113,7 +113,7 @@ public class AprendiendoRCPPaso7Activity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         Log.d(TAG, "Finalizando activity");
-        if(countDownTimer != null) {
+        if (countDownTimer != null) {
             countDownTimer.cancel();
         }
 
@@ -124,7 +124,7 @@ public class AprendiendoRCPPaso7Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(countDownTimer != null) {
+        if (countDownTimer != null) {
             countDownTimer.cancel();
         }
     }

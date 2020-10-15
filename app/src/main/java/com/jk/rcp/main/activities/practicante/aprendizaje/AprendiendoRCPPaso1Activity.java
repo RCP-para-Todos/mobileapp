@@ -20,13 +20,13 @@ import com.jk.rcp.R;
 
 public class AprendiendoRCPPaso1Activity extends AppCompatActivity {
     private static final String TAG = "AprendiendoRCPPaso_1_Activity";
+    private static final int REQUEST_ENABLE_BT = 200;
     private Button btnEntornoSeguro;
     private CheckBox cbNoCables;
     private CheckBox cbNoPersonasHostiles;
     private CheckBox cbNoSituacionViolenta;
     private CheckBox cbNoSignosAnimales;
     private BluetoothAdapter mBluetoothAdapter;
-    private static final int REQUEST_ENABLE_BT = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,7 @@ public class AprendiendoRCPPaso1Activity extends AppCompatActivity {
         cbNoSignosAnimales.setOnCheckedChangeListener(onCheckedChangedListener);
         beginBLE();
     }
+
     public void beginBLE() {
         // BLE
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
@@ -81,6 +82,7 @@ public class AprendiendoRCPPaso1Activity extends AppCompatActivity {
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         Log.d(TAG, "Finalizando activity");

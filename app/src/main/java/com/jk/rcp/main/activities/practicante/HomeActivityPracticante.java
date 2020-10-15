@@ -12,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.jk.rcp.R;
 import com.jk.rcp.main.activities.common.EstadisticasActivity;
 import com.jk.rcp.main.activities.practicante.aprendizaje.AprendiendoRCPPaso1Activity;
-import com.jk.rcp.main.activities.practicante.juego.JuegoPaso1Activity;
 import com.jk.rcp.main.activities.practicante.simulacion.SimulacionPaso1Activity;
 import com.jk.rcp.main.data.model.user.User;
 
@@ -33,7 +32,7 @@ public class HomeActivityPracticante extends AppCompatActivity {
         // Boton para ir atras
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ImageButton buttonVerEstadisticas = (ImageButton) findViewById(R.id.btn_ver_estadisticas);
+        ImageButton buttonVerEstadisticas = findViewById(R.id.btn_ver_estadisticas);
         buttonVerEstadisticas.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivityPracticante.this, EstadisticasActivity.class);
@@ -41,7 +40,7 @@ public class HomeActivityPracticante extends AppCompatActivity {
             }
         });
 
-        ImageButton btnAprenderRCP = (ImageButton) findViewById(R.id.btn_aprender_rcp);
+        ImageButton btnAprenderRCP = findViewById(R.id.btn_aprender_rcp);
         btnAprenderRCP.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivityPracticante.this, AprendiendoRCPPaso1Activity.class);
@@ -49,7 +48,7 @@ public class HomeActivityPracticante extends AppCompatActivity {
             }
         });
 
-        ImageButton btnSimulacion = (ImageButton) findViewById(R.id.btn_simulacion);
+        ImageButton btnSimulacion = findViewById(R.id.btn_simulacion);
         btnSimulacion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivityPracticante.this, SimulacionPaso1Activity.class);
@@ -57,7 +56,7 @@ public class HomeActivityPracticante extends AppCompatActivity {
             }
         });
 
-        ImageButton btnJuego = (ImageButton) findViewById(R.id.btn_modo_juego);
+        ImageButton btnJuego = findViewById(R.id.btn_modo_juego);
         btnJuego.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivityPracticante.this, ModoJuegoActivity.class);

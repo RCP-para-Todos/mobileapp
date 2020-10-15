@@ -45,8 +45,8 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
         // Boton para ir atras
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         imagen = findViewById(R.id.imagen_paso2);
-        progressBarView = (ProgressBar) findViewById(R.id.view_progress_bar_paso2);
-        tv_time = (TextView) findViewById(R.id.tv_timer_paso2);
+        progressBarView = findViewById(R.id.view_progress_bar_paso2);
+        tv_time = findViewById(R.id.tv_timer_paso2);
 
 
 
