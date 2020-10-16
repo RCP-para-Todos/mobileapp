@@ -185,7 +185,7 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
         corazon2 = findViewById(R.id.corazon2);
         corazon3 = findViewById(R.id.corazon3);
         corazon4 = findViewById(R.id.corazon4);
-        corazon5 = findViewById(R.id.corazon3);
+        corazon5 = findViewById(R.id.corazon5);
         progressBarView = findViewById(R.id.view_progress_bar);
         tv_time = findViewById(R.id.tv_timer);
         MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
@@ -281,7 +281,7 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
             }
         }
 
-        if ((compresionesCorrectas / this.instantes.size()) > Constants.APRENDIZAJE_PORCENTAJE_COMPRESIONES_VALIDAS) {
+        if (this.instantes.size() > 0 && (compresionesCorrectas / this.instantes.size()) > Constants.APRENDIZAJE_PORCENTAJE_COMPRESIONES_VALIDAS) {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("Aprendizaje de compresiones realizado correctamente");
             builder1.setTitle("Compresiones Finalizadas");
@@ -294,7 +294,6 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
                             dialog.cancel();
                             progressBarView.setVisibility(View.GONE);
                             countDownTimer.cancel();
-                            mBluetoothGatt.close();
                             Intent intent = new Intent(AprendiendoRCPPaso5Activity.this, AprendiendoRCPPaso6Activity.class);
                             startActivity(intent);
                         }
@@ -473,7 +472,7 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
     }
 
     private void tratamientoInstantes(Instant i1, Instant i2) {
-        ImageView corazonSelecto;
+        ImageView corazonSelecto = null;
         switch (this.iteracion) {
             case 1:
                 corazonSelecto = corazon1;
@@ -488,23 +487,22 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
                 corazonSelecto = corazon4;
                 break;
             case 5:
-            default:
                 corazonSelecto = corazon5;
                 break;
         }
         iteracion++;
-
-        if (i1.getCompresion() == "Nula") {
-            corazonSelecto.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-        } else if (i1.getCompresion() == "Insuficiente") {
-            corazonSelecto.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
-        } else if (i1.getCompresion() == "Correcta") {
-            corazonSelecto.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
-        } else if (i1.getCompresion() == "Excesiva") {
-            corazonSelecto.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+        if (corazonSelecto != null) {
+            if (i1.getCompresion() == "Nula") {
+                corazonSelecto.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            } else if (i1.getCompresion() == "Insuficiente") {
+                corazonSelecto.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
+            } else if (i1.getCompresion() == "Correcta") {
+                corazonSelecto.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
+            } else if (i1.getCompresion() == "Excesiva") {
+                corazonSelecto.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+            }
+            corazonSelecto.setVisibility(View.VISIBLE);
         }
-
-        corazonSelecto.setVisibility(View.VISIBLE);
     }
 
     @Override
