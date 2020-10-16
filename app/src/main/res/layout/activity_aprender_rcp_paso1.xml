@@ -20,50 +20,89 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbNoPersonasHostiles" />
+        app:layout_constraintTop_toBottomOf="@+id/cbNoPersonasHostilesContainer" />
 
-    <CheckBox
-        android:id="@+id/cbNoCables"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/cbNoCablesContainer"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="No hay cables ni el piso esta mojado"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-    <CheckBox
-        android:id="@+id/cbNoSituacionViolenta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="No hay signos de situación violenta (Robo/Riña)"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbNoCables" />
+        <CheckBox
+            android:id="@+id/cbNoCables"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="No hay cables ni el piso esta mojado"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+    </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/cbNoSignosAnimales"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/cbNoSituacionViolentaContainer"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="No hay signos de animales peligrosos"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbNoSituacionViolenta" />
+        app:layout_constraintTop_toBottomOf="@+id/cbNoCablesContainer">
 
-    <CheckBox
-        android:id="@+id/cbNoPersonasHostiles"
-        android:layout_width="wrap_content"
+        <CheckBox
+            android:id="@+id/cbNoSituacionViolenta"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="No hay signos de situación violenta (Robo/Riña)"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cbNoCablesContainer" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/cbNoSignosAnimalesContainer"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="No hay personas hostiles en el entorno"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbNoSignosAnimales" />
+        app:layout_constraintTop_toBottomOf="@+id/cbNoSituacionViolentaContainer">
+
+        <CheckBox
+            android:id="@+id/cbNoSignosAnimales"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="No hay signos de animales peligrosos"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cbNoSituacionViolenta" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/cbNoPersonasHostilesContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbNoSignosAnimalesContainer">
+
+
+        <CheckBox
+            android:id="@+id/cbNoPersonasHostiles"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="No hay personas hostiles en el entorno"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cbNoSignosAnimales" />
+    </LinearLayout>
+
+
 
     <ImageView
         android:id="@+id/logo"
@@ -81,7 +120,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="152dp"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:text="@string/aprendiendoRcp"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -113,11 +152,14 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="218dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="96dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
         android:text="Primero hay que verificar que no existen situaciones de riesgo para que nadie salga lastimado"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 

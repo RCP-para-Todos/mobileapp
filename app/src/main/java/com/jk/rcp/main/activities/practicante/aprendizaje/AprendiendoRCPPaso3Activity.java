@@ -32,7 +32,7 @@ public class AprendiendoRCPPaso3Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         // Boton para ir atras
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         btnAmbulanciaIncoming = findViewById(R.id.btnAmbulanciaIncoming);
         btnAmbulanciaIncoming.setEnabled(false);

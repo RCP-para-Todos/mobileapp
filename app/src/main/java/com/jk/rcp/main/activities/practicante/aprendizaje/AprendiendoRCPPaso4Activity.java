@@ -31,7 +31,7 @@ public class AprendiendoRCPPaso4Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         // Boton para ir atras
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         btnComenzarRCP = findViewById(R.id.btnComenzarRCP);
         btnComenzarRCP.setEnabled(false);

@@ -35,7 +35,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.datetime.setText(rowItem.getEventDate());
+        holder.datetime.setText(rowItem.getFormattedDate());
 
 
         return convertView;

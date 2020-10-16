@@ -183,7 +183,7 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         // Boton para ir atras
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         viento1 = findViewById(R.id.viento1);
         viento2 = findViewById(R.id.viento2);
         viento3 = findViewById(R.id.viento3);

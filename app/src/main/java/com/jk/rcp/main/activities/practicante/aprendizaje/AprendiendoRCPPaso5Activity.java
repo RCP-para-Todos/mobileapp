@@ -180,7 +180,7 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         // Boton para ir atras
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         corazon1 = findViewById(R.id.corazon1);
         corazon2 = findViewById(R.id.corazon2);
         corazon3 = findViewById(R.id.corazon3);

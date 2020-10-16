@@ -213,7 +213,7 @@ public class AprendiendoRCPPaso7Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         // Boton para ir atras
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         globalUser = (User) getApplicationContext();
 
 //        labelTimerCountdown = findViewById(R.id.labelTimerCountdown);

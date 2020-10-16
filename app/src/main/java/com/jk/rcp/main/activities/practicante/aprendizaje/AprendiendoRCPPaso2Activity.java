@@ -158,7 +158,7 @@ public class AprendiendoRCPPaso2Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         // Boton para ir atras
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         btnVictimaNoResponde = findViewById(R.id.btnVictimaNoResponde);
         btnVictimaNoResponde.setEnabled(false);

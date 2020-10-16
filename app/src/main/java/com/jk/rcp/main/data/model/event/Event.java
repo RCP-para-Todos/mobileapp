@@ -6,7 +6,11 @@ import com.jk.rcp.main.data.model.course.Student;
 import com.jk.rcp.main.data.model.instant.Instant;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Event implements Serializable {
 
@@ -136,6 +140,23 @@ public class Event implements Serializable {
 
     public String getEventDate() {
         return eventDate;
+    }
+
+    public String getFormattedDate() {
+        if (!eventDate.equals("")) {
+            try {
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                Date date = format.parse(eventDate);
+
+                DateFormat format2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                return format2.format(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        return "";
     }
 
     public void setEventDate(String eventDate) {
