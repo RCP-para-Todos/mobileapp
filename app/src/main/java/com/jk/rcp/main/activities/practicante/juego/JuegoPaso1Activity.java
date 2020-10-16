@@ -216,7 +216,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
         viento2 = findViewById(R.id.viento2);
         viento3 = findViewById(R.id.viento3);
         viento4 = findViewById(R.id.viento4);
-        puntajeTextView = findViewById(R.id.resultado);
+        puntajeTextView = findViewById(R.id.textView);
 
         instantes = new ArrayList<Instant>();
 
@@ -313,9 +313,6 @@ public class JuegoPaso1Activity extends AppCompatActivity {
                 mBluetoothGatt.close();
             }
             subirEvento();
-            Intent intent = new Intent(JuegoPaso1Activity.this, JuegoPaso2Activity.class);
-            intent.putExtra("puntaje", puntaje);
-            startActivity(intent);
         }
     }
 
@@ -355,7 +352,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
         if (this.puntaje < 0) {
             this.puntaje = 0;
         }
-        puntajeTextView.setText(String.valueOf(this.puntaje));
+        puntajeTextView.setText("Juego RCP        " + String.valueOf(this.puntaje));
     }
 
     private void subirEvento() {
@@ -388,8 +385,9 @@ public class JuegoPaso1Activity extends AppCompatActivity {
                 new EventRequestCallbacks() {
                     @Override
                     public void onSuccess(@NonNull final Event event) {
-//                        Toast.makeText(getApplicationContext(), "Evento creado correctamente", Toast.LENGTH_LONG).show();
-                        finish();
+                        Intent intent = new Intent(JuegoPaso1Activity.this, JuegoPaso2Activity.class);
+                        intent.putExtra("puntaje", puntaje);
+                        startActivity(intent);
                     }
 
                     @Override

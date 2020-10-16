@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/btnAmbulanciaIncoming"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
         android:backgroundTint="#4CAF50"
@@ -18,47 +18,89 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbAguardarConfirmacionOperador" />
+        app:layout_constraintTop_toBottomOf="@+id/cbAguardarConfirmacionOperadorContainer" />
 
-    <CheckBox
-        android:id="@+id/cbCalleEntreCalle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/cbCalleEntreCalleContainer"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Indica calle y entre calles"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.34"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-    <CheckBox
-        android:id="@+id/cbBarrio"
-        android:layout_width="wrap_content"
+        <CheckBox
+            android:id="@+id/cbCalleEntreCalle"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Indica calle y entre calles"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.34"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/cbBarrioContainer"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Indica barrio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbCalleEntreCalle" />
+        app:layout_constraintTop_toBottomOf="@+id/cbCalleEntreCalleContainer">
 
-    <CheckBox
-        android:id="@+id/cbIndicarInicioRCP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Indicar que se iniciará el RCP"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbBarrio" />
+        <CheckBox
+            android:id="@+id/cbBarrio"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Indica barrio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cbCalleEntreCalle" />
+    </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/cbAguardarConfirmacionOperador"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:id="@+id/cbIndicarInicioRCPContainer"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Aguardar confirmación del operador"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbIndicarInicioRCP" />
+        app:layout_constraintTop_toBottomOf="@+id/cbBarrioContainer">
+
+        <CheckBox
+            android:id="@+id/cbIndicarInicioRCP"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Indicar que se iniciará el RCP"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.38"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cbBarrio" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cbAguardarConfirmacionOperadorContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbIndicarInicioRCPContainer">
+
+        <CheckBox
+            android:id="@+id/cbAguardarConfirmacionOperador"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Aguardar confirmación del operador"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cbIndicarInicioRCP" />
+    </LinearLayout>
+
+
 
     <ImageView
         android:id="@+id/logo"
@@ -75,9 +117,10 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="152dp"
-        android:layout_height="21dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:text="@string/aprendiendoRcp"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,9 +130,10 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:text="PASO 3: Llamar ambulancia"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,19 +141,25 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="249dp"
-        android:layout_height="68dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="Antes de iniciar la maniobra recorda asegurarte de llamar al número local de emergencias médicas (Buenos Aires y CABA: 107)"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="218dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="75dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="De ser posible indicale a otra persona que llame a la ambulancia y vos inicia el RCP"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 

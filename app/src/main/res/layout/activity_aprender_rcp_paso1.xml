@@ -36,7 +36,6 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="No hay cables ni el piso esta mojado"
-            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -75,7 +74,6 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="No hay signos de animales peligrosos"
-            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cbNoSituacionViolenta" />
@@ -95,7 +93,6 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="No hay personas hostiles en el entorno"
-            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"

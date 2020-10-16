@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/btnVictimaRespondioFinalizarProtocolo"
-        android:layout_width="298dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="#03A9F4"
@@ -22,7 +22,7 @@
 
     <Button
         android:id="@+id/btnVictimaNoResponde"
-        android:layout_width="298dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="#4CAF50"
@@ -111,9 +111,12 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="@string/aprendiendoRcp"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -123,10 +126,13 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
         android:text="PASO 2: Verificar conciencia"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

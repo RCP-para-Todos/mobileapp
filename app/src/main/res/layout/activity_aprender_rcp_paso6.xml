@@ -21,52 +21,126 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@drawable/rcp_logo" />
 
-    <ProgressBar
-        android:id="@+id/view_progress_bar_paso6"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="113dp"
-        android:layout_height="113dp"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="130dp"
-        android:progressDrawable="@drawable/drawable_circularprogressbar"
-        android:visibility="visible"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/viento1"
+            android:layout_width="52dp"
+            android:layout_height="45dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
+            app:srcCompat="@drawable/viento" />
+
+        <ImageView
+            android:id="@+id/viento2"
+            android:layout_width="52dp"
+            android:layout_height="45dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/viento1"
+            app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
+            app:srcCompat="@drawable/viento" />
+
+        <ImageView
+            android:id="@+id/viento3"
+            android:layout_width="52dp"
+            android:layout_height="45dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/viento2"
+            app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
+            app:srcCompat="@drawable/viento" />
+
+        <ImageView
+            android:id="@+id/viento4"
+            android:layout_width="52dp"
+            android:layout_height="45dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/viento3"
+            app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
+            app:srcCompat="@drawable/viento" />
+
+        <ImageView
+            android:id="@+id/viento5"
+            android:layout_width="52dp"
+            android:layout_height="45dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/viento4"
+            app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
+            app:srcCompat="@drawable/viento" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gifImageView_paso6" />
+        app:layout_constraintTop_toBottomOf="@+id/gifImageView_paso6">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/view_progress_bar_paso6"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="113dp"
+                android:layout_height="113dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:progressDrawable="@drawable/drawable_circularprogressbar"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_timer_paso6"
+                android:layout_width="113dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="48dp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/view_progress_bar_paso6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view_progress_bar_paso6" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/textView2_paso6"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
         android:text="PASO 6: Práctica de insuflaciones"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_paso6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/textView_paso6"
-        android:layout_width="152dp"
-        android:layout_height="21dp"
+        android:id="@+id/textView"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="@string/aprendiendoRcp"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
-
-    <TextView
-        android:id="@+id/tv_timer_paso6"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="28dp"
-        app:layout_constraintEnd_toEndOf="@+id/view_progress_bar_paso6"
-        app:layout_constraintTop_toTopOf="@+id/view_progress_bar_paso6" />
-
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -83,55 +157,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2_paso6" />
 
-    <ImageView
-        android:id="@+id/viento1"
-        android:layout_width="52dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
-        app:srcCompat="@drawable/viento" />
-
-    <ImageView
-        android:id="@+id/viento2"
-        android:layout_width="52dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/viento1"
-        app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
-        app:srcCompat="@drawable/viento" />
-
-    <ImageView
-        android:id="@+id/viento3"
-        android:layout_width="52dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/viento2"
-        app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
-        app:srcCompat="@drawable/viento" />
-
-    <ImageView
-        android:id="@+id/viento4"
-        android:layout_width="52dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/viento3"
-        app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
-        app:srcCompat="@drawable/viento" />
-
-    <ImageView
-        android:id="@+id/viento5"
-        android:layout_width="52dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/viento4"
-        app:layout_constraintTop_toBottomOf="@+id/view_progress_bar_paso6"
-        app:srcCompat="@drawable/viento" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
