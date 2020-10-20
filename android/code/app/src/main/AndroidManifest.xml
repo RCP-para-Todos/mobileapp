@@ -137,11 +137,6 @@
             android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".main.activities.practicante.SimuladorActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
             android:name=".main.activities.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
@@ -159,13 +154,16 @@
         </activity>
     </application>
 
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
-    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 </manifest>
