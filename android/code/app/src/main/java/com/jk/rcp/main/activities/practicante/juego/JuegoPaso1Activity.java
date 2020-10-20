@@ -1,8 +1,10 @@
 package com.jk.rcp.main.activities.practicante.juego;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -10,9 +12,6 @@ import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
-import android.bluetooth.le.BluetoothLeScanner;
-import android.bluetooth.le.ScanCallback;
-import android.bluetooth.le.ScanResult;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +20,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -61,14 +61,20 @@ import okhttp3.ResponseBody;
 public class JuegoPaso1Activity extends AppCompatActivity {
     private static final String TAG = "JuegoPaso1Activity";
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
-    private static final int REQUEST_ENABLE_BT = 200;
     public ToggleButton toggleButton;
     public TextView textView;
+    private BluetoothAdapter mBluetoothAdapter;
+    private boolean mScanning;
+    private Handler mHandler;
+    private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
+    private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
+    private static final int REQUEST_ENABLE_BT = 1;
+    // Stops scanning after 10 seconds.
+    private static final long SCAN_PERIOD = 10000;
     BluetoothGattCharacteristic mGattChar;
     Timer timer;
     ProgressDialog progress;
     private Button btnJugar;
-    private BluetoothAdapter mBluetoothAdapter;
     private BluetoothGatt mBluetoothGatt;
     private List<Instant> instantes;
     private int mediosSegundos = 0;
@@ -182,19 +188,6 @@ public class JuegoPaso1Activity extends AppCompatActivity {
         }
 
     };
-    private ScanCallback mLeScanCallback = new ScanCallback() {
-        @Override
-        public void onScanResult(int callbackType, ScanResult result) {
-            super.onScanResult(callbackType, result);
-
-            Log.i("onScanResult", result.getDevice().getAddress());
-            Log.i("onScanResult", result.getDevice().getName());
-
-            scanLeDevice(false);
-
-            mBluetoothGatt = result.getDevice().connectGatt(getApplicationContext(), false, mBluetoothGattCallback);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -221,29 +214,59 @@ public class JuegoPaso1Activity extends AppCompatActivity {
         instantes = new ArrayList<Instant>();
 
         // toggleButton.setEnabled(false);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // Android M Permission check 
-            if (this.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("This app needs location access");
-                builder.setMessage("Please grant location access so this app can detect beacons.");
-                builder.setPositiveButton(android.R.string.ok, null);
-                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_COARSE_LOCATION);
-                    }
-                });
-                builder.show();
-                return;
-            }
-        }
-        beginBLE();
 
         if (getIntent().getExtras() != null && getIntent().getSerializableExtra("tiempo") != null) {
             int tiempo = (int) getIntent().getSerializableExtra("tiempo");
             this.count = tiempo;
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (this.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+            } else {
+                if (!this.shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            PERMISSION_REQUEST_FINE_LOCATION);
+                } else {
+                    final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+                    builder.setTitle("Functionality limited");
+                    builder.setMessage("Since location access has not been granted, this app will not be able to discover beacons.  Please go to Settings -> Applications -> Permissions and grant location access to this app.");
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                        }
+
+                    });
+                    builder.show();
+                }
+
+            }
+        }
+        mHandler = new Handler();
+
+        // Use this check to determine whether BLE is supported on the device.  Then you can
+        // selectively disable BLE-related features.
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+            Toast.makeText(this, "BLE no soportado", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+        // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
+        // BluetoothAdapter through BluetoothManager.
+        final BluetoothManager bluetoothManager =
+                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        mBluetoothAdapter = bluetoothManager.getAdapter();
+
+        // Checks if Bluetooth is supported on the device.
+        if (mBluetoothAdapter == null) {
+            Toast.makeText(this, "No se banca blueetoth", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+
     }
 
     private void sistemaIconos() {
@@ -418,7 +441,14 @@ public class JuegoPaso1Activity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // Ensures Bluetooth is enabled on the device.  If Bluetooth is not currently enabled,
+        // fire an intent to display a dialog asking the user to grant permission to enable it.
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
 
+        scanLeDevice(true);
     }
 
     public void beginBLE() {
@@ -436,13 +466,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
-        if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
-            scanLeDevice(false);
-        }
-        if (mBluetoothGatt != null) {
-            mBluetoothGatt.close();
-        }
+        scanLeDevice(false);
         if (timer != null) timer.cancel();
     }
 
@@ -459,17 +483,12 @@ public class JuegoPaso1Activity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
         // User chose not to enable Bluetooth.
-        Log.i("onActivityResult", "requestCode = " + requestCode);
-        Log.i("onActivityResult", "resultCode = " + resultCode);
-        if (requestCode == REQUEST_ENABLE_BT) {
-            if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-                finish();
-                return;
-            }
+        if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
+            finish();
+            return;
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -499,22 +518,43 @@ public class JuegoPaso1Activity extends AppCompatActivity {
     }
 
     private void scanLeDevice(final boolean enable) {
-        final BluetoothLeScanner bluetoothLeScanner =
-                mBluetoothAdapter.getBluetoothLeScanner();
-
         if (enable) {
-            progress = ProgressDialog.show(this, "Escaneando", "Aguarde un momento por favor");
+            // Stops scanning after a pre-defined scan period.
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mScanning = false;
+                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
+                    invalidateOptionsMenu();
+                }
+            }, SCAN_PERIOD);
 
-            bluetoothLeScanner.startScan(mLeScanCallback);
-            Log.i("scanLeDevice", "Start scan");
-
+            mScanning = true;
+            mBluetoothAdapter.startLeScan(mLeScanCallback);
         } else {
-            // if (progress.isIndeterminate()) progress.dismiss();
-
-            bluetoothLeScanner.stopScan(mLeScanCallback);
-            Log.i("scanLeDevice", "Stop scan");
+            mScanning = false;
+            mBluetoothAdapter.stopLeScan(mLeScanCallback);
         }
+        invalidateOptionsMenu();
     }
+
+    // Device scan callback.
+    private BluetoothAdapter.LeScanCallback mLeScanCallback =
+            new BluetoothAdapter.LeScanCallback() {
+
+                @Override
+                public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.d(TAG, device.getName().toString());
+                            if (device.getName().equals("ESP32")) {
+                                mBluetoothGatt = device.connectGatt(getApplicationContext(), false, mBluetoothGattCallback);
+                            }
+                        }
+                    });
+                }
+            };
 
     private void tratamientoRecepcionBluetooth(String[] datosCorrectos) {
         Log.d(TAG, "ReciboBluetoothPaso2Juego");
