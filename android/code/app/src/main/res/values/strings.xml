@@ -34,4 +34,5 @@
     <string name="location_denied_title">Titulo</string>
     <string name="location_permission_title">titulo</string>
     <string name="location_permission_message">mensaje</string>
+    <string name="pairing_request">Desea emparejar</string>
 </resources>

@@ -152,6 +152,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".main.activities.practicante.juego.SerialService" android:enabled="true"></service>
     </application>
 
 

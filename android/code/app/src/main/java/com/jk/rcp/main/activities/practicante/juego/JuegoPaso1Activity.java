@@ -1,20 +1,24 @@
 package com.jk.rcp.main.activities.practicante.juego;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattCharacteristic;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,10 +43,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.ResponseBody;
 
-public class JuegoPaso1Activity extends AppCompatActivity {
+public class JuegoPaso1Activity extends AppCompatActivity implements ServiceConnection, SerialListener{
     private static final String TAG = "JuegoPaso1Activity";
     public TextView textView;
     Timer timer;
@@ -67,9 +72,24 @@ public class JuegoPaso1Activity extends AppCompatActivity {
     private TextView puntajeTextView;
     private User globalUser;
 
+    private enum Connected {False, Pending, True}
+
+    private String deviceAddress;
+    private SerialService service;
+
+    private TextView receiveText;
+    private TextView sendText;
+
+    private Connected connected = Connected.False;
+    private boolean initialStart = true;
+    private boolean hexEnabled = false;
+    private boolean pendingNewline = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bindService(new Intent(this, SerialService.class), this, Context.BIND_AUTO_CREATE);
         setContentView(R.layout.activity_juego_paso1);
         // Configuro la toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -97,9 +117,24 @@ public class JuegoPaso1Activity extends AppCompatActivity {
         }
 
         if (getIntent().getExtras() != null && getIntent().getSerializableExtra("device") != null) {
-            int tiempo = (int) getIntent().getSerializableExtra("device");
-            this.count = tiempo;
+            deviceAddress =  (String) getIntent().getSerializableExtra("device");
         }
+
+        final Runnable modifyIcons = new Runnable() {
+            public void run() {
+                sistemaIconos();
+            }
+        };
+
+        TimerTask task = new TimerTask() {
+            public void run() {
+                runOnUiThread(modifyIcons);
+            }
+        };
+
+        //Set timer, read temperature every 2S
+        timer = new Timer();
+        timer.scheduleAtFixedRate(task, 5, 125);
     }
 
     private void sistemaIconos() {
@@ -168,6 +203,7 @@ public class JuegoPaso1Activity extends AppCompatActivity {
             if (mBluetoothGatt != null) {
                 mBluetoothGatt.close();
             }
+            disconnect();
             subirEvento();
         }
     }
@@ -191,24 +227,26 @@ public class JuegoPaso1Activity extends AppCompatActivity {
     }
 
     private void logicaColorearCompresion() {
-        Instant instante = this.instantes.get(this.instantes.size() - 1);
-        if (instante.getCompresion() == "Nula") {
-            corazon4.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-            this.puntaje = this.puntaje - 40;
-        } else if (instante.getCompresion() == "Insuficiente") {
-            corazon4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
-            this.puntaje = this.puntaje - 40;
-        } else if (instante.getCompresion() == "Correcta") {
-            corazon4.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
-            this.puntaje = this.puntaje + 100;
-        } else if (instante.getCompresion() == "Excesiva") {
-            corazon4.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
-            this.puntaje = this.puntaje - 40;
+        if(this.instantes.size() > 0) {
+            Instant instante = this.instantes.get(this.instantes.size() - 1);
+            if (instante.getCompresion() == "Nula") {
+                corazon4.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+                this.puntaje = this.puntaje - 40;
+            } else if (instante.getCompresion() == "Insuficiente") {
+                corazon4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
+                this.puntaje = this.puntaje - 40;
+            } else if (instante.getCompresion() == "Correcta") {
+                corazon4.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
+                this.puntaje = this.puntaje + 100;
+            } else if (instante.getCompresion() == "Excesiva") {
+                corazon4.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                this.puntaje = this.puntaje - 40;
+            }
+            if (this.puntaje < 0) {
+                this.puntaje = 0;
+            }
+            puntajeTextView.setText("Juego RCP        " + String.valueOf(this.puntaje));
         }
-        if (this.puntaje < 0) {
-            this.puntaje = 0;
-        }
-        puntajeTextView.setText("Juego RCP        " + String.valueOf(this.puntaje));
     }
 
     private void subirEvento() {
@@ -279,16 +317,6 @@ public class JuegoPaso1Activity extends AppCompatActivity {
         if (timer != null) timer.cancel();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (mBluetoothGatt == null) {
-            return;
-        }
-        mBluetoothGatt.close();
-        mBluetoothGatt = null;
-    }
 
     private void tratamientoRecepcionBluetooth(String[] datosCorrectos) {
         Log.d(TAG, "ReciboBluetoothPaso2Juego");
@@ -311,5 +339,138 @@ public class JuegoPaso1Activity extends AppCompatActivity {
         Log.d(TAG, "Finalizando activity");
         finish();
         return true;
+    }
+
+    /// COPIA
+
+    @Override
+    public void onDestroy() {
+        try { unbindService(this); } catch(Exception ignored) {}
+        if (connected != Connected.False)
+            disconnect();
+        stopService(new Intent(this, SerialService.class));
+        super.onDestroy();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "en el start");
+        if(service != null){
+            Log.d(TAG, "No es null");
+            service.attach(this);
+        }
+        else{
+            Log.d("SERVICE", "Arranco el serviico");
+            startService(new Intent(this, SerialService.class)); // prevents service destroy on unbind from recreated activity caused by orientation change
+        }
+    }
+
+    @Override
+    public void onStop() {
+        if(service != null && !isChangingConfigurations())
+            service.detach();
+        super.onStop();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(initialStart && service != null) {
+            initialStart = false;
+            runOnUiThread(this::connect);
+        }
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder binder) {
+        service = ((SerialService.SerialBinder) binder).getService();
+        service.attach(this);
+        if(initialStart ) {
+            initialStart = false;
+            runOnUiThread(this::connect);
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+        service = null;
+    }
+
+    /*
+     * Serial + UI
+     */
+    private void connect() {
+        try {
+            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            BluetoothDevice device = bluetoothAdapter.getRemoteDevice(deviceAddress);
+            status("connecting...");
+            connected = Connected.Pending;
+            SerialSocket socket = new SerialSocket(getApplicationContext(), device);
+            service.connect(socket);
+        } catch (Exception e) {
+            onSerialConnectError(e);
+        }
+    }
+
+    private void disconnect() {
+        connected = Connected.False;
+        service.disconnect();
+    }
+
+    private void send(String str) {
+        if (connected != Connected.True) {
+            Toast.makeText(this, "not connected", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            String msg;
+            byte[] data;
+            msg = str;
+            data = str.getBytes();
+
+            service.write(data);
+        } catch (Exception e) {
+            onSerialIoError(e);
+        }
+    }
+
+    private void receive(byte[] data) {
+        String msg = new String(data);
+        String converted = msg.substring(0, 8);
+        String[] splitted = converted.split(";");
+        Log.d(TAG, "Recibo ESP32: " + converted);
+        tratamientoRecepcionBluetooth(splitted);
+    }
+
+    private void status(String str) {
+        Log.d("STATUS", str);
+    }
+
+    /*
+     * SerialListener
+     */
+    @Override
+    public void onSerialConnect() {
+        status("connected");
+        connected = Connected.True;
+    }
+
+    @Override
+    public void onSerialConnectError(Exception e) {
+        status("connection failed: " + e.getMessage());
+        disconnect();
+    }
+
+    @Override
+    public void onSerialRead(byte[] data) {
+        receive(data);
+    }
+
+    @Override
+    public void onSerialIoError(Exception e) {
+        status("connection lost: " + e.getMessage());
+        disconnect();
     }
 }
