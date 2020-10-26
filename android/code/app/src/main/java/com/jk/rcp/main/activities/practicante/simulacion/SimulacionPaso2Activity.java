@@ -160,11 +160,13 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
         //Si el entorno es seguro y se selecciona llamar a la ambulancia se realiza la simulacion.
         if (this.elEntornoEsSeguro && this.ambulanciaClicked && !this.entornoNoSeguroClicked) {
             Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3Activity.class);
+            intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
             startActivity(intent);
         }
         //Si el entorno es seguro pero no selecciona para llamar a la ambulancia se realiza la simulacion pero sera invalidada finalmente porque la ambulancia nunca llegara.
         else if (this.elEntornoEsSeguro && !this.ambulanciaClicked && !this.entornoNoSeguroClicked) {
             Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3Activity.class);
+            intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
             startActivity(intent);
         }
 
@@ -174,6 +176,7 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
             intent.putExtra("ambulanciaClicked", ambulanciaClicked);
             intent.putExtra("entornoNoSeguroClicked", entornoNoSeguroClicked);
             intent.putExtra("elEntornoEsSeguro", elEntornoEsSeguro);
+            intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
             startActivity(intent);
         }
 
@@ -183,6 +186,7 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
             intent.putExtra("ambulanciaClicked", ambulanciaClicked);
             intent.putExtra("entornoNoSeguroClicked", entornoNoSeguroClicked);
             intent.putExtra("elEntornoEsSeguro", elEntornoEsSeguro);
+            intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
             startActivity(intent);
         }
 
@@ -194,6 +198,7 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
             intent.putExtra("ambulanciaClicked", ambulanciaClicked);
             intent.putExtra("entornoNoSeguroClicked", entornoNoSeguroClicked);
             intent.putExtra("elEntornoEsSeguro", elEntornoEsSeguro);
+            intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
             startActivity(intent);
         }
         //Si el entorno no es seguro y se selecciona el entorno no es seguro, se finalizara sin simulacion con error ya que no se llamo a la ambulancia.
@@ -202,16 +207,19 @@ public class SimulacionPaso2Activity extends AppCompatActivity {
             intent.putExtra("ambulanciaClicked", ambulanciaClicked);
             intent.putExtra("entornoNoSeguroClicked", entornoNoSeguroClicked);
             intent.putExtra("elEntornoEsSeguro", elEntornoEsSeguro);
+            intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
             startActivity(intent);
         }
         //Si el entorno no es seguro pero no se selecciona el entorno no es seguro, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
         else if (!this.elEntornoEsSeguro && !this.ambulanciaClicked && !this.entornoNoSeguroClicked) {
             Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3Activity.class);
+            intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
             startActivity(intent);
         }
         //Si el entorno no es seguro pero se selecciona llamar a la ambulancia, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
         else if (!this.elEntornoEsSeguro && this.ambulanciaClicked && !this.entornoNoSeguroClicked) {
             Intent intent = new Intent(SimulacionPaso2Activity.this, SimulacionPaso3Activity.class);
+            intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
             startActivity(intent);
         }
     }

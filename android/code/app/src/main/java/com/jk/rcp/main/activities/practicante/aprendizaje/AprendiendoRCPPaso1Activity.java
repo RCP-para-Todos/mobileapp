@@ -45,6 +45,7 @@ public class AprendiendoRCPPaso1Activity extends AppCompatActivity {
         btnEntornoSeguro.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(AprendiendoRCPPaso1Activity.this, AprendiendoRCPPaso2Activity.class);
+                intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
                 startActivity(intent);
             }
         });

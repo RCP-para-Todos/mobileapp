@@ -43,12 +43,12 @@ public class SimulacionPaso1Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SimulacionPaso1Activity.this, SimulacionPaso2Activity.class);
                 intent.putExtra("escenario", "escenario" + escenario);
+                intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
                 startActivity(intent);
             }
         });
         labelDescripcion = findViewById(R.id.textView2);
         imagen = findViewById(R.id.imageView2);
-        beginBLE();
         elegirEscenarioRandom();
     }
 
@@ -81,16 +81,6 @@ public class SimulacionPaso1Activity extends AppCompatActivity {
                 labelDescripcion.setText("Mientras charlabas con tu padre, de pronto deja de hablar y se desploma");
                 imagen.setImageDrawable(getResources().getDrawable(R.drawable.escenario6, getApplicationContext().getTheme()));
                 break;
-        }
-    }
-
-    public void beginBLE() {
-        // BLE
-        final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-        mBluetoothAdapter = bluetoothManager.getAdapter();
-        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
     }
 

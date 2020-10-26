@@ -55,99 +55,6 @@ public class AprendiendoRCPPaso2Activity extends AppCompatActivity {
     private Boolean tercerEstado = false;
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothGatt mBluetoothGatt;
-    public final BluetoothGattCallback mBluetoothGattCallback = new BluetoothGattCallback() {
-        @Override
-        public void onCharacteristicChanged(BluetoothGatt gatt,
-                                            BluetoothGattCharacteristic characteristic) {
-            byte[] data = characteristic.getValue();
-            String s = new String(data);
-            String converted = s.substring(0, 8);
-            String[] splitted = converted.split(";");
-            Log.d(TAG, "Recibo ESP32: " + converted);
-            String posicion = Conversor.posicionToString(Integer.valueOf(splitted[2]));
-            tratamientoRecepcionBluetooth(posicion);
-            // mBluetoothGatt.disconnect();
-        }
-
-        @Override
-        public void onConnectionStateChange(BluetoothGatt gatt,
-                                            int status,
-                                            int newState) {
-            if (newState == BluetoothProfile.STATE_CONNECTED) {
-                mBluetoothGatt.discoverServices();
-            }
-        }
-
-        @Override
-        public void onServicesDiscovered(BluetoothGatt gatt,
-                                         int status) {
-            if (status == BluetoothGatt.GATT_SUCCESS) {
-                BluetoothGattService mGattService =
-                        mBluetoothGatt.getService(UUID.fromString("6E400001-B5A3-F393-E0A9-E50E24DCCA9E"));
-                if (mGattService != null) {
-
-                    Log.i("onServicesDiscovered",
-                            "Service characteristic UUID found: " + mGattService.getUuid().toString());
-
-                    mGattChar =
-                            mGattService.getCharacteristic(UUID.fromString("6E400003-B5A3-F393-E0A9-E50E24DCCA9E"));
-
-                    if (mGattChar != null) {
-
-                        if (gatt.setCharacteristicNotification(mGattChar, true) == true) {
-                            Log.d("gatt.setCharacteristicNotification", "SUCCESS!");
-                        } else {
-                            Log.d("gatt.setCharacteristicNotification", "FAILURE!");
-                        }
-                        BluetoothGattDescriptor descriptor = mGattChar.getDescriptors().get(0);
-                        if (0 != (mGattChar.getProperties() & BluetoothGattCharacteristic.PROPERTY_INDICATE)) {
-                            // It's an indicate characteristic
-                            Log.d("onServicesDiscovered", "Characteristic (" + mGattChar.getUuid() + ") is INDICATE");
-                            if (descriptor != null) {
-                                descriptor.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
-                                gatt.writeDescriptor(descriptor);
-                            }
-                        } else {
-                            // It's a notify characteristic
-                            Log.d("onServicesDiscovered", "Characteristic (" + mGattChar.getUuid() + ") is NOTIFY");
-                            if (descriptor != null) {
-                                descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-                                gatt.writeDescriptor(descriptor);
-                            }
-                        }
-                        Log.i("onServicesDiscovered",
-                                "characteristic UUID found: " + mGattChar.getUuid().toString());
-
-                    } else {
-                        Log.i("onServicesDiscovered",
-                                "characteristic not found for UUID: " + mGattChar.getUuid().toString());
-
-                    }
-
-                } else {
-                    Log.i("onServicesDiscovered",
-                            "Service characteristic not found for UUID: " + mGattService.getUuid().toString());
-
-                }
-
-                if (progress.isIndeterminate()) progress.dismiss();
-            }
-        }
-
-    };
-    private ScanCallback mLeScanCallback = new ScanCallback() {
-        @Override
-        public void onScanResult(int callbackType, ScanResult result) {
-            super.onScanResult(callbackType, result);
-
-            Log.i("onScanResult", result.getDevice().getAddress());
-            Log.i("onScanResult", result.getDevice().getName());
-
-            scanLeDevice(false);
-
-            mBluetoothGatt = result.getDevice().connectGatt(getApplicationContext(), false, mBluetoothGattCallback);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +74,7 @@ public class AprendiendoRCPPaso2Activity extends AppCompatActivity {
             public void onClick(View v) {
                 mBluetoothGatt.close();
                 Intent intent = new Intent(AprendiendoRCPPaso2Activity.this, AprendiendoRCPPaso3Activity.class);
+                intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
                 startActivity(intent);
             }
         });
@@ -216,102 +124,6 @@ public class AprendiendoRCPPaso2Activity extends AppCompatActivity {
                 builder.show();
                 return;
             }
-        }
-        beginBLE();
-    }
-
-    public void beginBLE() {
-        // BLE
-        final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-        mBluetoothAdapter = bluetoothManager.getAdapter();
-        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        } else {
-            scanLeDevice(true);
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
-            scanLeDevice(false);
-        }
-        if (mBluetoothGatt != null) {
-            mBluetoothGatt.close();
-        }
-        if (timer != null) timer.cancel();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (mBluetoothGatt == null) {
-            return;
-        }
-        mBluetoothGatt.close();
-        mBluetoothGatt = null;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // User chose not to enable Bluetooth.
-        Log.i("onActivityResult", "requestCode = " + requestCode);
-        Log.i("onActivityResult", "resultCode = " + resultCode);
-        if (requestCode == REQUEST_ENABLE_BT) {
-            if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-                finish();
-                return;
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions,
-                                           int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_COARSE_LOCATION: {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d("onRequestPermis...", "coarse location permission granted");
-                    beginBLE();
-                } else {
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Functionality limited");
-                    builder.setMessage("Since location access has not been granted, this app will not be able to discover beacons when in the background.");
-                    builder.setPositiveButton(android.R.string.ok, null);
-                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                        }
-                    });
-                    builder.show();
-                }
-                return;
-            }
-        }
-    }
-
-    private void scanLeDevice(final boolean enable) {
-        final BluetoothLeScanner bluetoothLeScanner =
-                mBluetoothAdapter.getBluetoothLeScanner();
-
-        if (enable) {
-            progress = ProgressDialog.show(this, "Escaneando", "Aguarde un momento por favor");
-
-            bluetoothLeScanner.startScan(mLeScanCallback);
-            Log.i("scanLeDevice", "Start scan");
-
-        } else {
-            // if (progress.isIndeterminate()) progress.dismiss();
-
-            bluetoothLeScanner.stopScan(mLeScanCallback);
-            Log.i("scanLeDevice", "Stop scan");
         }
     }
 

@@ -1,8 +1,8 @@
-package com.jk.rcp.main.activities.practicante.juego;
+package com.jk.rcp.main.bluetooth;
 
 import com.jk.rcp.BuildConfig;
 
-class Constants {
+public class Constants {
 
     // values have to be globally unique
     static final String INTENT_ACTION_DISCONNECT = BuildConfig.APPLICATION_ID + ".Disconnect";

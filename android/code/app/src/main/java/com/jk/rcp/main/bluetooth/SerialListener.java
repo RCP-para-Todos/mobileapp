@@ -1,6 +1,6 @@
-package com.jk.rcp.main.activities.practicante.juego;
+package com.jk.rcp.main.bluetooth;
 
-interface SerialListener {
+public interface SerialListener {
     void onSerialConnect      ();
     void onSerialConnectError (Exception e);
     void onSerialRead         (byte[] data);

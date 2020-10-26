@@ -1,6 +1,5 @@
 package com.jk.rcp.main.activities.practicante.juego;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -28,6 +27,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jk.rcp.R;
+import com.jk.rcp.main.bluetooth.SerialListener;
+import com.jk.rcp.main.bluetooth.SerialService;
+import com.jk.rcp.main.bluetooth.SerialSocket;
 import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventPost;
 import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
@@ -47,7 +49,7 @@ import java.util.TimerTask;
 
 import okhttp3.ResponseBody;
 
-public class JuegoPaso1Activity extends AppCompatActivity implements ServiceConnection, SerialListener{
+public class JuegoPaso1Activity extends AppCompatActivity implements ServiceConnection, SerialListener {
     private static final String TAG = "JuegoPaso1Activity";
     public TextView textView;
     Timer timer;

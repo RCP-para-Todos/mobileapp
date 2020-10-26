@@ -40,6 +40,7 @@ public class AprendiendoRCPPaso3Activity extends AppCompatActivity {
         btnAmbulanciaIncoming.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(AprendiendoRCPPaso3Activity.this, AprendiendoRCPPaso4Activity.class);
+                intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
                 startActivity(intent);
             }
         });

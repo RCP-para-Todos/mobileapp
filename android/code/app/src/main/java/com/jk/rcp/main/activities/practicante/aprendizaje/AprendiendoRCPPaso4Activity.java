@@ -39,6 +39,7 @@ public class AprendiendoRCPPaso4Activity extends AppCompatActivity {
         btnComenzarRCP.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(AprendiendoRCPPaso4Activity.this, AprendiendoRCPPaso5Activity.class);
+                intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
                 startActivity(intent);
             }
         });
