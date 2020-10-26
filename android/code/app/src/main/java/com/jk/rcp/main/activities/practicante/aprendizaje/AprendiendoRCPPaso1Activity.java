@@ -1,8 +1,5 @@
 package com.jk.rcp.main.activities.practicante.aprendizaje;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -20,13 +17,11 @@ import com.jk.rcp.R;
 
 public class AprendiendoRCPPaso1Activity extends AppCompatActivity {
     private static final String TAG = "AprendiendoRCPPaso_1_Activity";
-    private static final int REQUEST_ENABLE_BT = 200;
     private Button btnEntornoSeguro;
     private CheckBox cbNoCables;
     private CheckBox cbNoPersonasHostiles;
     private CheckBox cbNoSituacionViolenta;
     private CheckBox cbNoSignosAnimales;
-    private BluetoothAdapter mBluetoothAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,17 +66,6 @@ public class AprendiendoRCPPaso1Activity extends AppCompatActivity {
         cbNoPersonasHostiles.setOnCheckedChangeListener(onCheckedChangedListener);
         cbNoSituacionViolenta.setOnCheckedChangeListener(onCheckedChangedListener);
         cbNoSignosAnimales.setOnCheckedChangeListener(onCheckedChangedListener);
-        beginBLE();
-    }
-
-    public void beginBLE() {
-        // BLE
-        final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-        mBluetoothAdapter = bluetoothManager.getAdapter();
-        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }
     }
 
     @Override

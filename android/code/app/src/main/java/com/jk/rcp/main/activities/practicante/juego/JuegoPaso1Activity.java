@@ -79,9 +79,6 @@ public class JuegoPaso1Activity extends AppCompatActivity implements ServiceConn
     private String deviceAddress;
     private SerialService service;
 
-    private TextView receiveText;
-    private TextView sendText;
-
     private Connected connected = Connected.False;
     private boolean initialStart = true;
     private boolean hexEnabled = false;

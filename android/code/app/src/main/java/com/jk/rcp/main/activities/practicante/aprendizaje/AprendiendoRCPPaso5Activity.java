@@ -1,40 +1,35 @@
 package com.jk.rcp.main.activities.practicante.aprendizaje;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattCallback;
-import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattDescriptor;
-import android.bluetooth.BluetoothGattService;
-import android.bluetooth.BluetoothManager;
-import android.bluetooth.BluetoothProfile;
-import android.bluetooth.le.BluetoothLeScanner;
-import android.bluetooth.le.ScanCallback;
-import android.bluetooth.le.ScanResult;
+import android.bluetooth.BluetoothDevice;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.jk.rcp.R;
+import com.jk.rcp.main.bluetooth.SerialListener;
+import com.jk.rcp.main.bluetooth.SerialService;
+import com.jk.rcp.main.bluetooth.SerialSocket;
 import com.jk.rcp.main.data.model.instant.Instant;
 import com.jk.rcp.main.utils.AlarmManager;
 import com.jk.rcp.main.utils.Constants;
@@ -44,16 +39,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.UUID;
 
 import static android.view.animation.Animation.RELATIVE_TO_SELF;
 import static androidx.lifecycle.Lifecycle.State.STARTED;
 
-public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
+public class AprendiendoRCPPaso5Activity extends AppCompatActivity implements ServiceConnection, SerialListener {
     private static final String TAG = "AprendiendoRCPActivity";
-    private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
-    private static final int REQUEST_ENABLE_BT = 200;
-    BluetoothGattCharacteristic mGattChar;
     Timer timer;
     private AlarmManager alarmManager;
     private ProgressBar progressBarView;
@@ -68,19 +59,27 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
     private ImageView corazon3;
     private ImageView corazon4;
     private ImageView corazon5;
-    private BluetoothAdapter mBluetoothAdapter;
-    private BluetoothGatt mBluetoothGatt;
     private List<Instant> instantes;
     private int mediosSegundos = 0;
     private int contadorX = 0;
     private ProgressDialog progress;
     private int iteracion = 0;
 
+    private enum Connected {False, Pending, True}
+
+    private String deviceAddress;
+    private SerialService service;
+
+    private Connected connected = Connected.False;
+    private boolean initialStart = true;
+    private boolean hexEnabled = false;
+    private boolean pendingNewline = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aprender_rcp_paso5);
-
+        bindService(new Intent(getApplicationContext(), SerialService.class), this, Context.BIND_AUTO_CREATE);
         // Configuro la toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -97,7 +96,7 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
         MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                beginBLE();
+                fn_countdown();
             }
         };
 
@@ -111,25 +110,10 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
         alarmManager = new AlarmManager(onCompletionListener);
         alarmManager.startSound(this, "CompresionManiobraAudio.mp3", false, true);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // Android M Permission check 
-            if (this.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("This app needs location access");
-                builder.setMessage("Please grant location access so this app can detect beacons.");
-                builder.setPositiveButton(android.R.string.ok, null);
-                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_COARSE_LOCATION);
-                    }
-                });
-                builder.show();
-                return;
-            }
-        }
-
         instantes = new ArrayList<Instant>();
+        if (getIntent().getExtras() != null && getIntent().getSerializableExtra("device") != null) {
+            deviceAddress = (String) getIntent().getSerializableExtra("device");
+        }
     }
 
     private void fn_countdown() {
@@ -165,9 +149,6 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
                     tv_time.setText("0 secs");
                     setProgress(progressCount, endTime);
                     logicaEvaluacionCompresiones();
-                    if (mBluetoothGatt != null) {
-                        mBluetoothGatt.close();
-                    }
                 } else {
                     cancel();
                 }
@@ -335,5 +316,141 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity {
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
+    }
+
+    /// COPIA
+
+    @Override
+    public void onDestroy() {
+        try {
+            unbindService(this);
+        } catch (Exception ignored) {
+        }
+        if (connected != Connected.False)
+            disconnect();
+        stopService(new Intent(this, SerialService.class));
+        super.onDestroy();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "en el start");
+        if (service != null) {
+            Log.d(TAG, "No es null");
+            service.attach(this);
+        } else {
+            Log.d("SERVICE", "Arranco el serviico");
+            startService(new Intent(this, SerialService.class)); // prevents service destroy on unbind from recreated activity caused by orientation change
+        }
+    }
+
+    @Override
+    public void onStop() {
+        if (service != null && !isChangingConfigurations())
+            service.detach();
+        super.onStop();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (initialStart && service != null) {
+            initialStart = false;
+            runOnUiThread(this::connect);
+        }
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder binder) {
+        service = ((SerialService.SerialBinder) binder).getService();
+        service.attach(this);
+        if (initialStart) {
+            initialStart = false;
+            runOnUiThread(this::connect);
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+        service = null;
+    }
+
+    /*
+     * Serial + UI
+     */
+    private void connect() {
+        try {
+            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            BluetoothDevice device = bluetoothAdapter.getRemoteDevice(deviceAddress);
+            status("connecting...");
+            connected = Connected.Pending;
+            SerialSocket socket = new SerialSocket(getApplicationContext(), device);
+            service.connect(socket);
+
+        } catch (Exception e) {
+            onSerialConnectError(e);
+        }
+    }
+
+    private void disconnect() {
+        connected = Connected.False;
+        service.disconnect();
+    }
+
+    private void send(String str) {
+        if (connected != Connected.True) {
+            Toast.makeText(this, "not connected", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            String msg;
+            byte[] data;
+            msg = str;
+            data = str.getBytes();
+
+            service.write(data);
+        } catch (Exception e) {
+            onSerialIoError(e);
+        }
+    }
+
+    private void receive(byte[] data) {
+        String msg = new String(data);
+        String converted = msg.substring(0, 8);
+        String[] splitted = converted.split(";");
+        Log.d(TAG, "Recibo ESP32: " + converted);
+        tratamientoRecepcionBluetooth(splitted);
+    }
+
+    private void status(String str) {
+        Log.d("STATUS", str);
+    }
+
+    /*
+     * SerialListener
+     */
+    @Override
+    public void onSerialConnect() {
+        status("connected");
+        connected = Connected.True;
+    }
+
+    @Override
+    public void onSerialConnectError(Exception e) {
+        status("connection failed: " + e.getMessage());
+        disconnect();
+    }
+
+    @Override
+    public void onSerialRead(byte[] data) {
+        receive(data);
+    }
+
+    @Override
+    public void onSerialIoError(Exception e) {
+        status("connection lost: " + e.getMessage());
+        disconnect();
     }
 }
