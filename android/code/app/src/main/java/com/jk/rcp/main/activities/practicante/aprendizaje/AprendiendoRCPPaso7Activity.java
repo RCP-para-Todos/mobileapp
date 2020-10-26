@@ -235,7 +235,7 @@ public class AprendiendoRCPPaso7Activity extends AppCompatActivity implements Se
                         Intent intent = new Intent(AprendiendoRCPPaso7Activity.this, AprendiendoRCPPaso8Activity.class);
 
                         intent.putExtra("instantes", (Serializable) instantes);
-
+                        disconnect();
                         startActivity(intent);
                     }
 
@@ -332,6 +332,7 @@ public class AprendiendoRCPPaso7Activity extends AppCompatActivity implements Se
 
                 //Voy a la otra activity
                 Intent intent = new Intent(AprendiendoRCPPaso7Activity.this, AprendiendoRCPPaso8Activity.class);
+                disconnect();
                 startActivity(intent);
             }
         }

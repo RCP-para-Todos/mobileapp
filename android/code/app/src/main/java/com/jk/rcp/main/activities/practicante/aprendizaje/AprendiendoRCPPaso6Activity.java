@@ -3,8 +3,6 @@ package com.jk.rcp.main.activities.practicante.aprendizaje;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -46,10 +44,7 @@ import static android.view.animation.Animation.RELATIVE_TO_SELF;
 import static androidx.lifecycle.Lifecycle.State.STARTED;
 
 public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements ServiceConnection, SerialListener {
-    private static final String TAG = "AprendiendoRC_paso_6_PActivity";
-    private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
-    private static final int REQUEST_ENABLE_BT = 200;
-    BluetoothGattCharacteristic mGattChar;
+    private static final String TAG = "AprendiendoRCPActivity";
     Timer timer;
     private AlarmManager alarmManager;
     private ProgressBar progressBarView;
@@ -64,8 +59,6 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
     private ImageView viento3;
     private ImageView viento4;
     private ImageView viento5;
-    private BluetoothAdapter mBluetoothAdapter;
-    private BluetoothGatt mBluetoothGatt;
     private List<Instant> instantes;
     private int mediosSegundos = 0;
     private int contadorX = 0;
@@ -87,8 +80,6 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aprender_rcp_paso6);
         bindService(new Intent(getApplicationContext(), SerialService.class), this, Context.BIND_AUTO_CREATE);
-
-
         // Configuro la toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -122,19 +113,6 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
         instantes = new ArrayList<Instant>();
         if (getIntent().getExtras() != null && getIntent().getSerializableExtra("device") != null) {
             deviceAddress = (String) getIntent().getSerializableExtra("device");
-        }
-        if (this.mediosSegundos < 60) {
-            final Runnable manejarGraficos = new Runnable() {
-                public void run() {
-                    manejarGraficoAccion();
-                }
-            };
-
-            TimerTask task = new TimerTask() {
-                public void run() {
-                    runOnUiThread(manejarGraficos);
-                }
-            };
         }
     }
 
@@ -202,8 +180,10 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                             progressBarView.setVisibility(View.GONE);
+                            countDownTimer.cancel();
                             Intent intent = new Intent(AprendiendoRCPPaso6Activity.this, AprendiendoRCPPaso7Activity.class);
                             intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
+                            disconnect();
                             startActivity(intent);
                         }
                     });
@@ -221,10 +201,12 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
                     "Aceptar",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            progressBarView.setVisibility(View.GONE);
                             dialog.cancel();
+                            progressBarView.setVisibility(View.GONE);
+                            countDownTimer.cancel();
                             Intent intent = new Intent(AprendiendoRCPPaso6Activity.this, AprendiendoRCPPaso7Activity.class);
                             intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
+                            disconnect();
                             startActivity(intent);
                         }
                     });
@@ -243,17 +225,6 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
         Log.d(TAG, "progreso" + startTime);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (mBluetoothGatt != null) {
-            mBluetoothGatt.close();
-        }
-        if (timer != null) timer.cancel();
-    }
-
-
     private void tratamientoRecepcionBluetooth(String[] datosCorrectos) {
         Log.d(TAG, "ReciboBluetoothPaso2Juego");
         String insuflacion = Conversor.insuflacionToString(Integer.valueOf(datosCorrectos[0]));
@@ -268,6 +239,23 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
 
         //Manejo de variables.
         this.mediosSegundos += 1;
+
+        if (this.mediosSegundos < 60) {
+            final Runnable manejarGraficos = new Runnable() {
+                public void run() {
+                    manejarGraficoAccion();
+                }
+            };
+
+            TimerTask task = new TimerTask() {
+                public void run() {
+                    runOnUiThread(manejarGraficos);
+                }
+            };
+
+            task.run();
+
+        }
     }
 
     private void manejarGraficoAccion() {
@@ -280,7 +268,7 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
     }
 
     private void tratamientoInstantes(Instant i1, Instant i2) {
-        ImageView vientoSelecto;
+        ImageView vientoSelecto = null;
         switch (this.iteracion) {
             case 1:
                 vientoSelecto = viento1;
@@ -295,22 +283,22 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
                 vientoSelecto = viento4;
                 break;
             case 5:
-            default:
                 vientoSelecto = viento5;
                 break;
         }
-
-        if (i1.getInsuflacion() == "Nula") {
-            vientoSelecto.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-        } else if (i1.getInsuflacion() == "Insuficiente") {
-            vientoSelecto.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
-        } else if (i1.getInsuflacion() == "Correcta") {
-            vientoSelecto.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
-        } else if (i1.getInsuflacion() == "Excesiva") {
-            vientoSelecto.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
-        }
         iteracion++;
-        vientoSelecto.setVisibility(View.VISIBLE);
+        if (vientoSelecto != null) {
+            if (i1.getCompresion() == "Nula") {
+                vientoSelecto.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            } else if (i1.getCompresion() == "Insuficiente") {
+                vientoSelecto.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
+            } else if (i1.getCompresion() == "Correcta") {
+                vientoSelecto.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
+            } else if (i1.getCompresion() == "Excesiva") {
+                vientoSelecto.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+            }
+            vientoSelecto.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

@@ -183,6 +183,7 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity implements Se
                             countDownTimer.cancel();
                             Intent intent = new Intent(AprendiendoRCPPaso5Activity.this, AprendiendoRCPPaso6Activity.class);
                             intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
+                            disconnect();
                             startActivity(intent);
                         }
                     });
@@ -205,7 +206,7 @@ public class AprendiendoRCPPaso5Activity extends AppCompatActivity implements Se
                             countDownTimer.cancel();
                             Intent intent = new Intent(AprendiendoRCPPaso5Activity.this, AprendiendoRCPPaso6Activity.class);
                             intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
-                            intent.putExtra("device", (String) getIntent().getSerializableExtra("device"));
+                            disconnect();
                             startActivity(intent);
                         }
                     });
