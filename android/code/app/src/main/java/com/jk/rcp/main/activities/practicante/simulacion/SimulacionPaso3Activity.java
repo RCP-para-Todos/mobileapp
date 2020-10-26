@@ -1,28 +1,18 @@
 package com.jk.rcp.main.activities.practicante.simulacion;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattCallback;
-import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattDescriptor;
-import android.bluetooth.BluetoothGattService;
-import android.bluetooth.BluetoothManager;
-import android.bluetooth.BluetoothProfile;
-import android.bluetooth.le.BluetoothLeScanner;
-import android.bluetooth.le.ScanCallback;
-import android.bluetooth.le.ScanResult;
+import android.bluetooth.BluetoothDevice;
+import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -39,6 +28,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jk.rcp.R;
+import com.jk.rcp.main.bluetooth.SerialListener;
+import com.jk.rcp.main.bluetooth.SerialService;
+import com.jk.rcp.main.bluetooth.SerialSocket;
 import com.jk.rcp.main.data.model.event.Event;
 import com.jk.rcp.main.data.model.event.EventPost;
 import com.jk.rcp.main.data.model.event.EventRequestCallbacks;
@@ -57,16 +49,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.UUID;
 
 import okhttp3.ResponseBody;
 
-public class SimulacionPaso3Activity extends AppCompatActivity {
+public class SimulacionPaso3Activity extends AppCompatActivity implements ServiceConnection, SerialListener {
     private static final String TAG = "SimulacionPaso3Activity";
-    // Bluetooth
-    private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
-    private static final int REQUEST_ENABLE_BT = 200;
-    BluetoothGattCharacteristic mGattChar;
     //Countdown
     Timer timer;
     int totalSeconds = Constants.SIMULACION_DURACION_SEGUNDOS_PASO3;
@@ -79,8 +66,6 @@ public class SimulacionPaso3Activity extends AppCompatActivity {
     private ImageView viento;
     private TextView labelCountCompresiones;
     private TextView labelCountInsuflasiones;
-    private BluetoothAdapter mBluetoothAdapter;
-    private BluetoothGatt mBluetoothGatt;
     private ProgressDialog progressDialog;
     private int progress;
     private int endTime;
@@ -94,105 +79,20 @@ public class SimulacionPaso3Activity extends AppCompatActivity {
     private boolean entornoNoSeguroClicked = false;
 
     private User globalUser;
-    public final BluetoothGattCallback mBluetoothGattCallback = new BluetoothGattCallback() {
-        @Override
-        public void onCharacteristicChanged(BluetoothGatt gatt,
-                                            BluetoothGattCharacteristic characteristic) {
-            byte[] data = characteristic.getValue();
-            String s = new String(data);
-            String converted = s.substring(0, 8);
-            String[] splitted = converted.split(";");
-            Log.d(TAG, "Recibo ESP32: " + converted);
-            tratamientoRecepcionBluetooth(splitted);
-            // mBluetoothGatt.disconnect();
-        }
 
-        @Override
-        public void onConnectionStateChange(BluetoothGatt gatt,
-                                            int status,
-                                            int newState) {
-            if (newState == BluetoothProfile.STATE_CONNECTED) {
-                mBluetoothGatt.discoverServices();
-            }
-        }
+    private enum Connected {False, Pending, True}
 
-        @Override
-        public void onServicesDiscovered(BluetoothGatt gatt,
-                                         int status) {
-            if (status == BluetoothGatt.GATT_SUCCESS) {
-                BluetoothGattService mGattService =
-                        mBluetoothGatt.getService(UUID.fromString("6E400001-B5A3-F393-E0A9-E50E24DCCA9E"));
-                if (mGattService != null) {
+    private String deviceAddress;
+    private SerialService service;
 
-                    Log.i("onServicesDiscovered",
-                            "Service characteristic UUID found: " + mGattService.getUuid().toString());
-
-                    mGattChar =
-                            mGattService.getCharacteristic(UUID.fromString("6E400003-B5A3-F393-E0A9-E50E24DCCA9E"));
-
-                    if (mGattChar != null) {
-
-                        if (gatt.setCharacteristicNotification(mGattChar, true) == true) {
-                            Log.d("gatt.setCharacteristicNotification", "SUCCESS!");
-                        } else {
-                            Log.d("gatt.setCharacteristicNotification", "FAILURE!");
-                        }
-                        BluetoothGattDescriptor descriptor = mGattChar.getDescriptors().get(0);
-                        if (0 != (mGattChar.getProperties() & BluetoothGattCharacteristic.PROPERTY_INDICATE)) {
-                            // It's an indicate characteristic
-                            Log.d("onServicesDiscovered", "Characteristic (" + mGattChar.getUuid() + ") is INDICATE");
-                            if (descriptor != null) {
-                                descriptor.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
-                                gatt.writeDescriptor(descriptor);
-                            }
-                        } else {
-                            // It's a notify characteristic
-                            Log.d("onServicesDiscovered", "Characteristic (" + mGattChar.getUuid() + ") is NOTIFY");
-                            if (descriptor != null) {
-                                descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-                                gatt.writeDescriptor(descriptor);
-                            }
-                        }
-                        Log.i("onServicesDiscovered",
-                                "characteristic UUID found: " + mGattChar.getUuid().toString());
-
-                        fn_countdown();
-
-                    } else {
-                        Log.i("onServicesDiscovered",
-                                "characteristic not found for UUID: " + mGattChar.getUuid().toString());
-
-                    }
-
-                } else {
-                    Log.i("onServicesDiscovered",
-                            "Service characteristic not found for UUID: " + mGattService.getUuid().toString());
-
-                }
-
-                if (progressDialog.isIndeterminate()) progressDialog.dismiss();
-            }
-        }
-
-    };
-    private ScanCallback mLeScanCallback = new ScanCallback() {
-        @Override
-        public void onScanResult(int callbackType, ScanResult result) {
-            super.onScanResult(callbackType, result);
-
-            Log.i("onScanResult", result.getDevice().getAddress());
-            Log.i("onScanResult", result.getDevice().getName());
-
-            scanLeDevice(false);
-
-            mBluetoothGatt = result.getDevice().connectGatt(getApplicationContext(), false, mBluetoothGattCallback);
-        }
-    };
+    private Connected connected = Connected.False;
+    private boolean initialStart = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simulacion_paso3);
+        bindService(new Intent(getApplicationContext(), SerialService.class), this, Context.BIND_AUTO_CREATE);
 
         // Configuro la toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -208,23 +108,6 @@ public class SimulacionPaso3Activity extends AppCompatActivity {
         corazon = findViewById(R.id.corazon);
         viento = findViewById(R.id.viento);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // Android M Permission check 
-            if (this.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("This app needs location access");
-                builder.setMessage("Please grant location access so this app can detect beacons.");
-                builder.setPositiveButton(android.R.string.ok, null);
-                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_COARSE_LOCATION);
-                    }
-                });
-                builder.show();
-                return;
-            }
-        }
         if (getIntent().getExtras() != null &&
                 getIntent().getSerializableExtra("elEntornoEsSeguro") != null &&
                 getIntent().getSerializableExtra("ambulanciaClicked") != null &&
@@ -236,8 +119,9 @@ public class SimulacionPaso3Activity extends AppCompatActivity {
         }
 
         instantes = new ArrayList<Instant>();
-
-        beginBLE();
+        if (getIntent().getExtras() != null && getIntent().getSerializableExtra("device") != null) {
+            deviceAddress = (String) getIntent().getSerializableExtra("device");
+        }
     }
 
     private void fn_countdown() {
@@ -271,8 +155,8 @@ public class SimulacionPaso3Activity extends AppCompatActivity {
                     @Override
                     public void onFinish() {
                         labelTimerCountdown.setText("00:00:00 (E.T.A.)");
+                        disconnect();
                         subirEvento();
-
                     }
                 }.start();
             }
@@ -342,99 +226,12 @@ public class SimulacionPaso3Activity extends AppCompatActivity {
                 });
     }
 
-    public void beginBLE() {
-        // BLE
-        final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-        mBluetoothAdapter = bluetoothManager.getAdapter();
-        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        } else {
-            scanLeDevice(true);
-        }
-    }
-
     @Override
     protected void onPause() {
         super.onPause();
 
-        if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
-            scanLeDevice(false);
-        }
-        if (mBluetoothGatt != null) {
-            mBluetoothGatt.close();
-        }
+        disconnect();
         if (timer != null) timer.cancel();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (mBluetoothGatt == null) {
-            return;
-        }
-        mBluetoothGatt.close();
-        mBluetoothGatt = null;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // User chose not to enable Bluetooth.
-        Log.i("onActivityResult", "requestCode = " + requestCode);
-        Log.i("onActivityResult", "resultCode = " + resultCode);
-        if (requestCode == REQUEST_ENABLE_BT) {
-            if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-                finish();
-                return;
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions,
-                                           int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_COARSE_LOCATION: {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d("onRequestPermis...", "coarse location permission granted");
-                    beginBLE();
-                } else {
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Functionality limited");
-                    builder.setMessage("Since location access has not been granted, this app will not be able to discover beacons when in the background.");
-                    builder.setPositiveButton(android.R.string.ok, null);
-                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                        }
-                    });
-                    builder.show();
-                }
-                return;
-            }
-        }
-    }
-
-    private void scanLeDevice(final boolean enable) {
-        final BluetoothLeScanner bluetoothLeScanner =
-                mBluetoothAdapter.getBluetoothLeScanner();
-
-        if (enable) {
-            this.progressDialog = ProgressDialog.show(this, "Escaneando", "Aguarde un momento por favor");
-
-            bluetoothLeScanner.startScan(mLeScanCallback);
-            Log.i("scanLeDevice", "Start scan");
-
-        } else {
-            // if (progressDialog.isIndeterminate()) progressDialog.dismiss();
-
-            bluetoothLeScanner.stopScan(mLeScanCallback);
-            Log.i("scanLeDevice", "Stop scan");
-        }
     }
 
     private void tratamientoRecepcionBluetooth(String[] datosCorrectos) {
@@ -485,13 +282,7 @@ public class SimulacionPaso3Activity extends AppCompatActivity {
     private void logicaEntornoNoSeguro(Instant instante) {
         if (this.entornoNoSeguroClicked && !this.elEntornoEsSeguro) {
             if (!instante.getCompresion().equals("Nula") || !instante.getInsuflacion().equals("Nula")) {
-                // Finalizo el bluetooth
-                if (mBluetoothGatt == null) {
-                    return;
-                }
-                mBluetoothGatt.close();
-                mBluetoothGatt = null;
-
+                disconnect();
                 //Voy a la otra activity
                 Intent intent = new Intent(SimulacionPaso3Activity.this, SimulacionEstadisticasActivity.class);
                 startActivity(intent);
@@ -575,5 +366,141 @@ public class SimulacionPaso3Activity extends AppCompatActivity {
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
+    }
+
+    /// COPIA
+
+    @Override
+    public void onDestroy() {
+        try {
+            unbindService(this);
+        } catch (Exception ignored) {
+        }
+        if (connected != Connected.False)
+            disconnect();
+        stopService(new Intent(this, SerialService.class));
+        super.onDestroy();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "en el start");
+        if (service != null) {
+            Log.d(TAG, "No es null");
+            service.attach(this);
+        } else {
+            Log.d("SERVICE", "Arranco el serviico");
+            startService(new Intent(this, SerialService.class)); // prevents service destroy on unbind from recreated activity caused by orientation change
+        }
+    }
+
+    @Override
+    public void onStop() {
+        if (service != null && !isChangingConfigurations())
+            service.detach();
+        super.onStop();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (initialStart && service != null) {
+            initialStart = false;
+            runOnUiThread(this::connect);
+        }
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder binder) {
+        service = ((SerialService.SerialBinder) binder).getService();
+        service.attach(this);
+        if (initialStart) {
+            initialStart = false;
+            runOnUiThread(this::connect);
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+        service = null;
+    }
+
+    /*
+     * Serial + UI
+     */
+    private void connect() {
+        try {
+            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            BluetoothDevice device = bluetoothAdapter.getRemoteDevice(deviceAddress);
+            status("connecting...");
+            connected = Connected.Pending;
+            SerialSocket socket = new SerialSocket(getApplicationContext(), device);
+            service.connect(socket);
+            fn_countdown();
+        } catch (Exception e) {
+            onSerialConnectError(e);
+        }
+    }
+
+    private void disconnect() {
+        connected = Connected.False;
+        service.disconnect();
+    }
+
+    private void send(String str) {
+        if (connected != Connected.True) {
+            Toast.makeText(this, "not connected", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            String msg;
+            byte[] data;
+            msg = str;
+            data = str.getBytes();
+
+            service.write(data);
+        } catch (Exception e) {
+            onSerialIoError(e);
+        }
+    }
+
+    private void receive(byte[] data) {
+        String msg = new String(data);
+        String converted = msg.substring(0, 8);
+        String[] splitted = converted.split(";");
+        Log.d(TAG, "Recibo ESP32: " + converted);
+        tratamientoRecepcionBluetooth(splitted);
+    }
+
+    private void status(String str) {
+        Log.d("STATUS", str);
+    }
+
+    /*
+     * SerialListener
+     */
+    @Override
+    public void onSerialConnect() {
+        status("connected");
+        connected = Connected.True;
+    }
+
+    @Override
+    public void onSerialConnectError(Exception e) {
+        status("connection failed: " + e.getMessage());
+        disconnect();
+    }
+
+    @Override
+    public void onSerialRead(byte[] data) {
+        receive(data);
+    }
+
+    @Override
+    public void onSerialIoError(Exception e) {
+        status("connection lost: " + e.getMessage());
+        disconnect();
     }
 }
