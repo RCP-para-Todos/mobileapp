@@ -112,7 +112,6 @@ public class AprendiendoRCPPaso7Activity extends AppCompatActivity implements Se
         setContentView(R.layout.activity_aprender_rcp_paso7);
         tv_time = findViewById(R.id.tv_timer_paso7);
         progressBarView = findViewById(R.id.view_progress_bar_paso7);
-        bindService(new Intent(getApplicationContext(), SerialService.class), this, Context.BIND_AUTO_CREATE);
 
         // Configuro la toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -192,6 +191,7 @@ public class AprendiendoRCPPaso7Activity extends AppCompatActivity implements Se
                 }.start();
             }
         });
+        bindService(new Intent(getApplicationContext(), SerialService.class), this, Context.BIND_AUTO_CREATE);
     }
 
     public void setProgress(int startTime, int endTime) {

@@ -79,7 +79,6 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aprender_rcp_paso6);
-        bindService(new Intent(getApplicationContext(), SerialService.class), this, Context.BIND_AUTO_CREATE);
         // Configuro la toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -156,6 +155,7 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
         };
         Log.d(TAG, "arranca");
         countDownTimer.start();
+        bindService(new Intent(getApplicationContext(), SerialService.class), this, Context.BIND_AUTO_CREATE);
     }
 
     private void logicaEvaluacionCompresiones() {
