@@ -35,6 +35,7 @@ import java.util.ArrayList;
 public class HomeActivityPracticante extends AppCompatActivity {
     private static final String TAG = "HomeActivityPracticante";
     private User globalUser;
+    private static final int REQUEST_ENABLE_BT = 200;
 
     private enum ScanState {NONE, LESCAN, DISCOVERY, DISCOVERY_FINISHED}
 
@@ -74,37 +75,60 @@ public class HomeActivityPracticante extends AppCompatActivity {
         ImageButton btnAprenderRCP = findViewById(R.id.btn_aprender_rcp);
         btnAprenderRCP.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivityPracticante.this, AprendiendoRCPPaso1Activity.class);
-                stopScan();
-                intent.putExtra("device", ESP32.getAddress());
-                startActivity(intent);
+                if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+                }
+                if (ESP32 == null) {
+                    startScan();
+                } else {
+                    Intent intent = new Intent(HomeActivityPracticante.this, AprendiendoRCPPaso1Activity.class);
+                    stopScan();
+                    intent.putExtra("device", ESP32.getAddress());
+                    startActivity(intent);
+                }
             }
         });
 
         ImageButton btnSimulacion = findViewById(R.id.btn_simulacion);
         btnSimulacion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivityPracticante.this, SimulacionPaso1Activity.class);
-                stopScan();
-                intent.putExtra("device", ESP32.getAddress());
-                startActivity(intent);
+                if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+                }
+                if (ESP32 == null) {
+                    startScan();
+                } else {
+                    Intent intent = new Intent(HomeActivityPracticante.this, SimulacionPaso1Activity.class);
+                    stopScan();
+                    intent.putExtra("device", ESP32.getAddress());
+                    startActivity(intent);
+                }
             }
         });
 
         ImageButton btnJuego = findViewById(R.id.btn_modo_juego);
         btnJuego.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivityPracticante.this, ModoJuegoActivity.class);
-                stopScan();
-                intent.putExtra("device", ESP32.getAddress());
-                startActivity(intent);
+                if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+                }
+                if (ESP32 == null) {
+                    startScan();
+                } else {
+                    Intent intent = new Intent(HomeActivityPracticante.this, ModoJuegoActivity.class);
+                    stopScan();
+                    intent.putExtra("device", ESP32.getAddress());
+                    startActivity(intent);
+                }
             }
         });
 
         leScanCallback = (device, rssi, scanRecord) -> {
             if (device != null) {
                 runOnUiThread(() -> {
-                    Log.d(TAG, "En el callbakc");
                     updateScan(device);
                 });
             }
@@ -128,8 +152,16 @@ public class HomeActivityPracticante extends AppCompatActivity {
         discoveryIntentFilter = new IntentFilter();
         discoveryIntentFilter.addAction(BluetoothDevice.ACTION_FOUND);
         discoveryIntentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH))
+        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
             bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+                if (ESP32 == null) {
+                    startScan();
+                }
+            }
+        }
         startScan();
     }
 
@@ -138,7 +170,6 @@ public class HomeActivityPracticante extends AppCompatActivity {
         if (scanState != ScanState.NONE)
             return;
         scanState = ScanState.LESCAN;
-        Log.d(TAG, "AC!");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 scanState = ScanState.NONE;
@@ -172,7 +203,6 @@ public class HomeActivityPracticante extends AppCompatActivity {
         listItems.clear();
 
         if (scanState == ScanState.LESCAN) {
-            Log.d(TAG, "ACA?");
             leScanStopHandler.postDelayed(this::stopScan, LESCAN_PERIOD);
             new AsyncTask<Void, Void, Void>() {
                 @Override
@@ -201,17 +231,29 @@ public class HomeActivityPracticante extends AppCompatActivity {
     }
 
     private void updateScan(BluetoothDevice device) {
-        Log.d(TAG, device.getName());
-
         if (scanState == ScanState.NONE)
             return;
-        if (listItems.indexOf(device) < 0) {
-            listItems.add(device);
-            if (device.getName().equals("ESP32")) {
-                this.ESP32 = device;
-                Log.d(TAG, "Tengo al ESP32!");
-                stopScan();
+        if (device != null) {
+            if (listItems.indexOf(device) < 0 && device.getName() != null) {
+                listItems.add(device);
+                if (device.getName().equals("ESP32")) {
+                    this.ESP32 = device;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle(getText(R.string.esp32_found_title));
+                    builder.setMessage(getText(R.string.esp32_found_message));
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    builder.show();
+                    stopScan();
+                }
             }
+        }
+        stopScan();
+        if (this.ESP32 == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getText(R.string.error_esp32_title));
+            builder.setMessage(getText(R.string.error_esp32_message));
+            builder.setPositiveButton(android.R.string.ok, null);
+            builder.show();
         }
     }
 

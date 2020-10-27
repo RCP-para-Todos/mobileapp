@@ -35,4 +35,8 @@
     <string name="location_permission_title">titulo</string>
     <string name="location_permission_message">mensaje</string>
     <string name="pairing_request">Desea emparejar</string>
+    <string name="error_esp32_title">Atención</string>
+    <string name="error_esp32_message">Verifique que el ESP32 este funcionando</string>
+    <string name="esp32_found_message">Conexión con hardware correcta</string>
+    <string name="esp32_found_title">Atención</string>
 </resources>
