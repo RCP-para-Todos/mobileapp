@@ -47,12 +47,12 @@ class VerObservacionesViewController: UIViewController{
         
         self.buttonRegistrar.layer.cornerRadius = 15
         self.labelFecha.text = Utils.translateDateMongo(date: evento!.fecha)
-        self.primeroEstado = !evento!.brazosFlexionados!
-        self.segundoEstado = !evento!.noConsultaEstadoVictima!
-        self.terceroEstado = !evento!.noEstaAtentoAlEscenario!
+        self.primeroEstado = evento!.brazosFlexionados!
+        self.segundoEstado = evento!.noConsultaEstadoVictima!
+        self.terceroEstado = evento!.noEstaAtentoAlEscenario!
         self.cuartoEstado
-            = !evento!.disponeAyudaNoSolicita!
-        self.quintoEstado = !evento!.demoraTomaDecisiones!
+            = evento!.disponeAyudaNoSolicita!
+        self.quintoEstado = evento!.demoraTomaDecisiones!
         self.textObservaciones.text = evento!.observaciones
         
         self.logicaCheckBox1()
@@ -173,11 +173,11 @@ class VerObservacionesViewController: UIViewController{
     @IBAction func buttonRegistrarClicked(_ sender: Any) {
         if(self.rol == "instructor"){
             let parameters : [String: Any] = [
-            "brazosFlexionados": self.primeroEstado,
-            "noConsultaEstadoVictima": self.segundoEstado,
-            "noEstaAtentoAlEscenario": self.terceroEstado,
-            "disponeAyudaNoSolicita": self.cuartoEstado,
-            "demoraTomaDesiciones": self.quintoEstado,
+            "brazosFlexionados": !self.primeroEstado,
+            "noConsultaEstadoVictima": !self.segundoEstado,
+            "noEstaAtentoAlEscenario": !self.terceroEstado,
+            "disponeAyudaNoSolicita": !self.cuartoEstado,
+            "demoraTomaDesiciones": !self.quintoEstado,
             "observations":self.textObservaciones.text!
             ]
             self.serviceEvento?.updateEventoWithObservations(id: evento!.id, parameters: parameters, completion: self.newEvento)

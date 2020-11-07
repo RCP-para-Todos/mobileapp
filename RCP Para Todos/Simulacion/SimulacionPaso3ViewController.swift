@@ -196,7 +196,12 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
             "porcentajeCompresionOk": porcentajeCompresionesCorrectas,
             "cantidadInsuflacionesOkMalCabeza": cantidadInsuflacionesCorrectasMalaPosicion,
             "fuerzaPromedioAplicada": fuerzaPromedioAplicada,
-            "calidadInsuflaciones":calidadInsuflaciones
+            "calidadInsuflaciones":calidadInsuflaciones,
+            /*"brazosFlexionados": false,
+            "noConsultaEstadoVictima": false,
+            "noEstaAtentoAlEscenario": false,
+            "disponeAyudaNoSolicita": false,
+            "demoraTomaDesiciones": false*/
             ]
         self.serviceEvento?.newEvento(parameters: parameters, completion: self.newEvento)
     }

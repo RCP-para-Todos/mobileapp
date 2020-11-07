@@ -159,6 +159,7 @@ class AprendizajePaso6ViewController: UIViewController, CBCentralManagerDelegate
                 compresionesCorrectas+=1
             }
         }
+        //print("COMPRESIONES PORCENTAJE: \(Double(compresionesCorrectas) / Double(self.instantes.count))")
         if((Double(compresionesCorrectas) / Double(self.instantes.count)) > Constants.APRENDIZAJE_PORCENTAJE_COMPRESIONES_VALIDAS){
             let alert = UIAlertController(title: "Compresiones Finalizadas", message: "Aprendizaje de compresiones realizado exitosamente", preferredStyle: UIAlertController.Style.alert)
             let action = UIAlertAction(title: "Aceptar", style: UIAlertAction.Style.default) {
