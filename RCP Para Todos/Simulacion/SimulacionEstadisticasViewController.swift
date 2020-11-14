@@ -36,7 +36,7 @@ class SimulacionEstadisticasViewController: UIViewController, ChartViewDelegate
     }
         
     func initInterface(){
-        self.backButton.backBarButtonItem?.isEnabled = false //PROBAR
+        self.backButton.backBarButtonItem?.isEnabled = false
         self.buttonIrAlInicio.layer.cornerRadius = 15
     }
     
@@ -61,28 +61,49 @@ class SimulacionEstadisticasViewController: UIViewController, ChartViewDelegate
     
     func logicaResultado(){
         //Si el entorno es seguro y se selecciona llamar a la ambulancia se realiza la simulacion.
-       if(self.elEntornoEsSeguro && self.ambulanciaClicked && !self.entornoNoSeguroClicked){
-        self.labelResultado.text = "Felicitaciones, el entorno estaba seguro y la ambulancia llegó a tiempo luego del RCP"
-       }
-       //Si el entorno es seguro pero no selecciona para llamar a la ambulancia se realiza la simulacion pero sera invalidada finalmente porque la ambulancia nunca llegara.
-       else if(self.elEntornoEsSeguro && !self.ambulanciaClicked && !self.entornoNoSeguroClicked){
-           self.labelResultado.text = "Lo sentimos, aunque la maniobra RCP fue practicada la ambulancia no llegó ya que nunca fue llamada"
-       }
-       //Si el entorno no es seguro pero no se selecciona el entorno no es seguro, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
-       else if(!self.elEntornoEsSeguro && !self.entornoNoSeguroClicked && !self.ambulanciaClicked){
-           self.labelResultado.text = "Lo sentimos, el entorno era no seguro y no se debía interactuar con el simulador"
-       }
-       //Si el entorno no es seguro pero se selecciona llamar a la ambulancia, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
-       else if(!self.elEntornoEsSeguro && !self.entornoNoSeguroClicked && self.ambulanciaClicked){
-           self.labelResultado.text = "Lo sentimos, el entorno era no seguro y no se debía interactuar con el simulador"
-       }
+        if(self.elEntornoEsSeguro && self.ambulanciaClicked && !self.entornoNoSeguroClicked){
+        self.labelResultado.text = "Resultado: El entorno estaba seguro y la ambulancia llegó a tiempo luego del RCP"
+        }
+        //Si el entorno es seguro pero no selecciona para llamar a la ambulancia se realiza la simulacion pero sera invalidada finalmente porque la ambulancia nunca llegara.
+        else if(self.elEntornoEsSeguro && !self.ambulanciaClicked && !self.entornoNoSeguroClicked){
+           self.labelResultado.text = "Resultado: Aunque la maniobra RCP fue practicada la ambulancia no llegó ya que nunca fue llamada"
+        }
+        //Si el entorno no es seguro pero no se selecciona el entorno no es seguro, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
+        else if(!self.elEntornoEsSeguro && !self.entornoNoSeguroClicked && !self.ambulanciaClicked){
+           self.labelResultado.text = "Resultado: El entorno no era seguro y no se debía interactuar con el simulador"
+        }
+        //Si el entorno no es seguro pero se selecciona llamar a la ambulancia, se realiza la simulacion pero sera invalidada finalmente porque el entorno no era seguro.
+        else if(!self.elEntornoEsSeguro && !self.entornoNoSeguroClicked && self.ambulanciaClicked){
+           self.labelResultado.text = "Resultado: El entorno no era seguro y no se debía interactuar con el simulador"
+        }
+
+        self.escenarioEmbarazada()
+    }
+    
+    //Agregada validacion adicional sobre escenario de embarazada para la expo.
+    private func escenarioEmbarazada(){
+        let defaults = UserDefaults.standard
+        let escenarioNumero = defaults.integer(forKey: "escenarioNumero")
+        if(escenarioNumero == 4){
+            var buenaPosicion = 0
+            for i in instantes {
+                if (i.Posicion == "Reclinado"){
+                    buenaPosicion += 1
+                }
+            }
+            if buenaPosicion == 0{
+                self.labelResultado.text = "Resultado: El entorno estaba seguro y la ambulancia llegó a tiempo luego del RCP, además por tratarse de una persona embarazada la misma estaba reclinada."
+            }
+            else{
+                self.labelResultado.text = "Resultado: El entorno estaba seguro y la ambulancia llegó a tiempo luego del RCP, aunque por tratarse de una persona embarazada la misma no estaba reclinada"
+            }
+        }
     }
     
     func initGraph(){
         let labels = ["Nulas", "Insuficientes", "Correctas", "Excesivas"]
         var n : Double = 0, i : Double = 0, c : Double = 0, e : Double = 0
         for ins in self.instantes{
-            print(ins.Compresion)
             if(ins.Compresion == "Nula"){
                 n = n+1
             }

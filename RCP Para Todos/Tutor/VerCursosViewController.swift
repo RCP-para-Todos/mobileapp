@@ -15,7 +15,6 @@ class VerCursosViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var activityIndicatorSpinner: UIActivityIndicatorView!
     var cursos : [String] = []
     var cursosIds : [String] = []
-    //let cursos = ["E.T. 37 TM", "UNLM TN", "UBA TT", "Dpto. Ci.", "R.R."]
     var cursoSeleccionado : String?
     var cursoSeleccionadoId: String?
     var serviceCurso : ServiceCurso?

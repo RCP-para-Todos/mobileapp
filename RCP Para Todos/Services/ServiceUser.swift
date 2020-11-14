@@ -31,8 +31,6 @@ class ServiceUser
                     defaults.set(value["token"]!, forKey: "token")
                     defaults.set(value["refreshToken"]!, forKey: "refreshToken")
                     defaults.set(value["rol"]!, forKey: "rol")
-                    //ELIMINAR ESTA ASQUEROSIDAD
-                    print(courses)
                     for i in courses{
                         let cu = (i.1["_id"].stringValue)
                         defaults.set(cu, forKey: "curso")
@@ -59,17 +57,6 @@ class ServiceUser
                 }
                 return
             }
-        }
-    }
-    
-    public func getUserByToken(token: String/*, completion: @escaping (Bool) -> Void*/){
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(token)",
-            "Accept": "application/json"
-        ]
-
-        AF.request("\(Constants.GLOBAL_ENDPOINT)users", method: .get, headers: headers).responseJSON { response in
-            debugPrint(response)
         }
     }
     

@@ -64,7 +64,6 @@ class JuegoPaso2ViewController: UIViewController,  CBCentralManagerDelegate, CBP
     }
     
     func tratamientoRecepcionBluetooth(datosCorrectos: [String]){
-        print("ReciboBluetoothPaso2Juego")
         let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
         let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
         let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)
@@ -315,7 +314,6 @@ class JuegoPaso2ViewController: UIViewController,  CBCentralManagerDelegate, CBP
         {
             self.delegate?.bleDidReceiveData(data: characteristic.value)
             let recibido = [UInt8](characteristic.value!)
-            //print(recibido)
             let cadenaBytetoString = String(bytes: recibido, encoding: .utf8)
             let datosCorrectos = cadenaBytetoString!.components(separatedBy: ";")
             self.tratamientoRecepcionBluetooth(datosCorrectos: datosCorrectos)

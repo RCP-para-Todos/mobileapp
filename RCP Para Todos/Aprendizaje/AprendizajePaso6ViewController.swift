@@ -61,7 +61,6 @@ class AprendizajePaso6ViewController: UIViewController, CBCentralManagerDelegate
             switch state {
             case .finished:
                 self.logicaEvaluacionCompresiones()
-                print("finished")
             case .continued(let time):
                 print("continued: \(String(describing: time))")
             case .paused(let time):
@@ -82,9 +81,7 @@ class AprendizajePaso6ViewController: UIViewController, CBCentralManagerDelegate
 
             player.play()
 
-        } catch let error {
-            print(error.localizedDescription)
-        }
+        } catch let error {}
     }
     
     func manejarGraficoAccion(){
@@ -124,7 +121,6 @@ class AprendizajePaso6ViewController: UIViewController, CBCentralManagerDelegate
     }
     
     func tratamientoRecepcionBluetooth(datosCorrectos: [String]){
-        print("ReciboBluetoothPaso6")
         let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
         let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
         let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)

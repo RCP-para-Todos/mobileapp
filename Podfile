@@ -11,4 +11,5 @@ target 'RCP Para Todos' do
 	pod 'UICircularProgressRing'
 	pod 'Charts'
 	pod 'SwiftyJSON'
+	pod 'Toast-Swift'
 end

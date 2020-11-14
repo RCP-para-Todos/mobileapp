@@ -17,10 +17,8 @@ class ServiceEvento{
             "Authorization": "Bearer \(token!)",
               "Accept": "application/json"
           ]
-        print(parameters)
         AF.request("\(Constants.GLOBAL_ENDPOINT)events", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON {
           response in
-            print(response)
             completion(true)
         }
     }
@@ -31,10 +29,8 @@ class ServiceEvento{
             "Authorization": "Bearer \(token!)",
               "Accept": "application/json"
           ]
-        print(parameters)
         AF.request("\(Constants.GLOBAL_ENDPOINT)events/\(id)", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON {
           response in
-            print(response)
             completion(true)
         }
     }
@@ -56,7 +52,11 @@ class ServiceEvento{
                 let finalDate = Utils.translateDateMongo(date: i.1["Created_date"].stringValue)
                 arrayResponseNames.append(finalDate)
             }
-            print(arrayResponseNames)
+            arrayResponseIds = Array(arrayResponseIds).sorted(by: <)
+            arrayResponseNames = Array(arrayResponseNames).sorted(by: <)
+            for i in arrayResponseNames.indices{
+                arrayResponseNames[i] = Utils.translateDateToEasyRead(date: arrayResponseNames[i])
+            }
             completion(arrayResponseIds, arrayResponseNames)
         }
     }

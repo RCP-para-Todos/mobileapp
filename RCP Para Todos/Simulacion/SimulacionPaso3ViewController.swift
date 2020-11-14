@@ -77,13 +77,11 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
     }
     
     @objc func volverAtras2Views() {
-        print("PUSH")
         self.navigationController!.popViewControllers(viewsToPop: 3)
     }
 
     
     func tratamientoRecepcionBluetooth(datosCorrectos: [String]){
-        print("ReciboBluetoothPaso3Simulacion")
         let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
         let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
         let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)

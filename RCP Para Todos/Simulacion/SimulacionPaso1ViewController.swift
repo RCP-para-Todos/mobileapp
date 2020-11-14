@@ -16,11 +16,21 @@ class SimulacionPaso1ViewController: UIViewController
     @IBOutlet weak var labelDescripcion: UILabel!
     
     var escenarioRandom : Int = 0
+    /*
+     0 = VACACIONES, ARENA
+     1 = OBRA EN CONSTRUCCION
+     2 = FAMILIAR CON UN CABLE
+     3 = RUTA, OBSTACULO
+     4 = MUJER DESMAYADA
+     5 = CHARLABAS PADRE
+     */
+    let listaEscenarios : [Int] = [0, 1, 2, 3, 4, 5]
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.inicializarBarraSuperior()
+        self.escenarioCargadoParaExpo()
         self.elegirEscenarioRandom()
         self.initInterface()
     }
@@ -29,8 +39,18 @@ class SimulacionPaso1ViewController: UIViewController
         self.buttonIniciar.layer.cornerRadius = 15
     }
     
+    func escenarioCargadoParaExpo(){
+        let defaults = UserDefaults.standard
+        var escenarioNumeroInt : Int = 0
+        if let escenarioNumero = defaults.object(forKey: "escenarioNumero"){
+            escenarioNumeroInt = (escenarioNumero as! Int) + 1
+        }
+        defaults.set(escenarioNumeroInt, forKey: "escenarioNumero")
+        self.escenarioRandom = escenarioNumeroInt
+    }
+    
     func elegirEscenarioRandom(){
-        self.escenarioRandom = Int.random(in: 0...5)
+        //self.escenarioRandom = Int.random(in: 0...5)
         if(self.escenarioRandom == 0){
             self.labelDescripcion.text = "Durante tus vacaciones luego de una larga caminata, la persona que te acompaña se agarra el pecho y cae desplomada"
             self.imagenSimuacion.image = UIImage(named: "escenario1")

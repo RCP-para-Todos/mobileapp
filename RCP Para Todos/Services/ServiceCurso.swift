@@ -18,10 +18,8 @@ class ServiceCurso
             "Authorization": "Bearer \(token!)",
               "Accept": "application/json"
           ]
-        print(parameters)
         AF.request("\(Constants.GLOBAL_ENDPOINT)courses", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON {
           response in
-            print(response)
             completion(true)
         }
     }
@@ -43,7 +41,8 @@ class ServiceCurso
                 arrayResponseIds.append(i.1["_id"].stringValue)
                 arrayResponseNames.append(i.1["name"].stringValue)
             }
-            print(arrayResponseNames)
+            arrayResponseIds = Array(arrayResponseIds).sorted(by: <)
+            arrayResponseNames = Array(arrayResponseNames).sorted(by: <)
             completion(arrayResponseIds, arrayResponseNames)
         }
     }

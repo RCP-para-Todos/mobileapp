@@ -49,7 +49,6 @@ class AprendizajeEstadisticasViewController: UIViewController, ChartViewDelegate
         let labels = ["Nulas", "Insuficientes", "Correctas", "Excesivas"]
         var n : Double = 0, i : Double = 0, c : Double = 0, e : Double = 0
         for ins in self.instantes{
-            print(ins.Compresion)
             if(ins.Compresion == "Nula"){
                 n = n+1
             }

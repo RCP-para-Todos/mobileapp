@@ -51,9 +51,6 @@ class RegistrarNuevoUsuario: UIViewController
         if(result){
             self.navigationController?.popViewController(animated: true)
         }
-        else{
-            print("ERROR AL REGISTRAR")
-        }
     }
     
 }

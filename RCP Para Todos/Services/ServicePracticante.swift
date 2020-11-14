@@ -23,7 +23,6 @@ class ServicePracticante
             guard let data = response.value else { return }
             var arrayResponse : [String] = []
             let jsonData = JSON(data)
-            print(jsonData)
             for i in jsonData{
                 arrayResponse.append(i.1["name"].stringValue)
             }

@@ -141,16 +141,9 @@ class CrearCursoViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Eliminar") { (action, sourceView, completionHandler) in
-            print(indexPath.row)
             self.practicantes.remove(at: indexPath.row)
             self.tableView.reloadData()
-            //completionHandler(true)
         }
-
-        /*let rename = UIContextualAction(style: .normal, title: "Edit") { (action, sourceView, completionHandler) in
-            print("index path of edit: \(indexPath)")
-            completionHandler(true)
-        }*/
         let swipeActionConfig = UISwipeActionsConfiguration(actions: [/*rename,*/ delete])
         swipeActionConfig.performsFirstActionWithFullSwipe = false
         return swipeActionConfig

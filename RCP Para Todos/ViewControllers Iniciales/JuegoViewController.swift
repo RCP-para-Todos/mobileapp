@@ -35,14 +35,6 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
         //Se inicia el manager que controla el bluetooth.
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.instantes = [Instante]()
-        //scheduledTimerWithTimeInterval()
-    }
-    
-    func printDate(string: String) {
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss.SSSS"
-        print(string + formatter.string(from: date))
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -243,10 +235,6 @@ class JuegoViewController: UIViewController, CBCentralManagerDelegate, CBPeriphe
             //print(recibido)
             let cadenaBytetoString = String(bytes: recibido, encoding: .utf8)
             let datosCorrectos = cadenaBytetoString!.components(separatedBy: ";")
-            
-            //Debug para ver cada cuanto se reciben los datos.
-            self.printDate(string: "")
-            
             
             let insuflacion : String = Conversor.insuflacionToString(n: Int(datosCorrectos[0])!)
             let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
