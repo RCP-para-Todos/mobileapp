@@ -201,6 +201,7 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
             "disponeAyudaNoSolicita": false,
             "demoraTomaDesiciones": false*/
             ]
+        print(parameters)
         self.serviceEvento?.newEvento(parameters: parameters, completion: self.newEvento)
     }
     

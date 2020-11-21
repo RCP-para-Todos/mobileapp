@@ -24,7 +24,7 @@ class SimulacionPaso1ViewController: UIViewController
      4 = MUJER DESMAYADA
      5 = CHARLABAS PADRE
      */
-    let listaEscenarios : [Int] = [0, 1, 2, 3, 4, 5]
+    let listaEscenarios : [Int] = [1, 4, 5, 2, 3, 0]
     
     override func viewDidLoad()
     {
@@ -46,7 +46,7 @@ class SimulacionPaso1ViewController: UIViewController
             escenarioNumeroInt = (escenarioNumero as! Int) + 1
         }
         defaults.set(escenarioNumeroInt, forKey: "escenarioNumero")
-        self.escenarioRandom = escenarioNumeroInt
+        self.escenarioRandom = self.listaEscenarios[escenarioNumeroInt]
     }
     
     func elegirEscenarioRandom(){

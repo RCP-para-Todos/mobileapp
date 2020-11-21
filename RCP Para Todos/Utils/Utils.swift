@@ -30,7 +30,7 @@ public class Utils{
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
         dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-        let dateF = dateFormatter.date(from:date)!
+        let dateF = dateFormatter.date(from:date)!.adding(minutes: -1)
         let difference = Date() - dateF
         if difference.day! < 0{
             if(difference.hour! < 0){
@@ -65,6 +65,10 @@ extension Date {
         let second = Calendar.current.dateComponents([.second], from: previous, to: recent).second
 
         return (month: month, day: day, hour: hour, minute: minute, second: second)
+    }
+    
+    func adding(minutes: Int) -> Date {
+        return Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
     }
 
 }
