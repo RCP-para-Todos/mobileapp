@@ -54,15 +54,15 @@ public class SimulacionPaso3AlternativoActivity extends AppCompatActivity {
     private void logicaResultado() {
         //Si el entorno es seguro pero se selecciona el entorno no es seguro, se finalizara sin simulacion con error ya que el entorno era seguro.
         if (this.elEntornoEsSeguro && !this.ambulanciaClicked && this.entornoNoSeguroClicked) {
-            this.resultado.setText("Lo sentimos, el entorno era seguro, correspondía realizar la maniobra RCP y llamar a la ambulancia");
+            this.resultado.setText("Resultado: El entorno era seguro, correspondía realizar la maniobra RCP y llamar a la ambulancia");
         }
         //Si el entorno es seguro pero se selecciona el entorno no es seguro, se finalizara sin simulacion con error ya que el entorno era seguro.
         if (this.elEntornoEsSeguro && this.ambulanciaClicked && this.entornoNoSeguroClicked) {
-            this.resultado.setText("Lo sentimos, el entorno era seguro, correspondía realizar la maniobra RCP y esperar a la ambulancia");
+            this.resultado.setText("Resultado: El entorno era seguro, correspondía realizar la maniobra RCP y esperar a la ambulancia");
         }
         //Si el entorno no es seguro y se selecciona el entorno no es seguro, se finalizara sin simulacion correctamente.
         else if (!this.elEntornoEsSeguro && this.ambulanciaClicked && this.entornoNoSeguroClicked) {
-            this.resultado.setText("Felicitaciones, el entorno no era seguro y no correspondía realizar la maniobra RCP");
+            this.resultado.setText("Resultado: El entorno no era seguro y no correspondía realizar la maniobra RCP");
         }
         //Si el entorno no es seguro y se selecciona el entorno no es seguro, se finalizara sin simulacion correctamente.
         else if (!this.elEntornoEsSeguro && !this.ambulanciaClicked && this.entornoNoSeguroClicked) {

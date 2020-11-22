@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.jk.rcp.main.data.model.course.Student;
 import com.jk.rcp.main.data.model.instant.Instant;
+import com.jk.rcp.main.utils.Utils;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -148,8 +149,7 @@ public class Event implements Serializable {
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                 Date date = format.parse(eventDate);
 
-                DateFormat format2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                return format2.format(date);
+                return Utils.translateDateToEasyRead(date);
             } catch (ParseException e) {
                 e.printStackTrace();
             }

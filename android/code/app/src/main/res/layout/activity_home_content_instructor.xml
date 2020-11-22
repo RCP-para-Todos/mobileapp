@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <Button
-        android:id="@+id/btn_crear_curso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="#2196F3"
-        android:text="Crear curso"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
-
     <ImageButton
         android:id="@+id/btn_mis_cursos"
         android:layout_width="253dp"
         android:layout_height="132dp"
-        android:layout_marginTop="36dp"
-        android:scaleType="fitXY"
+        android:layout_marginTop="16dp"
         android:padding="0dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_crear_curso"
         app:srcCompat="@drawable/miscursos" />
 
+
+    <ImageButton
+        android:id="@+id/btn_crear_curso"
+        android:layout_width="253dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="40dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:srcCompat="@drawable/crearcurso" />
 
     <ImageView
         android:id="@+id/logo"
