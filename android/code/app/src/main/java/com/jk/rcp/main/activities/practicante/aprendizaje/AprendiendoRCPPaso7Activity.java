@@ -202,66 +202,74 @@ public class AprendiendoRCPPaso7Activity extends AppCompatActivity implements Se
     }
 
     private void subirEvento() {
-        //DATOS DEL EVENTO
-        String usuarioActivo = globalUser.getUsername();
-        String curso = globalUser.getCourses().get(0).getId();
-        int tiempoTotalManiobra = Instant.tiempoTotalManiobra(this.instantes);
-        String tipo = "aprendizaje";
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        String event_date = dateFormat.format(date);
+        try {
+            //DATOS DEL EVENTO
+            String usuarioActivo = globalUser.getUsername();
+            String curso = globalUser.getCourses().get(0).getId();
+            int tiempoTotalManiobra = Instant.tiempoTotalManiobra(this.instantes);
+            String tipo = "aprendizaje";
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            String event_date = dateFormat.format(date);
 
-        Request request = new Request();
-        request.crearEvento(
-                usuarioActivo,
-                curso,
-                Instant.tiempoTotalManiobra(this.instantes),
-                tipo,
-                event_date,
-                instantes,
-                Instant.tiempoTotalInactividad(this.instantes),
-                Instant.porcentajeTotalSobreVida(this.instantes),
-                Instant.calidadInsuflaciones(this.instantes),
-                Instant.porcentajeInsuflacionesCorrectas(this.instantes),
-                Instant.porcentajeCompresionesCorrectas(this.instantes),
-                Instant.cantidadInsuflacionesCorrectasPosicionCabeza(this.instantes),
-                Instant.fuerzaPromedioAplicada(this.instantes),
-                globalUser.getBearerToken(),
+            Request request = new Request();
+            request.crearEvento(
+                    usuarioActivo,
+                    curso,
+                    Instant.tiempoTotalManiobra(this.instantes),
+                    tipo,
+                    event_date,
+                    instantes,
+                    Instant.tiempoTotalInactividad(this.instantes),
+                    Instant.porcentajeTotalSobreVida(this.instantes),
+                    Instant.calidadInsuflaciones(this.instantes),
+                    Instant.porcentajeInsuflacionesCorrectas(this.instantes),
+                    Instant.porcentajeCompresionesCorrectas(this.instantes),
+                    Instant.cantidadInsuflacionesCorrectasPosicionCabeza(this.instantes),
+                    Instant.fuerzaPromedioAplicada(this.instantes),
+                    globalUser.getBearerToken(),
 
-                new EventRequestCallbacks() {
-                    @Override
-                    public void onSuccess(@NonNull final Event event) {
+                    new EventRequestCallbacks() {
+                        @Override
+                        public void onSuccess(@NonNull final Event event) {
 //                        Toast.makeText(getApplicationContext(), "Evento creado correctamente", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(AprendiendoRCPPaso7Activity.this, AprendiendoRCPPaso8Activity.class);
+                            Intent intent = new Intent(AprendiendoRCPPaso7Activity.this, AprendiendoRCPPaso8Activity.class);
 
-                        intent.putExtra("instantes", (Serializable) instantes);
-                        disconnect();
-                        startActivity(intent);
-                    }
+                            intent.putExtra("instantes", (Serializable) instantes);
+                            disconnect();
+                            startActivity(intent);
+                        }
 
-                    @Override
-                    public void onError(@NonNull Throwable throwable) {
-                        Toast.makeText(getApplicationContext(), "Ocurrió un error: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
-                    }
+                        @Override
+                        public void onError(@NonNull Throwable throwable) {
+                            Toast.makeText(getApplicationContext(), "Ocurrió un error: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                        }
 
-                    @Override
-                    public void onErrorBody(@NonNull ResponseBody errorBody) {
-                        if (errorBody != null) {
-                            JsonParser parser = new JsonParser();
-                            JsonElement mJson = null;
-                            try {
-                                mJson = parser.parse(errorBody.string());
-                                Gson gson = new Gson();
-                                EventPost errorResponse = gson.fromJson(mJson, EventPost.class);
+                        @Override
+                        public void onErrorBody(@NonNull ResponseBody errorBody) {
+                            if (errorBody != null) {
+                                JsonParser parser = new JsonParser();
+                                JsonElement mJson = null;
+                                try {
+                                    mJson = parser.parse(errorBody.string());
+                                    Gson gson = new Gson();
+                                    EventPost errorResponse = gson.fromJson(mJson, EventPost.class);
 
-                                Toast.makeText(getApplicationContext(), "Ocurrió un error", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Ocurrió un error", Toast.LENGTH_LONG).show();
 
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
-                    }
-                });
+                    });
+        } catch (IndexOutOfBoundsException error){
+            Intent intent = new Intent(AprendiendoRCPPaso7Activity.this, AprendiendoRCPPaso8Activity.class);
+
+            intent.putExtra("instantes", (Serializable) this.instantes);
+            disconnect();
+            startActivity(intent);
+        }
     }
 
 
@@ -360,22 +368,22 @@ public class AprendiendoRCPPaso7Activity extends AppCompatActivity implements Se
             corazon.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         }
 
-        if (instante.getCompresion().equals("Nula")) {
+        if (instante.getInsuflacion().equals("Nula")) {
             this.viento.setVisibility(View.VISIBLE);
-            corazon.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-        } else if (instante.getCompresion().equals("Insuficiente")) {
+            viento.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        } else if (instante.getInsuflacion().equals("Insuficiente")) {
             this.viento.setVisibility(View.VISIBLE);
-            corazon.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
-        } else if (instante.getCompresion().equals("Correcta")) {
+            viento.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
+        } else if (instante.getInsuflacion().equals("Correcta")) {
             this.viento.setVisibility(View.VISIBLE);
-            corazon.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
+            viento.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
             this.insuflacionesCorrectas = this.insuflacionesCorrectas + 1;
-        } else if (instante.getCompresion().equals("Excesiva")) {
+        } else if (instante.getInsuflacion().equals("Excesiva")) {
             this.viento.setVisibility(View.VISIBLE);
-            corazon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+            viento.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
         } else {
             this.viento.setVisibility(View.VISIBLE);
-            corazon.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            viento.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         }
 
         final Runnable hideIcons = new Runnable() {

@@ -257,6 +257,7 @@ public class LoginActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (JsonSyntaxException e1) {
+                        Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_LONG).show();
                         e1.printStackTrace();
                     }
                 }

@@ -38,7 +38,7 @@ public class HomeActivityInstructor extends AppCompatActivity {
             }
         });
 
-        Button btnCrearCurso = findViewById(R.id.btn_crear_curso);
+        ImageButton btnCrearCurso = findViewById(R.id.btn_crear_curso);
         btnCrearCurso.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivityInstructor.this, CrearCursoActivity.class);

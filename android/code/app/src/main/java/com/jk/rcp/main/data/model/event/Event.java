@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Event implements Serializable {
+public class Event implements Serializable, Comparable<Event> {
 
     @SerializedName("_id")
     @Expose
@@ -340,5 +340,20 @@ public class Event implements Serializable {
                 ", disponeAyudaNoSolicita='" + disponeAyudaNoSolicita + '\'' +
                 ", demoraTomaDesiciones='" + demoraTomaDesiciones + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Event u) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        try {
+            Date date = format.parse(u.getEventDate());
+            Date date2 = format.parse(getEventDate());
+
+            return date.compareTo(date2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 }

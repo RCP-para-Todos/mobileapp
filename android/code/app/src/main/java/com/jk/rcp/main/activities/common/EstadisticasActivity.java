@@ -25,6 +25,8 @@ import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.remote.Request;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -111,6 +113,7 @@ public class EstadisticasActivity extends AppCompatActivity {
             public void onSuccess(@NonNull final List<Event> eventos) {
                 eventList = findViewById(R.id.eventsList);
                 eventListAdapter = new EventListAdapter(getApplicationContext(), eventos);
+                Collections.sort(eventos);
                 eventList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position,
