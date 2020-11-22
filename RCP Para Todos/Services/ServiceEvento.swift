@@ -52,8 +52,8 @@ class ServiceEvento{
                 let finalDate = Utils.translateDateMongo(date: i.1["Created_date"].stringValue)
                 arrayResponseNames.append(finalDate)
             }
-            arrayResponseIds = Array(arrayResponseIds).sorted(by: <)
-            arrayResponseNames = Array(arrayResponseNames).sorted(by: <)
+            arrayResponseIds = Array(arrayResponseIds).sorted(by: >)
+            arrayResponseNames = Array(arrayResponseNames).sorted(by: >)
             for i in arrayResponseNames.indices{
                 arrayResponseNames[i] = Utils.translateDateToEasyRead(date: arrayResponseNames[i])
             }

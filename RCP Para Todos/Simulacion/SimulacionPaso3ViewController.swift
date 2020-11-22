@@ -73,7 +73,7 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
         backButton.title = "Atras"
         backButton.target = self
         backButton.action = #selector(volverAtras2Views)
-        self.navigationController!.navigationBar.topItem!.rightBarButtonItem = backButton //TODO
+        self.navigationController!.navigationBar.topItem!.rightBarButtonItem = backButton
     }
     
     @objc func volverAtras2Views() {
@@ -86,6 +86,16 @@ class SimulacionPaso3ViewController: UIViewController, CBCentralManagerDelegate,
         let compresion : String = Conversor.compresionToString(n: Int(datosCorrectos[1])!)
         let posicion : String = Conversor.posicionToString(n: Int(datosCorrectos[2])!)
         let posicionCabeza: String = Conversor.posicionCabezaToString(n: Int(datosCorrectos[3])!)
+        
+        //FIX 22/11 si en el escenario no era para interactuar con el maniqui e interactue, entonces paso a la siguiente pantalla.
+        let defaults = UserDefaults.standard
+        let escenarioNumero = defaults.integer(forKey: "escenarioNumeroFix")
+        if(escenarioNumero == 1 || escenarioNumero == 2 || escenarioNumero == 3){
+            if(insuflacion != "Nula" || compresion != "Nula"){
+                self.centralManager = nil
+                self.performSegue(withIdentifier: "pasoEstadisticasSimulacion", sender: nil)
+            }
+        }
         
         let instante : Instante = Instante(insuflacion: insuflacion, compresion: compresion, posicion: posicion, posicionCabeza: posicionCabeza)
         
