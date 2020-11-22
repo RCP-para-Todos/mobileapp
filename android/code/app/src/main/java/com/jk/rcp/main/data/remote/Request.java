@@ -139,7 +139,7 @@ public class Request {
     }
 
     public void getEventsByPracticant(String student, String token, final EventListRequestCallbacks requestCallbacks) {
-        mAPIService.getEventsByPracticant(student, token).enqueue(new Callback<List<Event>>() {
+        mAPIService.getEventsByPracticant(student.toLowerCase(), token).enqueue(new Callback<List<Event>>() {
             @Override
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                 if (requestCallbacks != null) {
@@ -164,8 +164,8 @@ public class Request {
         });
     }
 
-    public void getCourses(String token, final CoursesRequestCallbacks requestCallbacks) {
-        mAPIService.getCourses(token).enqueue(new Callback<List<Course>>() {
+    public void getCourses(String user, String token, final CoursesRequestCallbacks requestCallbacks) {
+        mAPIService.getMyCourses(user.toLowerCase(), token).enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 if (requestCallbacks != null) {

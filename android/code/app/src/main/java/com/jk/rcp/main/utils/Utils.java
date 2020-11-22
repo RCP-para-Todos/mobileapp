@@ -11,12 +11,9 @@ public class Utils {
 
     public static String translateDateToEasyRead(Date date) {
         DateFormat format2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        // CAPAZ HAY QUE RESTARLE 3HS? VER
+
         Date actualDateTime = new java.util.Date();
         long diff = actualDateTime.getTime() - date.getTime();
-
-        Log.d("FECHA1", format2.format(date));
-        Log.d("FECHA2", format2.format(actualDateTime));
 
         long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
         long hours = TimeUnit.MILLISECONDS.toHours(diff);

@@ -48,7 +48,7 @@ public class EstadisticasActivity extends AppCompatActivity {
             Student student = (Student) getIntent().getSerializableExtra("Student");
             Log.d(TAG, student.toString());
             // Obtengo los eventos de la API, con el token
-            getEventsByPracticant(student.getName(), globalUser.getBearerToken());
+            getEventsByPracticant(student.getName().toLowerCase(), globalUser.getBearerToken());
         } else {
             // Obtengo los eventos de la API, con el token
             getEvents(globalUser.getBearerToken());
@@ -108,7 +108,7 @@ public class EstadisticasActivity extends AppCompatActivity {
 
     public void getEventsByPracticant(String practicant, String token) {
         Request request = new Request();
-        request.getEventsByPracticant(practicant, token, new EventListRequestCallbacks() {
+        request.getEventsByPracticant(practicant.toLowerCase(), token, new EventListRequestCallbacks() {
             @Override
             public void onSuccess(@NonNull final List<Event> eventos) {
                 eventList = findViewById(R.id.eventsList);

@@ -54,7 +54,7 @@ public class MisCursosActivity extends AppCompatActivity {
 
     public void getCourses(String token) {
         Request request = new Request();
-        request.getCourses(token, new CoursesRequestCallbacks() {
+        request.getCourses(globalUser.getUsername(), token, new CoursesRequestCallbacks() {
             @Override
             public void onSuccess(@NonNull final List<Course> courses) {
                 coursesList = findViewById(R.id.coursesList);

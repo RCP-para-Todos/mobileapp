@@ -65,6 +65,9 @@ public interface APIService {
     @GET("courses")
     Call<List<Course>> getCourses(@Header("Authorization") String auth);
 
+    @GET("courses")
+    Call<List<Course>> getMyCourses(@Query("q") String course, @Header("Authorization") String auth);
+
     @GET("courses/{courseId}")
     Call<UserPost> getCourse(@Path("courseId") String id,
                              @Header("Authorization") String auth);
@@ -89,7 +92,7 @@ public interface APIService {
     Call<List<Event>> getEvents(@Header("Authorization") String auth);
 
     @GET("events")
-    Call<List<Event>> getEventsByPracticant(@Query("practicantName") String practicant, @Header("Authorization") String auth);
+    Call<List<Event>> getEventsByPracticant(@Query("q") String practicant, @Header("Authorization") String auth);
 
     @POST("events")
     Call<Event> addEvent(@Header("Authorization") String auth,
