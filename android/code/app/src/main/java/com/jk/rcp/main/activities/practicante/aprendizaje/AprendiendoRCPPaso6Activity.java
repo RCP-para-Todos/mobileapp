@@ -147,7 +147,7 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
                 ) {
                     tv_time.setText("0 secs");
                     setProgress(progressCount, endTime);
-                    logicaEvaluacionCompresiones();
+                    logicaEvaluacionInsuflaciones();
                 } else {
                     cancel();
                 }
@@ -158,7 +158,7 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
         bindService(new Intent(getApplicationContext(), SerialService.class), this, Context.BIND_AUTO_CREATE);
     }
 
-    private void logicaEvaluacionCompresiones() {
+    private void logicaEvaluacionInsuflaciones() {
         int insuflacionesCorrectas = 0;
 
         for (Instant i : instantes
@@ -288,13 +288,13 @@ public class AprendiendoRCPPaso6Activity extends AppCompatActivity implements Se
         }
         iteracion++;
         if (vientoSelecto != null) {
-            if (i1.getCompresion() == "Nula") {
+            if (i1.getInsuflacion() == "Nula") {
                 vientoSelecto.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-            } else if (i1.getCompresion() == "Insuficiente") {
+            } else if (i1.getInsuflacion() == "Insuficiente") {
                 vientoSelecto.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
-            } else if (i1.getCompresion() == "Correcta") {
+            } else if (i1.getInsuflacion() == "Correcta") {
                 vientoSelecto.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
-            } else if (i1.getCompresion() == "Excesiva") {
+            } else if (i1.getInsuflacion() == "Excesiva") {
                 vientoSelecto.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
             }
             vientoSelecto.setVisibility(View.VISIBLE);
