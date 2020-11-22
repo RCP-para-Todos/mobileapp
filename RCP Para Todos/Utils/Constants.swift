@@ -11,8 +11,8 @@ import UIKit
 
 struct Constants {
     //App Constants
-    static let GLOBAL_ENDPOINT2 = "https://api.rcp.margaale.ddnss.de/"
-    static let GLOBAL_ENDPOINT = "http://192.168.1.149:3000/"
+    static let GLOBAL_ENDPOINT = "https://api.rcp.margaale.ddnss.de/"
+    static let GLOBAL_ENDPOINT_LOCAL = "http://192.168.1.149:3000/"
     static let COLOR_BOTON_DESACTIVADO = UIColor(red: 0.39, green: 0.39, blue: 0.39, alpha: 1.00)
     static let COLOR_BOTON_ACTIVADO = UIColor(red: 0.00, green: 0.70, blue: 0.01, alpha: 1.00)
     static let IMAGE_COMPRESION = UIImage(systemName: "heart.fill")

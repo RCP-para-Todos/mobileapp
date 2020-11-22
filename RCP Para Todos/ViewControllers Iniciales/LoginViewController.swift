@@ -103,7 +103,9 @@ class LoginViewController: UIViewController
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in
-            defaults.removeObject(forKey: key)
+            if(!(key == "usuarioRecordar" || key == "contrasenaRecordar")){
+                defaults.removeObject(forKey: key)
+            }
         }
     }
     

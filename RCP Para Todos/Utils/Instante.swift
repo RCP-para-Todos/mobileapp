@@ -69,6 +69,9 @@ class Instante {
                 insuflacionesCorrectas = insuflacionesCorrectas + 1
             }
         }
+        if(insuflacionesTotalesSinNulas == 0 || insuflacionesCorrectas == 0){
+            return 0
+        }
         return (insuflacionesCorrectas / insuflacionesTotalesSinNulas) * 100
     }
     
@@ -82,7 +85,6 @@ class Instante {
         return (compresionesCorrectas / Double(instantes.count)) * 100
     }
     
-    // TODO
     public static func cantidadInsuflacionesIncorrectasPosicionCabeza(instantes: [Instante]) -> Double{
         var cantidadInsuflacionesTotales : Double = 0
         var cantidadInsuflacionesIncorrectas : Double = 0
@@ -94,10 +96,13 @@ class Instante {
                 }
             }
         }
+        if(cantidadInsuflacionesTotales == 0 || cantidadInsuflacionesIncorrectas == 0){
+            return 0
+        }
         return (cantidadInsuflacionesIncorrectas / cantidadInsuflacionesTotales) * 100
     }
     
-    // TODO
+    // TODO -> No se va a hacer.
     public static func fuerzaPromedioAplicada(instantes: [Instante]) -> Double{
         return 10.0;
     }

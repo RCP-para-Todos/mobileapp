@@ -83,7 +83,7 @@ class SimulacionEstadisticasViewController: UIViewController, ChartViewDelegate
     //Agregada validacion adicional sobre escenario de embarazada para la expo.
     private func escenarioEmbarazada(){
         let defaults = UserDefaults.standard
-        let escenarioNumero = defaults.integer(forKey: "escenarioNumero")
+        let escenarioNumero = defaults.integer(forKey: "escenarioNumeroFix")
         if(escenarioNumero == 4){
             var buenaPosicion = 0
             for i in instantes {

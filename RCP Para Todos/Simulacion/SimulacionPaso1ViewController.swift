@@ -46,6 +46,7 @@ class SimulacionPaso1ViewController: UIViewController
             escenarioNumeroInt = (escenarioNumero as! Int) + 1
         }
         defaults.set(escenarioNumeroInt, forKey: "escenarioNumero")
+        defaults.set(self.listaEscenarios[escenarioNumeroInt], forKey: "escenarioNumeroFix")
         self.escenarioRandom = self.listaEscenarios[escenarioNumeroInt]
     }
     

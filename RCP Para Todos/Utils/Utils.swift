@@ -30,11 +30,11 @@ public class Utils{
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
         dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-        let dateF = dateFormatter.date(from:date)!.adding(minutes: -1)
+        let dateF = dateFormatter.date(from:date)!.adding(minutes: -180)
         let difference = Date() - dateF
-        if difference.day! < 0{
-            if(difference.hour! < 0){
-                if(difference.minute! < 0){
+        if difference.day! <= 0{
+            if(difference.hour! <= 0){
+                if(difference.minute! <= 0){
                     return "Hace unos instantes"
                 }
                 else{
