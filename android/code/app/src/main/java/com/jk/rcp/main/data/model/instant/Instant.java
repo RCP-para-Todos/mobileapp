@@ -101,7 +101,7 @@ public class Instant implements Serializable {
                 insuflacionesCorrectas = insuflacionesCorrectas + 1;
             }
         }
-        if (insuflacionesCorrectas == 0.0 && insuflacionesTotalesSinNulas == 0.0) {
+        if (insuflacionesCorrectas == 0.0 || insuflacionesTotalesSinNulas == 0.0) {
             return 0.0;
         }
         return (insuflacionesCorrectas / insuflacionesTotalesSinNulas) * 100;
@@ -119,12 +119,29 @@ public class Instant implements Serializable {
         return (compresionesCorrectas / Double.valueOf(instantes.size())) * 100;
     }
 
-    // TODO
     public static Double cantidadInsuflacionesCorrectasPosicionCabeza(List<Instant> instantes) {
-        return 1.0;
+        Double cantidadInsuflacionesTotales = 0.0;
+        Double cantidadInsuflacionesIncorrectas = 0.0;
+
+        for (Instant instante : instantes) {
+            if (instante.getInsuflacion() != null && (
+                    instante.getInsuflacion().equals("Insuficiente") || instante.getInsuflacion().equals("Correcta") || instante.getInsuflacion().equals("Excesiva"))) {
+                cantidadInsuflacionesTotales = cantidadInsuflacionesTotales + 1;
+
+                if (instante.getPosicionCabeza().equals("Incorrecta")) {
+                    cantidadInsuflacionesIncorrectas = cantidadInsuflacionesIncorrectas + 1;
+                }
+            }
+        }
+
+
+        if (cantidadInsuflacionesTotales == 0 || cantidadInsuflacionesIncorrectas == 0) {
+            return 0.0;
+        }
+        return (cantidadInsuflacionesIncorrectas / cantidadInsuflacionesTotales) * 100;
     }
 
-    // TODO
+    // TODO -> No se va a hacer.
     public static Double fuerzaPromedioAplicada(List<Instant> instantes) {
         return 10.0;
     }
