@@ -107,7 +107,7 @@ class InicioViewController: UIViewController, CBCentralManagerDelegate, CBPeriph
         
         //Cuando descubro las caracteristicas del dispositivo a la vez activo las notificaciones. Es decir lo que me manda el ESP32.
         enableNotifications(enable: true)
-        AprendizajePaso2ViewController.characteristicsShared = self.characteristics
+        InicioViewController.characteristicsShared = self.characteristics
         //SACAR DE ACA
         let mensaje = "TEXTO"
         let data: Data = mensaje.data(using: String.Encoding.utf8)!
