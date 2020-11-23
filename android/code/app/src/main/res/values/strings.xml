@@ -30,10 +30,10 @@
     <string name="instructor">Instructor</string>
     <string name="practicante">Practicante</string>
     <string name="aprendiendoRcp">Aprendiendo RCP</string>
-    <string name="location_denied_message">Mensaje</string>
-    <string name="location_denied_title">Titulo</string>
-    <string name="location_permission_title">titulo</string>
-    <string name="location_permission_message">mensaje</string>
+    <string name="location_denied_message">El permiso de localización fue denegado, por lo que no se podrá utilizar el BLE.</string>
+    <string name="location_denied_title">Permiso denegado</string>
+    <string name="location_permission_title">Permiso requerido</string>
+    <string name="location_permission_message">Se necesita el permiso de localización para el escaneo de BLE.</string>
     <string name="pairing_request">Desea emparejar</string>
     <string name="error_esp32_title">Atención</string>
     <string name="error_esp32_message">Verifique que el ESP32 este funcionando</string>
