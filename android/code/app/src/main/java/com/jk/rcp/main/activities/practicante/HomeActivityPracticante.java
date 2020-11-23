@@ -68,6 +68,7 @@ public class HomeActivityPracticante extends AppCompatActivity {
         buttonVerEstadisticas.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivityPracticante.this, EstadisticasActivity.class);
+                intent.putExtra("StudentName", globalUser.getUsername().toLowerCase());
                 startActivity(intent);
             }
         });

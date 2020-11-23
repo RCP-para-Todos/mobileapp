@@ -25,7 +25,6 @@ import com.jk.rcp.main.data.model.user.User;
 import com.jk.rcp.main.data.remote.Request;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,6 +48,10 @@ public class EstadisticasActivity extends AppCompatActivity {
             Log.d(TAG, student.toString());
             // Obtengo los eventos de la API, con el token
             getEventsByPracticant(student.getName().toLowerCase(), globalUser.getBearerToken());
+        } else if (getIntent().getExtras() != null && getIntent().getSerializableExtra("StudentName") != null) {
+            String student = (String) getIntent().getSerializableExtra("StudentName");
+            // Obtengo los eventos de la API, con el token
+            getEventsByPracticant(student.toLowerCase(), globalUser.getBearerToken());
         } else {
             // Obtengo los eventos de la API, con el token
             getEvents(globalUser.getBearerToken());
@@ -68,6 +71,8 @@ public class EstadisticasActivity extends AppCompatActivity {
             @Override
             public void onSuccess(@NonNull final List<Event> eventos) {
                 eventList = findViewById(R.id.eventsList);
+                Collections.sort(eventos);
+
                 eventListAdapter = new EventListAdapter(getApplicationContext(), eventos);
                 eventList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
